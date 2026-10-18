@@ -35,7 +35,7 @@ export const Sponsorships: React.FC = () => {
     const blob = new Blob([
       `CARNAVAL DA CHITTAGONG COLLEGE - SPONSORSHIP PROSPECTUS 2026\n\n` +
       `Citadel Venue: Chittagong College Heritage Campus, Chawkbazar\n` +
-      `Dates: December 11-12, 2026\n` +
+      `Dates: December 18-19, 2026\n` +
       `Estimated Reach: 1,000+ On-ground Attendees | 1,000,000+ Digital Impressions\n\n` +
       `TIERS AVAILABLE:\n` +
       `1. Title Sponsor ("The Hand of the King") - Official Naming Rights\n` +

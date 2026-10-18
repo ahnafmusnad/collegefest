@@ -4,13 +4,13 @@ export const FEST_METADATA = {
   name: "Carnaval Da Chittagong College",
   tagline: "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory.",
   edition: "Inaugural Edition",
-  dates: "December 11–12, 2026",
+  dates: "December 18–19, 2026",
   venue: "Chittagong College Heritage Campus, Chawkbazar, Chittagong",
   tickifyLink: "https://tickify.live",
   totalPrizePool: "150,000+ BDT",
   expectedFootfall: "1,000+ Students, Teachers & Guardians",
   participatingInstitutions: "25+ Institutions",
-  countdownTarget: "2026-12-11T09:00:00",
+  countdownTarget: "2026-12-18T09:00:00",
 };
 
 export const FOUR_HOUSES: ClubHouse[] = [
@@ -132,7 +132,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '3-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 11–12, 2026',
+    date: 'December 18–19, 2026',
     time: '10:00 AM onwards',
     description: 'The flagship oratory trial of the Carnaval. Teams from institutions across the nation clash in parliamentary battle, where the sharpest arguments and coldest nerves carry the crest.',
     rules: [
@@ -155,7 +155,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo / Duo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 11, 2026',
+    date: 'December 18, 2026',
     time: '11:00 AM onwards',
     description: 'The written crucible of House Stark. SSC and HSC-level scholars battle through conceptual and problem-solving rounds modeled on international Olympiad standards.',
     rules: [
@@ -178,7 +178,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 11, 2026',
+    date: 'December 18, 2026',
     time: '12:30 PM onwards',
     description: 'Hosted by The Muses, this written championship tests grammar, comprehension, vocabulary and literary intuition — a true trial for the wordsmiths of the realm.',
     rules: [
@@ -201,7 +201,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '3 Members',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 11, 2026',
+    date: 'December 18, 2026',
     time: '02:00 PM onwards',
     description: 'Rapid-fire general knowledge and literature rounds where three minds must think as one. Only the swiftest council claims the crest.',
     rules: [
@@ -224,7 +224,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Parade Ground',
-    date: 'December 12, 2026',
+    date: 'December 19, 2026',
     time: '11:00 AM onwards',
     description: 'Teams bid gold-dragons for physics problem lots, then solve what they win. Strategy, nerve and equations collide in the Citadel’s most thrilling open-ground spectacle.',
     rules: [
@@ -247,7 +247,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-5 Members',
     entryFee: 'Tickify Pass',
     venue: 'Main Gate → Parade Ground',
-    date: 'December 12, 2026',
+    date: 'December 19, 2026',
     time: '01:00 PM onwards',
     description: 'Riddles, clues and hidden sigils scattered across the historic campus. Teams race from the Main Gate through the courts of the Red Citadel to unearth the hidden treasure.',
     rules: [
@@ -270,7 +270,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
-    date: 'December 11, 2026',
+    date: 'December 18, 2026',
     time: '03:00 PM onwards',
     description: 'Presented by the Photographic Society, this on-spot contest challenges shooters to capture the smallest empires — dew, brick, light and shadow — hiding in plain sight across the Citadel.',
     rules: [
@@ -293,7 +293,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo / Duo',
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
-    date: 'December 12, 2026',
+    date: 'December 19, 2026',
     time: '02:30 PM onwards',
     description: 'A chromatic scavenger chase — participants hunt and photograph every colour of the spectrum hidden across the grounds. The most complete palette claims glory.',
     rules: [
@@ -512,7 +512,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
 export const FEST_SCHEDULE: FestDaySchedule[] = [
   {
     day: 1,
-    date: 'Friday, December 11, 2026',
+    date: 'Friday, December 18, 2026',
     title: 'The Gathering of Banners',
     gotTitle: 'Prologue: When the Raven Sings',
     description: 'The royal opening ceremony, the written olympiads, the National Debate Fest preliminaries, and the first frames of the photography contest.',
@@ -528,7 +528,7 @@ export const FEST_SCHEDULE: FestDaySchedule[] = [
   },
   {
     day: 2,
-    date: 'Saturday, December 12, 2026',
+    date: 'Saturday, December 19, 2026',
     title: 'The Grand Finals & Coronation',
     gotTitle: 'Act II: The Clash of Champions',
     description: 'The Grand Final of debates, the Team Physics Auction spectacle, the Treasure Hunt and Colour Hunt across campus, and the closing coronation.',
@@ -630,7 +630,7 @@ export const FAQS = [
   },
   {
     q: "When and where is the festival held?",
-    a: "Carnaval Da Chittagong College takes place on December 11–12, 2026 at the Chittagong College heritage campus in Chawkbazar — the Main Gate, Academic Building, Parade Ground and Parade by Lane host the segments."
+    a: "Carnaval Da Chittagong College takes place on December 18–19, 2026 at the Chittagong College heritage campus in Chawkbazar — the Main Gate, Academic Building, Parade Ground and Parade by Lane host the segments."
   },
   {
     q: "How can my organization become a sponsor?",

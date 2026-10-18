@@ -115,7 +115,7 @@ export const Home: React.FC<HomeProps> = ({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/80 border border-violet-400/50 shadow-[0_0_20px_rgba(139,92,246,0.4)] backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
             <span className="font-cinzel text-xs md:text-sm font-bold tracking-[0.25em] text-violet-300 uppercase">
-              Chittagong College &bull; December 11–12, 2026
+              Chittagong College &bull; December 18–19, 2026
             </span>
           </div>
 
