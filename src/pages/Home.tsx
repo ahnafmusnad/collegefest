@@ -347,10 +347,10 @@ export const Home: React.FC<HomeProps> = ({
               {/* House Name & Lore */}
               <div className="space-y-2 mb-6">
                 <h3 className="font-cinzel-dec text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                  {house.houseName}
+                  {house.name.split('(')[0]}
                 </h3>
-                <div className="text-xs font-semibold text-violet-400 font-cinzel">
-                  {house.name}
+                <div className="text-xs font-semibold text-amber-400 font-cinzel">
+                  {house.houseName}
                 </div>
                 <p className="font-cinzel text-xs text-violet-200/80 italic">
                   "{house.motto}"

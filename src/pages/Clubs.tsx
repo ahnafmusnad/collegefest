@@ -118,13 +118,13 @@ export const Clubs: React.FC<ClubsProps> = ({
                 }`}>
                   {getHouseIcon(house.iconName, 'w-4 h-4')}
                 </div>
-                <div className="font-cinzel text-xs text-violet-400/80 font-semibold uppercase">
-                  {house.houseName}
+                <div className="font-cinzel text-xs text-amber-400/80 font-semibold uppercase">
+                  {house.name.split('(')[0]}
                 </div>
               </div>
 
               <div className="font-cinzel text-sm font-bold text-white group-hover:text-blue-300 transition-colors line-clamp-1">
-                {house.name.split('(')[0]}
+                {house.houseName}
               </div>
 
               <div className="font-cinzel text-[11px] text-slate-400 italic mt-1 line-clamp-1">
@@ -154,13 +154,13 @@ export const Clubs: React.FC<ClubsProps> = ({
                   Citadel House Sigil: {activeHouse.sigil}
                 </span>
                 <h2 className="font-cinzel-dec text-3xl sm:text-4xl font-extrabold text-white text-glow-ice">
-                  {activeHouse.houseName}
+                  {activeHouse.name.split('(')[0]}
                 </h2>
               </div>
             </div>
 
-            <div className="font-cinzel text-base font-semibold text-violet-300">
-              {activeHouse.name}
+            <div className="font-cinzel text-base font-semibold text-amber-300">
+              {activeHouse.houseName}
             </div>
 
             <p className="font-cinzel text-sm text-violet-200/90 italic">
@@ -350,9 +350,9 @@ export const Clubs: React.FC<ClubsProps> = ({
                 #{idx + 1}
               </div>
               <h3 className="font-cinzel text-base font-bold text-white">
-                {house.houseName}
+                {house.name.split('(')[0]}
               </h3>
-              <p className="text-xs text-slate-400 truncate">{house.name.split('(')[0]}</p>
+              <p className="text-xs text-slate-400 truncate">{house.houseName}</p>
               <div className="font-mono text-2xl font-black text-amber-300">
                 {house.points} PTS
               </div>
