@@ -13,6 +13,14 @@ export const FEST_METADATA = {
   countdownTarget: "2026-12-18T09:00:00",
 };
 
+// Official Carnaval social channels.
+// TODO: replace each placeholder "#" with the real profile URL.
+export const SOCIAL_LINKS = [
+  { name: 'Facebook', url: '#', icon: 'Facebook' },
+  { name: 'Instagram', url: '#', icon: 'Instagram' },
+  { name: 'YouTube', url: '#', icon: 'Youtube' },
+] as const;
+
 export const FOUR_HOUSES: ClubHouse[] = [
   {
     id: 'house-veritas',
@@ -21,6 +29,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Hear Me Roar',
     sigil: 'The Golden Lion',
     iconName: 'Scroll',
+    logo: '/images/club-logos/ccds-debating-society.jpg',
     colorScheme: {
       primary: '#9e2a2b', // Crimson
       secondary: '#7b1418',
@@ -48,6 +57,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Winter Is Coming',
     sigil: 'The Direwolf',
     iconName: 'Cpu',
+    logo: '/images/club-logos/ccpac-physics-astronomy.png',
     colorScheme: {
       primary: '#60a5fa', // Blue
       secondary: '#3b82f6',
@@ -73,6 +83,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Fire And Blood',
     sigil: 'The Three-Headed Dragon',
     iconName: 'Music',
+    logo: '/images/club-logos/muses-english-literature.jpg',
     colorScheme: {
       primary: '#ec4899', // Crimson-Rose
       secondary: '#be185d',
@@ -100,6 +111,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Ours Is The Fury',
     sigil: 'The Crowned Stag',
     iconName: 'Shield',
+    logo: '/images/club-logos/ccps-photographic-society.jpg',
     colorScheme: {
       primary: '#f59e0b', // Amber/Gold
       secondary: '#d97706',

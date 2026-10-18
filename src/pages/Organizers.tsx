@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SMALL_COUNCIL } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import { 
@@ -110,7 +109,6 @@ export const Organizers: React.FC = () => {
             <button
               key={cat.value}
               onClick={() => {
-                soundFx.playSwordClash();
                 setFilterCategory(cat.value);
               }}
               className={`px-4 py-2 rounded-xl font-cinzel text-xs font-bold tracking-wider transition-all ${
@@ -130,7 +128,7 @@ export const Organizers: React.FC = () => {
         {filteredMembers.map((member, i) => (
           <Reveal key={member.id} delay={(i % 4) * 90} className="h-full">
           <TiltCard
-            onMouseEnter={() => soundFx.playRuneChime()}
+
             className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-5 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
           >
             <div>

@@ -13,6 +13,7 @@ export interface ClubHouse {
   motto: string;
   sigil: string;
   iconName: string;
+  logo: string;
   colorScheme: {
     primary: string;
     secondary: string;

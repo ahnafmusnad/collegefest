@@ -1,8 +1,7 @@
 import React from 'react';
 import { PageType } from '../types';
 import { FEST_METADATA, FOUR_HOUSES } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
-import { Crown, Shield, MapPin, Ticket, ExternalLink, Mail, Heart } from 'lucide-react';
+import { Crown, MapPin, Ticket, ExternalLink, Mail, Heart } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageType) => void;
@@ -26,13 +25,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
             <div
               key={house.id}
               onClick={() => {
-                soundFx.playRuneChime();
                 onNavigate('clubs');
               }}
               className="p-3 rounded-xl border border-iron/80 hover:border-gold/50 bg-ink-2/30 hover:bg-ink-2/80 transition-all cursor-pointer group text-center"
             >
               <div className="flex items-center justify-center gap-1.5 font-cinzel text-xs font-bold text-bone group-hover:text-gold-2">
-                <Shield className="w-3.5 h-3.5 text-gold group-hover:scale-110 transition-transform" />
+                <span className="w-6 h-6 rounded bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
+                </span>
                 <span>{house.houseName}</span>
               </div>
               <p className="text-[11px] text-bone-dim truncate mt-0.5">{house.name}</p>

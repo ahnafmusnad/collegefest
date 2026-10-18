@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { X, ExternalLink, Ticket, Check, Shield, Sparkles, Copy } from 'lucide-react';
 import { FEST_METADATA } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
-
 interface TickifyModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,7 +18,6 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
   if (!isOpen) return null;
 
   const handleCopyLink = () => {
-    soundFx.playSwordClash();
     navigator.clipboard.writeText(FEST_METADATA.tickifyLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -67,7 +64,6 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
         {/* Close Button */}
         <button
           onClick={() => {
-            soundFx.playSwordClash();
             onClose();
           }}
           className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
@@ -98,7 +94,6 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
             <div
               key={pass.id}
               onClick={() => {
-                soundFx.playRuneChime();
                 setSelectedPass(pass.id as 'standard' | 'tournament' | 'vip');
               }}
               className={`relative cursor-pointer p-4 rounded-xl border transition-all ${pass.color} ${
@@ -133,8 +128,8 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
             href={FEST_METADATA.tickifyLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => soundFx.playRoyalHorn()}
-            className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 transition-all shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 text-center"
+
+            className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 transition-all shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 text-center"
           >
             <Sparkles className="w-4 h-4" />
             PROCEED TO TICKIFY (OFFICIAL CHECKOUT)

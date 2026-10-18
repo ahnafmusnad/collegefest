@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SPONSOR_TIERS } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
@@ -30,7 +29,6 @@ export const Sponsorships: React.FC = () => {
   });
 
   const handleDownloadDeck = () => {
-    soundFx.playSwordClash();
     // Simulate instant download of royal sponsorship dossier
     const blob = new Blob([
       `CARNAVAL DA CHITTAGONG COLLEGE - SPONSORSHIP PROSPECTUS 2026\n\n` +
@@ -59,7 +57,6 @@ export const Sponsorships: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    soundFx.playRoyalHorn();
     setFormSubmitted(true);
     try {
       confetti({
@@ -91,7 +88,7 @@ export const Sponsorships: React.FC = () => {
           <div className="pt-3">
       <button
         onClick={handleDownloadDeck}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone border border-bone shadow-[0_0_20px_rgba(201,162,39,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone border border-bone shadow-[0_0_20px_rgba(201,162,39,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
       >
         <Download className="w-4 h-4" />
         <span>DOWNLOAD SPONSORSHIP PROSPECTUS</span>
@@ -111,7 +108,7 @@ export const Sponsorships: React.FC = () => {
         ].map((stat, i) => (
           <Reveal key={i} delay={i * 90} className="h-full">
           <TiltCard
-            onMouseEnter={() => soundFx.playRuneChime()}
+
             className="frost-card p-5 rounded-2xl border border-gold/20 text-center space-y-1 hover:border-gold/50 transition-all group h-full"
           >
             <stat.icon className="w-5 h-5 text-gold mx-auto group-hover:scale-110 transition-transform" />
@@ -153,7 +150,7 @@ export const Sponsorships: React.FC = () => {
             return (
               <Reveal key={tier.id} delay={i * 120} className="h-full">
               <TiltCard
-                onMouseEnter={() => soundFx.playRuneChime()}
+
                 maxTilt={8}
                 glareClassName="rounded-3xl"
                 shadowClassName={isTitle ? '0 28px 55px rgba(60, 35, 5, 0.6), 0 0 36px rgba(201, 162, 39, 0.25)' : undefined}
@@ -222,7 +219,6 @@ export const Sponsorships: React.FC = () => {
                   <a
                     href="#sponsor-form"
                     onClick={() => {
-                      soundFx.playSwordClash();
                       setFormData(prev => ({ ...prev, tierInterested: tier.name }));
                     }}
                     className={`w-full py-3.5 px-4 rounded-xl font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider text-center block transition-all shadow ${
@@ -438,7 +434,7 @@ export const Sponsorships: React.FC = () => {
               <div className="pt-2 text-center">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone shadow-[0_0_25px_rgba(201,162,39,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone shadow-[0_0_25px_rgba(201,162,39,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
                 >
                   DISPATCH PETITION TO MASTER OF COIN
                 </button>

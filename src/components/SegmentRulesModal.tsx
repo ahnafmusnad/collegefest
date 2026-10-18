@@ -2,8 +2,6 @@ import React from 'react';
 import { X, Trophy, MapPin, Clock, Users, ShieldAlert, Sparkles, ExternalLink } from 'lucide-react';
 import { Segment } from '../types';
 import { FOUR_HOUSES, FEST_METADATA } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
-
 interface SegmentRulesModalProps {
   segment: Segment | null;
   onClose: () => void;
@@ -26,7 +24,6 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
         {/* Close Button */}
         <button
           onClick={() => {
-            soundFx.playSwordClash();
             onClose();
           }}
           className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
@@ -128,10 +125,9 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
         <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-crimson/20">
           <button
             onClick={() => {
-              soundFx.playRoyalHorn();
               onRegisterTickify(segment.title);
             }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
           >
             <Sparkles className="w-4 h-4" />
             REGISTER VIA TICKIFY (ENTRY: {segment.entryFee})

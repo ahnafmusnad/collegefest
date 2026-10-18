@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FEST_SCHEDULE, CAMPUS_LOCATIONS, FAQS } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
 import { Reveal } from '../components/Reveal';
 import { 
   Scroll, 
@@ -29,7 +28,6 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
   const activeLocation = CAMPUS_LOCATIONS.find(l => l.id === selectedLocation) || CAMPUS_LOCATIONS[0];
 
   const toggleFaq = (index: number) => {
-    soundFx.playRuneChime();
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
@@ -140,7 +138,6 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               <button
                 key={day.day}
                 onClick={() => {
-                  soundFx.playSwordClash();
                   setSelectedDay(day.day);
                 }}
                 className={`relative px-5 py-3 rounded-xl font-cinzel text-xs md:text-sm font-bold tracking-wider transition-all ${
@@ -175,7 +172,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             {activeDaySchedule.events.map((evt, idx) => (
               <Reveal key={idx} delay={idx * 70}>
               <div
-                onMouseEnter={() => soundFx.playRuneChime()}
+
                 className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-ink-2/60 hover:bg-ink-2/40 border border-iron hover:border-gold/50 transition-all duration-200 h-full"
               >
                 <div className="flex items-center gap-3">
@@ -249,7 +246,6 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                       : 'bg-ink-2/60 border-iron hover:border-crimson/40'
                   }`}
                   onClick={() => {
-                    soundFx.playSwordClash();
                     setSelectedLocation(loc.id);
                   }}
                 >
@@ -400,10 +396,9 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
       <Reveal className="text-center pt-6">
         <button
           onClick={() => {
-            soundFx.playRoyalHorn();
             onOpenTickify();
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
         >
           <Ticket className="w-5 h-5" />
           <span>JOIN THE FESTIVAL VIA TICKIFY</span>

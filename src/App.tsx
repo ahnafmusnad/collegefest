@@ -8,7 +8,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { TickifyModal } from './components/TickifyModal';
 import { SortingQuizModal } from './components/SortingQuizModal';
 import { SegmentRulesModal } from './components/SegmentRulesModal';
-
+import { ScrollToTop } from './components/ScrollToTop';
 // Pages
 import { Home } from './pages/Home';
 import { FestDescription } from './pages/FestDescription';
@@ -71,11 +71,8 @@ export function App() {
 
   // Snow intensity toggle
   const handleToggleSnow = () => {
-    setSnowMode(prev => {
-      if (prev === 'gentle') return 'blizzard';
-      if (prev === 'blizzard') return 'off';
-      return 'gentle';
-    });
+    const next = snowMode === 'gentle' ? 'blizzard' : snowMode === 'blizzard' ? 'off' : 'gentle';
+    setSnowMode(next);
   };
 
   // Open rules modal
@@ -174,6 +171,9 @@ export function App() {
         onNavigate={handleNavigate}
         onOpenTickifyModal={() => handleOpenTickify()}
       />
+
+      {/* Back to top button */}
+      <ScrollToTop />
 
       {/* ========================================================
           MODALS & DRAWERS

@@ -3,8 +3,6 @@ import { X, Shield, Sparkles, RotateCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SORTING_QUESTIONS, FOUR_HOUSES } from '../data/festData';
 import { ClubHouse } from '../types';
-import { soundFx } from '../utils/soundEffects';
-
 interface SortingQuizModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -28,7 +26,6 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
   if (!isOpen) return null;
 
   const handleSelectOption = (houseId: string) => {
-    soundFx.playSwordClash();
     const updated = { ...houseTallies, [houseId]: houseTallies[houseId] + 1 };
     setHouseTallies(updated);
 
@@ -46,7 +43,6 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
       }
       const matched = FOUR_HOUSES.find(h => h.id === highestHouseId) || FOUR_HOUSES[0];
       setSortedHouse(matched);
-      soundFx.playRoyalHorn();
 
       // Confetti burst
       try {
@@ -60,7 +56,6 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
   };
 
   const handleReset = () => {
-    soundFx.playRuneChime();
     setCurrentQuestionIndex(0);
     setHouseTallies({
       'house-veritas': 0,
@@ -73,7 +68,6 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
 
   const handlePledge = () => {
     if (sortedHouse) {
-      soundFx.playRoyalHorn();
       onPledgeHouse(sortedHouse);
       onClose();
     }
@@ -152,8 +146,8 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
               The Raven Has Spoken
             </div>
 
-            <div className="w-20 h-20 mx-auto rounded-full bg-ink-2/80 border-2 border-gold flex items-center justify-center shadow-[0_0_30px_rgba(158,42,43,0.5)] mb-4">
-              <Shield className="w-10 h-10 text-gold" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-white border-2 border-gold flex items-center justify-center shadow-[0_0_30px_rgba(158,42,43,0.5)] mb-4 p-2 overflow-hidden">
+              <img src={sortedHouse.logo} alt={`${sortedHouse.name} logo`} className="w-full h-full object-contain" />
             </div>
 
             <h3 className="font-cinzel text-xs uppercase tracking-widest text-gold-2">
@@ -174,7 +168,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handlePledge}
-                className="flex-1 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] active:scale-95 transition-all text-center uppercase tracking-wider"
+                className="flex-1 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all text-center uppercase tracking-wider"
               >
                 PLEDGE ALLEGIANCE & WEAR CREST
               </button>

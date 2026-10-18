@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
-import { soundFx } from '../utils/soundEffects';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import { CountUp } from '../components/CountUp';
@@ -16,9 +15,6 @@ import {
   Flame, 
   Award,
   Users,
-  Scroll,
-  Cpu,
-  Music,
   ChevronRight
 } from 'lucide-react';
 
@@ -68,19 +64,8 @@ export const Home: React.FC<HomeProps> = ({
 
   const handleCheer = (houseId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    soundFx.playSwordClash();
     setHouseCheers(prev => ({ ...prev, [houseId]: prev[houseId] + 1 }));
     setHasCheered(prev => ({ ...prev, [houseId]: true }));
-  };
-
-  const getHouseIcon = (name: string) => {
-    switch (name) {
-      case 'Scroll': return <Scroll className="w-8 h-8 text-crimson-2" />;
-      case 'Cpu': return <Cpu className="w-8 h-8 text-blue-400" />;
-      case 'Music': return <Music className="w-8 h-8 text-pink-400" />;
-      case 'Shield': return <Shield className="w-8 h-8 text-gold" />;
-      default: return <Crown className="w-8 h-8 text-crimson-2" />;
-    }
   };
 
   return (
@@ -123,11 +108,14 @@ export const Home: React.FC<HomeProps> = ({
           <div className="space-y-2">
             <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight text-glow-gold drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               CARNAVAL DA <br />
+              <span className="inline-block animate-gradient bg-gradient-to-r from-gold-2 via-bone to-ember bg-clip-text text-transparent">
+                CHITTAGONG
+              </span>{' '}
               <span className="bg-gradient-to-r from-gold-2 via-gold-2 to-bone bg-clip-text text-transparent">
-                CHITTAGONG COLLEGE
+                COLLEGE
               </span>
             </h1>
-            <p className="font-sans text-base sm:text-lg md:text-xl text-gold-2/90 font-normal tracking-normal max-w-2xl mx-auto drop-shadow-md">
+            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
               "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory."
             </p>
           </div>
@@ -135,7 +123,9 @@ export const Home: React.FC<HomeProps> = ({
           {/* User Pledged House Badge if available */}
           {userPledgedHouse && (
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-gold text-gold-2 text-xs font-cinzel tracking-widest shadow-[0_0_15px_rgba(158,42,43,0.4)]">
-              <Shield className="w-4 h-4 text-gold" />
+              <span className="w-6 h-6 rounded-md bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center">
+                <img src={userPledgedHouse.logo} alt="" className="w-full h-full object-contain" />
+              </span>
               <span>You Have Sworn Allegiance to <strong>{userPledgedHouse.houseName}</strong></span>
             </div>
           )}
@@ -147,8 +137,8 @@ export const Home: React.FC<HomeProps> = ({
               href={FEST_METADATA.tickifyLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => soundFx.playRoyalHorn()}
-              className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.7)] hover:shadow-[0_0_40px_rgba(158,42,43,0.9)] active:scale-95 transition-all uppercase tracking-wider"
+
+              className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.7)] hover:shadow-[0_0_40px_rgba(158,42,43,0.9)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
             >
               <Ticket className="w-4 h-4 text-ink" />
               <span>REGISTER VIA TICKIFY</span>
@@ -158,7 +148,6 @@ export const Home: React.FC<HomeProps> = ({
             {/* Explore Tourneys */}
             <button
               onClick={() => {
-                soundFx.playSwordClash();
                 onNavigate('segments');
               }}
               className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-cinzel text-sm md:text-base font-semibold text-white bg-ink-2/80 hover:bg-ink-3/90 border border-crimson/40 hover:border-gold shadow-[0_0_20px_rgba(158,42,43,0.2)] transition-all"
@@ -170,7 +159,6 @@ export const Home: React.FC<HomeProps> = ({
             {/* Sorting Quiz */}
             <button
               onClick={() => {
-                soundFx.playRuneChime();
                 onOpenSortingQuiz();
               }}
               className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-cinzel text-xs md:text-sm font-semibold text-gold-2 bg-ink-3/40 hover:bg-ink-3/50 border border-gold/40 hover:border-gold transition-all"
@@ -323,16 +311,20 @@ export const Home: React.FC<HomeProps> = ({
             <Reveal key={house.id} delay={i * 100} className="h-full">
             <TiltCard
               onClick={() => {
-                soundFx.playSwordClash();
                 onNavigate('clubs');
               }}
-              onMouseEnter={() => soundFx.playRuneChime()}
+
               className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               {/* Top Card Decor */}
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-ink border border-crimson/30 shadow-inner group-hover:scale-110 transition-transform">
-                  {getHouseIcon(house.iconName)}
+                <div className="w-14 h-14 p-1 rounded-xl bg-white border border-crimson/30 shadow-inner overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <img
+                    src={house.logo}
+                    alt={`${house.name} logo`}
+                    loading="lazy"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="text-right">
                   {house.founded !== '—' && (
@@ -393,7 +385,6 @@ export const Home: React.FC<HomeProps> = ({
         <div className="text-center mt-10">
           <button
             onClick={() => {
-              soundFx.playSwordClash();
               onNavigate('clubs');
             }}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-cinzel text-sm font-bold text-gold-2 border border-crimson/40 hover:border-gold bg-ink-2/40 hover:bg-ink-2/80 shadow-[0_0_20px_rgba(158,42,43,0.2)] transition-all"
@@ -430,10 +421,9 @@ export const Home: React.FC<HomeProps> = ({
             <div className="pt-2">
               <button
                 onClick={() => {
-                  soundFx.playRoyalHorn();
                   onOpenSortingQuiz();
                 }}
-                className="px-6 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+                className="px-6 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
               >
                 BEGIN SORTING CEREMONY
               </button>
@@ -459,7 +449,6 @@ export const Home: React.FC<HomeProps> = ({
           </div>
           <button
             onClick={() => {
-              soundFx.playSwordClash();
               onNavigate('segments');
             }}
             className="inline-flex items-center gap-1.5 font-cinzel text-xs font-bold text-gold hover:text-gold-2 tracking-wider group"
@@ -475,10 +464,9 @@ export const Home: React.FC<HomeProps> = ({
             <Reveal key={segment.id} delay={i * 100} className="h-full">
             <TiltCard
               onClick={() => {
-                soundFx.playSwordClash();
                 onNavigate('segments');
               }}
-              onMouseEnter={() => soundFx.playRuneChime()}
+
               className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border border-crimson/25 hover:border-gold/80 p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               <div>
@@ -537,8 +525,8 @@ export const Home: React.FC<HomeProps> = ({
               href={FEST_METADATA.tickifyLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => soundFx.playRoyalHorn()}
-              className="flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.6)] active:scale-95 transition-all uppercase tracking-wider"
+
+              className="flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.6)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
             >
               <Ticket className="w-5 h-5 text-ink" />
               <span>BOOK TICKETS ON TICKIFY</span>
@@ -547,7 +535,6 @@ export const Home: React.FC<HomeProps> = ({
 
             <button
               onClick={() => {
-                soundFx.playRuneChime();
                 onOpenTickify();
               }}
               className="px-6 py-4 rounded-xl font-cinzel text-sm font-semibold text-gold-2 bg-ink-2/80 hover:bg-ink-3 border border-crimson/40 transition-colors"

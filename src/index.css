@@ -66,6 +66,10 @@
   font-family: 'GameOfThrones', serif;
 }
 
+.font-garamond {
+  font-family: 'EB Garamond', 'Times New Roman', Georgia, serif;
+}
+
 /* Custom Scrollbar styled like Valyrian Steel */
 ::-webkit-scrollbar {
   width: 8px;
@@ -84,33 +88,144 @@
 
 /* Glassmorphism Ember effects */
 .frost-card {
-  background: rgba(23, 18, 14, 0.75);
+  position: relative;
+  background: linear-gradient(180deg, rgba(34, 26, 20, 0.82), rgba(23, 18, 14, 0.92));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(201, 162, 39, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(201, 162, 39, 0.05);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(201, 162, 39, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 30px -12px rgba(0, 0, 0, 0.85),
+    0 2px 8px -4px rgba(0, 0, 0, 0.6);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s ease;
+}
+
+/* top-light sheen */
+.frost-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at 50% -20%, rgba(227, 199, 102, 0.14), transparent 60%);
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 .frost-card:hover {
-  border-color: rgba(201, 162, 39, 0.55);
-  box-shadow: 0 16px 40px 0 rgba(226, 113, 29, 0.25), inset 0 0 24px rgba(201, 162, 39, 0.15);
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-6px);
+  border-color: rgba(201, 162, 39, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 28px 55px -20px rgba(0, 0, 0, 0.9),
+    0 0 34px -6px rgba(201, 162, 39, 0.4),
+    0 0 70px -14px rgba(226, 113, 29, 0.3);
+}
+
+.frost-card:hover::before {
+  opacity: 1;
 }
 
 /* Gold Valyrian Card */
 .gold-card {
-  background: rgba(26, 20, 10, 0.8);
+  position: relative;
+  background: linear-gradient(180deg, rgba(38, 29, 12, 0.85), rgba(20, 15, 7, 0.92));
   backdrop-filter: blur(14px);
   border: 1px solid rgba(201, 162, 39, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 16px rgba(201, 162, 39, 0.05);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 10px 30px -12px rgba(0, 0, 0, 0.9),
+    0 2px 8px -4px rgba(0, 0, 0, 0.6);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s ease;
 }
 
 .gold-card:hover {
+  transform: translateY(-6px);
   border-color: rgba(201, 162, 39, 0.7);
-  box-shadow: 0 16px 40px 0 rgba(201, 162, 39, 0.3), inset 0 0 24px rgba(201, 162, 39, 0.15);
-  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 28px 55px -20px rgba(0, 0, 0, 0.9),
+    0 0 40px -4px rgba(201, 162, 39, 0.5);
+}
+
+/* Modern sheen-sweep for primary CTA buttons */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.btn-shine:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.06);
+}
+
+.btn-shine:hover::after {
+  left: 135%;
+}
+
+.btn-shine:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Rotating conic aura rendered behind tilt cards on hover */
+@property --tilt-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.tilt-aura {
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--tilt-angle),
+    rgba(201, 162, 39, 0) 0deg,
+    rgba(201, 162, 39, 0.9) 80deg,
+    rgba(226, 113, 29, 0.9) 160deg,
+    rgba(158, 42, 43, 0.85) 240deg,
+    rgba(201, 162, 39, 0.9) 320deg,
+    rgba(201, 162, 39, 0) 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  filter: blur(6px);
+}
+
+.tilt-aura-active {
+  animation: tiltAura 6s linear infinite;
+}
+
+@keyframes tiltAura {
+  to {
+    --tilt-angle: 360deg;
+  }
 }
 
 /* Glowing text effects */
@@ -181,6 +296,21 @@
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Animated gradient text (hero heading) */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradientShift 6s linear infinite;
+}
+
 /* Shimmer scanline effect on cards */
 .shimmer-effect {
   position: relative;
@@ -249,6 +379,22 @@
     transform: none;
     transition: none;
   }
+
+  .animate-gradient,
+  .tilt-aura-active {
+    animation: none;
+  }
+
+  .btn-shine::after {
+    display: none;
+  }
+
+  .btn-shine:hover,
+  .btn-shine:active,
+  .frost-card:hover,
+  .gold-card:hover {
+    transform: none;
+  }
 }
 
 /* Background grid boxes */
@@ -264,3 +410,4 @@
   -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
   mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
 }
+

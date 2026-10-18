@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { ClubHouse, PageType } from '../types';
-import { soundFx } from '../utils/soundEffects';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
@@ -14,8 +13,6 @@ import {
   Sparkles, 
   ChevronRight, 
   Scroll, 
-  Cpu, 
-  Music, 
   Check, 
   Flame
 } from 'lucide-react';
@@ -39,7 +36,6 @@ export const Clubs: React.FC<ClubsProps> = ({
   const houseSegments = FEST_SEGMENTS.filter(s => s.houseId === activeHouse.id);
 
   const handlePledge = (house: ClubHouse) => {
-    soundFx.playRoyalHorn();
     onPledgeHouse(house);
     try {
       confetti({
@@ -48,16 +44,6 @@ export const Clubs: React.FC<ClubsProps> = ({
         origin: { y: 0.6 }
       });
     } catch {}
-  };
-
-  const getHouseIcon = (name: string, sizeClass = "w-6 h-6") => {
-    switch (name) {
-      case 'Scroll': return <Scroll className={sizeClass} />;
-      case 'Cpu': return <Cpu className={sizeClass} />;
-      case 'Music': return <Music className={sizeClass} />;
-      case 'Shield': return <Shield className={sizeClass} />;
-      default: return <Crown className={sizeClass} />;
-    }
   };
 
   return (
@@ -95,10 +81,9 @@ export const Clubs: React.FC<ClubsProps> = ({
             <button
               key={house.id}
               onClick={() => {
-                soundFx.playSwordClash();
                 setActiveHouseId(house.id);
               }}
-              onMouseEnter={() => soundFx.playRuneChime()}
+
               className={`relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between group h-full ${
                 isSelected
                   ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold shadow-[0_0_25px_rgba(158,42,43,0.35)] -translate-y-1'
@@ -112,12 +97,7 @@ export const Clubs: React.FC<ClubsProps> = ({
                 </div>
               )}
 
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className={`p-2 rounded-lg border ${
-                  isSelected ? 'bg-crimson/20 border-gold text-gold-2' : 'bg-ink-3/80 border-iron text-bone-dim'
-                }`}>
-                  {getHouseIcon(house.iconName, 'w-4 h-4')}
-                </div>
+              <div className="mb-2">
                 <div className="font-cinzel text-xs text-gold/80 font-semibold uppercase">
                   {house.name.split('(')[0]}
                 </div>
@@ -146,8 +126,8 @@ export const Clubs: React.FC<ClubsProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-crimson/20 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="p-3.5 rounded-2xl bg-ink border-2 border-gold shadow-[0_0_20px_rgba(158,42,43,0.4)]">
-                {getHouseIcon(activeHouse.iconName, 'w-8 h-8 text-gold')}
+              <div className="w-20 h-20 p-2 rounded-2xl bg-white border-2 border-gold shadow-[0_0_20px_rgba(158,42,43,0.4)] overflow-hidden shrink-0 flex items-center justify-center">
+                <img src={activeHouse.logo} alt={`${activeHouse.name} logo`} className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest block">
@@ -175,7 +155,7 @@ export const Clubs: React.FC<ClubsProps> = ({
               className={`w-full sm:w-auto px-6 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                 userPledgedHouse?.id === activeHouse.id
                   ? 'bg-ember/20 border-2 border-ember text-gold-2 shadow-[0_0_20px_rgba(226,113,29,0.4)]'
-                  : 'bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95'
+                  : 'bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95'
               }`}
             >
               <Sparkles className="w-4 h-4" />
@@ -290,7 +270,6 @@ export const Clubs: React.FC<ClubsProps> = ({
               <Reveal key={seg.id} delay={i * 90} className="h-full">
               <TiltCard
                 onClick={() => {
-                  soundFx.playSwordClash();
                   onNavigate('segments');
                 }}
                 className="p-4 rounded-xl bg-ink-2/70 border border-iron hover:border-gold/60 shadow-[0_8px_22px_rgba(11,9,7,0.5)] flex flex-col justify-between h-full"
@@ -372,10 +351,9 @@ export const Clubs: React.FC<ClubsProps> = ({
       <Reveal className="text-center pt-4">
         <button
           onClick={() => {
-            soundFx.playRoyalHorn();
             onOpenTickify();
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
         >
           <span>CLAIM HOUSE WARRIOR PASS ON TICKIFY</span>
           <Sparkles className="w-4 h-4" />

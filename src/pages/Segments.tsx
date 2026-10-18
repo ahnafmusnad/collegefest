@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FEST_SEGMENTS, FOUR_HOUSES, FEST_METADATA } from '../data/festData';
 import { Segment } from '../types';
-import { soundFx } from '../utils/soundEffects';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import { 
@@ -37,7 +36,6 @@ export const Segments: React.FC<SegmentsProps> = ({
 
   const handleToggleBookmark = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    soundFx.playRuneChime();
     setBookmarkedIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
@@ -110,7 +108,6 @@ export const Segments: React.FC<SegmentsProps> = ({
               <button
                 key={cat}
                 onClick={() => {
-                  soundFx.playSwordClash();
                   setSelectedCategory(cat);
                 }}
                 className={`px-3 py-1.5 rounded-lg font-cinzel text-xs font-bold tracking-wider transition-all ${
@@ -133,7 +130,6 @@ export const Segments: React.FC<SegmentsProps> = ({
           </span>
           <button
             onClick={() => {
-              soundFx.playSwordClash();
               setSelectedHouse('All');
             }}
             className={`px-3 py-1 rounded-md text-xs font-cinzel font-semibold transition-colors ${
@@ -146,7 +142,6 @@ export const Segments: React.FC<SegmentsProps> = ({
             <button
               key={h.id}
               onClick={() => {
-                soundFx.playSwordClash();
                 setSelectedHouse(h.id);
               }}
               className={`px-3 py-1 rounded-md text-xs font-cinzel font-semibold transition-colors ${
@@ -178,10 +173,9 @@ export const Segments: React.FC<SegmentsProps> = ({
             <Reveal key={segment.id} delay={(idx % 3) * 90} className="h-full">
             <TiltCard
               onClick={() => {
-                soundFx.playSwordClash();
                 onOpenRulesModal(segment);
               }}
-              onMouseEnter={() => soundFx.playRuneChime()}
+
               className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               <div>
@@ -272,7 +266,6 @@ export const Segments: React.FC<SegmentsProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    soundFx.playSwordClash();
                     onOpenRulesModal(segment);
                   }}
                   className="text-xs font-cinzel font-semibold text-gold hover:text-white transition-colors"
@@ -283,10 +276,9 @@ export const Segments: React.FC<SegmentsProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    soundFx.playRoyalHorn();
                     onRegisterTickify(segment.title);
                   }}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink font-cinzel text-[11px] font-bold shadow-[0_0_12px_rgba(158,42,43,0.4)] active:scale-95 transition-all uppercase tracking-wider"
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink font-cinzel text-[11px] font-bold shadow-[0_0_12px_rgba(158,42,43,0.4)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
                 >
                   <span>Tickify Entry</span>
                   <ExternalLink className="w-3 h-3" />
@@ -322,8 +314,8 @@ export const Segments: React.FC<SegmentsProps> = ({
             href={FEST_METADATA.tickifyLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => soundFx.playRoyalHorn()}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
           >
             <span>REGISTER CONTINGENT ON TICKIFY</span>
             <Sparkles className="w-4 h-4" />
