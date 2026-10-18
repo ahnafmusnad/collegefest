@@ -214,6 +214,17 @@
   }
 }
 
+/* Hero throne background */
+.hero-throne-bg {
+  background-position: center 35%;
+}
+@media (max-width: 640px) {
+  .hero-throne-bg {
+    background-size: auto 100%;
+    background-position: center center;
+  }
+}
+
 /* Background grid boxes */
 .gridlines {
   position: fixed;
