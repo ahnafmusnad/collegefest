@@ -63,7 +63,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           Winter Is Coming
         </p>
         <h2 className="font-cinzel-dec text-2xl md:text-3xl font-extrabold text-white tracking-widest text-glow-ice mb-3">
-          CARNIVAL DA CHITTAGONG COLLEGE
+          CARNAVAL DA CHITTAGONG COLLEGE
         </h2>
         <p className="font-cinzel text-sm text-slate-300 tracking-wider">
           Entering <span className="text-violet-300 font-semibold">{targetPageName}</span>

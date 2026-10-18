@@ -59,7 +59,7 @@ export const Organizers: React.FC = () => {
             THE SMALL COUNCIL & ORGANIZERS
           </h1>
           <p className="font-sans text-sm sm:text-base text-slate-300 leading-relaxed">
-            Meet the architects, marshals, and visionaries steering Carnival Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud.
+            Meet the architects, marshals, and visionaries steering Carnaval Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud.
           </p>
         </div>
       </div>
@@ -88,7 +88,7 @@ export const Organizers: React.FC = () => {
               "A Celebration of Academic Excellence, Creativity, Culture, and Youth Talent"
             </h2>
             <p className="font-sans text-xs md:text-sm text-slate-300 leading-relaxed italic">
-              "As the convenor, I assure you this platform has been built with dedication, transparency, and professionalism. This carnival will give students a space to showcase talent, exchange ideas, and foster collaboration. I am sincerely grateful to our respected Principal, Vice Principal, teachers, sponsors, volunteers, and participants for their guidance and support."
+              "As the convenor, I assure you this platform has been built with dedication, transparency, and professionalism. This carnaval will give students a space to showcase talent, exchange ideas, and foster collaboration. I am sincerely grateful to our respected Principal, Vice Principal, teachers, sponsors, volunteers, and participants for their guidance and support."
             </p>
             <div className="pt-2 text-xs font-cinzel">
               <span className="font-bold text-white block">Prof. Anowar Malek Mozumdar</span>

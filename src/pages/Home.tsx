@@ -121,8 +121,8 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* Main Fest Heading */}
           <div className="space-y-2">
-            <h1 className="font-cinzel-dec text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-wider leading-tight text-glow-ice drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              CARNIVAL DA <br />
+            <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight text-glow-gold drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+              CARNAVAL DA <br />
               <span className="bg-gradient-to-r from-violet-200 via-blue-300 to-amber-200 bg-clip-text text-transparent">
                 CHITTAGONG COLLEGE
               </span>

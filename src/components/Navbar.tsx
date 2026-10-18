@@ -96,9 +96,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-cinzel text-xs tracking-[0.25em] text-violet-400 font-bold block uppercase leading-none">
                   Chittagong College
                 </span>
-                <span className="font-cinzel-dec text-base md:text-lg font-black text-white tracking-wider block text-glow-ice leading-tight group-hover:text-blue-200 transition-colors">
-                  CARNIVAL DA CC
-                </span>
+<span className="font-cinzel-dec text-base md:text-lg font-black text-white tracking-wider block text-glow-ice leading-tight group-hover:text-blue-200 transition-colors">
+CARNAVAL DA CC
+</span>
               </div>
             </button>
 
@@ -219,7 +219,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
               <div>
                 <span className="font-cinzel text-xs text-violet-400 font-bold tracking-widest block">CHITTAGONG COLLEGE</span>
-                <span className="font-cinzel-dec text-sm font-bold text-white tracking-wider">CARNIVAL DA CC</span>
+                <span className="font-cinzel-dec text-sm font-bold text-white tracking-wider">CARNAVAL DA CC</span>
               </div>
             </div>
 

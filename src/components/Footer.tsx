@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
                   Chittagong College &bull; Est. 1869
                 </span>
                 <span className="font-cinzel-dec text-lg font-black text-white text-glow-ice block">
-                  CARNIVAL DA CC
+                  CARNAVAL DA CC
                 </span>
               </div>
             </div>
@@ -172,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
         {/* Bottom Copyright & Valyrian Easter Egg */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p className="font-cinzel text-center md:text-left">
-            &copy; {new Date().getFullYear()} Carnival Da Chittagong College. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Carnaval Da Chittagong College. All Rights Reserved.
           </p>
           <div className="flex items-center gap-2">
             <span>Forged with</span>

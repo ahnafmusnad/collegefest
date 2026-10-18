@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'GameOfThrones';
+  src: url('/fonts/Game of Thrones.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --font-cinzel: 'Cinzel', serif;
     --font-cinzel-dec: 'Cinzel Decorative', serif;
     --font-medieval: 'MedievalSharp', cursive;
+    --font-got: 'GameOfThrones', serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -27,6 +36,10 @@
 
 .font-medieval {
   font-family: 'MedievalSharp', cursive;
+}
+
+.font-got {
+  font-family: 'GameOfThrones', serif;
 }
 
 /* Custom Scrollbar styled like Valyrian Steel */

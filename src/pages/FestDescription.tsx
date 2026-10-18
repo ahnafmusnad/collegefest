@@ -52,7 +52,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             THE CHRONICLE OF THE REALM
           </h1>
           <p className="font-sans text-sm sm:text-base text-slate-300 leading-relaxed">
-            Founded in 1869, Chittagong College stands as one of the most venerable educational citadels in Bengal. Carnival Da Chittagong College is the grand winter convergence where our four legendary student clubs join forces to crown the realm’s brightest champions.
+            Founded in 1869, Chittagong College stands as one of the most venerable educational citadels in Bengal. Carnaval Da Chittagong College is the grand winter convergence where our four legendary student clubs join forces to crown the realm’s brightest champions.
           </p>
         </div>
       </div>
