@@ -103,8 +103,11 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#040812] text-slate-100 selection:bg-sky-500 selection:text-slate-950 flex flex-col relative font-sans">
-      
+    <div className="min-h-screen bg-[#070512] text-slate-100 selection:bg-violet-500 selection:text-slate-950 flex flex-col relative font-sans">
+
+      {/* Background Grid Boxes */}
+      <div className="gridlines" aria-hidden="true" />
+
       {/* Dynamic Falling Snow Simulation */}
       <SnowfallCanvas intensity={snowMode} />
 
@@ -125,7 +128,7 @@ export function App() {
       />
 
       {/* Page Content Body */}
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         {currentPage === 'home' && (
           <Home
             onNavigate={handleNavigate}

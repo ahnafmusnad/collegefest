@@ -10,7 +10,7 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #050b14;
+    background-color: #0a0718;
     color: #e2e8f0;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -34,15 +34,15 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050b14;
+  background: #0a0718;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
+  background: #0a0f2e;
   border-radius: 4px;
-  border: 1px solid #38bdf8;
+  border: 1px solid #1e3a8a;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #2563eb;
 }
 
 /* Glassmorphism Frost effects */
@@ -212,4 +212,18 @@
     transform: none;
     transition: none;
   }
+}
+
+/* Background grid boxes */
+.gridlines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(139, 92, 246, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.18) 1px, transparent 1px);
+  background-size: clamp(70px, 8vw, 120px) clamp(70px, 8vw, 120px);
+  -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
+  mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
 }

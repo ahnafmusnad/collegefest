@@ -23,13 +23,7 @@ export interface ClubHouse {
   };
   lore: string;
   founded: string;
-  lords: {
-    role: string;
-    name: string;
-    batch: string;
-  }[];
   achievements: string[];
-  keySegments: string[];
   memberCount: number;
   points: number;
 }
@@ -39,7 +33,7 @@ export interface Segment {
   title: string;
   gotTitle: string;
   houseId: string;
-  category: 'Debate' | 'Science & Tech' | 'Culture & Arts' | 'Business & MUN' | 'Gaming & Fun';
+  category: 'Debate' | 'Science & Tech' | 'Language & Literature' | 'Culture & Arts' | 'Gaming & Fun';
   prizePool: string;
   goldDragons: number; // GoT currency flair
   teamSize: string;
@@ -58,18 +52,12 @@ export interface SponsorTier {
   id: string;
   name: string;
   gotTitle: string;
-  price: string;
   badge: string;
   description: string;
   slots: string;
   perks: string[];
   color: string;
   borderColor: string;
-  currentSponsors?: {
-    name: string;
-    logoUrl?: string;
-    tagline: string;
-  }[];
 }
 
 export interface OrganizerMember {

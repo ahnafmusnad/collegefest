@@ -20,6 +20,7 @@ export const CountUp: React.FC<CountUpProps> = ({
   const ref = useRef<HTMLSpanElement>(null);
   const [value, setValue] = useState(0);
   const [target] = useState(end);
+  const [settled, setSettled] = useState(false);
 
   useEffect(() => {
     let rafId: number;
@@ -33,6 +34,7 @@ export const CountUp: React.FC<CountUpProps> = ({
         const eased = 1 - Math.pow(1 - progress, 4);
         setValue(Math.round(eased * target));
         if (progress < 1) rafId = requestAnimationFrame(tick);
+        else setSettled(true);
       };
       rafId = requestAnimationFrame(tick);
     };
@@ -62,9 +64,11 @@ export const CountUp: React.FC<CountUpProps> = ({
     };
   }, [target, duration, delay, startOnView]);
 
+  const display = settled ? end : value;
+
   return (
     <span ref={ref} className={className}>
-      {format ? format(value) : value}
+      {format ? format(display) : display}
     </span>
   );
 };

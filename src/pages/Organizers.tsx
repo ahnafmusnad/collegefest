@@ -17,6 +17,16 @@ import {
 export const Organizers: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState<string>('all');
 
+  const getInitials = (name: string) =>
+    name
+      .replace(/^(Prof\.|Dr\.|Md\.)\s+/i, '')
+      .split(' ')
+      .filter((w) => w.length > 1)
+      .map((w) => w[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase();
+
   const categories = [
     { label: 'All Ranks', value: 'all' },
     { label: 'The Small Council', value: 'council' },
@@ -35,13 +45,13 @@ export const Organizers: React.FC = () => {
       
       {/* Hero Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-sky-500/30 bg-gradient-to-r from-[#040813] via-[#091529] to-[#040813] p-8 md:p-14 text-center">
+      <div className="relative rounded-3xl overflow-hidden border-2 border-violet-500/30 bg-gradient-to-r from-[#070514] via-[#130e2c] to-[#070514] p-8 md:p-14 text-center">
         <div 
           className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
           style={{ backgroundImage: `url('/images/small-council-chamber.jpg')` }}
         />
         <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-950/90 border border-sky-400/40 text-sky-300 text-xs font-cinzel uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-violet-950/90 border border-violet-400/40 text-violet-300 text-xs font-cinzel uppercase tracking-widest">
             <Users className="w-3.5 h-3.5" />
             The Citadel High Chamber
           </div>
@@ -56,15 +66,13 @@ export const Organizers: React.FC = () => {
       </Reveal>
 
       {/* Convener's Royal Proclamation */}
-      <Reveal direction="zoom" className="frost-card p-6 md:p-10 rounded-3xl border-2 border-sky-500/40 relative overflow-hidden">
+      <Reveal direction="zoom" className="frost-card p-6 md:p-10 rounded-3xl border-2 border-violet-500/40 relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)]">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80"
-                alt="Convener"
-                className="w-full h-full object-cover"
-              />
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)] flex items-center justify-center bg-gradient-to-br from-slate-900 via-amber-950/40 to-slate-950">
+              <span className="font-cinzel-dec text-4xl md:text-5xl font-black text-amber-300 text-glow-gold">
+                AM
+              </span>
             </div>
             <div className="absolute -bottom-2 -right-2 p-1.5 rounded-full bg-amber-400 text-slate-950 shadow">
               <Crown className="w-4 h-4" />
@@ -74,17 +82,17 @@ export const Organizers: React.FC = () => {
           <div className="space-y-2 text-center md:text-left">
             <div className="inline-flex items-center gap-1.5 text-xs font-cinzel text-amber-400 uppercase tracking-widest font-bold">
               <Scroll className="w-3.5 h-3.5" />
-              Proclamation from the Hand of the King
+              Proclamation from the Office of the Convenor
             </div>
             <h2 className="font-cinzel-dec text-xl md:text-2xl font-bold text-white">
-              "To Every Student, Warrior, and Scholar of Bengal"
+              "A Celebration of Academic Excellence, Creativity, Culture, and Youth Talent"
             </h2>
             <p className="font-sans text-xs md:text-sm text-slate-300 leading-relaxed italic">
-              "Carnival Da Chittagong College is not merely an event; it is an epoch. For three days, the brick courtyards of our 157-year-old Citadel will echo with brilliant arguments, heavy metal guitar solos, buzzing robotics combat, and timeless camaraderie. We invite every brave soul to contest for honor."
+              "As the convenor, I assure you this platform has been built with dedication, transparency, and professionalism. This carnival will give students a space to showcase talent, exchange ideas, and foster collaboration. I am sincerely grateful to our respected Principal, Vice Principal, teachers, sponsors, volunteers, and participants for their guidance and support."
             </p>
             <div className="pt-2 text-xs font-cinzel">
-              <span className="font-bold text-white block">Fahim Shahriar Chowdhury</span>
-              <span className="text-sky-400">Fest Convener & Hand of the King (HSC '24)</span>
+              <span className="font-bold text-white block">Prof. Anowar Malek Mozumdar</span>
+              <span className="text-violet-400">Convenor, Carnaval Da Chittagong College — Department of Islamic History</span>
             </div>
           </div>
         </div>
@@ -107,7 +115,7 @@ export const Organizers: React.FC = () => {
               }}
               className={`px-4 py-2 rounded-xl font-cinzel text-xs font-bold tracking-wider transition-all ${
                 isSelected
-                  ? 'bg-sky-500/30 text-cyan-300 border border-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.4)]'
+                  ? 'bg-violet-500/30 text-blue-300 border border-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.4)]'
                   : 'bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
               }`}
             >
@@ -123,20 +131,18 @@ export const Organizers: React.FC = () => {
           <Reveal key={member.id} delay={(i % 4) * 90} className="h-full">
           <TiltCard
             onMouseEnter={() => soundFx.playRuneChime()}
-            className="group relative h-full rounded-2xl bg-gradient-to-b from-[#091527] via-[#060e1d] to-[#040812] border-2 border-slate-800 hover:border-sky-400 p-5 shadow-[0_10px_28px_rgba(2,8,20,0.5)] flex flex-col justify-between"
+            className="group relative h-full rounded-2xl bg-gradient-to-b from-[#130e2b] via-[#0d0a22] to-[#070512] border-2 border-slate-800 hover:border-violet-400 p-5 shadow-[0_10px_28px_rgba(2,8,20,0.5)] flex flex-col justify-between"
           >
             <div>
               {/* Member Portrait */}
-              <div className="relative mb-4 overflow-hidden rounded-xl aspect-square border border-slate-700 group-hover:border-sky-400/80 transition-colors">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="relative mb-4 overflow-hidden rounded-xl aspect-square border border-slate-700 group-hover:border-violet-400/80 transition-colors flex items-center justify-center bg-gradient-to-br from-slate-900 via-violet-950/60 to-slate-950">
+                <span className="font-cinzel-dec text-5xl md:text-6xl font-black text-violet-400/80 text-glow-ice group-hover:scale-110 transition-transform duration-500">
+                  {getInitials(member.name)}
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
-                
+
                 {/* House Tag */}
-                <div className="absolute bottom-2 left-2 right-2 px-2 py-1 rounded bg-slate-950/90 border border-sky-500/30 text-[10px] font-cinzel text-sky-300 truncate">
+                <div className="absolute bottom-2 left-2 right-2 px-2 py-1 rounded bg-slate-950/90 border border-violet-500/30 text-[10px] font-cinzel text-violet-300 truncate">
                   {member.houseAllegiance}
                 </div>
               </div>
@@ -145,10 +151,10 @@ export const Organizers: React.FC = () => {
               <div className="text-[11px] font-cinzel font-bold text-amber-400 uppercase tracking-wider mb-0.5">
                 {member.gotTitle}
               </div>
-              <h3 className="font-cinzel text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+              <h3 className="font-cinzel text-base font-bold text-white group-hover:text-blue-300 transition-colors">
                 {member.name}
               </h3>
-              <p className="text-xs text-sky-300/80 font-sans font-medium mb-1">
+              <p className="text-xs text-violet-300/80 font-sans font-medium mb-1">
                 {member.modernRole}
               </p>
               <div className="text-[10px] text-slate-400 font-mono mb-3">
@@ -168,7 +174,7 @@ export const Organizers: React.FC = () => {
                     href={member.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 rounded hover:bg-white/10 hover:text-sky-400 transition-colors"
+                    className="p-1.5 rounded hover:bg-white/10 hover:text-violet-400 transition-colors"
                     title="LinkedIn Raven"
                   >
                     <Globe className="w-3.5 h-3.5" />
@@ -179,7 +185,7 @@ export const Organizers: React.FC = () => {
                     href={member.socials.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 rounded hover:bg-white/10 hover:text-sky-400 transition-colors"
+                    className="p-1.5 rounded hover:bg-white/10 hover:text-violet-400 transition-colors"
                     title="Facebook Raven"
                   >
                     <Users className="w-3.5 h-3.5" />
@@ -188,7 +194,7 @@ export const Organizers: React.FC = () => {
                 {member.socials.email && (
                   <a
                     href={`mailto:${member.socials.email}`}
-                    className="p-1.5 rounded hover:bg-white/10 hover:text-sky-400 transition-colors"
+                    className="p-1.5 rounded hover:bg-white/10 hover:text-violet-400 transition-colors"
                     title="Dispatch Royal Mail"
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -202,15 +208,15 @@ export const Organizers: React.FC = () => {
             </div>
 
             {/* Hover aura */}
-            <div className="absolute inset-0 rounded-2xl bg-sky-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl bg-violet-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           </TiltCard>
           </Reveal>
         ))}
       </div>
 
       {/* Volunteer Battalion Callout */}
-      <Reveal direction="zoom" className="frost-card p-8 md:p-10 rounded-3xl border border-sky-500/40 text-center max-w-3xl mx-auto space-y-4">
-        <div className="w-12 h-12 rounded-full bg-sky-950 border border-sky-400 flex items-center justify-center mx-auto text-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+      <Reveal direction="zoom" className="frost-card p-8 md:p-10 rounded-3xl border border-violet-500/40 text-center max-w-3xl mx-auto space-y-4">
+        <div className="w-12 h-12 rounded-full bg-violet-950 border border-violet-400 flex items-center justify-center mx-auto text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.4)]">
           <Shield className="w-6 h-6" />
         </div>
         <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
@@ -220,7 +226,7 @@ export const Organizers: React.FC = () => {
           Over 120 dedicated student marshals from Chittagong College ensure smooth gate operations, technical logistics, medical safety, and stage management.
         </p>
         <div className="pt-2">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 border border-sky-500/30 text-xs font-cinzel text-sky-300">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 border border-violet-500/30 text-xs font-cinzel text-violet-300">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Honoring the City Watch of Chittagong College</span>
           </div>

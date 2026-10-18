@@ -11,17 +11,17 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }) => {
   return (
-    <footer className="relative border-t border-sky-500/20 bg-gradient-to-b from-[#050b14] via-[#03060c] to-[#010307] text-slate-300 overflow-hidden pt-16 pb-12">
+    <footer className="relative z-10 border-t border-violet-500/20 bg-gradient-to-b from-[#0a0718] via-[#03060c] to-[#010307] text-slate-300 overflow-hidden pt-16 pb-12">
       {/* Top icy divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400/60 to-transparent shadow-[0_0_15px_#38bdf8]" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-violet-400/60 to-transparent shadow-[0_0_15px_#8b5cf6]" />
       
       {/* Background radial atmosphere */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-sky-950/20 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-violet-950/20 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Four Houses Banner Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 p-4 rounded-2xl bg-slate-950/60 border border-sky-500/20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 p-4 rounded-2xl bg-slate-950/60 border border-violet-500/20">
           {FOUR_HOUSES.map((house) => (
             <div
               key={house.id}
@@ -29,10 +29,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
                 soundFx.playRuneChime();
                 onNavigate('clubs');
               }}
-              className="p-3 rounded-xl border border-slate-800/80 hover:border-sky-400/50 bg-slate-900/30 hover:bg-slate-900/80 transition-all cursor-pointer group text-center"
+              className="p-3 rounded-xl border border-slate-800/80 hover:border-violet-400/50 bg-slate-900/30 hover:bg-slate-900/80 transition-all cursor-pointer group text-center"
             >
-              <div className="flex items-center justify-center gap-1.5 font-cinzel text-xs font-bold text-slate-200 group-hover:text-cyan-300">
-                <Shield className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
+              <div className="flex items-center justify-center gap-1.5 font-cinzel text-xs font-bold text-slate-200 group-hover:text-blue-300">
+                <Shield className="w-3.5 h-3.5 text-violet-400 group-hover:scale-110 transition-transform" />
                 <span>{house.houseName}</span>
               </div>
               <p className="text-[11px] text-slate-400 truncate mt-0.5">{house.name}</p>
@@ -46,11 +46,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
           {/* Fest Proclamation */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-sky-400/50 flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.3)]">
-                <Crown className="w-5 h-5 text-sky-400" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-violet-400/50 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                <Crown className="w-5 h-5 text-violet-400" />
               </div>
               <div>
-                <span className="font-cinzel text-xs text-sky-400 font-bold tracking-widest block uppercase">
+                <span className="font-cinzel text-xs text-violet-400 font-bold tracking-widest block uppercase">
                   Chittagong College &bull; Est. 1869
                 </span>
                 <span className="font-cinzel-dec text-lg font-black text-white text-glow-ice block">
@@ -60,49 +60,49 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
             </div>
 
             <p className="font-sans text-xs text-slate-400 leading-relaxed max-w-sm">
-              The grand winter convergence uniting the Four Great Houses of Chittagong College in an epic saga of intellect, technology, music, and valor. Winter has arrived at the Citadel.
+              The grand winter convergence uniting the Four Great Houses of Chittagong College in an epic saga of science, language, debate, and the art of the lens. Winter has arrived at the Citadel.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-slate-400">
-              <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
+              <MapPin className="w-4 h-4 text-violet-400 shrink-0" />
               <span>Chawkbazar, College Road, Chittagong-4203, Bangladesh</span>
             </div>
           </div>
 
           {/* Quick Realms */}
           <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-sky-300 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-violet-300 mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
               The Realms
             </h4>
             <ul className="space-y-2 text-xs font-sans">
               <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('home')} className="hover:text-blue-300 transition-colors">
                   The Iron Throne (Home)
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('description')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('description')} className="hover:text-blue-300 transition-colors">
                   Fest Chronicle & Schedule
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('clubs')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('clubs')} className="hover:text-blue-300 transition-colors">
                   The 4 Great Houses (Clubs)
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('segments')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('segments')} className="hover:text-blue-300 transition-colors">
                   Tourneys & Competitions
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('sponsorships')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('sponsorships')} className="hover:text-blue-300 transition-colors">
                   Iron Bank (Sponsorships)
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('organizers')} className="hover:text-cyan-300 transition-colors">
+                <button onClick={() => onNavigate('organizers')} className="hover:text-blue-300 transition-colors">
                   Small Council (Organizers)
                 </button>
               </li>
@@ -111,8 +111,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
 
           {/* Registration & Tickify */}
           <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-sky-300 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-violet-300 mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
               Tickify Portal
             </h4>
             <ul className="space-y-2.5 text-xs font-sans">
@@ -121,7 +121,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
                   href={FEST_METADATA.tickifyLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-cyan-300 hover:text-cyan-200 font-semibold"
+                  className="inline-flex items-center gap-1.5 text-blue-300 hover:text-blue-200 font-semibold"
                 >
                   <Ticket className="w-3.5 h-3.5" />
                   <span>Direct Tickify Checkout</span>
@@ -152,18 +152,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
 
           {/* Contact Treasury */}
           <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-sky-300 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-violet-300 mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
               Royal Ravens
             </h4>
             <div className="space-y-2 text-xs text-slate-400">
               <p>For inquiries, partnerships or royal scrolls:</p>
-              <div className="flex items-center gap-1.5 text-sky-300">
+              <div className="flex items-center gap-1.5 text-violet-300">
                 <Mail className="w-3.5 h-3.5" />
-                <span>carnival@ctgcollege.edu.bd</span>
+                <span>carnavaldactgclg@gmail.com</span>
               </div>
               <p className="text-[11px] text-slate-500 pt-1">
-                Emergency Council Raven: +880 1819-000000
+                Sponsorship Wing: +880 1776-810739
               </p>
             </div>
           </div>
