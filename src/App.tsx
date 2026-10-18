@@ -103,7 +103,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070512] text-slate-100 selection:bg-violet-500 selection:text-slate-950 flex flex-col relative font-sans">
+    <div className="min-h-screen bg-ink text-bone selection:bg-crimson selection:text-ink flex flex-col relative font-sans">
 
       {/* Background Grid Boxes */}
       <div className="gridlines" aria-hidden="true" />

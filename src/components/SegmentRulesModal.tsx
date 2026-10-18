@@ -21,7 +21,7 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-gradient-to-b from-[#100c28] via-[#070e1c] to-[#040810] border-2 border-violet-400/50 rounded-2xl shadow-[0_0_50px_rgba(139,92,246,0.3)] p-6 md:p-8 text-slate-100 my-8">
+      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 rounded-2xl shadow-[0_0_50px_rgba(158,42,43,0.3)] p-6 md:p-8 text-bone my-8">
         
         {/* Close Button */}
         <button
@@ -29,18 +29,18 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
             soundFx.playSwordClash();
             onClose();
           }}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+          className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Top Badges */}
         <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-cinzel font-semibold bg-violet-950/80 border border-violet-500/40 text-violet-300">
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-cinzel font-semibold bg-ink-2/80 border border-crimson/40 text-gold-2">
             {segment.category}
           </span>
           {house && (
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-cinzel font-semibold bg-slate-900 border border-slate-700 text-slate-300">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-cinzel font-semibold bg-ink-2 border border-iron text-bone-dim">
               Host: {house.houseName}
             </span>
           )}
@@ -50,57 +50,57 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
         <h2 className="font-cinzel text-xl md:text-2xl font-bold text-white tracking-wide">
           {segment.title}
         </h2>
-        <p className="font-cinzel text-xs text-violet-400 italic mb-4">
+        <p className="font-cinzel text-xs text-gold italic mb-4">
           The Citadel Proclamation: "{segment.gotTitle}"
         </p>
 
         {/* Quick Details Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-xl bg-slate-900/80 border border-violet-500/20 mb-6 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
-            <Trophy className="w-4 h-4 text-amber-400 shrink-0" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-xl bg-ink-2/80 border border-crimson/20 mb-6 text-xs">
+          <div className="flex items-center gap-2 text-bone-dim">
+            <Trophy className="w-4 h-4 text-gold shrink-0" />
             <div>
-              <div className="text-[10px] text-slate-400 uppercase">Prize Vault</div>
-              <div className="font-bold text-amber-300">{segment.prizePool}</div>
+              <div className="text-[10px] text-bone-dim uppercase">Prize Vault</div>
+              <div className="font-bold text-gold-2">{segment.prizePool}</div>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <Users className="w-4 h-4 text-violet-400 shrink-0" />
+          <div className="flex items-center gap-2 text-bone-dim">
+            <Users className="w-4 h-4 text-gold shrink-0" />
             <div>
-              <div className="text-[10px] text-slate-400 uppercase">Team Size</div>
+              <div className="text-[10px] text-bone-dim uppercase">Team Size</div>
               <div className="font-bold text-white">{segment.teamSize}</div>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <MapPin className="w-4 h-4 text-blue-400 shrink-0" />
+          <div className="flex items-center gap-2 text-bone-dim">
+            <MapPin className="w-4 h-4 text-ember shrink-0" />
             <div>
-              <div className="text-[10px] text-slate-400 uppercase">Citadel Venue</div>
+              <div className="text-[10px] text-bone-dim uppercase">Citadel Venue</div>
               <div className="font-bold text-white truncate">{segment.venue}</div>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <Clock className="w-4 h-4 text-purple-400 shrink-0" />
+          <div className="flex items-center gap-2 text-bone-dim">
+            <Clock className="w-4 h-4 text-crimson-2 shrink-0" />
             <div>
-              <div className="text-[10px] text-slate-400 uppercase">Schedule</div>
+              <div className="text-[10px] text-bone-dim uppercase">Schedule</div>
               <div className="font-bold text-white">{segment.time}</div>
             </div>
           </div>
         </div>
 
         {/* Description */}
-        <div className="mb-5 text-sm text-slate-300 leading-relaxed">
+        <div className="mb-5 text-sm text-bone-dim leading-relaxed">
           {segment.description}
         </div>
 
         {/* Tournament Rules */}
         <div className="mb-5">
-          <div className="flex items-center gap-2 font-cinzel text-xs font-bold text-violet-300 uppercase tracking-widest mb-2.5">
-            <ShieldAlert className="w-4 h-4 text-violet-400" />
+          <div className="flex items-center gap-2 font-cinzel text-xs font-bold text-gold-2 uppercase tracking-widest mb-2.5">
+            <ShieldAlert className="w-4 h-4 text-gold" />
             Tournament Decrees & Rules of Engagement
           </div>
-          <ul className="space-y-2 text-xs text-slate-300 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+          <ul className="space-y-2 text-xs text-bone-dim bg-ink-2/60 p-3.5 rounded-xl border border-iron">
             {segment.rules.map((rule, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-violet-400 font-bold shrink-0">{idx + 1}.</span>
+                <span className="text-gold font-bold shrink-0">{idx + 1}.</span>
                 <span>{rule}</span>
               </li>
             ))}
@@ -109,14 +109,14 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
 
         {/* Judging Criteria */}
         <div className="mb-6">
-          <div className="font-cinzel text-xs font-bold text-violet-300 uppercase tracking-widest mb-2">
+          <div className="font-cinzel text-xs font-bold text-gold-2 uppercase tracking-widest mb-2">
             Judging Criteria & Scoring
           </div>
           <div className="flex flex-wrap gap-2">
             {segment.judgingCriteria.map((crit, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 rounded-lg bg-violet-950/50 border border-violet-400/30 text-xs text-violet-200"
+                className="px-3 py-1 rounded-lg bg-ink-2/50 border border-gold/30 text-xs text-gold-2"
               >
                 {crit}
               </span>
@@ -125,13 +125,13 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-violet-500/20">
+        <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-crimson/20">
           <button
             onClick={() => {
               soundFx.playRoyalHorn();
               onRegisterTickify(segment.title);
             }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-slate-950 bg-gradient-to-r from-blue-400 to-violet-300 hover:from-blue-300 hover:to-violet-200 shadow-[0_0_20px_rgba(139,92,246,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
           >
             <Sparkles className="w-4 h-4" />
             REGISTER VIA TICKIFY (ENTRY: {segment.entryFee})
@@ -141,7 +141,7 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
             href={FEST_METADATA.tickifyLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-cinzel uppercase transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-iron hover:border-ash text-bone-dim text-xs font-cinzel uppercase transition-colors"
           >
             <span>Tickify Portal</span>
             <ExternalLink className="w-3.5 h-3.5" />

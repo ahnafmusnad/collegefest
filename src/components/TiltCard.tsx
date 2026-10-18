@@ -18,7 +18,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   glareClassName = 'rounded-2xl',
   maxTilt = 10,
   scale = 1.03,
-  shadowClassName = '0 25px 50px rgba(2, 8, 20, 0.55), 0 0 32px rgba(56, 189, 248, 0.12)',
+  shadowClassName = '0 25px 50px rgba(11, 9, 7, 0.55), 0 0 32px rgba(226, 113, 29, 0.12)',
   onClick,
   onMouseEnter,
   glare = true
@@ -69,7 +69,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         <div
           className={`pointer-events-none absolute inset-0 ${glareClassName} transition-opacity duration-300`}
           style={{
-            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(186, 230, 253, 0.14), transparent 55%)`,
+            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(237, 228, 211, 0.14), transparent 55%)`,
             opacity: glarePos.opacity
           }}
         />

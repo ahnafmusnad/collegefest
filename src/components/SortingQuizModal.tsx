@@ -83,12 +83,12 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-xl bg-gradient-to-b from-[#100c28] via-[#070e1c] to-[#040810] border-2 border-violet-400/50 rounded-2xl shadow-[0_0_50px_rgba(139,92,246,0.3)] p-6 md:p-8 text-slate-100">
+      <div className="relative w-full max-w-xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 rounded-2xl shadow-[0_0_50px_rgba(158,42,43,0.3)] p-6 md:p-8 text-bone">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+          className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -96,20 +96,20 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
         {!sortedHouse ? (
           <div>
             <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-950 border border-violet-400/40 text-violet-300 text-xs font-cinzel uppercase tracking-widest mb-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-2">
                 <Shield className="w-3.5 h-3.5" />
                 The Iron Raven’s Trial
               </div>
               <h2 className="font-cinzel text-xl md:text-2xl font-bold text-white tracking-wide">
                 WHICH HOUSE OF THE CITADEL SHALL CLAIM YOU?
               </h2>
-              <p className="text-xs text-violet-400/80 font-cinzel mt-1">
+              <p className="text-xs text-gold/80 font-cinzel mt-1">
                 Question {currentQuestionIndex + 1} of {SORTING_QUESTIONS.length}
               </p>
             </div>
 
             {/* Question Text */}
-            <div className="p-4 rounded-xl bg-slate-900/80 border border-violet-500/20 mb-5">
+            <div className="p-4 rounded-xl bg-ink-2/80 border border-crimson/20 mb-5">
               <p className="font-cinzel text-base md:text-lg text-white font-medium text-center">
                 "{currentQ.question}"
               </p>
@@ -121,10 +121,10 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
                 <button
                   key={i}
                   onClick={() => handleSelectOption(opt.houseId)}
-                  className="w-full text-left p-3.5 rounded-xl border border-slate-700 hover:border-violet-400 bg-slate-900/50 hover:bg-violet-950/40 transition-all text-sm text-slate-200 hover:text-white flex items-center justify-between group shadow-sm"
+                  className="w-full text-left p-3.5 rounded-xl border border-iron hover:border-gold bg-ink-2/50 hover:bg-ink-2/40 transition-all text-sm text-bone hover:text-white flex items-center justify-between group shadow-sm"
                 >
                   <span className="font-sans leading-relaxed">{opt.text}</span>
-                  <Sparkles className="w-4 h-4 text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-3" />
+                  <Sparkles className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-3" />
                 </button>
               ))}
             </div>
@@ -136,10 +136,10 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
                   key={i}
                   className={`h-1.5 rounded-full transition-all ${
                     i === currentQuestionIndex
-                      ? 'w-8 bg-violet-400 shadow-[0_0_8px_#8b5cf6]'
+                      ? 'w-8 bg-gold shadow-[0_0_8px_#9e2a2b]'
                       : i < currentQuestionIndex
-                      ? 'w-4 bg-violet-700'
-                      : 'w-4 bg-slate-800'
+                      ? 'w-4 bg-crimson-2'
+                      : 'w-4 bg-ink-3'
                   }`}
                 />
               ))}
@@ -148,40 +148,40 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
         ) : (
           /* Result View */
           <div className="text-center py-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-950 border border-violet-400/40 text-violet-300 text-xs font-cinzel uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-3">
               The Raven Has Spoken
             </div>
 
-            <div className="w-20 h-20 mx-auto rounded-full bg-violet-950/80 border-2 border-violet-400 flex items-center justify-center shadow-[0_0_30px_rgba(139,92,246,0.5)] mb-4">
-              <Shield className="w-10 h-10 text-violet-400" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-ink-2/80 border-2 border-gold flex items-center justify-center shadow-[0_0_30px_rgba(158,42,43,0.5)] mb-4">
+              <Shield className="w-10 h-10 text-gold" />
             </div>
 
-            <h3 className="font-cinzel text-xs uppercase tracking-widest text-violet-300">
+            <h3 className="font-cinzel text-xs uppercase tracking-widest text-gold-2">
               You Have Been Claimed By
             </h3>
             <h2 className="font-cinzel-dec text-2xl md:text-3xl font-extrabold text-white my-2 text-glow-ice">
               {sortedHouse.houseName}
             </h2>
-            <p className="font-cinzel text-sm text-violet-200/90 italic mb-4">
+            <p className="font-cinzel text-sm text-gold-2/90 italic mb-4">
               "{sortedHouse.motto}"
             </p>
 
-            <div className="p-4 rounded-xl bg-slate-900/80 border border-violet-500/30 text-left text-xs md:text-sm text-slate-300 mb-6">
-              <div className="font-bold text-violet-300 mb-1">{sortedHouse.name}</div>
+            <div className="p-4 rounded-xl bg-ink-2/80 border border-crimson/30 text-left text-xs md:text-sm text-bone-dim mb-6">
+              <div className="font-bold text-gold-2 mb-1">{sortedHouse.name}</div>
               <p className="line-clamp-3">{sortedHouse.lore}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handlePledge}
-                className="flex-1 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-slate-950 bg-gradient-to-r from-blue-400 to-violet-300 hover:from-blue-300 hover:to-violet-200 shadow-[0_0_20px_rgba(139,92,246,0.5)] active:scale-95 transition-all text-center uppercase tracking-wider"
+                className="flex-1 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] active:scale-95 transition-all text-center uppercase tracking-wider"
               >
                 PLEDGE ALLEGIANCE & WEAR CREST
               </button>
 
               <button
                 onClick={handleReset}
-                className="flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-cinzel uppercase transition-colors"
+                className="flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-iron hover:border-ash text-bone-dim text-xs font-cinzel uppercase transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 Retake

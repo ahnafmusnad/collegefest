@@ -61,24 +61,24 @@ export const Clubs: React.FC<ClubsProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 px-4 text-slate-100 max-w-7xl mx-auto space-y-16">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-16">
       
       {/* Header Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-violet-500/30 bg-gradient-to-r from-[#070514] via-[#130e2c] to-[#070514] p-8 md:p-12 text-center">
+      <div className="relative rounded-3xl overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
         <div 
           className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
           style={{ backgroundImage: `url('/images/four-houses-heraldry.jpg')` }}
         />
         <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-violet-950/90 border border-violet-400/40 text-violet-300 text-xs font-cinzel uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
             <Shield className="w-3.5 h-3.5" />
             The Citadel Quadrumvirate
           </div>
           <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-ice">
             THE FOUR GREAT HOUSES
           </h1>
-          <p className="font-sans text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
             Four legendary clubs anchor Chittagong College’s student body. Each house bears its own sigil, sacred motto, heroic ancestry, and fierce competitive fire.
           </p>
         </div>
@@ -101,12 +101,12 @@ export const Clubs: React.FC<ClubsProps> = ({
               onMouseEnter={() => soundFx.playRuneChime()}
               className={`relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between group h-full ${
                 isSelected
-                  ? 'bg-gradient-to-b from-violet-950/90 to-slate-900 border-violet-400 shadow-[0_0_25px_rgba(139,92,246,0.35)] -translate-y-1'
-                  : 'bg-slate-900/60 border-slate-800 hover:border-violet-500/40 hover:bg-slate-900/90'
+                  ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold shadow-[0_0_25px_rgba(158,42,43,0.35)] -translate-y-1'
+                  : 'bg-ink-2/60 border-iron hover:border-crimson/40 hover:bg-ink-2/90'
               }`}
             >
               {isPledged && (
-                <div className="absolute -top-2.5 right-3 bg-blue-400 text-slate-950 text-[10px] font-cinzel font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow">
+                <div className="absolute -top-2.5 right-3 bg-ember text-ink text-[10px] font-cinzel font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow">
                   <Check className="w-3 h-3" />
                   Your House
                 </div>
@@ -114,20 +114,20 @@ export const Clubs: React.FC<ClubsProps> = ({
 
               <div className="flex items-center gap-2.5 mb-2">
                 <div className={`p-2 rounded-lg border ${
-                  isSelected ? 'bg-violet-500/20 border-violet-400 text-blue-300' : 'bg-slate-800/80 border-slate-700 text-slate-400'
+                  isSelected ? 'bg-crimson/20 border-gold text-gold-2' : 'bg-ink-3/80 border-iron text-bone-dim'
                 }`}>
                   {getHouseIcon(house.iconName, 'w-4 h-4')}
                 </div>
-                <div className="font-cinzel text-xs text-amber-400/80 font-semibold uppercase">
+                <div className="font-cinzel text-xs text-gold/80 font-semibold uppercase">
                   {house.name.split('(')[0]}
                 </div>
               </div>
 
-              <div className="font-cinzel text-sm font-bold text-white group-hover:text-blue-300 transition-colors line-clamp-1">
+              <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1">
                 {house.houseName}
               </div>
 
-              <div className="font-cinzel text-[11px] text-slate-400 italic mt-1 line-clamp-1">
+              <div className="font-cinzel text-[11px] text-bone-dim italic mt-1 line-clamp-1">
                 "{house.motto}"
               </div>
             </button>
@@ -140,17 +140,17 @@ export const Clubs: React.FC<ClubsProps> = ({
           ACTIVE HOUSE SHOWCASE DOSSIER
       ======================================================== */}
       <Reveal direction="zoom">
-      <div className="frost-card rounded-3xl border-2 border-violet-500/40 p-6 md:p-10 space-y-10 relative overflow-hidden">
+      <div className="frost-card rounded-3xl border-2 border-crimson/40 p-6 md:p-10 space-y-10 relative overflow-hidden">
         
         {/* Top House Banner */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-violet-500/20 pb-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-crimson/20 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="p-3.5 rounded-2xl bg-slate-950 border-2 border-violet-400 shadow-[0_0_20px_rgba(139,92,246,0.4)]">
-                {getHouseIcon(activeHouse.iconName, 'w-8 h-8 text-violet-400')}
+              <div className="p-3.5 rounded-2xl bg-ink border-2 border-gold shadow-[0_0_20px_rgba(158,42,43,0.4)]">
+                {getHouseIcon(activeHouse.iconName, 'w-8 h-8 text-gold')}
               </div>
               <div>
-                <span className="font-cinzel text-xs font-bold text-violet-400 uppercase tracking-widest block">
+                <span className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest block">
                   Citadel House Sigil: {activeHouse.sigil}
                 </span>
                 <h2 className="font-cinzel-dec text-3xl sm:text-4xl font-extrabold text-white text-glow-ice">
@@ -159,11 +159,11 @@ export const Clubs: React.FC<ClubsProps> = ({
               </div>
             </div>
 
-            <div className="font-cinzel text-base font-semibold text-amber-300">
+            <div className="font-cinzel text-base font-semibold text-gold-2">
               {activeHouse.houseName}
             </div>
 
-            <p className="font-cinzel text-sm text-violet-200/90 italic">
+            <p className="font-cinzel text-sm text-gold-2/90 italic">
               House Words: "{activeHouse.motto}"
             </p>
           </div>
@@ -174,17 +174,17 @@ export const Clubs: React.FC<ClubsProps> = ({
               onClick={() => handlePledge(activeHouse)}
               className={`w-full sm:w-auto px-6 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                 userPledgedHouse?.id === activeHouse.id
-                  ? 'bg-blue-500/20 border-2 border-blue-400 text-blue-200 shadow-[0_0_20px_rgba(96,165,250,0.4)]'
-                  : 'bg-gradient-to-r from-blue-400 to-violet-400 hover:from-blue-300 hover:to-violet-300 text-slate-950 border border-blue-200 shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95'
+                  ? 'bg-ember/20 border-2 border-ember text-gold-2 shadow-[0_0_20px_rgba(226,113,29,0.4)]'
+                  : 'bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95'
               }`}
             >
               <Sparkles className="w-4 h-4" />
               <span>{userPledgedHouse?.id === activeHouse.id ? 'ALLEGIANCE SWORN' : `PLEDGE TO ${activeHouse.houseName.toUpperCase()}`}</span>
             </button>
 
-            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center min-w-[120px]">
-              <div className="font-mono text-lg font-bold text-amber-400">{activeHouse.points}</div>
-              <div className="text-[10px] font-cinzel text-slate-400 uppercase">Citadel Points</div>
+            <div className="p-3 rounded-xl bg-ink-2/80 border border-iron text-center min-w-[120px]">
+              <div className="font-mono text-lg font-bold text-gold">{activeHouse.points}</div>
+              <div className="text-[10px] font-cinzel text-bone-dim uppercase">Citadel Points</div>
             </div>
           </div>
         </div>
@@ -192,27 +192,27 @@ export const Clubs: React.FC<ClubsProps> = ({
         {/* House Lore Description */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-4">
-            <h3 className="font-cinzel text-base font-bold text-violet-300 uppercase tracking-wider flex items-center gap-2">
+            <h3 className="font-cinzel text-base font-bold text-gold-2 uppercase tracking-wider flex items-center gap-2">
               <Scroll className="w-4 h-4" />
               The Chronicle & Philosophy
             </h3>
-            <p className="font-sans text-sm text-slate-300 leading-relaxed">
+            <p className="font-sans text-sm text-bone-dim leading-relaxed">
               {activeHouse.lore}
             </p>
 
             {/* Achievements */}
             <div className="pt-4 space-y-2.5">
-              <h4 className="font-cinzel text-xs font-bold text-violet-400 uppercase tracking-widest flex items-center gap-2">
-                <Award className="w-4 h-4 text-amber-400" />
+              <h4 className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest flex items-center gap-2">
+                <Award className="w-4 h-4 text-gold" />
                 Historic Trophies & Laurels
               </h4>
               <div className="space-y-2">
                 {activeHouse.achievements.map((ach, i) => (
                   <Reveal key={i} delay={i * 90}>
                   <div
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-200 hover:border-violet-500/40 transition-colors h-full"
+                    className="flex items-center gap-2.5 p-3 rounded-xl bg-ink-2/60 border border-iron/80 text-xs text-bone hover:border-crimson/40 transition-colors h-full"
                   >
-                    <Crown className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <Crown className="w-3.5 h-3.5 text-gold shrink-0" />
                     <span>{ach}</span>
                   </div>
                   </Reveal>
@@ -223,44 +223,44 @@ export const Clubs: React.FC<ClubsProps> = ({
 
           {/* House Vitals */}
           <div className="space-y-4">
-            <h3 className="font-cinzel text-base font-bold text-violet-300 uppercase tracking-wider flex items-center gap-2">
+            <h3 className="font-cinzel text-base font-bold text-gold-2 uppercase tracking-wider flex items-center gap-2">
               <Users className="w-4 h-4" />
               House Vitals
             </h3>
             <div className="grid grid-cols-2 gap-2.5">
               <Reveal delay={0}>
-                <div className="p-3.5 rounded-xl bg-slate-900/80 border border-violet-500/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-violet-400 uppercase tracking-wider">Founded</div>
+                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Founded</div>
                   <div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>
                 </div>
               </Reveal>
               <Reveal delay={80}>
-                <div className="p-3.5 rounded-xl bg-slate-900/80 border border-violet-500/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-violet-400 uppercase tracking-wider">Members</div>
+                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Members</div>
                   <div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
                 </div>
               </Reveal>
               <Reveal delay={160}>
-                <div className="p-3.5 rounded-xl bg-slate-900/80 border border-violet-500/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-violet-400 uppercase tracking-wider">Sigil</div>
+                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Sigil</div>
                   <div className="font-cinzel text-[11px] font-bold text-white leading-tight px-1">{activeHouse.sigil}</div>
                 </div>
               </Reveal>
               <Reveal delay={240}>
-                <div className="p-3.5 rounded-xl bg-slate-900/80 border border-violet-500/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-violet-400 uppercase tracking-wider">Crest Points</div>
-                  <div className="font-mono text-lg font-bold text-amber-300">{activeHouse.points}</div>
+                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Crest Points</div>
+                  <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
                 </div>
               </Reveal>
             </div>
 
             <Reveal delay={320}>
-              <div className="p-3.5 rounded-xl bg-violet-950/40 border border-violet-500/20 space-y-2 text-xs">
-                <div className="flex items-center justify-between gap-2 text-slate-300">
+              <div className="p-3.5 rounded-xl bg-ink-2/40 border border-crimson/20 space-y-2 text-xs">
+                <div className="flex items-center justify-between gap-2 text-bone-dim">
                   <span className="shrink-0">House Words:</span>
-                  <span className="font-cinzel text-violet-300 italic text-right">"{activeHouse.motto}"</span>
+                  <span className="font-cinzel text-gold-2 italic text-right">"{activeHouse.motto}"</span>
                 </div>
-                <div className="flex items-center justify-between gap-2 text-slate-300">
+                <div className="flex items-center justify-between gap-2 text-bone-dim">
                   <span className="shrink-0">Realm:</span>
                   <span className="font-cinzel text-white text-right truncate">{activeHouse.name}</span>
                 </div>
@@ -270,15 +270,15 @@ export const Clubs: React.FC<ClubsProps> = ({
         </div>
 
         {/* House Segments Showcase */}
-        <div className="pt-4 border-t border-violet-500/20 space-y-4">
+        <div className="pt-4 border-t border-crimson/20 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-cinzel text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <Swords className="w-4 h-4 text-violet-400" />
+              <Swords className="w-4 h-4 text-gold" />
               Tournament Segments Commanded by {activeHouse.houseName}
             </h3>
             <button
               onClick={() => onNavigate('segments')}
-              className="text-xs font-cinzel text-violet-400 hover:text-blue-300 flex items-center gap-1"
+              className="text-xs font-cinzel text-gold hover:text-gold-2 flex items-center gap-1"
             >
               <span>View All Tourneys</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -293,24 +293,24 @@ export const Clubs: React.FC<ClubsProps> = ({
                   soundFx.playSwordClash();
                   onNavigate('segments');
                 }}
-                className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-violet-400/60 shadow-[0_8px_22px_rgba(2,8,20,0.5)] flex flex-col justify-between h-full"
+                className="p-4 rounded-xl bg-ink-2/70 border border-iron hover:border-gold/60 shadow-[0_8px_22px_rgba(11,9,7,0.5)] flex flex-col justify-between h-full"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-cinzel text-violet-400">{seg.category}</span>
-                    <span className="font-bold text-amber-400">{seg.prizePool}</span>
+                    <span className="font-cinzel text-gold">{seg.category}</span>
+                    <span className="font-bold text-gold">{seg.prizePool}</span>
                   </div>
-                  <h4 className="font-cinzel text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                  <h4 className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors">
                     {seg.title}
                   </h4>
-                  <p className="text-xs text-slate-400 line-clamp-2 mt-1">
+                  <p className="text-xs text-bone-dim line-clamp-2 mt-1">
                     {seg.description}
                   </p>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="pt-3 mt-3 border-t border-iron/60 flex items-center justify-between text-[11px] text-bone-dim">
                   <span>{seg.venue}</span>
-                  <span className="text-violet-400 font-cinzel font-bold group-hover:underline">Enter Tourney &rarr;</span>
+                  <span className="text-gold font-cinzel font-bold group-hover:underline">Enter Tourney &rarr;</span>
                 </div>
               </TiltCard>
               </Reveal>
@@ -324,14 +324,14 @@ export const Clubs: React.FC<ClubsProps> = ({
       {/* House Points Leaderboard */}
       <section className="space-y-6">
         <Reveal className="text-center max-w-2xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950 border border-violet-400/30 text-violet-300 text-xs font-cinzel uppercase tracking-widest">
-            <Flame className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/30 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
+            <Flame className="w-3.5 h-3.5 text-gold" />
             The Citadel Leaderboard
           </div>
           <h2 className="font-cinzel text-2xl sm:text-3xl font-extrabold text-white">
             HOUSE CHAMPIONSHIP POINTS
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-slate-400">
+          <p className="font-sans text-xs sm:text-sm text-bone-dim">
             Points are accumulated through tournament victories, participation quotas, and student cheering.
           </p>
         </Reveal>
@@ -342,23 +342,23 @@ export const Clubs: React.FC<ClubsProps> = ({
             <TiltCard
               className={`p-5 rounded-2xl border text-center space-y-3 h-full ${
                 idx === 0
-                  ? 'bg-gradient-to-b from-amber-950/60 via-slate-900 to-slate-950 border-amber-500/60 shadow-[0_0_25px_rgba(245,158,11,0.25)]'
-                  : 'bg-slate-900/60 border-slate-800'
+                  ? 'bg-gradient-to-b from-ink-3/60 via-ink-2 to-ink border-gold/60 shadow-[0_0_25px_rgba(201,162,39,0.25)]'
+                  : 'bg-ink-2/60 border-iron'
               }`}
             >
-              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-950 border border-slate-700 font-cinzel text-xs font-bold text-violet-400">
+              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-ink border border-iron font-cinzel text-xs font-bold text-gold">
                 #{idx + 1}
               </div>
               <h3 className="font-cinzel text-base font-bold text-white">
                 {house.name.split('(')[0]}
               </h3>
-              <p className="text-xs text-slate-400 truncate">{house.houseName}</p>
-              <div className="font-mono text-2xl font-black text-amber-300">
+              <p className="text-xs text-bone-dim truncate">{house.houseName}</p>
+              <div className="font-mono text-2xl font-black text-gold-2">
                 {house.points} PTS
               </div>
-              <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div className="w-full bg-ink-3 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-violet-400 to-amber-400 h-full rounded-full"
+                  className="bg-gradient-to-r from-gold to-gold h-full rounded-full"
                   style={{ width: `${(house.points / 1400) * 100}%` }}
                 />
               </div>
@@ -375,7 +375,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             soundFx.playRoyalHorn();
             onOpenTickify();
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-slate-950 bg-gradient-to-r from-blue-400 via-violet-300 to-violet-400 hover:from-blue-300 hover:to-violet-200 shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95 transition-all uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] active:scale-95 transition-all uppercase tracking-wider"
         >
           <span>CLAIM HOUSE WARRIOR PASS ON TICKIFY</span>
           <Sparkles className="w-4 h-4" />

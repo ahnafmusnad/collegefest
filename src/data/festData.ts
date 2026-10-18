@@ -22,12 +22,12 @@ export const FOUR_HOUSES: ClubHouse[] = [
     sigil: 'The Golden Lion',
     iconName: 'Scroll',
     colorScheme: {
-      primary: '#7c3aed', // Violet
-      secondary: '#6d28d9',
-      border: 'border-violet-500/50',
-      glow: 'shadow-violet-500/40',
-      bgGradient: 'from-violet-950/80 via-slate-900/90 to-blue-950/80',
-      accent: 'text-violet-400'
+      primary: '#9e2a2b', // Crimson
+      secondary: '#7b1418',
+      border: 'border-crimson/50',
+      glow: 'shadow-crimson/40',
+      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
+      accent: 'text-crimson-2'
     },
     lore: 'Forged in the debating chambers of the Red Citadel, House Lannister exists to build a culture of argument and inquiry at Chittagong College. Its debaters have stood tall in national tournaments alongside the country’s established institutions, sharpening critical thinking, research, public speaking and communication on the way to becoming one of Bangladesh’s leading debating societies.',
     founded: '—',
@@ -53,7 +53,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       secondary: '#3b82f6',
       border: 'border-blue-500/50',
       glow: 'shadow-blue-500/40',
-      bgGradient: 'from-blue-950/80 via-slate-900/90 to-teal-950/80',
+      bgGradient: 'from-blue-950/80 via-ink-2/90 to-ink/80',
       accent: 'text-blue-400'
     },
     lore: 'Founded in 2025, CCPAC is a leading student-led Physics and Astronomy club at Chittagong College, running workshops, competitions and camps. Its members have represented Bangladesh at international science Olympiads, carrying the banner of the Citadel to the world stage.',
@@ -78,7 +78,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       secondary: '#be185d',
       border: 'border-pink-500/50',
       glow: 'shadow-pink-500/40',
-      bgGradient: 'from-pink-950/80 via-purple-950/90 to-slate-900/90',
+      bgGradient: 'from-pink-950/80 via-ink-3/90 to-ink-2/90',
       accent: 'text-pink-400'
     },
     lore: 'Founded in 2025, The Muses is a 150+ member literary club building creativity and confidence through workshops, writing competitions, public speaking and cultural programmes. The club represents Chittagong College nationally and even collaborated with Memorial University of Newfoundland, Canada on an academic session about higher education abroad.',
@@ -105,7 +105,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       secondary: '#d97706',
       border: 'border-amber-500/50',
       glow: 'shadow-amber-500/40',
-      bgGradient: 'from-amber-950/80 via-slate-900/90 to-orange-950/80',
+      bgGradient: 'from-amber-950/80 via-ink-2/90 to-ink-3/80',
       accent: 'text-amber-400'
     },
     lore: 'Established in 2026, CCPS has become one of Chittagong College’s most engaging clubs, bringing hundreds of photography enthusiasts together through online contests like Capture the Campus and offline sessions, while running weekly and monthly member-exclusive contests that champion creative freedom alongside academic excellence.',
@@ -315,8 +315,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     badge: '1 Exclusive Slot',
     description: 'The supreme patron whose banner flies above the Carnaval across every mention of the event — in print, online, and on-ground.',
     slots: '1 Brand Only',
-    color: 'from-amber-400 to-yellow-600',
-    borderColor: 'border-amber-400',
+    color: 'from-gold-2 to-gold',
+    borderColor: 'border-gold',
     perks: [
       'Official naming rights: the festival is presented as "[Your Brand] presents Carnaval Da Chittagong College"',
       'Maximum banner visibility — the most prominent placement across all event banners',
@@ -340,8 +340,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     badge: 'Limited Slots',
     description: 'The festival carries your brand as "Powered by [Your Brand]" — a leading identity just behind the Title Sponsor across every medium.',
     slots: 'Limited Brands',
-    color: 'from-violet-300 via-blue-200 to-indigo-300',
-    borderColor: 'border-violet-400',
+    color: 'from-crimson-2 via-gold-2 to-gold',
+    borderColor: 'border-crimson',
     perks: [
       'Official naming rights: the festival carries your brand as "Powered by [Your Brand]"',
       'Prominent banner placement across all event banners, just behind the Title Sponsor',
@@ -361,8 +361,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     badge: 'Limited Slots',
     description: 'A prestigious partnership with a dedicated workshop stage, prime stall space, and priority visibility across festival media.',
     slots: 'Limited Brands',
-    color: 'from-indigo-300 via-violet-200 to-blue-300',
-    borderColor: 'border-indigo-400',
+    color: 'from-gold-2 via-bone to-gold',
+    borderColor: 'border-gold',
     perks: [
       'A dedicated 20–30 minute workshop/seminar showcasing and promoting your work',
       'Leading logo placement on specific event banners, just behind the Power Sponsor',
@@ -383,8 +383,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     badge: 'Limited Slots',
     description: 'A powerful presence offering targeted brand visibility, stall activation, and direct engagement with Chittagong’s finest young minds.',
     slots: 'Limited Brands',
-    color: 'from-yellow-400 to-amber-500',
-    borderColor: 'border-yellow-500',
+    color: 'from-gold-2 to-ember',
+    borderColor: 'border-ember',
     perks: [
       'Logo inclusion across selected event banners and key promotional displays throughout the venue',
       'Exclusive stall space at the venue to distribute leaflets and engage students directly',
@@ -403,8 +403,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     badge: 'In-Kind / Strategic',
     description: 'Strategic partners powering vital festival infrastructure — ticketing, media coverage, and on-ground experience.',
     slots: 'By Category',
-    color: 'from-purple-400 to-slate-400',
-    borderColor: 'border-purple-400',
+    color: 'from-crimson-2 to-bone-dim',
+    borderColor: 'border-crimson-2',
     perks: [
       'Official Ticketing Partner: branded passes, live QR scanning and instant entry management',
       'Official Media Partner: logo on press releases, promo shorts and media coverage',

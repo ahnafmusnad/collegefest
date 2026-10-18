@@ -75,9 +75,9 @@ export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gen
 
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(224, 242, 254, ${f.opacity})`;
+        ctx.fillStyle = `rgba(237, 228, 211, ${f.opacity})`;
         ctx.shadowBlur = 6;
-        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+        ctx.shadowColor = 'rgba(226, 113, 29, 0.4)';
         ctx.fill();
       }
 
