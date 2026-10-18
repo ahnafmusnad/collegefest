@@ -103,8 +103,9 @@ export const Home: React.FC<HomeProps> = ({
         />
 
         {/* Layer 2: Atmospheric Lighting & Gradients (visible throne with frosty vignette) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0718] via-[#0a0718]/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08051a]/70 via-transparent to-[#0a0718]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0718] via-[#0a0718]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08051a]/80 via-[#08051a]/30 to-[#0a0718]" />
+        <div className="absolute inset-0 bg-[#070512]/25" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,_rgba(139,92,246,0.15)_0%,_transparent_65%)] pointer-events-none" />
 
         {/* Layer 3: Hero Content */}
