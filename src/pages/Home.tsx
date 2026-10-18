@@ -94,10 +94,11 @@ export const Home: React.FC<HomeProps> = ({
       <section className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
         
         {/* Layer 1: Background Iron Throne Image */}
-        <div
-          className="hero-throne-bg absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{
-            backgroundImage: `url('/images/iron-throne-hero.jpg')`
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
+          style={{ 
+            backgroundImage: `url('/images/iron-throne-hero.jpg')`,
+            backgroundPosition: 'center 35%'
           }}
         />
 
