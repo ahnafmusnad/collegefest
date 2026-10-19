@@ -3,6 +3,7 @@ import { FEST_SEGMENTS, FOUR_HOUSES, FEST_METADATA } from '../data/festData';
 import { Segment } from '../types';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
+import Button from '../components/ui/Button';
 import { 
   Swords, 
   Search, 
@@ -11,8 +12,6 @@ import {
   MapPin, 
   Clock, 
   Star, 
-  ExternalLink, 
-  Sparkles, 
   ShieldCheck,
   Flame,
   Filter
@@ -58,13 +57,13 @@ export const Segments: React.FC<SegmentsProps> = ({
       
       {/* Page Hero Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
+      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
         <div className="relative z-10 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
             <Swords className="w-3.5 h-3.5" />
             The Citadel Trials of Skill
           </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-ice">
+          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
             TOURNEYS & COMPETITIONS
           </h1>
           <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
@@ -72,7 +71,7 @@ export const Segments: React.FC<SegmentsProps> = ({
           </p>
 
           {/* Quick Prize Banner */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-ink-3/40 border border-gold/40 text-gold-2 font-cinzel text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(201,162,39,0.2)]">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-ink-3/40 border border-gold/40 text-gold-2 font-cinzel text-xs sm:text-sm font-bold">
             <Trophy className="w-4 h-4 text-gold" />
             <span>Total Festival Prize Vault: <strong>150,000+ BDT</strong></span>
           </div>
@@ -82,7 +81,7 @@ export const Segments: React.FC<SegmentsProps> = ({
 
       {/* Filter and Search Controls */}
       <Reveal>
-      <div className="frost-card p-5 md:p-6 rounded-2xl border border-crimson/30 space-y-4">
+      <div className="frost-card p-5 md:p-6 border border-crimson/30 space-y-4">
         
         {/* Search Bar */}
         <div className="relative">
@@ -112,7 +111,7 @@ export const Segments: React.FC<SegmentsProps> = ({
                 }}
                 className={`px-3 py-1.5 rounded-lg font-cinzel text-xs font-bold tracking-wider transition-all ${
                   isSelected
-                    ? 'bg-crimson/30 text-gold-2 border border-gold shadow-[0_0_12px_rgba(158,42,43,0.4)]'
+                    ? 'bg-crimson/30 text-gold-2 border border-gold'
                     : 'bg-ink-2/60 text-bone-dim border border-iron hover:text-white hover:border-iron'
                 }`}
               >
@@ -176,7 +175,7 @@ export const Segments: React.FC<SegmentsProps> = ({
                 onOpenRulesModal(segment);
               }}
 
-              className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
+              className="group relative h-full bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               <div>
                 
@@ -225,7 +224,7 @@ export const Segments: React.FC<SegmentsProps> = ({
                 </p>
 
                 {/* Tournament Metadata grid */}
-                <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-ink-2/80 border border-iron text-[11px] mb-4">
+                <div className="grid grid-cols-2 gap-2 p-2.5 bg-ink-2/80 border border-iron text-[11px] mb-4">
                   <div className="flex items-center gap-1.5 text-bone-dim">
                     <Trophy className="w-3.5 h-3.5 text-gold shrink-0" />
                     <div>
@@ -262,31 +261,28 @@ export const Segments: React.FC<SegmentsProps> = ({
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-3 border-t border-iron/80 flex items-center justify-between gap-2">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onOpenRulesModal(segment);
-                  }}
-                  className="text-xs font-cinzel font-semibold text-gold hover:text-white transition-colors"
+              <div
+                className="pt-3 border-t border-iron/80 flex items-center justify-between gap-2"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => onOpenRulesModal(segment)}
                 >
-                  Rules & Criteria &rarr;
-                </button>
+                  Rules & Criteria
+                </Button>
 
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onRegisterTickify(segment.title);
-                  }}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink font-cinzel text-[11px] font-bold shadow-[0_0_12px_rgba(158,42,43,0.4)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
+                <Button
+                  size="sm"
+                  onClick={() => onRegisterTickify(segment.title)}
                 >
-                  <span>Tickify Entry</span>
-                  <ExternalLink className="w-3 h-3" />
-                </button>
+                  Tickify Entry
+                </Button>
               </div>
 
               {/* Hover Glow Ambient */}
-              <div className="absolute inset-0 rounded-2xl bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </TiltCard>
             </Reveal>
           );
@@ -294,7 +290,7 @@ export const Segments: React.FC<SegmentsProps> = ({
       </div>
 
       {filteredSegments.length === 0 && (
-        <Reveal className="text-center py-16 frost-card rounded-2xl border border-crimson/20">
+        <Reveal className="text-center py-16 frost-card border border-crimson/20">
           <Swords className="w-12 h-12 text-ash mx-auto mb-3" />
           <h3 className="font-cinzel text-lg font-bold text-bone-dim">No Tournaments Match Your Query</h3>
           <p className="font-sans text-xs text-ash mt-1">Try resetting the filter or searching for another keyword.</p>
@@ -302,7 +298,7 @@ export const Segments: React.FC<SegmentsProps> = ({
       )}
 
       {/* Global Registration Banner */}
-      <Reveal direction="zoom" className="frost-card p-8 rounded-3xl border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
+      <Reveal direction="zoom" className="frost-card p-8 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
         <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
           READY TO ENTER THE ARENA?
         </h3>
@@ -310,16 +306,12 @@ export const Segments: React.FC<SegmentsProps> = ({
           Every participant receives an official tournament badge, certificate of royal participation, and access to the Citadel grounds on Tickify.
         </p>
         <div className="pt-2">
-          <a
+          <Button
             href={FEST_METADATA.tickifyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
+            external
           >
-            <span>REGISTER CONTINGENT ON TICKIFY</span>
-            <Sparkles className="w-4 h-4" />
-          </a>
+            REGISTER CONTINGENT ON TICKIFY
+          </Button>
         </div>
       </Reveal>
 

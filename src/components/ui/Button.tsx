@@ -1,27 +1,55 @@
-import type { ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 
-interface ButtonProps {
-  as?: "button" | "a";
-  variant?: "primary" | "ghost" | "dark" | "link";
-  arrow?: boolean;
+type ButtonProps = {
+  children: string;
+  variant?: "primary" | "secondary";
+  size?: "md" | "sm";
+  href?: string;
+  external?: boolean;
+  onClick?: () => void;
   className?: string;
-  children?: ReactNode;
-  [key: string]: unknown;
-}
+  type?: "button" | "submit";
+};
 
-export default function Button({ as = "button", variant = "primary", arrow = true, children, className = "", ...props }: ButtonProps) {
-  const Tag = as as "button" | "a";
-  const base = "group inline-flex items-center gap-3 font-display text-sm font-semibold tracking-[0.12em] uppercase transition-colors duration-200 active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold";
-  const variants = {
-    primary: "px-6 py-3.5 bg-gold text-ink hover:bg-bone",
-    ghost: "px-6 py-3.5 border border-bone/25 text-bone hover:border-gold hover:text-gold",
-    dark: "px-6 py-3.5 bg-ink text-bone hover:bg-ink-3",
-    link: "text-gold hover:text-bone",
-  };
+export default function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  href,
+  external,
+  onClick,
+  className = "",
+  type = "button",
+}: ButtonProps) {
+  const classes = ["btn", variant === "secondary" && "btn--secondary", size === "sm" && "btn--sm", className]
+    .filter(Boolean)
+    .join(" ");
+
+  const inner = (
+    <>
+      <span className="btn__label">
+        <span data-text={children}>{children}</span>
+      </span>
+      {external && <ArrowUpRight className="btn__icon" aria-hidden="true" />}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        onClick={onClick}
+        className={classes}
+        {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      >
+        {inner}
+      </a>
+    );
+  }
+
   return (
-    <Tag className={`${base} ${variants[variant]} ${className}`} {...(Tag === "button" ? { type: "button" } : {})} {...props}>
-      {children}
-      {arrow && <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>}
-    </Tag>
+    <button type={type} onClick={onClick} className={classes}>
+      {inner}
+    </button>
   );
 }

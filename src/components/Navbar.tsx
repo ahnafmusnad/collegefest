@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { PageType } from '../types';
 import { FEST_METADATA, SOCIAL_LINKS } from '../data/festData';
+import Button from './ui/Button';
 import { 
   Shield, 
   Menu, 
   X, 
   CloudSnow, 
   Ticket, 
-  ExternalLink,
   ChevronRight,
   Crown,
   Scroll,
@@ -115,81 +115,40 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center justify-between">
             
             {/* Brand Logo & Sigil */}
-            <button
-              onClick={() => handleNavClick('home')}
-              className="flex items-center gap-3 text-left group focus:outline-none"
-            >
-              <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-ink-2 to-ink-2 border border-crimson/50 shadow-[0_0_15px_rgba(158,42,43,0.3)] group-hover:border-gold group-hover:shadow-[0_0_25px_rgba(158,42,43,0.6)] transition-all">
-                <Crown className="w-5 h-5 md:w-6 md:h-6 text-gold group-hover:scale-110 transition-transform" />
-                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-ember rounded-full animate-ping" />
-              </div>
-              <div>
-                <span className="font-cinzel text-xs tracking-[0.25em] text-gold font-bold block uppercase leading-none">
-                  Chittagong College
-                </span>
-<span className="font-cinzel-dec text-base md:text-lg font-black text-white tracking-wider block text-glow-ice leading-tight group-hover:text-gold-2 transition-colors">
-CARNAVAL DA CC
-</span>
-              </div>
+            <button onClick={() => handleNavClick('home')} className="flex items-center gap-3 text-left shrink-0 focus:outline-none">
+              <img src="/images/college-crest.png" alt="Chittagong College crest" className="h-10 md:h-11 w-auto" />
+              <span className="hidden sm:block w-px h-9 bg-iron" />
+              <span className="flex flex-col leading-none">
+                <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
+                <span className="font-cinzel text-[9px] md:text-[10px] tracking-[0.3em] text-bone-dim mt-1.5 uppercase">Da Chittagong College</span>
+              </span>
             </button>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-              {navItems.map((item) => {
-                const isActive = currentPage === item.page;
-                return (
-                  <button
-                    key={item.page}
-                    onClick={() => handleNavClick(item.page)}
-
-                    className={`relative px-3 py-1.5 rounded-lg font-cinzel text-xs xl:text-sm font-semibold tracking-wider transition-all duration-200 ${
-                      isActive
-                        ? 'text-gold-2 bg-ink-2/60 border border-crimson/50 shadow-[0_0_15px_rgba(158,42,43,0.25)]'
-                        : 'text-bone-dim hover:text-white hover:bg-ink-3/40'
-                    }`}
-                  >
-                    {item.label}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-ember shadow-[0_0_8px_#145e62]" />
-                    )}
-                  </button>
-                );
-              })}
+            <nav className="hidden min-[1180px]:flex items-center gap-5 2xl:gap-8">
+              {navItems.map((item) => (
+                <button
+                  key={item.page}
+                  onClick={() => handleNavClick(item.page)}
+                  className={`nav-link font-cinzel text-[12px] 2xl:text-[13px] font-semibold uppercase tracking-[0.1em] 2xl:tracking-[0.14em] whitespace-nowrap ${currentPage === item.page ? 'is-active' : ''}`}
+                >
+                  {item.label}
+                </button>
+              ))}
             </nav>
 
             {/* Right Action Icons & Direct Tickify Register Link */}
-            <div className="flex items-center gap-2 md:gap-3">
+            <div className="flex items-center gap-2 md:gap-3 shrink-0">
               
               {/* Snowfall Intensity Toggle */}
-              <button
-                onClick={onToggleSnow}
-                title={`Snow: ${snowMode.toUpperCase()}`}
-                aria-label={`Snow: ${snowMode.toUpperCase()}`}
-                className={`hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-all ${
-                  snowMode !== 'off'
-                    ? 'border-crimson/40 bg-ink-2/60 text-gold-2'
-                    : 'border-iron bg-ink-2/30 text-ash'
-                }`}
-              >
-                <CloudSnow className={`w-3.5 h-3.5 ${snowMode === 'blizzard' ? 'animate-bounce text-gold-2' : ''}`} />
-                <span className="uppercase text-[10px]">{snowMode}</span>
+              <button onClick={onToggleSnow} title={`Snow: ${snowMode}`} aria-label={`Snow: ${snowMode}`} className={`hidden sm:flex items-center justify-center w-9 h-9 text-bone-dim hover:text-white transition-colors ${snowMode === 'off' ? 'opacity-40' : ''}`}>
+                <CloudSnow className="w-4 h-4" />
               </button>
 
               {/* REGISTER (TICKIFY) CTA BUTTON */}
               <div className="flex items-center gap-1.5">
                 {/* Direct Hyperlink to Tickify as required */}
-                <a
-                  href={FEST_METADATA.tickifyLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-
-                  className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-cinzel text-xs font-bold uppercase tracking-wider text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] hover:shadow-[0_0_30px_rgba(158,42,43,0.8)] btn-shine active:scale-95 transition-all"
-                  title="Direct Tickify Registration Portal"
-                >
-                  <Ticket className="w-3.5 h-3.5 text-ink" />
-                  <span>REGISTER (TICKIFY)</span>
-                  <ExternalLink className="w-3 h-3 text-ink-2" />
-                </a>
+                <Button href={FEST_METADATA.tickifyLink} external size="sm" className="hidden md:inline-flex shrink-0">Register Now</Button>
 
                 {/* Quick pass preview modal button */}
                 <button
@@ -208,7 +167,7 @@ CARNAVAL DA CC
                 onClick={() => {
                   setMobileMenuOpen(!mobileMenuOpen);
                 }}
-                className="lg:hidden p-2 rounded-lg border border-crimson/40 bg-ink-2/80 text-gold hover:text-white hover:border-gold-2 transition-colors shadow-[0_0_12px_rgba(158,42,43,0.2)]"
+                className="min-[1180px]:hidden p-2 rounded-lg border border-crimson/40 bg-ink-2/80 text-gold hover:text-white hover:border-gold-2 transition-colors"
                 aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -220,23 +179,21 @@ CARNAVAL DA CC
 
       {/* FULLSCREEN MOBILE & TABLET BURGER MENU WITH SWEEPING ANIMATION */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-between bg-ink text-white overflow-y-auto animate-fadeIn duration-300">
+        <div className="fixed inset-0 z-50 min-[1180px]:hidden flex flex-col justify-between bg-ink text-white overflow-y-auto animate-fadeIn duration-300">
           
           {/* Background Frost Graphics */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(226,113,29,0.15)_0%,_rgba(11,9,7,0.98)_70%)] pointer-events-none" />
-          <div className="absolute top-0 right-0 w-80 h-80 bg-crimson/5 rounded-full blur-3xl pointer-events-none" />
 
           {/* Top Bar inside Fullscreen overlay */}
           <div className="relative z-10 flex items-center justify-between p-5 border-b border-crimson/20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-ink-2 border border-crimson/40 flex items-center justify-center">
-                <Crown className="w-5 h-5 text-gold" />
-              </div>
-              <div>
-                <span className="font-cinzel text-xs text-gold font-bold tracking-widest block">CHITTAGONG COLLEGE</span>
-                <span className="font-cinzel-dec text-sm font-bold text-white tracking-wider">CARNAVAL DA CC</span>
-              </div>
-            </div>
+            <button onClick={() => handleNavClick('home')} className="flex items-center gap-3 text-left shrink-0 focus:outline-none">
+              <img src="/images/college-crest.png" alt="Chittagong College crest" className="h-9 w-auto" />
+              <span className="hidden sm:block w-px h-9 bg-iron" />
+              <span className="flex flex-col leading-none">
+                <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
+                <span className="font-cinzel text-[9px] md:text-[10px] tracking-[0.3em] text-bone-dim mt-1.5 uppercase">Da Chittagong College</span>
+              </span>
+            </button>
 
             <button
               onClick={() => {
@@ -263,7 +220,7 @@ CARNAVAL DA CC
                   style={{ animationDelay: `${index * 60}ms` }}
                   className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all duration-200 animate-fadeIn ${
                     isActive
-                      ? 'bg-gradient-to-r from-ink-2/80 to-ink-2/50 border-gold shadow-[0_0_20px_rgba(158,42,43,0.3)]'
+                      ? 'bg-gradient-to-r from-ink-2/80 to-ink-2/50 border-gold'
                       : 'bg-ink-2/40 border-iron/80 hover:bg-ink-2/90 hover:border-crimson/40'
                   }`}
                 >
@@ -287,19 +244,16 @@ CARNAVAL DA CC
 
             {/* Tickify Register Button in Fullscreen Mobile Menu */}
             <div className="pt-4 space-y-2.5">
-              <a
+              <Button
                 href={FEST_METADATA.tickifyLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                external
+                className="w-full"
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.6)] btn-shine active:scale-95 transition-all text-center uppercase tracking-wider"
               >
-                <Ticket className="w-5 h-5" />
-                <span>REGISTER ON TICKIFY NOW</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
+                REGISTER ON TICKIFY NOW
+              </Button>
 
               {/* Follow the Carnaval — Social Channels */}
               <div className="pt-3">
@@ -316,7 +270,7 @@ CARNAVAL DA CC
                       aria-label={s.name}
                       title={s.name}
 
-                      className="w-11 h-11 flex items-center justify-center rounded-xl border border-crimson/40 bg-ink-2/60 text-gold hover:text-white hover:border-gold hover:bg-ink-3 transition-all hover:-translate-y-0.5 shadow-[0_0_15px_rgba(158,42,43,0.2)]"
+                      className="w-11 h-11 flex items-center justify-center rounded-xl border border-crimson/40 bg-ink-2/60 text-gold hover:text-white hover:border-gold hover:bg-ink-3 transition-all hover:-translate-y-0.5"
                     >
                       <SocialGlyph icon={s.icon} className="w-5 h-5" />
                     </a>

@@ -5,18 +5,17 @@ import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import { CountUp } from '../components/CountUp';
 import SwordDivider from '../components/ui/SwordDivider';
+import Button from '../components/ui/Button';
 import { 
   Crown, 
   Shield, 
   Swords, 
   Ticket, 
-  ExternalLink, 
   Sparkles, 
   ArrowRight, 
   Flame, 
   Award,
-  Users,
-  ChevronRight
+  Users
 } from 'lucide-react';
 
 interface HomeProps {
@@ -98,7 +97,7 @@ export const Home: React.FC<HomeProps> = ({
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
           
           {/* Fest Proclamation Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ink/80 border border-gold/50 shadow-[0_0_20px_rgba(158,42,43,0.4)] backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ink/80 border border-gold/50 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-ember animate-ping" />
             <span className="font-cinzel text-xs md:text-sm font-bold tracking-[0.25em] text-gold-2 uppercase">
               Chittagong College &bull; December 18–19, 2026
@@ -107,7 +106,7 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* Main Fest Heading */}
           <div className="space-y-2">
-            <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight text-glow-gold drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               CARNAVAL
             </h1>
             <SwordDivider className="mt-4 mb-4" />
@@ -127,7 +126,7 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* User Pledged House Badge if available */}
           {userPledgedHouse && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-gold text-gold-2 text-xs font-cinzel tracking-widest shadow-[0_0_15px_rgba(158,42,43,0.4)]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-gold text-gold-2 text-xs font-cinzel tracking-widest">
               <span className="w-6 h-6 rounded-md bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center">
                 <img src={userPledgedHouse.logo} alt="" className="w-full h-full object-contain" />
               </span>
@@ -136,41 +135,35 @@ export const Home: React.FC<HomeProps> = ({
           )}
 
           {/* Hero CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <div className="grid grid-cols-2 gap-3 w-full max-w-md mx-auto sm:max-w-none sm:flex sm:flex-wrap sm:justify-center">
             {/* Direct Tickify Registration */}
-            <a
+            <Button
               href={FEST_METADATA.tickifyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-
-              className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.7)] hover:shadow-[0_0_40px_rgba(158,42,43,0.9)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
+              external
+              className="col-span-2 sm:col-auto"
             >
-              <Ticket className="w-4 h-4 text-ink" />
-              <span>REGISTER VIA TICKIFY</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              REGISTER VIA TICKIFY
+            </Button>
 
             {/* Explore Tourneys */}
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 onNavigate('segments');
               }}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-cinzel text-sm md:text-base font-semibold text-white bg-ink-2/80 hover:bg-ink-3/90 border border-crimson/40 hover:border-gold shadow-[0_0_20px_rgba(158,42,43,0.2)] transition-all"
             >
-              <Swords className="w-4 h-4 text-gold" />
-              <span>Explore Tourneys</span>
-            </button>
+              Explore Tourneys
+            </Button>
 
             {/* Sorting Quiz */}
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 onOpenSortingQuiz();
               }}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-cinzel text-xs md:text-sm font-semibold text-gold-2 bg-ink-3/40 hover:bg-ink-3/50 border border-gold/40 hover:border-gold transition-all"
             >
-              <Sparkles className="w-4 h-4 text-gold" />
-              <span>Which House Are You?</span>
-            </button>
+              Which House Are You?
+            </Button>
           </div>
 
           {/* ========================================================
@@ -189,7 +182,7 @@ export const Home: React.FC<HomeProps> = ({
               ].map((unit, i) => (
                 <Reveal key={i} delay={i * 100}>
                   <div
-                    className="frost-card p-3 sm:p-4 rounded-xl border border-crimson/30 bg-ink/70 shadow-[0_4px_20px_rgba(0,0,0,0.6)] group hover:border-gold transition-all h-full"
+                    className="frost-card p-3 sm:p-4 border border-crimson/30 bg-ink/70 shadow-[0_4px_20px_rgba(0,0,0,0.6)] group hover:border-gold transition-all h-full"
                   >
                     <CountUp
                       end={unit.value}
@@ -197,7 +190,7 @@ export const Home: React.FC<HomeProps> = ({
                       delay={i * 250}
                       startOnView={false}
                       format={(v) => String(v).padStart(2, '0')}
-                      className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white text-glow-ice group-hover:scale-105 transition-transform"
+                      className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white group-hover:scale-105 transition-transform"
                     />
                     <div className="font-cinzel text-[10px] sm:text-xs tracking-wider text-gold uppercase mt-1">
                       {unit.label}
@@ -302,7 +295,7 @@ export const Home: React.FC<HomeProps> = ({
             <Crown className="w-3.5 h-3.5" />
             The Four Pillars of Chittagong College
           </div>
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide text-glow-ice">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
             THE FOUR GREAT HOUSES
           </h2>
           <p className="font-sans text-sm sm:text-base text-bone-dim">
@@ -319,11 +312,11 @@ export const Home: React.FC<HomeProps> = ({
                 onNavigate('clubs');
               }}
 
-              className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
+              className="group relative h-full bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               {/* Top Card Decor */}
               <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 p-1 rounded-xl bg-white border border-crimson/30 shadow-inner overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 p-1 bg-white border border-crimson/30 shadow-inner overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
                   <img
                     src={house.logo}
                     alt={`${house.name} logo`}
@@ -364,7 +357,7 @@ export const Home: React.FC<HomeProps> = ({
                     onClick={(e) => handleCheer(house.id, e)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-cinzel font-bold transition-all ${
                       hasCheered[house.id]
-                        ? 'border-ember bg-ink-2/60 text-gold-2 shadow-[0_0_12px_rgba(226,113,29,0.4)]'
+                        ? 'border-ember bg-ink-2/60 text-gold-2'
                         : 'border-iron bg-ink-2/60 text-bone-dim hover:border-gold hover:text-white'
                     }`}
                   >
@@ -380,7 +373,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
 
               {/* Glow border sheen */}
-              <div className="absolute inset-0 rounded-2xl bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </TiltCard>
             </Reveal>
           ))}
@@ -388,16 +381,14 @@ export const Home: React.FC<HomeProps> = ({
 
         {/* View All Clubs CTA */}
         <div className="text-center mt-10">
-          <button
+          <Button
+            variant="secondary"
             onClick={() => {
               onNavigate('clubs');
             }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-cinzel text-sm font-bold text-gold-2 border border-crimson/40 hover:border-gold bg-ink-2/40 hover:bg-ink-2/80 shadow-[0_0_20px_rgba(158,42,43,0.2)] transition-all"
           >
-            <Shield className="w-4 h-4" />
-            <span>ENTER THE SANCTUARY OF HOUSES & LORE</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
+            ENTER THE SANCTUARY OF HOUSES & LORE
+          </Button>
         </div>
       </section>
 
@@ -406,7 +397,7 @@ export const Home: React.FC<HomeProps> = ({
       ======================================================== */}
       <section className="relative py-12 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
-        <div className="relative rounded-3xl bg-gradient-to-r from-ink-2/80 via-ink-2 to-ink-2/80 border-2 border-gold/40 p-8 md:p-12 overflow-hidden shadow-[0_0_50px_rgba(158,42,43,0.2)]">
+        <div className="relative bg-gradient-to-r from-ink-2/80 via-ink-2 to-ink-2/80 border-2 border-gold/40 p-8 md:p-12 overflow-hidden">
           {/* Subtle watermark */}
           <div className="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
             <Crown className="w-80 h-80 text-gold" />
@@ -417,21 +408,20 @@ export const Home: React.FC<HomeProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-gold" />
               The Iron Raven's Sorting Ceremony
             </div>
-            <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white text-glow-ice">
+            <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
               DISCOVER YOUR TRUE COLLEGE HOUSE
             </h3>
             <p className="font-sans text-sm md:text-base text-bone-dim leading-relaxed">
               Are your words sharp enough for House Lannister? Does your mind master the gears of House Stark? Does your soul sing with House Targaryen, or do you command armies with House Baratheon? Take the 3-question trial now.
             </p>
             <div className="pt-2">
-              <button
+              <Button
                 onClick={() => {
                   onOpenSortingQuiz();
                 }}
-                className="px-6 py-3.5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
               >
                 BEGIN SORTING CEREMONY
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -452,15 +442,15 @@ export const Home: React.FC<HomeProps> = ({
               FEATURED SEGMENTS & ARENAS
             </h2>
           </div>
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={() => {
               onNavigate('segments');
             }}
-            className="inline-flex items-center gap-1.5 font-cinzel text-xs font-bold text-gold hover:text-gold-2 tracking-wider group"
           >
-            <span>VIEW ALL 8 SEGMENTS</span>
-            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+            VIEW ALL 8 SEGMENTS
+          </Button>
         </div>
 
         {/* Featured Segments Cards */}
@@ -472,7 +462,7 @@ export const Home: React.FC<HomeProps> = ({
                 onNavigate('segments');
               }}
 
-              className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border border-crimson/25 hover:border-gold/80 p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
+              className="group relative h-full bg-gradient-to-b from-ink-2 via-ink-2 to-ink border border-crimson/25 hover:border-gold/80 p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -513,7 +503,7 @@ export const Home: React.FC<HomeProps> = ({
       ======================================================== */}
       <section className="relative py-16 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
-        <div className="frost-card rounded-3xl p-8 md:p-12 border-2 border-gold/40 relative overflow-hidden text-center max-w-4xl mx-auto">
+        <div className="frost-card p-8 md:p-12 border-2 border-gold/40 relative overflow-hidden text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-4">
             <Ticket className="w-3.5 h-3.5" />
             Official Ticketing Partner: Tickify
@@ -526,26 +516,23 @@ export const Home: React.FC<HomeProps> = ({
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
+            <Button
               href={FEST_METADATA.tickifyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-
-              className="flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 border border-gold-2 shadow-[0_0_30px_rgba(158,42,43,0.6)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
+              external
+              className="w-full sm:w-auto"
             >
-              <Ticket className="w-5 h-5 text-ink" />
-              <span>BOOK TICKETS ON TICKIFY</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              BOOK TICKETS ON TICKIFY
+            </Button>
 
-            <button
+            <Button
+              variant="secondary"
+              className="w-full sm:w-auto"
               onClick={() => {
                 onOpenTickify();
               }}
-              className="px-6 py-4 rounded-xl font-cinzel text-sm font-semibold text-gold-2 bg-ink-2/80 hover:bg-ink-3 border border-crimson/40 transition-colors"
             >
               View Pass Tiers & Perks
-            </button>
+            </Button>
           </div>
         </div>
         </Reveal>

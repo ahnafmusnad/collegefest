@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FEST_SCHEDULE, CAMPUS_LOCATIONS, FAQS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
+import Button from '../components/ui/Button';
 import { 
   Scroll, 
   MapPin, 
@@ -9,9 +10,6 @@ import {
   HelpCircle, 
   ChevronDown, 
   ChevronUp, 
-  Sparkles, 
-  Ticket, 
-  ExternalLink,
   Crown
 } from 'lucide-react';
 
@@ -36,17 +34,17 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
       
       {/* Page Hero Header */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-14 text-center">
+      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-14 text-center">
         <div 
           className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
           style={{ backgroundImage: `url('/images/college-winter-citadel.jpg')` }}
         />
         <div className="relative z-10 max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest shadow-[0_0_15px_rgba(158,42,43,0.3)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
             <Scroll className="w-3.5 h-3.5" />
             The Chronicler's Parchment
           </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-ice">
+          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
             THE CHRONICLE OF THE REALM
           </h1>
           <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
@@ -77,19 +75,19 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
           <div className="grid grid-cols-3 gap-3 pt-2">
             <Reveal delay={0}>
-              <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+              <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
                 <div className="font-cinzel text-xl font-bold text-gold">1869</div>
                 <div className="text-[11px] text-bone-dim font-cinzel uppercase mt-0.5">Citadel Founded</div>
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <div className="p-3.5 rounded-xl bg-ink-2/80 border border-ember/20 text-center h-full">
+              <div className="p-3.5 bg-ink-2/80 border border-ember/20 text-center h-full">
                 <div className="font-cinzel text-xl font-bold text-ember">4 Houses</div>
                 <div className="text-[11px] text-bone-dim font-cinzel uppercase mt-0.5">Club Alliance</div>
               </div>
             </Reveal>
             <Reveal delay={200}>
-              <div className="p-3.5 rounded-xl bg-ink-2/80 border border-gold/20 text-center h-full">
+              <div className="p-3.5 bg-ink-2/80 border border-gold/20 text-center h-full">
                 <div className="font-cinzel text-xl font-bold text-gold">2 Days</div>
                 <div className="text-[11px] text-bone-dim font-cinzel uppercase mt-0.5">Winter Glory</div>
               </div>
@@ -99,14 +97,14 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
         {/* Citadel Visual Banner */}
         <div className="relative group">
-          <div className="overflow-hidden rounded-2xl border-2 border-crimson/30 shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+          <div className="overflow-hidden border-2 border-crimson/30 shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
             <img
               src="/images/college-winter-citadel.jpg"
               alt="Chittagong College Winter Citadel"
               className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="absolute -bottom-4 -left-4 p-4 rounded-xl bg-ink/90 border border-gold/50 shadow-lg text-xs font-cinzel text-gold-2">
+          <div className="absolute -bottom-4 -left-4 p-4 bg-ink/90 border border-gold/50 shadow-lg text-xs font-cinzel text-gold-2">
             <span className="font-bold text-white block">The Historic Red Keep</span>
             Chawkbazar Campus Grounds
           </div>
@@ -122,7 +120,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             <Clock className="w-3.5 h-3.5" />
             The Citadel Order of Events
           </div>
-          <h2 className="font-cinzel text-3xl sm:text-4xl font-extrabold text-white text-glow-ice">
+          <h2 className="font-cinzel text-3xl sm:text-4xl font-extrabold text-white">
             THE 3-DAY FESTIVAL ITINERARY
           </h2>
           <p className="font-sans text-xs sm:text-sm text-bone-dim">
@@ -142,7 +140,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                 }}
                 className={`relative px-5 py-3 rounded-xl font-cinzel text-xs md:text-sm font-bold tracking-wider transition-all ${
                   isSelected
-                    ? 'bg-gradient-to-r from-blood to-ember text-ink shadow-[0_0_20px_rgba(158,42,43,0.5)] border border-gold-2 scale-105'
+                    ? 'bg-gradient-to-r from-blood to-ember text-ink border border-gold-2 scale-105'
                     : 'bg-ink-2/80 text-bone-dim hover:text-white hover:bg-ink-3 border border-iron'
                 }`}
               >
@@ -154,10 +152,10 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
         {/* Active Day Content */}
         <Reveal key={selectedDay} direction="zoom">
-        <div className="frost-card p-6 md:p-8 rounded-2xl border border-crimson/30 space-y-6">
+        <div className="frost-card p-6 md:p-8 border border-crimson/30 space-y-6">
           <div className="border-b border-crimson/20 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
             <div>
-              <h3 className="font-cinzel-dec text-xl md:text-2xl font-bold text-white text-glow-ice">
+              <h3 className="font-cinzel-dec text-xl md:text-2xl font-bold text-white">
                 {activeDaySchedule.gotTitle}
               </h3>
               <p className="font-cinzel text-xs text-gold">{activeDaySchedule.date}</p>
@@ -173,7 +171,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               <Reveal key={idx} delay={idx * 70}>
               <div
 
-                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-ink-2/60 hover:bg-ink-2/40 border border-iron hover:border-gold/50 transition-all duration-200 h-full"
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-ink-2/60 hover:bg-ink-2/40 border border-iron hover:border-gold/50 transition-all duration-200 h-full"
               >
                 <div className="flex items-center gap-3">
                   <div className="px-3 py-1.5 rounded-lg bg-ink-2 border border-crimson/40 text-gold-2 font-mono text-xs font-bold shrink-0">
@@ -242,7 +240,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                 <button
                   className={`w-full text-left p-4 rounded-xl border transition-all duration-200 ${
                     isSelected
-                      ? 'bg-ink-2/80 border-gold shadow-[0_0_20px_rgba(158,42,43,0.3)]'
+                      ? 'bg-ink-2/80 border-gold'
                       : 'bg-ink-2/60 border-iron hover:border-crimson/40'
                   }`}
                   onClick={() => {
@@ -263,7 +261,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
           </div>
 
           {/* Active Location Detail Card */}
-          <Reveal key={selectedLocation} direction="left" className="lg:col-span-2 frost-card p-6 md:p-8 rounded-2xl border-2 border-crimson/30 flex flex-col justify-between">
+          <Reveal key={selectedLocation} direction="left" className="lg:col-span-2 frost-card p-6 md:p-8 border-2 border-crimson/30 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase">
                 <MapPin className="w-3.5 h-3.5" />
@@ -300,13 +298,13 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
             <div className="pt-6 mt-6 border-t border-iron flex items-center justify-between text-xs text-bone-dim">
               <span>Location Coordinates: Chittagong College Heritage Campus</span>
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={onOpenTickify}
-                className="text-gold hover:text-white font-cinzel font-bold flex items-center gap-1"
               >
-                <span>Book Event Pass</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
+                Book Event Pass
+              </Button>
             </div>
           </Reveal>
 
@@ -316,7 +314,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
       {/* ========================================================
           THE CITADEL CODEX & SAFETY RULES
       ======================================================== */}
-      <Reveal className="rounded-2xl bg-gradient-to-r from-ink via-ink-2 to-ink border border-crimson/30 p-8 space-y-6">
+      <Reveal className="bg-gradient-to-r from-ink via-ink-2 to-ink border border-crimson/30 p-8 space-y-6">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-xl bg-ink-2 border border-gold/50">
             <ShieldCheck className="w-6 h-6 text-gold" />
@@ -331,19 +329,19 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans text-bone-dim">
           <Reveal delay={0}>
-            <div className="p-4 rounded-xl bg-ink-2/60 border border-iron space-y-1 h-full">
+            <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
               <div className="font-cinzel font-bold text-gold-2 text-sm">Valid Identification</div>
               <p className="text-bone-dim">All students and warriors must carry their institution ID card along with their digital or printed Tickify QR Pass for access.</p>
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <div className="p-4 rounded-xl bg-ink-2/60 border border-iron space-y-1 h-full">
+            <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
               <div className="font-cinzel font-bold text-gold-2 text-sm">Sanctity of the Arena</div>
               <p className="text-bone-dim">No weapons with sharpened steel, fire hazards, or prohibited items. Prop weapons for cosplay must pass inspection at the North Gate.</p>
             </div>
           </Reveal>
           <Reveal delay={200}>
-            <div className="p-4 rounded-xl bg-ink-2/60 border border-iron space-y-1 h-full">
+            <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
               <div className="font-cinzel font-bold text-gold-2 text-sm">Knightly Conduct</div>
               <p className="text-bone-dim">Respect all house delegates, faculty grand maesters, and volunteer marshals. Unruly conduct results in immediate banishment.</p>
             </div>
@@ -371,7 +369,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             return (
               <Reveal key={index} delay={index * 80}>
               <div
-                className="frost-card rounded-xl border border-crimson/20 overflow-hidden transition-all"
+                className="frost-card border border-crimson/20 overflow-hidden transition-all"
               >
                 <button
                   onClick={() => toggleFaq(index)}
@@ -394,16 +392,13 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
       {/* Bottom CTA to Tickify */}
       <Reveal className="text-center pt-6">
-        <button
+        <Button
           onClick={() => {
             onOpenTickify();
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
         >
-          <Ticket className="w-5 h-5" />
-          <span>JOIN THE FESTIVAL VIA TICKIFY</span>
-          <Sparkles className="w-4 h-4" />
-        </button>
+          JOIN THE FESTIVAL VIA TICKIFY
+        </Button>
       </Reveal>
 
     </div>

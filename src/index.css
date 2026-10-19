@@ -89,7 +89,8 @@
 /* Glassmorphism Ember effects */
 .frost-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(11, 40, 42, 0.82), rgba(6, 26, 28, 0.92));
+  border-radius: 0;
+  background: #061a1c;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(158, 159, 159, 0.16);
@@ -108,7 +109,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: 0;
   background: radial-gradient(120% 80% at 50% -20%, rgba(248, 248, 248, 0.14), transparent 60%);
   opacity: 0.7;
   pointer-events: none;
@@ -120,9 +121,7 @@
   border-color: rgba(158, 159, 159, 0.5);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 28px 55px -20px rgba(0, 0, 0, 0.9),
-    0 0 34px -6px rgba(158, 159, 159, 0.4),
-    0 0 70px -14px rgba(23, 104, 110, 0.3);
+    0 28px 55px -20px rgba(0, 0, 0, 0.9);
 }
 
 .frost-card:hover::before {
@@ -132,7 +131,8 @@
 /* Gold Valyrian Card */
 .gold-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(11, 40, 42, 0.85), rgba(6, 26, 28, 0.92));
+  border-radius: 0;
+  background: #061a1c;
   backdrop-filter: blur(14px);
   border: 1px solid rgba(158, 159, 159, 0.25);
   box-shadow:
@@ -150,8 +150,7 @@
   border-color: rgba(158, 159, 159, 0.7);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 28px 55px -20px rgba(0, 0, 0, 0.9),
-    0 0 40px -4px rgba(158, 159, 159, 0.5);
+    0 28px 55px -20px rgba(0, 0, 0, 0.9);
 }
 
 /* Modern sheen-sweep for primary CTA buttons */
@@ -192,55 +191,6 @@
   transform: translateY(0) scale(0.97);
 }
 
-/* Rotating conic aura rendered behind tilt cards on hover */
-@property --tilt-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.tilt-aura {
-  border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from var(--tilt-angle),
-    rgba(158, 159, 159, 0) 0deg,
-    rgba(158, 159, 159, 0.9) 80deg,
-    rgba(23, 104, 110, 0.9) 160deg,
-    rgba(20, 94, 98, 0.85) 240deg,
-    rgba(158, 159, 159, 0.9) 320deg,
-    rgba(158, 159, 159, 0) 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  filter: blur(6px);
-}
-
-.tilt-aura-active {
-  animation: tiltAura 6s linear infinite;
-}
-
-@keyframes tiltAura {
-  to {
-    --tilt-angle: 360deg;
-  }
-}
-
-/* Glowing text effects */
-.text-glow-ice {
-  text-shadow: 0 0 10px rgba(248, 248, 248, 0.7), 0 0 25px rgba(23, 104, 110, 0.35);
-}
-
-.text-glow-gold {
-  text-shadow: 0 0 10px rgba(158, 159, 159, 0.8), 0 0 25px rgba(158, 159, 159, 0.4);
-}
-
-.text-glow-fire {
-  text-shadow: 0 0 10px rgba(20, 94, 98, 0.8), 0 0 25px rgba(20, 94, 98, 0.4);
-}
-
 /* Subtle animations */
 @keyframes floatSlow {
   0%, 100% {
@@ -253,19 +203,6 @@
 
 .animate-float {
   animation: floatSlow 6s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.85;
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
 }
 
 @keyframes runeSpin {
@@ -380,8 +317,7 @@
     transition: none;
   }
 
-  .animate-gradient,
-  .tilt-aura-active {
+  .animate-gradient {
     animation: none;
   }
 
@@ -409,5 +345,106 @@
   background-size: clamp(70px, 8vw, 120px) clamp(70px, 8vw, 120px);
   -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
   mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
+}
+
+.btn {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.7rem;
+  font-family: "Cinzel", serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  text-align: center;
+  color: #f8f8f8;
+  background: #145e62;
+  border: 1px solid #2f7f84;
+  border-radius: 12px;
+  box-shadow: none;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transition: border-color 0.5s var(--ease), transform 0.2s ease;
+}
+.btn--secondary { background: transparent; border-color: #2f5557; }
+.btn--sm { padding: 0.65rem 1.1rem; font-size: 0.7rem; }
+
+
+/* fill wipe from the bottom */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #1f8f96;
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease);
+}
+.btn--secondary::before { background: #145e62; }
+
+
+.btn__label { display: inline-block; }
+.btn__label > span::after { display: none; }
+.btn__icon { width: 1em; height: 1em; flex-shrink: 0; transition: transform 0.5s var(--ease); }
+
+
+/* hover (mouse), works at every screen width */
+@media (hover: hover) {
+  .btn:hover { border-color: #1f8f96; }
+  .btn:hover::before { transform: translateY(0); }
+  .btn:hover .btn__icon { transform: translate(3px, -3px); }
+}
+
+
+/* press effect for touch screens */
+@media (hover: none) {
+  .btn:active { border-color: #1f8f96; }
+  .btn:active::before { transform: translateY(0); }
+  .btn:active .btn__icon { transform: translate(3px, -3px); }
+}
+
+
+/* text roll, large screens only */
+@media (hover: hover) and (min-width: 1024px) {
+  .btn__label { position: relative; overflow: hidden; height: 1.25em; }
+  .btn__label > span { position: relative; display: block; transition: transform 0.5s var(--ease); }
+  .btn__label > span::after { display: block; content: attr(data-text); position: absolute; left: 0; top: 100%; }
+  .btn:hover .btn__label > span { transform: translateY(-100%); }
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid #1f8f96; outline-offset: 3px; }
+
+
+/* nav link: underline draws in on hover, draws out the other side on leave */
+.nav-link { position: relative; padding: 0.5rem 0; color: #9e9f9f; transition: color 0.3s ease; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: #f8f8f8;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover, .nav-link.is-active { color: #f8f8f8; }
+.nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); transform-origin: left; }
+
+
+/* cards: lift, top line draws across, image slowly zooms. No glow. */
+.frost-card, .gold-card {
+  overflow: hidden;
+  background-image: linear-gradient(#1f8f96, #1f8f96);
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 0% 2px;
+  transition: background-size 0.6s cubic-bezier(0.22, 1, 0.36, 1), translate 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.5s ease;
+}
+.frost-card img, .gold-card img { transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+@media (hover: hover) {
+  .frost-card:hover, .gold-card:hover { background-size: 100% 2px; translate: 0 -4px; border-color: #1f8f96; }
+  .frost-card:hover img, .gold-card:hover img { transform: scale(1.06); }
 }
 

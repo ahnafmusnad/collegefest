@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { X, Shield, Sparkles, RotateCcw } from 'lucide-react';
+import { X, Shield, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SORTING_QUESTIONS, FOUR_HOUSES } from '../data/festData';
 import { ClubHouse } from '../types';
+import Button from './ui/Button';
 interface SortingQuizModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -77,7 +78,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 rounded-2xl shadow-[0_0_50px_rgba(158,42,43,0.3)] p-6 md:p-8 text-bone">
+      <div className="relative w-full max-w-xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 p-6 md:p-8 text-bone">
         
         {/* Close Button */}
         <button
@@ -103,7 +104,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
             </div>
 
             {/* Question Text */}
-            <div className="p-4 rounded-xl bg-ink-2/80 border border-crimson/20 mb-5">
+            <div className="p-4 bg-ink-2/80 border border-crimson/20 mb-5">
               <p className="font-cinzel text-base md:text-lg text-white font-medium text-center">
                 "{currentQ.question}"
               </p>
@@ -130,7 +131,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
                   key={i}
                   className={`h-1.5 rounded-full transition-all ${
                     i === currentQuestionIndex
-                      ? 'w-8 bg-gold shadow-[0_0_8px_#145e62]'
+                      ? 'w-8 bg-gold'
                       : i < currentQuestionIndex
                       ? 'w-4 bg-crimson-2'
                       : 'w-4 bg-ink-3'
@@ -146,40 +147,41 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
               The Raven Has Spoken
             </div>
 
-            <div className="w-20 h-20 mx-auto rounded-full bg-white border-2 border-gold flex items-center justify-center shadow-[0_0_30px_rgba(158,42,43,0.5)] mb-4 p-2 overflow-hidden">
+            <div className="w-20 h-20 mx-auto rounded-full bg-white border-2 border-gold flex items-center justify-center mb-4 p-2 overflow-hidden">
               <img src={sortedHouse.logo} alt={`${sortedHouse.name} logo`} className="w-full h-full object-contain" />
             </div>
 
             <h3 className="font-cinzel text-xs uppercase tracking-widest text-gold-2">
               You Have Been Claimed By
             </h3>
-            <h2 className="font-cinzel-dec text-2xl md:text-3xl font-extrabold text-white my-2 text-glow-ice">
+            <h2 className="font-cinzel-dec text-2xl md:text-3xl font-extrabold text-white my-2">
               {sortedHouse.houseName}
             </h2>
             <p className="font-cinzel text-sm text-gold-2/90 italic mb-4">
               "{sortedHouse.motto}"
             </p>
 
-            <div className="p-4 rounded-xl bg-ink-2/80 border border-crimson/30 text-left text-xs md:text-sm text-bone-dim mb-6">
+            <div className="p-4 bg-ink-2/80 border border-crimson/30 text-left text-xs md:text-sm text-bone-dim mb-6">
               <div className="font-bold text-gold-2 mb-1">{sortedHouse.name}</div>
               <p className="line-clamp-3">{sortedHouse.lore}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              <button
+              <Button
+                className="flex-1"
                 onClick={handlePledge}
-                className="flex-1 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all text-center uppercase tracking-wider"
               >
                 PLEDGE ALLEGIANCE & WEAR CREST
-              </button>
+              </Button>
 
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
+                className="flex-1"
                 onClick={handleReset}
-                className="flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-iron hover:border-ash text-bone-dim text-xs font-cinzel uppercase transition-colors"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
                 Retake
-              </button>
+              </Button>
             </div>
           </div>
         )}

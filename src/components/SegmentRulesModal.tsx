@@ -1,7 +1,8 @@
 import React from 'react';
-import { X, Trophy, MapPin, Clock, Users, ShieldAlert, Sparkles, ExternalLink } from 'lucide-react';
+import { X, Trophy, MapPin, Clock, Users, ShieldAlert } from 'lucide-react';
 import { Segment } from '../types';
 import { FOUR_HOUSES, FEST_METADATA } from '../data/festData';
+import Button from './ui/Button';
 interface SegmentRulesModalProps {
   segment: Segment | null;
   onClose: () => void;
@@ -19,7 +20,7 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 rounded-2xl shadow-[0_0_50px_rgba(158,42,43,0.3)] p-6 md:p-8 text-bone my-8">
+      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-gold/50 p-6 md:p-8 text-bone my-8">
         
         {/* Close Button */}
         <button
@@ -52,7 +53,7 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
         </p>
 
         {/* Quick Details Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-xl bg-ink-2/80 border border-crimson/20 mb-6 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-ink-2/80 border border-crimson/20 mb-6 text-xs">
           <div className="flex items-center gap-2 text-bone-dim">
             <Trophy className="w-4 h-4 text-gold shrink-0" />
             <div>
@@ -94,7 +95,7 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
             <ShieldAlert className="w-4 h-4 text-gold" />
             Tournament Decrees & Rules of Engagement
           </div>
-          <ul className="space-y-2 text-xs text-bone-dim bg-ink-2/60 p-3.5 rounded-xl border border-iron">
+          <ul className="space-y-2 text-xs text-bone-dim bg-ink-2/60 p-3.5 border border-iron">
             {segment.rules.map((rule, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="text-gold font-bold shrink-0">{idx + 1}.</span>
@@ -123,25 +124,23 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-crimson/20">
-          <button
+          <Button
+            className="flex-1"
             onClick={() => {
               onRegisterTickify(segment.title);
             }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cinzel text-sm font-bold text-ink bg-gradient-to-r from-ember to-gold-2 hover:from-gold-2 hover:to-gold-2 shadow-[0_0_20px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
           >
-            <Sparkles className="w-4 h-4" />
-            REGISTER VIA TICKIFY (ENTRY: {segment.entryFee})
-          </button>
+            {`REGISTER VIA TICKIFY (ENTRY: ${segment.entryFee})`}
+          </Button>
 
-          <a
+          <Button
+            variant="secondary"
+            size="sm"
             href={FEST_METADATA.tickifyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-iron hover:border-ash text-bone-dim text-xs font-cinzel uppercase transition-colors"
+            external
           >
-            <span>Tickify Portal</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+            Tickify Portal
+          </Button>
         </div>
       </div>
     </div>

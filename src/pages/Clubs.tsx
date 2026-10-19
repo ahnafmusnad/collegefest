@@ -4,14 +4,13 @@ import { ClubHouse, PageType } from '../types';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
+import Button from '../components/ui/Button';
 import { 
   Shield, 
   Crown, 
   Award, 
   Users, 
   Swords, 
-  Sparkles, 
-  ChevronRight, 
   Scroll, 
   Check, 
   Flame
@@ -51,7 +50,7 @@ export const Clubs: React.FC<ClubsProps> = ({
       
       {/* Header Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
+      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
         <div 
           className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
           style={{ backgroundImage: `url('/images/four-houses-heraldry.jpg')` }}
@@ -61,7 +60,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             <Shield className="w-3.5 h-3.5" />
             The Citadel Quadrumvirate
           </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-ice">
+          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
             THE FOUR GREAT HOUSES
           </h1>
           <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
@@ -86,7 +85,7 @@ export const Clubs: React.FC<ClubsProps> = ({
 
               className={`relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between group h-full ${
                 isSelected
-                  ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold shadow-[0_0_25px_rgba(158,42,43,0.35)] -translate-y-1'
+                  ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold -translate-y-1'
                   : 'bg-ink-2/60 border-iron hover:border-crimson/40 hover:bg-ink-2/90'
               }`}
             >
@@ -120,20 +119,20 @@ export const Clubs: React.FC<ClubsProps> = ({
           ACTIVE HOUSE SHOWCASE DOSSIER
       ======================================================== */}
       <Reveal direction="zoom">
-      <div className="frost-card rounded-3xl border-2 border-crimson/40 p-6 md:p-10 space-y-10 relative overflow-hidden">
+      <div className="frost-card border-2 border-crimson/40 p-6 md:p-10 space-y-10 relative overflow-hidden">
         
         {/* Top House Banner */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-crimson/20 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-20 h-20 p-2 rounded-2xl bg-white border-2 border-gold shadow-[0_0_20px_rgba(158,42,43,0.4)] overflow-hidden shrink-0 flex items-center justify-center">
+              <div className="w-20 h-20 p-2 bg-white border-2 border-gold overflow-hidden shrink-0 flex items-center justify-center">
                 <img src={activeHouse.logo} alt={`${activeHouse.name} logo`} className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest block">
                   Citadel House Sigil: {activeHouse.sigil}
                 </span>
-                <h2 className="font-cinzel-dec text-3xl sm:text-4xl font-extrabold text-white text-glow-ice">
+                <h2 className="font-cinzel-dec text-3xl sm:text-4xl font-extrabold text-white">
                   {activeHouse.name.split('(')[0]}
                 </h2>
               </div>
@@ -150,19 +149,14 @@ export const Clubs: React.FC<ClubsProps> = ({
 
           {/* House Pledge Action */}
           <div className="flex flex-col sm:flex-row items-center gap-3">
-            <button
+            <Button
+              className="w-full sm:w-auto"
               onClick={() => handlePledge(activeHouse)}
-              className={`w-full sm:w-auto px-6 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
-                userPledgedHouse?.id === activeHouse.id
-                  ? 'bg-ember/20 border-2 border-ember text-gold-2 shadow-[0_0_20px_rgba(226,113,29,0.4)]'
-                  : 'bg-gradient-to-r from-ember to-gold hover:from-gold-2 hover:to-gold-2 text-ink border border-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95'
-              }`}
             >
-              <Sparkles className="w-4 h-4" />
-              <span>{userPledgedHouse?.id === activeHouse.id ? 'ALLEGIANCE SWORN' : `PLEDGE TO ${activeHouse.houseName.toUpperCase()}`}</span>
-            </button>
+              {userPledgedHouse?.id === activeHouse.id ? 'ALLEGIANCE SWORN' : `PLEDGE TO ${activeHouse.houseName.toUpperCase()}`}
+            </Button>
 
-            <div className="p-3 rounded-xl bg-ink-2/80 border border-iron text-center min-w-[120px]">
+            <div className="p-3 bg-ink-2/80 border border-iron text-center min-w-[120px]">
               <div className="font-mono text-lg font-bold text-gold">{activeHouse.points}</div>
               <div className="text-[10px] font-cinzel text-bone-dim uppercase">Citadel Points</div>
             </div>
@@ -190,7 +184,7 @@ export const Clubs: React.FC<ClubsProps> = ({
                 {activeHouse.achievements.map((ach, i) => (
                   <Reveal key={i} delay={i * 90}>
                   <div
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-ink-2/60 border border-iron/80 text-xs text-bone hover:border-crimson/40 transition-colors h-full"
+                    className="flex items-center gap-2.5 p-3 bg-ink-2/60 border border-iron/80 text-xs text-bone hover:border-crimson/40 transition-colors h-full"
                   >
                     <Crown className="w-3.5 h-3.5 text-gold shrink-0" />
                     <span>{ach}</span>
@@ -209,25 +203,25 @@ export const Clubs: React.FC<ClubsProps> = ({
             </h3>
             <div className="grid grid-cols-2 gap-2.5">
               <Reveal delay={0}>
-                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
                   <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Founded</div>
                   <div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>
                 </div>
               </Reveal>
               <Reveal delay={80}>
-                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
                   <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Members</div>
                   <div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
                 </div>
               </Reveal>
               <Reveal delay={160}>
-                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
                   <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Sigil</div>
                   <div className="font-cinzel text-[11px] font-bold text-white leading-tight px-1">{activeHouse.sigil}</div>
                 </div>
               </Reveal>
               <Reveal delay={240}>
-                <div className="p-3.5 rounded-xl bg-ink-2/80 border border-crimson/20 text-center h-full">
+                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
                   <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Crest Points</div>
                   <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
                 </div>
@@ -235,7 +229,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             </div>
 
             <Reveal delay={320}>
-              <div className="p-3.5 rounded-xl bg-ink-2/40 border border-crimson/20 space-y-2 text-xs">
+              <div className="p-3.5 bg-ink-2/40 border border-crimson/20 space-y-2 text-xs">
                 <div className="flex items-center justify-between gap-2 text-bone-dim">
                   <span className="shrink-0">House Words:</span>
                   <span className="font-cinzel text-gold-2 italic text-right">"{activeHouse.motto}"</span>
@@ -256,13 +250,13 @@ export const Clubs: React.FC<ClubsProps> = ({
               <Swords className="w-4 h-4 text-gold" />
               Tournament Segments Commanded by {activeHouse.houseName}
             </h3>
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => onNavigate('segments')}
-              className="text-xs font-cinzel text-gold hover:text-gold-2 flex items-center gap-1"
             >
-              <span>View All Tourneys</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+              View All Tourneys
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -272,7 +266,7 @@ export const Clubs: React.FC<ClubsProps> = ({
                 onClick={() => {
                   onNavigate('segments');
                 }}
-                className="p-4 rounded-xl bg-ink-2/70 border border-iron hover:border-gold/60 shadow-[0_8px_22px_rgba(11,9,7,0.5)] flex flex-col justify-between h-full"
+                className="p-4 bg-ink-2/70 border border-iron hover:border-gold/60 shadow-[0_8px_22px_rgba(11,9,7,0.5)] flex flex-col justify-between h-full"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs mb-2">
@@ -319,9 +313,9 @@ export const Clubs: React.FC<ClubsProps> = ({
           {[...FOUR_HOUSES].sort((a, b) => b.points - a.points).map((house, idx) => (
             <Reveal key={house.id} delay={idx * 100} className="h-full">
             <TiltCard
-              className={`p-5 rounded-2xl border text-center space-y-3 h-full ${
+              className={`p-5 border text-center space-y-3 h-full ${
                 idx === 0
-                  ? 'bg-gradient-to-b from-ink-3/60 via-ink-2 to-ink border-gold/60 shadow-[0_0_25px_rgba(201,162,39,0.25)]'
+                  ? 'bg-gradient-to-b from-ink-3/60 via-ink-2 to-ink border-gold/60'
                   : 'bg-ink-2/60 border-iron'
               }`}
             >
@@ -349,15 +343,13 @@ export const Clubs: React.FC<ClubsProps> = ({
 
       {/* Registration CTA */}
       <Reveal className="text-center pt-4">
-        <button
+        <Button
           onClick={() => {
             onOpenTickify();
           }}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
         >
-          <span>CLAIM HOUSE WARRIOR PASS ON TICKIFY</span>
-          <Sparkles className="w-4 h-4" />
-        </button>
+          CLAIM HOUSE WARRIOR PASS ON TICKIFY
+        </Button>
       </Reveal>
 
     </div>

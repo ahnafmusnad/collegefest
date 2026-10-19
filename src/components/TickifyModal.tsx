@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, Ticket, Check, Shield, Sparkles, Copy } from 'lucide-react';
+import { X, Ticket, Check, Shield, Copy } from 'lucide-react';
 import { FEST_METADATA } from '../data/festData';
+import Button from './ui/Button';
 interface TickifyModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -41,7 +42,7 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
       popular: true,
       desc: 'All-inclusive pass for contestants entering Debate, Science, Language, or Cultural tourneys.',
       perks: ['Free entry into 1 Major Tournament', 'Official CDCC Souvenir Kit & Badge', 'Access to contestant preparation arenas', 'Certificate of Royal Participation', 'Concert access with closer zone'],
-      color: 'border-crimson shadow-[0_0_20px_rgba(158,42,43,0.25)]'
+      color: 'border-crimson'
     },
     {
       id: 'vip',
@@ -56,7 +57,7 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-crimson/40 rounded-2xl shadow-[0_0_50px_rgba(158,42,43,0.25)] p-6 md:p-8 overflow-hidden text-bone max-h-[92vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-crimson/40 p-6 md:p-8 overflow-hidden text-bone max-h-[92vh] overflow-y-auto">
         
         {/* Top medieval accent bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-crimson via-gold-2 to-gold" />
@@ -96,9 +97,9 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
               onClick={() => {
                 setSelectedPass(pass.id as 'standard' | 'tournament' | 'vip');
               }}
-              className={`relative cursor-pointer p-4 rounded-xl border transition-all ${pass.color} ${
+              className={`relative cursor-pointer p-4 border transition-all ${pass.color} ${
                 selectedPass === pass.id
-                  ? 'bg-ink-2/60 ring-2 ring-gold shadow-[0_0_15px_rgba(158,42,43,0.3)]'
+                  ? 'bg-ink-2/60 ring-2 ring-gold'
                   : 'bg-ink-2/40 hover:bg-ink-2/80'
               }`}
             >
@@ -124,19 +125,15 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          <a
+          <Button
             href={FEST_METADATA.tickifyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-
-            className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl font-cinzel text-sm md:text-base font-bold text-ink bg-gradient-to-r from-ember via-gold-2 to-gold hover:from-gold-2 hover:to-gold-2 transition-all shadow-[0_0_25px_rgba(158,42,43,0.5)] btn-shine active:scale-95 text-center"
+            external
+            className="w-full"
           >
-            <Sparkles className="w-4 h-4" />
             PROCEED TO TICKIFY (OFFICIAL CHECKOUT)
-            <ExternalLink className="w-4 h-4" />
-          </a>
+          </Button>
 
-          <div className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-ink-2/60 border border-iron text-xs text-bone-dim">
+          <div className="flex items-center justify-between gap-3 p-2.5 bg-ink-2/60 border border-iron text-xs text-bone-dim">
             <span className="truncate">Direct Tickify Portal: <span className="text-gold underline">{FEST_METADATA.tickifyLink}</span></span>
             <button
               onClick={handleCopyLink}

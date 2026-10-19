@@ -3,17 +3,16 @@ import { SPONSOR_TIERS } from '../data/festData';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
+import Button from '../components/ui/Button';
 import { 
   Coins, 
   Crown, 
   ShieldCheck, 
   Check, 
-  Download, 
   Send, 
   Sparkles, 
   TrendingUp, 
   Building2, 
-  ExternalLink,
   Users
 } from 'lucide-react';
 
@@ -27,33 +26,6 @@ export const Sponsorships: React.FC = () => {
     tierInterested: 'Title Sponsor',
     notes: ''
   });
-
-  const handleDownloadDeck = () => {
-    // Simulate instant download of royal sponsorship dossier
-    const blob = new Blob([
-      `CARNAVAL DA CHITTAGONG COLLEGE - SPONSORSHIP PROSPECTUS 2026\n\n` +
-      `Citadel Venue: Chittagong College Heritage Campus, Chawkbazar\n` +
-      `Dates: December 18-19, 2026\n` +
-      `Estimated Reach: 1,000+ On-ground Attendees | 1,000,000+ Digital Impressions\n\n` +
-      `TIERS AVAILABLE:\n` +
-      `1. Title Sponsor ("The Hand of the King") - Official Naming Rights\n` +
-      `2. Power Sponsor ("The Shield of the Realm") - Powered-By Naming\n` +
-      `3. Platinum Sponsor ("High Valyrian Lords") - Workshop & Stage Access\n` +
-      `4. Gold Sponsor ("The Iron Bank") - Banners, Stall & Stage Time\n` +
-      `5. Co-Sponsor ("The Royal Guilds & Envoys") - In-Kind / Strategic Partnerships\n\n` +
-      `Contact the Sponsorship Wing: carnavaldactgclg@gmail.com | +880 1776-810739\n` +
-      `Sponsorship Wing Head: Sabbir Hossain`
-    ], { type: 'text/plain' });
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'CDCC-Fest-Sponsorship-Prospectus.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,28 +44,18 @@ export const Sponsorships: React.FC = () => {
       
       {/* Page Hero Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-gold/30 bg-gradient-to-r from-ink-2 via-ink-3 to-ink-2 p-8 md:p-14 text-center">
+      <div className="relative overflow-hidden border-2 border-gold/30 bg-gradient-to-r from-ink-2 via-ink-3 to-ink-2 p-8 md:p-14 text-center">
         <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-3/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest shadow-[0_0_15px_rgba(201,162,39,0.3)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-3/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
             <Coins className="w-3.5 h-3.5" />
             The Treasuries of the Iron Bank
           </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-gold">
+          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
             ROYAL SPONSORSHIPS & PARTNERS
           </h1>
           <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
             Align your house and enterprise with a national academic festival at one of Bengal’s most venerable citadels. Command unprecedented brand visibility among 1,000+ bright young minds from 25+ institutions, with a digital reach over 1,000,000+.
           </p>
-
-          <div className="pt-3">
-      <button
-        onClick={handleDownloadDeck}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone border border-bone shadow-[0_0_20px_rgba(201,162,39,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
-      >
-        <Download className="w-4 h-4" />
-        <span>DOWNLOAD SPONSORSHIP PROSPECTUS</span>
-      </button>
-          </div>
         </div>
       </div>
       </Reveal>
@@ -109,10 +71,10 @@ export const Sponsorships: React.FC = () => {
           <Reveal key={i} delay={i * 90} className="h-full">
           <TiltCard
 
-            className="frost-card p-5 rounded-2xl border border-gold/20 text-center space-y-1 hover:border-gold/50 transition-all group h-full"
+            className="frost-card p-5 border border-gold/20 text-center space-y-1 hover:border-gold/50 transition-all group h-full"
           >
             <stat.icon className="w-5 h-5 text-gold mx-auto group-hover:scale-110 transition-transform" />
-            <div className="font-cinzel text-2xl md:text-3xl font-extrabold text-white text-glow-gold">
+            <div className="font-cinzel text-2xl md:text-3xl font-extrabold text-white">
               {stat.value}
             </div>
             <div className="font-cinzel text-xs font-semibold text-gold-2/90 uppercase">
@@ -152,12 +114,12 @@ export const Sponsorships: React.FC = () => {
               <TiltCard
 
                 maxTilt={8}
-                glareClassName="rounded-3xl"
-                shadowClassName={isTitle ? '0 28px 55px rgba(60, 35, 5, 0.6), 0 0 36px rgba(158, 159, 159, 0.25)' : undefined}
-                className={`relative h-full rounded-3xl border-2 p-6 md:p-8 flex flex-col justify-between group ${
+                glareClassName="rounded-none"
+                shadowClassName={isTitle ? '0 28px 55px rgba(60, 35, 5, 0.6)' : undefined}
+                className={`relative h-full border-2 p-6 md:p-8 flex flex-col justify-between group ${
                   isTitle
-                    ? 'bg-gradient-to-b from-ink-3/80 via-ink-3/90 to-ink-2 border-gold shadow-[0_15px_40px_rgba(201,162,39,0.25)]'
-                    : 'bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-gold/50 hover:border-gold-2 shadow-[0_15px_40px_rgba(158,42,43,0.2)]'
+                    ? 'bg-gradient-to-b from-ink-3/80 via-ink-3/90 to-ink-2 border-gold'
+                    : 'bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-gold/50 hover:border-gold-2'
                 }`}
               >
                 {/* Crown Ribbon for Title */}
@@ -188,9 +150,9 @@ export const Sponsorships: React.FC = () => {
                   </p>
 
                   {/* Slot Availability */}
-                  <div className="p-3.5 rounded-2xl bg-ink/80 border border-iron mb-6 text-center">
+                  <div className="p-3.5 bg-ink/80 border border-iron mb-6 text-center">
                     <span className="text-[10px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
-                    <span className={`font-cinzel text-lg sm:text-xl font-extrabold ${isTitle ? 'text-gold-2 text-glow-gold' : 'text-gold-2 text-glow-ice'}`}>
+                    <span className={`font-cinzel text-lg sm:text-xl font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
                       {tier.slots}
                     </span>
                   </div>
@@ -216,19 +178,15 @@ export const Sponsorships: React.FC = () => {
 
                 {/* Bottom CTA */}
                 <div className="pt-6 mt-6 border-t border-iron/80">
-                  <a
+                  <Button
+                    className="w-full"
                     href="#sponsor-form"
                     onClick={() => {
                       setFormData(prev => ({ ...prev, tierInterested: tier.name }));
                     }}
-                    className={`w-full py-3.5 px-4 rounded-xl font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider text-center block transition-all shadow ${
-                      isTitle
-                        ? 'bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone text-ink'
-                        : 'bg-ink-3 hover:bg-ink-3 text-white border border-ash'
-                    }`}
                   >
                     SELECT THIS TIER & CONTACT
-                  </a>
+                  </Button>
                 </div>
               </TiltCard>
               </Reveal>
@@ -238,7 +196,7 @@ export const Sponsorships: React.FC = () => {
       </section>
 
       {/* Guild & Strategic Partners (Tickify, Media, Refreshment) */}
-      <Reveal className="frost-card p-6 md:p-8 rounded-3xl border border-crimson/30 space-y-6">
+      <Reveal className="frost-card p-6 md:p-8 border border-crimson/30 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-crimson/20 pb-4">
           <div>
             <span className="font-cinzel text-xs text-gold uppercase tracking-widest font-bold">
@@ -256,7 +214,7 @@ export const Sponsorships: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Tickify Box */}
-          <TiltCard className="p-5 rounded-2xl bg-ink-2/80 border border-gold/50 flex flex-col justify-between space-y-3 group hover:border-gold-2 transition-colors shadow-[0_10px_28px_rgba(11,9,7,0.5)]">
+          <TiltCard className="p-5 bg-ink-2/80 border border-gold/50 flex flex-col justify-between space-y-3 group hover:border-gold-2 transition-colors shadow-[0_10px_28px_rgba(11,9,7,0.5)]">
             <div>
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded bg-ink-2 border border-ember/40 text-gold-2 text-[10px] font-cinzel uppercase">
@@ -271,19 +229,13 @@ export const Sponsorships: React.FC = () => {
                 Powering the entire festival admission ecosystem with instant passes, student identity verification, and live gate scanning.
               </p>
             </div>
-            <a
-              href="https://tickify.live"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-cinzel font-bold text-gold-2 flex items-center gap-1 hover:underline"
-            >
-              <span>Visit Official Tickify Portal</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            <Button href="https://tickify.live" external size="sm">
+              Visit Official Tickify Portal
+            </Button>
           </TiltCard>
 
           {/* Media Guild */}
-          <TiltCard className="p-5 rounded-2xl bg-ink-2/80 border border-iron flex flex-col justify-between space-y-3 shadow-[0_10px_28px_rgba(11,9,7,0.5)]">
+          <TiltCard className="p-5 bg-ink-2/80 border border-iron flex flex-col justify-between space-y-3 shadow-[0_10px_28px_rgba(11,9,7,0.5)]">
             <div>
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded bg-ink-2 border border-crimson/40 text-gold-2 text-[10px] font-cinzel uppercase">
@@ -308,14 +260,14 @@ export const Sponsorships: React.FC = () => {
       {/* ========================================================
           PETITION THE MASTER OF COIN (SPONSOR CONTACT FORM)
       ======================================================== */}
-      <Reveal direction="zoom" className="relative rounded-3xl bg-gradient-to-b from-ink-2/90 via-ink-2 to-ink border-2 border-gold/40 p-6 md:p-12 shadow-[0_0_50px_rgba(201,162,39,0.15)]" id="sponsor-form">
+      <Reveal direction="zoom" className="relative bg-gradient-to-b from-ink-2/90 via-ink-2 to-ink border-2 border-gold/40 p-6 md:p-12" id="sponsor-form">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-3 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
               <Send className="w-3.5 h-3.5" />
               Petition The Small Council Treasury
             </div>
-            <h3 className="font-cinzel text-2xl sm:text-3xl font-extrabold text-white text-glow-gold">
+            <h3 className="font-cinzel text-2xl sm:text-3xl font-extrabold text-white">
               BECOME A PATRON OF THE CITADEL
             </h3>
             <p className="font-sans text-xs sm:text-sm text-bone-dim">
@@ -324,7 +276,7 @@ export const Sponsorships: React.FC = () => {
           </div>
 
           {formSubmitted ? (
-            <div className="p-8 rounded-2xl bg-ink-3/40 border border-gold text-center space-y-3 animate-fadeIn">
+            <div className="p-8 bg-ink-3/40 border border-gold text-center space-y-3 animate-fadeIn">
               <div className="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center mx-auto">
                 <Check className="w-6 h-6" />
               </div>
@@ -332,12 +284,14 @@ export const Sponsorships: React.FC = () => {
               <p className="font-sans text-xs text-bone-dim max-w-md mx-auto">
                 Our Master of Coin and Fest Convener have received your raven for the <strong>{formData.tierInterested}</strong>. A royal representative will dispatch a message shortly.
               </p>
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
+                className="mt-3"
                 onClick={() => setFormSubmitted(false)}
-                className="mt-3 text-xs font-cinzel text-gold underline hover:text-white"
               >
                 Send Another Petition
-              </button>
+              </Button>
             </div>
           ) : (
             <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -432,12 +386,12 @@ export const Sponsorships: React.FC = () => {
               </div>
 
               <div className="pt-2 text-center">
-                <button
+                <Button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold text-ink bg-gradient-to-r from-gold via-gold-2 to-gold hover:from-gold-2 hover:to-bone shadow-[0_0_25px_rgba(201,162,39,0.5)] btn-shine active:scale-95 transition-all uppercase tracking-wider"
+                  className="w-full sm:w-auto"
                 >
                   DISPATCH PETITION TO MASTER OF COIN
-                </button>
+                </Button>
               </div>
             </form>
           )}

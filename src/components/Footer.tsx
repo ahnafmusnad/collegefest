@@ -12,22 +12,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
   return (
     <footer className="relative z-10 border-t border-crimson/20 bg-gradient-to-b from-ink via-ink to-ink text-bone-dim overflow-hidden pt-16 pb-12">
       {/* Top icy divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent shadow-[0_0_15px_#145e62]" />
-      
-      {/* Background radial atmosphere */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-ink-2/20 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Four Houses Banner Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 p-4 rounded-2xl bg-ink/60 border border-crimson/20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 p-4 bg-ink/60 border border-crimson/20">
           {FOUR_HOUSES.map((house) => (
             <div
               key={house.id}
               onClick={() => {
                 onNavigate('clubs');
               }}
-              className="p-3 rounded-xl border border-iron/80 hover:border-gold/50 bg-ink-2/30 hover:bg-ink-2/80 transition-all cursor-pointer group text-center"
+              className="p-3 border border-iron/80 hover:border-gold/50 bg-ink-2/30 hover:bg-ink-2/80 transition-all cursor-pointer group text-center"
             >
               <div className="flex items-center justify-center gap-1.5 font-cinzel text-xs font-bold text-bone group-hover:text-gold-2">
                 <span className="w-6 h-6 rounded bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -46,14 +43,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
           {/* Fest Proclamation */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-ink-2 border border-gold/50 flex items-center justify-center shadow-[0_0_15px_rgba(158,42,43,0.3)]">
+              <div className="w-10 h-10 rounded-xl bg-ink-2 border border-gold/50 flex items-center justify-center">
                 <Crown className="w-5 h-5 text-gold" />
               </div>
               <div>
                 <span className="font-cinzel text-xs text-gold font-bold tracking-widest block uppercase">
                   Chittagong College &bull; Est. 1869
                 </span>
-                <span className="font-cinzel-dec text-lg font-black text-white text-glow-ice block">
+                <span className="font-cinzel-dec text-lg font-black text-white block">
                   CARNAVAL DA CC
                 </span>
               </div>

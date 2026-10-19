@@ -25,7 +25,7 @@ export const ScrollToTop: React.FC = () => {
         onClick={handleClick}
         aria-label="Back to top"
         title="Back to top"
-        className="w-12 h-12 flex items-center justify-center rounded-xl border border-gold/50 bg-ink-2/90 text-gold-2 backdrop-blur-sm shadow-[0_0_20px_rgba(158,42,43,0.35)] transition-colors hover:text-white hover:border-gold hover:bg-ink-3 btn-shine"
+        className="w-12 h-12 flex items-center justify-center rounded-xl border border-gold/50 bg-ink-2/90 text-gold-2 backdrop-blur-sm transition-colors hover:text-white hover:border-gold hover:bg-ink-3 btn-shine"
       >
         <ArrowUp className="w-5 h-5" />
       </button>

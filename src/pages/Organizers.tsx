@@ -44,7 +44,7 @@ export const Organizers: React.FC = () => {
       
       {/* Hero Banner */}
       <Reveal direction="zoom">
-      <div className="relative rounded-3xl overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-14 text-center">
+      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-14 text-center">
         <div 
           className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
           style={{ backgroundImage: `url('/images/small-council-chamber.jpg')` }}
@@ -54,7 +54,7 @@ export const Organizers: React.FC = () => {
             <Users className="w-3.5 h-3.5" />
             The Citadel High Chamber
           </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider text-glow-ice">
+          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
             THE SMALL COUNCIL & ORGANIZERS
           </h1>
           <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
@@ -65,11 +65,11 @@ export const Organizers: React.FC = () => {
       </Reveal>
 
       {/* Convener's Royal Proclamation */}
-      <Reveal direction="zoom" className="frost-card p-6 md:p-10 rounded-3xl border-2 border-crimson/40 relative overflow-hidden">
+      <Reveal direction="zoom" className="frost-card p-6 md:p-10 border-2 border-crimson/40 relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-gold shadow-[0_0_25px_rgba(201,162,39,0.3)] flex items-center justify-center bg-gradient-to-br from-ink-2 via-ink-3/40 to-ink">
-              <span className="font-cinzel-dec text-4xl md:text-5xl font-black text-gold-2 text-glow-gold">
+            <div className="w-24 h-24 md:w-32 md:h-32 overflow-hidden border-2 border-gold flex items-center justify-center bg-gradient-to-br from-ink-2 via-ink-3/40 to-ink">
+              <span className="font-cinzel-dec text-4xl md:text-5xl font-black text-gold-2">
                 AM
               </span>
             </div>
@@ -113,7 +113,7 @@ export const Organizers: React.FC = () => {
               }}
               className={`px-4 py-2 rounded-xl font-cinzel text-xs font-bold tracking-wider transition-all ${
                 isSelected
-                  ? 'bg-crimson/30 text-gold-2 border border-gold shadow-[0_0_15px_rgba(158,42,43,0.4)]'
+                  ? 'bg-crimson/30 text-gold-2 border border-gold'
                   : 'bg-ink-2/60 text-bone-dim border border-iron hover:text-white hover:border-iron'
               }`}
             >
@@ -129,12 +129,12 @@ export const Organizers: React.FC = () => {
           <Reveal key={member.id} delay={(i % 4) * 90} className="h-full">
           <TiltCard
 
-            className="group relative h-full rounded-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-5 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
+            className="group relative h-full bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-5 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
           >
             <div>
               {/* Member Portrait */}
-              <div className="relative mb-4 overflow-hidden rounded-xl aspect-square border border-iron group-hover:border-gold/80 transition-colors flex items-center justify-center bg-gradient-to-br from-ink-2 via-ink-2/60 to-ink">
-                <span className="font-cinzel-dec text-5xl md:text-6xl font-black text-gold/80 text-glow-ice group-hover:scale-110 transition-transform duration-500">
+              <div className="relative mb-4 overflow-hidden aspect-square border border-iron group-hover:border-gold/80 transition-colors flex items-center justify-center bg-gradient-to-br from-ink-2 via-ink-2/60 to-ink">
+                <span className="font-cinzel-dec text-5xl md:text-6xl font-black text-gold/80 group-hover:scale-110 transition-transform duration-500">
                   {getInitials(member.name)}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60" />
@@ -159,7 +159,7 @@ export const Organizers: React.FC = () => {
                 {member.department} &bull; {member.batch}
               </div>
 
-              <p className="text-xs text-bone-dim font-sans italic line-clamp-3 mb-4 bg-ink-2/60 p-2.5 rounded-lg border border-iron/80">
+              <p className="text-xs text-bone-dim font-sans italic line-clamp-3 mb-4 bg-ink-2/60 p-2.5 border border-iron/80">
                 "{member.quote}"
               </p>
             </div>
@@ -206,15 +206,15 @@ export const Organizers: React.FC = () => {
             </div>
 
             {/* Hover aura */}
-            <div className="absolute inset-0 rounded-2xl bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           </TiltCard>
           </Reveal>
         ))}
       </div>
 
       {/* Volunteer Battalion Callout */}
-      <Reveal direction="zoom" className="frost-card p-8 md:p-10 rounded-3xl border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
-        <div className="w-12 h-12 rounded-full bg-ink-2 border border-gold flex items-center justify-center mx-auto text-gold shadow-[0_0_15px_rgba(158,42,43,0.4)]">
+      <Reveal direction="zoom" className="frost-card p-8 md:p-10 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
+        <div className="w-12 h-12 rounded-full bg-ink-2 border border-gold flex items-center justify-center mx-auto text-gold">
           <Shield className="w-6 h-6" />
         </div>
         <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
