@@ -304,7 +304,7 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
         {/* 4 Houses Grid with rich hover interactions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pt-4">
           {FOUR_HOUSES.map((house, i) => (
             <Reveal key={house.id} delay={i * 100} className="h-full">
             <TiltCard
@@ -312,7 +312,7 @@ export const Home: React.FC<HomeProps> = ({
                 onNavigate('clubs');
               }}
 
-              className="group relative h-full bg-gradient-to-b from-ink-2/90 via-ink-2/90 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
+              className="scroll-card group relative h-full p-6 flex flex-col justify-between"
             >
               {/* Top Card Decor */}
               <div className="flex items-center justify-between mb-4">

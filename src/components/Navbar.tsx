@@ -148,7 +148,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* REGISTER (TICKIFY) CTA BUTTON */}
               <div className="flex items-center gap-1.5">
                 {/* Direct Hyperlink to Tickify as required */}
-                <Button href={FEST_METADATA.tickifyLink} external size="sm" className="hidden md:inline-flex shrink-0">Register Now</Button>
+                <div className="hidden md:block shrink-0">
+                  <Button href={FEST_METADATA.tickifyLink} external size="sm">Register Now</Button>
+                </div>
 
                 {/* Quick pass preview modal button */}
                 <button

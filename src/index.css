@@ -448,3 +448,61 @@
   .frost-card:hover img, .gold-card:hover img { transform: scale(1.06); }
 }
 
+/* aged parchment body, rolled at top & bottom, trimmed with gold */
+.scroll-card {
+  position: relative;
+  margin: 24px 0;
+  border-left: 2px solid #6b5a2c;
+  border-right: 2px solid #6b5a2c;
+  border-radius: 3px;
+  background:
+    /* subtle paper fibres */
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 5px),
+    /* rolled shading top & bottom */
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.12) 30px, transparent 70px),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.12) 30px, transparent 70px),
+    /* parchment */
+    radial-gradient(120% 80% at 50% 50%, #123033 0%, #0a1f21 55%, #051315 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 162, 39, 0.18),
+    inset 0 2px 4px rgba(255, 255, 255, 0.04),
+    inset 0 0 70px rgba(0, 0, 0, 0.7),
+    0 20px 44px -18px rgba(0, 0, 0, 0.95),
+    0 4px 12px -6px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* ornate dark-metal rods with silver core, gold collars and end knobs */
+.scroll-card::before,
+.scroll-card::after {
+  content: '';
+  position: absolute;
+  left: -16px;
+  right: -16px;
+  height: 18px;
+  border-radius: 9px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 9px 50%, #9e9f9f 0 4px, #2f5557 4px 6px, rgba(0, 0, 0, 0.6) 6px 7px, transparent 8px),
+    radial-gradient(circle at calc(100% - 9px) 50%, #9e9f9f 0 4px, #2f5557 4px 6px, rgba(0, 0, 0, 0.6) 6px 7px, transparent 8px),
+    linear-gradient(90deg, #6b5a2c 0 2px, transparent 2px calc(100% - 2px), #6b5a2c calc(100% - 2px)),
+    linear-gradient(180deg, #020a0b 0%, #0b282a 20%, #2f5557 42%, #c9d2d2 50%, #2f5557 58%, #0b282a 80%, #020a0b 100%);
+  box-shadow:
+    0 7px 16px rgba(0, 0, 0, 0.75),
+    0 2px 0 rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+}
+.scroll-card::before { top: -18px; }
+.scroll-card::after { bottom: -18px; }
+
+.scroll-card:hover {
+  border-color: #9e8a4a;
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 162, 39, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05),
+    inset 0 0 70px rgba(0, 0, 0, 0.7),
+    0 24px 50px -18px rgba(0, 0, 0, 0.98),
+    0 0 36px rgba(201, 162, 39, 0.22) !important;
+}
+
