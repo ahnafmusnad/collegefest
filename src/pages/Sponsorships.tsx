@@ -153,7 +153,7 @@ export const Sponsorships: React.FC = () => {
 
                 maxTilt={8}
                 glareClassName="rounded-3xl"
-                shadowClassName={isTitle ? '0 28px 55px rgba(60, 35, 5, 0.6), 0 0 36px rgba(201, 162, 39, 0.25)' : undefined}
+                shadowClassName={isTitle ? '0 28px 55px rgba(60, 35, 5, 0.6), 0 0 36px rgba(158, 159, 159, 0.25)' : undefined}
                 className={`relative h-full rounded-3xl border-2 p-6 md:p-8 flex flex-col justify-between group ${
                   isTitle
                     ? 'bg-gradient-to-b from-ink-3/80 via-ink-3/90 to-ink-2 border-gold shadow-[0_15px_40px_rgba(201,162,39,0.25)]'

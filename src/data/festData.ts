@@ -31,8 +31,8 @@ export const FOUR_HOUSES: ClubHouse[] = [
     iconName: 'Scroll',
     logo: '/images/club-logos/ccds-debating-society.jpg',
     colorScheme: {
-      primary: '#9e2a2b', // Crimson
-      secondary: '#7b1418',
+      primary: '#145e62', // Teal
+      secondary: '#17686e',
       border: 'border-crimson/50',
       glow: 'shadow-crimson/40',
       bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
@@ -59,12 +59,12 @@ export const FOUR_HOUSES: ClubHouse[] = [
     iconName: 'Cpu',
     logo: '/images/club-logos/ccpac-physics-astronomy.png',
     colorScheme: {
-      primary: '#60a5fa', // Blue
-      secondary: '#3b82f6',
-      border: 'border-blue-500/50',
-      glow: 'shadow-blue-500/40',
-      bgGradient: 'from-blue-950/80 via-ink-2/90 to-ink/80',
-      accent: 'text-blue-400'
+      primary: '#145e62', // Teal
+      secondary: '#17686e',
+      border: 'border-crimson/50',
+      glow: 'shadow-crimson/40',
+      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
+      accent: 'text-crimson-2'
     },
     lore: 'Founded in 2025, CCPAC is a leading student-led Physics and Astronomy club at Chittagong College, running workshops, competitions and camps. Its members have represented Bangladesh at international science Olympiads, carrying the banner of the Citadel to the world stage.',
     founded: '2025',
@@ -85,12 +85,12 @@ export const FOUR_HOUSES: ClubHouse[] = [
     iconName: 'Music',
     logo: '/images/club-logos/muses-english-literature.jpg',
     colorScheme: {
-      primary: '#ec4899', // Crimson-Rose
-      secondary: '#be185d',
-      border: 'border-pink-500/50',
-      glow: 'shadow-pink-500/40',
-      bgGradient: 'from-pink-950/80 via-ink-3/90 to-ink-2/90',
-      accent: 'text-pink-400'
+      primary: '#145e62', // Teal
+      secondary: '#17686e',
+      border: 'border-crimson/50',
+      glow: 'shadow-crimson/40',
+      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
+      accent: 'text-crimson-2'
     },
     lore: 'Founded in 2025, The Muses is a 150+ member literary club building creativity and confidence through workshops, writing competitions, public speaking and cultural programmes. The club represents Chittagong College nationally and even collaborated with Memorial University of Newfoundland, Canada on an academic session about higher education abroad.',
     founded: '2025',
@@ -113,12 +113,12 @@ export const FOUR_HOUSES: ClubHouse[] = [
     iconName: 'Shield',
     logo: '/images/club-logos/ccps-photographic-society.jpg',
     colorScheme: {
-      primary: '#f59e0b', // Amber/Gold
-      secondary: '#d97706',
-      border: 'border-amber-500/50',
-      glow: 'shadow-amber-500/40',
-      bgGradient: 'from-amber-950/80 via-ink-2/90 to-ink-3/80',
-      accent: 'text-amber-400'
+      primary: '#145e62', // Teal
+      secondary: '#17686e',
+      border: 'border-crimson/50',
+      glow: 'shadow-crimson/40',
+      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
+      accent: 'text-crimson-2'
     },
     lore: 'Established in 2026, CCPS has become one of Chittagong College’s most engaging clubs, bringing hundreds of photography enthusiasts together through online contests like Capture the Campus and offline sessions, while running weekly and monthly member-exclusive contests that champion creative freedom alongside academic excellence.',
     founded: '2026',

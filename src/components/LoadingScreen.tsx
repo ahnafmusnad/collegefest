@@ -73,7 +73,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
       {/* Valyrian Steel Loading Gauge */}
       <div className="relative z-10 mt-8 w-64 md:w-80 h-2 bg-ink-2 rounded-full border border-ink-2/60 overflow-hidden shadow-inner">
         <div
-          className="h-full bg-gradient-to-r from-blood via-gold to-gold-2 transition-all duration-300 ease-out shadow-[0_0_12px_#9e2a2b]"
+          className="h-full bg-gradient-to-r from-blood via-gold to-gold-2 transition-all duration-300 ease-out shadow-[0_0_12px_#145e62]"
           style={{ width: `${progress}%` }}
         />
       </div>

@@ -150,7 +150,7 @@ CARNAVAL DA CC
                   >
                     {item.label}
                     {isActive && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-ember shadow-[0_0_8px_#9e2a2b]" />
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-ember shadow-[0_0_8px_#145e62]" />
                     )}
                   </button>
                 );

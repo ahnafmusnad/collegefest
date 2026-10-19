@@ -1,3 +1,5 @@
+import SwordDivider from "./SwordDivider";
+
 interface SectionHeaderProps {
   number?: string;
   kicker?: string;
@@ -15,6 +17,7 @@ export default function SectionHeader({ number, kicker, title, intro, align = "l
         </p>
       )}
       <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[1.05] text-bone">{title}</h2>
+      <SwordDivider className={`mt-5 mx-0${align === "left" ? " !mx-0" : ""}`} />
       {intro && <p className="mt-5 text-lg md:text-xl text-bone-dim leading-relaxed">{intro}</p>}
     </header>
   );

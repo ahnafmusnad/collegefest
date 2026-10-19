@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 /* ============================================================
-   THEME TOKENS — "Fire, Blood & Gold"
-   Warm, cinematic Game of Thrones palette replacing the
-   bluish violet/indigo chrome the site used to rely on.
+   THEME TOKENS — "Dark Teal & Brushed Silver"
+   Palette sampled straight from the official Carnaval banner.
+   Token names are unchanged so no component breaks.
    ============================================================ */
 @theme {
-  --color-ink: #0b0907;          /* base background (warm near-black) */
-  --color-ink-2: #17120e;        /* surfaces / cards / nav glass */
-  --color-ink-3: #221a14;        /* elevated surfaces / hovers */
-  --color-iron: #3a2e24;         /* warm brown-grey borders */
-  --color-crimson: #9e2a2b;      /* primary accent (deep crimson) */
-  --color-crimson-2: #c24a4b;    /* lighter crimson */
-  --color-blood: #7b1418;        /* deep blood accent */
-  --color-gold: #c9a227;         /* antique gold (headings, icons, CTAs) */
-  --color-gold-2: #e3c766;       /* light gold highlight */
-  --color-ember: #e2711d;        /* ember / hover glow */
-  --color-bone: #ede4d3;         /* primary text (parchment) */
-  --color-bone-dim: #a89a88;     /* muted text */
-  --color-ash: #8e8170;          /* dimmest text (kept >=4.5:1 on ink) */
+  --color-ink: #020a0b;          /* deepest black-teal (page background) */
+  --color-ink-2: #061a1c;        /* card surface */
+  --color-ink-3: #0b282a;        /* raised surface / hover surface */
+  --color-iron: #2f5557;         /* muted teal-grey borders, dividers */
+  --color-crimson: #145e62;      /* teal accent (main accent) */
+  --color-crimson-2: #17686e;    /* bright teal (hover / active) */
+  --color-blood: #0b282a;        /* deep teal */
+  --color-gold: #9e9f9f;         /* silver mid (icons, secondary text, bevel) */
+  --color-gold-2: #f8f8f8;       /* silver highlight (headings, hero title) */
+  --color-ember: #17686e;        /* bright teal (hover / active) */
+  --color-bone: #c9d2d2;         /* soft silver body text */
+  --color-bone-dim: #9e9f9f;     /* silver mid secondary text */
+  --color-ash: #7f8a8a;          /* dimmest text */
 
   --font-display: 'Cinzel', serif;          /* headings / display */
   --font-body: 'Plus Jakarta Sans', sans-serif; /* body copy */
@@ -43,8 +43,8 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #0b0907;
-    color: #ede4d3;
+    background-color: #020a0b;
+    color: #c9d2d2;
     overflow-x: hidden;
     scroll-behavior: smooth;
   }
@@ -75,24 +75,24 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0907;
+  background: #020a0b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2018;
+  background: #0b282a;
   border-radius: 4px;
-  border: 1px solid #3a2e24;
+  border: 1px solid #2f5557;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9e2a2b;
+  background: #145e62;
 }
 
 /* Glassmorphism Ember effects */
 .frost-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(34, 26, 20, 0.82), rgba(23, 18, 14, 0.92));
+  background: linear-gradient(180deg, rgba(11, 40, 42, 0.82), rgba(6, 26, 28, 0.92));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(201, 162, 39, 0.16);
+  border: 1px solid rgba(158, 159, 159, 0.16);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 10px 30px -12px rgba(0, 0, 0, 0.85),
@@ -109,7 +109,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(120% 80% at 50% -20%, rgba(227, 199, 102, 0.14), transparent 60%);
+  background: radial-gradient(120% 80% at 50% -20%, rgba(248, 248, 248, 0.14), transparent 60%);
   opacity: 0.7;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -117,12 +117,12 @@
 
 .frost-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(201, 162, 39, 0.5);
+  border-color: rgba(158, 159, 159, 0.5);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
     0 28px 55px -20px rgba(0, 0, 0, 0.9),
-    0 0 34px -6px rgba(201, 162, 39, 0.4),
-    0 0 70px -14px rgba(226, 113, 29, 0.3);
+    0 0 34px -6px rgba(158, 159, 159, 0.4),
+    0 0 70px -14px rgba(23, 104, 110, 0.3);
 }
 
 .frost-card:hover::before {
@@ -132,9 +132,9 @@
 /* Gold Valyrian Card */
 .gold-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(38, 29, 12, 0.85), rgba(20, 15, 7, 0.92));
+  background: linear-gradient(180deg, rgba(11, 40, 42, 0.85), rgba(6, 26, 28, 0.92));
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(201, 162, 39, 0.25);
+  border: 1px solid rgba(158, 159, 159, 0.25);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 10px 30px -12px rgba(0, 0, 0, 0.9),
@@ -147,11 +147,11 @@
 
 .gold-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(201, 162, 39, 0.7);
+  border-color: rgba(158, 159, 159, 0.7);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 28px 55px -20px rgba(0, 0, 0, 0.9),
-    0 0 40px -4px rgba(201, 162, 39, 0.5);
+    0 0 40px -4px rgba(158, 159, 159, 0.5);
 }
 
 /* Modern sheen-sweep for primary CTA buttons */
@@ -204,12 +204,12 @@
   padding: 2px;
   background: conic-gradient(
     from var(--tilt-angle),
-    rgba(201, 162, 39, 0) 0deg,
-    rgba(201, 162, 39, 0.9) 80deg,
-    rgba(226, 113, 29, 0.9) 160deg,
-    rgba(158, 42, 43, 0.85) 240deg,
-    rgba(201, 162, 39, 0.9) 320deg,
-    rgba(201, 162, 39, 0) 360deg
+    rgba(158, 159, 159, 0) 0deg,
+    rgba(158, 159, 159, 0.9) 80deg,
+    rgba(23, 104, 110, 0.9) 160deg,
+    rgba(20, 94, 98, 0.85) 240deg,
+    rgba(158, 159, 159, 0.9) 320deg,
+    rgba(158, 159, 159, 0) 360deg
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -230,15 +230,15 @@
 
 /* Glowing text effects */
 .text-glow-ice {
-  text-shadow: 0 0 10px rgba(227, 199, 102, 0.7), 0 0 25px rgba(226, 113, 29, 0.35);
+  text-shadow: 0 0 10px rgba(248, 248, 248, 0.7), 0 0 25px rgba(23, 104, 110, 0.35);
 }
 
 .text-glow-gold {
-  text-shadow: 0 0 10px rgba(201, 162, 39, 0.8), 0 0 25px rgba(201, 162, 39, 0.4);
+  text-shadow: 0 0 10px rgba(158, 159, 159, 0.8), 0 0 25px rgba(158, 159, 159, 0.4);
 }
 
 .text-glow-fire {
-  text-shadow: 0 0 10px rgba(158, 42, 43, 0.8), 0 0 25px rgba(158, 42, 43, 0.4);
+  text-shadow: 0 0 10px rgba(20, 94, 98, 0.8), 0 0 25px rgba(20, 94, 98, 0.4);
 }
 
 /* Subtle animations */
@@ -404,8 +404,8 @@
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(201, 162, 39, 0.14) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201, 162, 39, 0.14) 1px, transparent 1px);
+    linear-gradient(to right, rgba(158, 159, 159, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(158, 159, 159, 0.14) 1px, transparent 1px);
   background-size: clamp(70px, 8vw, 120px) clamp(70px, 8vw, 120px);
   -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);
   mask-image: radial-gradient(130% 100% at 50% 0%, #000 25%, transparent 82%);

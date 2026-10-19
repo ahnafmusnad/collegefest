@@ -4,6 +4,7 @@ import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import { CountUp } from '../components/CountUp';
+import SwordDivider from '../components/ui/SwordDivider';
 import { 
   Crown, 
   Shield, 
@@ -107,14 +108,18 @@ export const Home: React.FC<HomeProps> = ({
           {/* Main Fest Heading */}
           <div className="space-y-2">
             <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight text-glow-gold drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              CARNAVAL DA <br />
+              CARNAVAL
+            </h1>
+            <SwordDivider className="mt-4 mb-4" />
+            <p className="font-got text-lg sm:text-2xl md:text-3xl font-normal text-white tracking-[0.15em] sm:tracking-[0.3em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+              DA{' '}
               <span className="inline-block animate-gradient bg-gradient-to-r from-gold-2 via-bone to-ember bg-clip-text text-transparent">
                 CHITTAGONG
               </span>{' '}
               <span className="bg-gradient-to-r from-gold-2 via-gold-2 to-bone bg-clip-text text-transparent">
                 COLLEGE
               </span>
-            </h1>
+            </p>
             <p className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
               "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory."
             </p>

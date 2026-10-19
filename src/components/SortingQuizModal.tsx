@@ -130,7 +130,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
                   key={i}
                   className={`h-1.5 rounded-full transition-all ${
                     i === currentQuestionIndex
-                      ? 'w-8 bg-gold shadow-[0_0_8px_#9e2a2b]'
+                      ? 'w-8 bg-gold shadow-[0_0_8px_#145e62]'
                       : i < currentQuestionIndex
                       ? 'w-4 bg-crimson-2'
                       : 'w-4 bg-ink-3'

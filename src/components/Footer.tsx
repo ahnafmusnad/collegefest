@@ -12,7 +12,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
   return (
     <footer className="relative z-10 border-t border-crimson/20 bg-gradient-to-b from-ink via-ink to-ink text-bone-dim overflow-hidden pt-16 pb-12">
       {/* Top icy divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent shadow-[0_0_15px_#9e2a2b]" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent shadow-[0_0_15px_#145e62]" />
       
       {/* Background radial atmosphere */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-ink-2/20 blur-[130px] rounded-full pointer-events-none" />
