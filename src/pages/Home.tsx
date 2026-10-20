@@ -4,17 +4,16 @@ import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import HouseScroll from '../components/HouseScroll';
-import { CountUp } from '../components/CountUp';
+import CountdownTablets from '../components/CountdownTablets';
+import StatsPanel from '../components/StatsPanel';
 import SwordDivider from '../components/ui/SwordDivider';
 import Button from '../components/ui/Button';
 import { 
   Crown, 
-  Shield, 
   Swords, 
   Ticket, 
   Sparkles, 
-  Award,
-  Users
+  Award
 } from 'lucide-react';
 
 interface HomeProps {
@@ -164,37 +163,7 @@ export const Home: React.FC<HomeProps> = ({
           {/* ========================================================
               LIVE COUNTDOWN TO THE FESTIVAL
           ======================================================== */}
-          <div className="pt-6 max-w-xl mx-auto">
-            <div className="font-cinzel text-xs tracking-[0.25em] text-gold-2/80 uppercase text-center mb-3">
-              Winter Descends In
-            </div>
-            <div className="grid grid-cols-4 gap-2 sm:gap-4 text-center">
-              {[
-                { label: 'Days', value: timeLeft.days },
-                { label: 'Hours', value: timeLeft.hours },
-                { label: 'Minutes', value: timeLeft.minutes },
-                { label: 'Seconds', value: timeLeft.seconds }
-              ].map((unit, i) => (
-                <Reveal key={i} delay={i * 100}>
-                  <div
-                    className="frost-card p-3 sm:p-4 border border-crimson/30 bg-ink/70 shadow-[0_4px_20px_rgba(0,0,0,0.6)] group hover:border-gold transition-all h-full"
-                  >
-                    <CountUp
-                      end={unit.value}
-                      duration={2200}
-                      delay={i * 250}
-                      startOnView={false}
-                      format={(v) => String(v).padStart(2, '0')}
-                      className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white group-hover:scale-105 transition-transform"
-                    />
-                    <div className="font-cinzel text-[10px] sm:text-xs tracking-wider text-gold uppercase mt-1">
-                      {unit.label}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+          <CountdownTablets time={timeLeft} />
 
         </div>
       </section>
@@ -202,81 +171,8 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FAST STATS & CITADEL HERALDRY STRIP
       ======================================================== */}
-      <section className="relative z-10 py-6 border-y border-crimson/20 bg-ink/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-
-            <Reveal delay={0}>
-              <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1.5 text-gold">
-                  <Shield className="w-5 h-5" />
-                  <CountUp
-                    end={4}
-                    duration={1500}
-                    className="font-cinzel text-2xl md:text-3xl font-extrabold text-white"
-                  />
-                </div>
-                <div className="font-cinzel text-xs tracking-wider text-bone-dim uppercase">
-                  Great College Houses
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1.5 text-ember">
-                  <Swords className="w-5 h-5" />
-                  <CountUp
-                    end={8}
-                    duration={1600}
-                    delay={150}
-                    className="font-cinzel text-2xl md:text-3xl font-extrabold text-white"
-                  />
-                </div>
-                <div className="font-cinzel text-xs tracking-wider text-bone-dim uppercase">
-                  Competitive Segments
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1.5 text-gold">
-                  <Award className="w-5 h-5" />
-                  <CountUp
-                    end={150}
-                    duration={1800}
-                    delay={300}
-                    format={(v) => `${v}K+`}
-                    className="font-cinzel text-2xl md:text-3xl font-extrabold text-white"
-                  />
-                </div>
-                <div className="font-cinzel text-xs tracking-wider text-bone-dim uppercase">
-                  BDT Prize Vault
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={300}>
-              <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1.5 text-pink-400">
-                  <Users className="w-5 h-5" />
-                  <CountUp
-                    end={1}
-                    duration={1200}
-                    delay={450}
-                    format={(v) => `${v}M+`}
-                    className="font-cinzel text-2xl md:text-3xl font-extrabold text-white"
-                  />
-                </div>
-                <div className="font-cinzel text-xs font-semibold text-bone-dim uppercase">
-                  Digital Reach
-                </div>
-              </div>
-            </Reveal>
-
-          </div>
-        </div>
+      <section className="relative z-10 px-4 py-8">
+        <StatsPanel />
       </section>
 
       {/* ========================================================
