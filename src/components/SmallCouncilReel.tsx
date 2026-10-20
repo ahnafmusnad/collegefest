@@ -33,6 +33,11 @@ export default function SmallCouncilReel() {
   const jumping = useRef(false);
   const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false });
   const activeRef = useRef(N);
+  /* index the user asked for (middle copy) — kept so a recenter that fires
+     mid-flight still lands on the intended member */
+  const intentRef = useRef({ index: -1, at: 0 });
+  /* suppress nearest-index updates while a smooth scroll is running */
+  const smoothUntil = useRef(0);
   const [active, setActive] = useState(N);
   const [dragging, setDragging] = useState(false);
 
@@ -62,16 +67,34 @@ export default function SmallCouncilReel() {
   }, []);
 
 
+  /* pixel offset that centers a slide inside the visible track */
+  const offsetFor = useCallback((i: number) => {
+    const track = trackRef.current;
+    const slide = slideRefs.current[i];
+    if (!track || !slide) return null;
+    return slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2;
+  }, []);
+
+
+  /**
+   * Center a slide. Every request is mapped onto the MIDDLE copy of the reel,
+   * so a member is never left stranded in the first/third copy.
+   */
   const scrollToIndex = useCallback(
     (i: number, smooth = true) => {
       const track = trackRef.current;
       const clamped = Math.max(0, Math.min(3 * N - 1, i));
-      const slide = slideRefs.current[clamped];
-      if (!track || !slide) return;
-      const target = slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2;
-      track.scrollTo({ left: target, behavior: smooth ? "smooth" : "auto" });
+      const target = clamped % N + N; // middle copy of the same member
+      const left = offsetFor(target);
+      if (!track || left === null) return;
+      if (smooth) {
+        intentRef.current = { index: target, at: Date.now() };
+        smoothUntil.current = Date.now() + 900;
+        updateActive(target);
+      }
+      track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
     },
-    [N]
+    [N, offsetFor, updateActive]
   );
 
 
@@ -83,17 +106,32 @@ export default function SmallCouncilReel() {
 
     const recenter = () => {
       if (drag.current.down || jumping.current) return;
-      const best = nearestIndex();
-      if (best >= N && best < 2 * N) return; // already in the middle copy
-      const first = slideRefs.current[0];
-      const mid = slideRefs.current[N];
-      if (!first || !mid) return;
-      const copyWidth = mid.offsetLeft - first.offsetLeft;
-      const dir = best < N ? 1 : -1;
+      const track = trackRef.current;
+      if (!track) return;
+
+      /* If the user asked for a specific member, honour that request —
+         even when the jump happens while a smooth scroll is still running. */
+      const intent = intentRef.current;
+      const fresh = intent.index >= 0 && Date.now() - intent.at < 2000;
+
+      let targetIdx: number;
+      if (fresh) {
+        targetIdx = (intent.index % N) + N;
+      } else {
+        const best = nearestIndex();
+        if (best >= N && best < 2 * N) return; // already in the middle copy
+        targetIdx = best < N ? best + N : best - N;
+      }
+      if (targetIdx < 0 || targetIdx >= 3 * N) return;
+
+      const left = offsetFor(targetIdx);
+      if (left === null) return;
+
       jumping.current = true;
       track.dataset.free = "1"; // turn snapping off during the jump
-      track.scrollTo({ left: track.scrollLeft + dir * copyWidth, behavior: "auto" });
-      updateActive(best + dir * N);
+      track.scrollTo({ left, behavior: "auto" });
+      updateActive(targetIdx);
+      intentRef.current = { index: -1, at: 0 };
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
           delete track.dataset.free;
@@ -106,7 +144,9 @@ export default function SmallCouncilReel() {
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        if (!jumping.current) updateActive(nearestIndex());
+        if (!jumping.current && Date.now() > smoothUntil.current) {
+          updateActive(nearestIndex());
+        }
       });
       window.clearTimeout(idleTimer.current);
       idleTimer.current = window.setTimeout(recenter, 150);
@@ -124,7 +164,7 @@ export default function SmallCouncilReel() {
       window.clearTimeout(idleTimer.current);
       window.clearTimeout(t);
     };
-  }, [N, nearestIndex, scrollToIndex, updateActive]);
+  }, [N, nearestIndex, offsetFor, scrollToIndex, updateActive]);
 
 
   /* Mouse drag-to-scroll (touch uses native pan + snap) */
@@ -215,14 +255,13 @@ export default function SmallCouncilReel() {
             className={`council-track relative overflow-x-auto no-scrollbar select-none ${
               dragging ? "cursor-grabbing" : "cursor-grab"
             }`}
-            style={{ paddingInline: "calc(50% - 128px)" }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={endDrag}
             onPointerLeave={endDrag}
             onPointerCancel={endDrag}
           >
-            <div className="flex items-center gap-7 md:gap-12 w-max py-6">
+            <div className="flex items-center gap-5 md:gap-12 w-max py-6">
               {items.map(({ m, copy }, i) => {
                 const isActive = i === active;
                 return (
@@ -241,7 +280,7 @@ export default function SmallCouncilReel() {
                       }`}
                     >
                       <span
-                        className={`font-cinzel text-[9px] leading-relaxed tracking-[0.22em] uppercase text-center max-w-[200px] transition-colors duration-500 ${
+                        className={`font-cinzel text-[9px] leading-relaxed tracking-[0.22em] uppercase text-center max-w-[150px] md:max-w-[200px] transition-colors duration-500 ${
                           isActive
                             ? "text-gold-2 border border-gold-2/50 bg-ink/60 px-2.5 py-1.5 shadow-[0_0_24px_-6px_rgba(248,248,248,0.35)]"
                             : "text-ash"
@@ -265,10 +304,10 @@ export default function SmallCouncilReel() {
                         if (!drag.current.moved) scrollToIndex(i);
                       }}
                       aria-label={`Center ${m.name}`}
-                      className={`group relative w-[232px] h-[332px] shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
+                      className={`group relative w-[180px] h-[258px] md:w-[232px] md:h-[332px] shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
                         isActive
-                          ? "scale-110 z-10 border border-gold-2/60 shadow-[0_0_60px_-12px_rgba(23,104,110,0.55),inset_0_1px_0_rgba(255,255,255,0.08)]"
-                          : "scale-[0.92] opacity-50 border border-iron/50 hover:opacity-75 hover:border-iron"
+                          ? "scale-[1.03] md:scale-110 z-10 border border-gold-2/60 shadow-[0_0_60px_-12px_rgba(23,104,110,0.55),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                          : "scale-[0.9] md:scale-[0.92] opacity-50 border border-iron/50 hover:opacity-75 hover:border-iron"
                       }`}
                       style={{
                         background: "linear-gradient(165deg, #0b282a 0%, #061a1c 55%, #020a0b 100%)",
@@ -346,8 +385,8 @@ export default function SmallCouncilReel() {
 
 
           {/* edge fades */}
-          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-ink to-transparent pointer-events-none z-20" />
-          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-ink to-transparent pointer-events-none z-20" />
+          <div className="absolute inset-y-0 left-0 w-10 md:w-32 bg-gradient-to-r from-ink to-transparent pointer-events-none z-20" />
+          <div className="absolute inset-y-0 right-0 w-10 md:w-32 bg-gradient-to-l from-ink to-transparent pointer-events-none z-20" />
         </div>
 
 

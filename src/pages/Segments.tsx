@@ -1,21 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import { FEST_SEGMENTS, FOUR_HOUSES, FEST_METADATA } from '../data/festData';
+import React from 'react';
+import { FEST_SEGMENTS, FEST_METADATA } from '../data/festData';
 import { Segment } from '../types';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
-import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
-import { 
-  Swords, 
-  Search, 
-  Trophy, 
-  Users, 
-  MapPin, 
-  Clock, 
-  Star, 
-  ShieldCheck,
-  Flame,
-  Filter
+import {
+  Swords,
+  Trophy,
+  Users,
+  User,
+  Globe,
+  MapPin,
+  CalendarDays,
+  ShieldHalf,
+  ScrollText,
+  Gem,
 } from 'lucide-react';
 
 interface SegmentsProps {
@@ -23,289 +22,262 @@ interface SegmentsProps {
   onRegisterTickify: (segmentName: string) => void;
 }
 
-export const Segments: React.FC<SegmentsProps> = ({
-  onOpenRulesModal,
-  onRegisterTickify
-}) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedHouse, setSelectedHouse] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [bookmarkedIds, setBookmarkedIds] = useState<Record<string, boolean>>({});
+interface SegmentGroup {
+  key: string;
+  numeral: string;
+  title: string;
+  gotTitle: string;
+  blurb: string;
+  icon: React.ReactNode;
+  formatLabel: string;
+  venueSummary: string;
+  segmentIds: string[];
+}
 
-  const categories = ['All', 'Debate', 'Science & Tech', 'Language & Literature', 'Culture & Arts', 'Gaming & Fun'];
+const SEGMENT_GROUPS: SegmentGroup[] = [
+  {
+    key: 'group',
+    numeral: 'I',
+    title: 'Group Segments',
+    gotTitle: 'Banners That March Together',
+    blurb: 'Team trials on the Citadel grounds — bring your battalion.',
+    icon: <Users className="h-4 w-4" />,
+    formatLabel: 'Teams of 2–5',
+    venueSummary: 'Academic Building · Parade Ground · Campus Trail',
+    segmentIds: [
+      'seg-debate-fest',
+      'seg-physics-auction',
+      'seg-team-quiz',
+      'seg-treasure-hunt',
+    ],
+  },
+  {
+    key: 'solo',
+    numeral: 'II',
+    title: 'Solo Segments',
+    gotTitle: 'One Name Upon The Crest',
+    blurb: 'Single champions forged in science, language and the lens.',
+    icon: <User className="h-4 w-4" />,
+    formatLabel: 'Solo / Duo',
+    venueSummary: 'Academic Building · Parade by Lane',
+    segmentIds: [
+      'seg-physics-olympiad',
+      'seg-english-olympiad',
+      'seg-macro-photography',
+    ],
+  },
+  {
+    key: 'online',
+    numeral: 'III',
+    title: 'Online Segments',
+    gotTitle: 'Ravens Across The Realm',
+    blurb: 'Submit from anywhere — the realm judges by scroll and screen.',
+    icon: <Globe className="h-4 w-4" />,
+    formatLabel: 'Solo · Online Entry',
+    venueSummary: 'Tickify Portal · Parade by Lane',
+    segmentIds: [
+      'seg-colour-hunt',
+      'seg-scientific-article-writing',
+      'seg-why-is-it-debatable',
+      'seg-explaining-the-theory',
+      'seg-story-writing',
+      'seg-beyond-the-matrics',
+      'seg-scrapbook',
+      'seg-academic-meme',
+    ],
+  },
+];
 
-  const handleToggleBookmark = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setBookmarkedIds(prev => ({ ...prev, [id]: !prev[id] }));
-  };
+const resolveSegments = (ids: string[]): Segment[] =>
+  ids
+    .map((id) => FEST_SEGMENTS.find((s) => s.id === id))
+    .filter((s): s is Segment => Boolean(s));
 
-  const filteredSegments = useMemo(() => {
-    return FEST_SEGMENTS.filter(seg => {
-      const matchCategory = selectedCategory === 'All' || seg.category === selectedCategory;
-      const matchHouse = selectedHouse === 'All' || seg.houseId === selectedHouse;
-      const matchSearch = 
-        seg.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        seg.gotTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        seg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        seg.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      return matchCategory && matchHouse && matchSearch;
-    });
-  }, [selectedCategory, selectedHouse, searchQuery]);
+const GroupFrameCard: React.FC<{
+  group: SegmentGroup;
+  onOpenRulesModal: (segment: Segment) => void;
+}> = ({ group, onOpenRulesModal }) => {
+  const segments = resolveSegments(group.segmentIds);
+  const totalDragons = segments.reduce((sum, s) => sum + s.goldDragons, 0);
+  const venueSummary = group.venueSummary;
+  const dateSummary = FEST_METADATA.dates;
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-12">
-      
+    <article className="seg-frame">
+      <div className="seg-frame-body">
+        {/* ── Header ─────────────────────────────────────────── */}
+        <header className="text-center space-y-3">
+          <div className="inline-flex items-center gap-2 font-cinzel text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#5bc9d6]">
+            <span className="h-px w-8 bg-[#5bc9d6]/40" />
+            Trial Group {group.numeral}
+            <span className="h-px w-8 bg-[#5bc9d6]/40" />
+          </div>
+
+          <h3 className="font-got text-3xl sm:text-4xl md:text-5xl text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)]">
+            {group.title}
+          </h3>
+
+          <p className="font-cinzel text-xs sm:text-sm italic text-bone-dim">
+            &ldquo;{group.gotTitle}&rdquo; &mdash; {group.blurb}
+          </p>
+
+          <div className="flex items-center justify-center gap-2 pt-1 font-cinzel text-[10px] uppercase tracking-[0.28em] text-bone-dim">
+            <span className="text-[#5bc9d6]">{group.icon}</span>
+            <span>{group.formatLabel}</span>
+          </div>
+        </header>
+
+        {/* ── Roster ─────────────────────────────────────────── */}
+        <div
+          className={`mt-8 grid gap-2.5 ${
+            group.segmentIds.length >= 4 ? 'md:grid-cols-2' : 'md:grid-cols-1'
+          }`}
+        >
+          {segments.map((seg) => (
+            <button
+              key={seg.id}
+              type="button"
+              onClick={() => onOpenRulesModal(seg)}
+              className="group/row flex min-w-0 items-center gap-3 text-left px-4 py-3 border border-[#5bc9d6]/20 bg-ink/50 hover:bg-ink-2/85 hover:border-[#8ce8f2]/60 transition-all duration-300"
+            >
+              <Gem className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]/80 group-hover/row:text-[#8ce8f2] group-hover/row:drop-shadow-[0_0_6px_rgba(140,232,242,0.8)] transition-all" />
+
+              <span className="min-w-0 flex-1">
+                <span className="block font-cinzel text-sm sm:text-[15px] font-bold text-bone group-hover/row:text-gold-2 transition-colors truncate">
+                  {seg.title}
+                </span>
+                <span className="block font-cinzel text-[10px] sm:text-[11px] italic text-ash truncate">
+                  {seg.gotTitle} &middot; {seg.venue}
+                </span>
+              </span>
+
+              <span className="shrink-0 text-right">
+                <span className="block font-cinzel text-[11px] font-bold text-gold-2 tabular-nums">
+                  {seg.goldDragons.toLocaleString()}
+                </span>
+                <span className="block font-cinzel text-[8px] uppercase tracking-[0.18em] text-ash">
+                  Gold
+                </span>
+              </span>
+
+              <ScrollText className="h-4 w-4 shrink-0 text-ash opacity-0 -translate-x-1 group-hover/row:opacity-100 group-hover/row:translate-x-0 group-hover/row:text-[#8ce8f2] transition-all duration-300" />
+            </button>
+          ))}
+        </div>
+
+        {/* ── Condensed decree: prize / venue / dates / format ─ */}
+        <div className="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-4 border-t border-[#5bc9d6]/20 pt-5">
+          <div className="flex items-start gap-2.5">
+            <Trophy className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+            <div className="min-w-0">
+              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+                Prize Vault
+              </span>
+              <span className="block text-xs sm:text-sm font-bold text-gold-2">
+                {totalDragons.toLocaleString()} BDT
+              </span>
+              <span className="block text-[10px] text-bone-dim">Crests &amp; Medals</span>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-2.5">
+            <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+            <div className="min-w-0">
+              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+                Venue
+              </span>
+              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+                {venueSummary}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-2.5">
+            <CalendarDays className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+            <div className="min-w-0">
+              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+                Dates
+              </span>
+              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+                {dateSummary}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-2.5">
+            <ShieldHalf className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+            <div className="min-w-0">
+              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+                Format
+              </span>
+              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+                {group.formatLabel}
+              </span>
+              <span className="block text-[10px] text-bone-dim">
+                {segments.length} trials &middot; entry via Tickify
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
+  return (
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-12">
       {/* Page Hero */}
       <PageHero
         image="/images/iron-throne-hero.jpg"
         icon={<Swords className="h-3.5 w-3.5 text-ember" />}
         eyebrow="The Citadel Trials of Skill"
         title="Tourneys & Competitions"
-        description="Over 150,000+ BDT in Gold Dragons and Valyrian steel crests await the champions. Select your trial, inspect the royal rules, and register your battalion on Tickify."
+        description="Fifteen trials, three banners of contest. Choose your ground — group, solo or online — read the royal decrees, and register your name on Tickify."
       >
         <div className="inline-flex items-center gap-3 rounded-2xl border border-gold/40 bg-ink-3/40 px-5 py-2.5 font-cinzel text-xs font-bold text-gold-2 backdrop-blur-md sm:text-sm">
           <Trophy className="h-4 w-4 text-gold" />
-          <span>Total Festival Prize Vault: <strong>150,000+ BDT</strong></span>
+          <span>
+            Total Festival Prize Vault: <strong>{FEST_METADATA.totalPrizePool}</strong>
+          </span>
         </div>
       </PageHero>
 
-      {/* Filter and Search Controls */}
+      {/* Hint line */}
       <Reveal>
-      <div className="frost-card p-5 md:p-6 border border-crimson/30 space-y-4">
-        
-        {/* Search Bar */}
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-bone-dim" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search tournament name, keywords (e.g. Debate, Hackathon, Band, FIFA, Pitch)..."
-            className="w-full pl-11 pr-4 py-3 rounded-xl bg-ink-2/90 border border-iron focus:border-gold focus:ring-1 focus:ring-gold text-sm text-white placeholder-ash outline-none transition-all"
-          />
+        <div className="flex items-center justify-center gap-2 text-xs font-cinzel text-bone-dim">
+          <ScrollText className="w-3.5 h-3.5 text-[#5bc9d6]" />
+          <span>Select any trial to inspect its full decrees &amp; judging rules</span>
         </div>
-
-        {/* Category Tabs */}
-        <div className="flex flex-wrap items-center gap-2 pt-1">
-          <span className="text-xs font-cinzel text-bone-dim flex items-center gap-1 mr-2">
-            <Filter className="w-3.5 h-3.5" />
-            Category:
-          </span>
-          {categories.map((cat) => {
-            const isSelected = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => {
-                  setSelectedCategory(cat);
-                }}
-                className={`px-3 py-1.5 rounded-lg font-cinzel text-xs font-bold tracking-wider transition-all ${
-                  isSelected
-                    ? 'bg-crimson/30 text-gold-2 border border-gold'
-                    : 'bg-ink-2/60 text-bone-dim border border-iron hover:text-white hover:border-iron'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* House Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-iron/80">
-          <span className="text-xs font-cinzel text-bone-dim flex items-center gap-1 mr-2">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Host House:
-          </span>
-          <button
-            onClick={() => {
-              setSelectedHouse('All');
-            }}
-            className={`px-3 py-1 rounded-md text-xs font-cinzel font-semibold transition-colors ${
-              selectedHouse === 'All' ? 'bg-ink-2 text-gold-2 border border-crimson/50' : 'text-bone-dim hover:text-white'
-            }`}
-          >
-            All Houses
-          </button>
-          {FOUR_HOUSES.map((h) => (
-            <button
-              key={h.id}
-              onClick={() => {
-                setSelectedHouse(h.id);
-              }}
-              className={`px-3 py-1 rounded-md text-xs font-cinzel font-semibold transition-colors ${
-                selectedHouse === h.id ? 'bg-ink-2 text-gold-2 border border-crimson/50' : 'text-bone-dim hover:text-white'
-              }`}
-            >
-              {h.houseName}
-            </button>
-          ))}
-        </div>
-      </div>
       </Reveal>
 
-      {/* Segments Counter */}
-      <Reveal>
-      <div className="flex items-center justify-between text-xs font-cinzel text-bone-dim px-2">
-        <span>Showing {filteredSegments.length} of {FEST_SEGMENTS.length} Tournaments</span>
-        <span className="text-gold">Click any card to inspect full decrees & judging rules</span>
+      {/* Three framed group banners */}
+      <div className="space-y-10">
+        {SEGMENT_GROUPS.map((group, idx) => (
+          <Reveal key={group.key} delay={idx * 80}>
+            <GroupFrameCard group={group} onOpenRulesModal={onOpenRulesModal} />
+          </Reveal>
+        ))}
       </div>
-      </Reveal>
-
-      {/* Segments Cards Grid with RICH HOVER ANIMATIONS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredSegments.map((segment, idx) => {
-          const house = FOUR_HOUSES.find(h => h.id === segment.houseId);
-          const isBookmarked = bookmarkedIds[segment.id];
-
-          return (
-            <Reveal key={segment.id} delay={(idx % 3) * 90} className="h-full">
-            <TiltCard
-              onClick={() => {
-                onOpenRulesModal(segment);
-              }}
-
-              className="group relative h-full bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-iron hover:border-gold p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
-            >
-              <div>
-                
-                {/* Top Badge Strip */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-cinzel font-bold bg-ink-2/90 border border-crimson/40 text-gold-2">
-                      {segment.category}
-                    </span>
-                    {segment.isFeatured && (
-                      <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-cinzel font-bold bg-ink-3/80 text-gold-2 border border-gold/30">
-                        <Flame className="w-2.5 h-2.5 text-gold" />
-                        Featured
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Bookmark Button */}
-                  <button
-                    onClick={(e) => handleToggleBookmark(segment.id, e)}
-                    className="p-1.5 rounded-lg text-ash hover:text-gold transition-colors"
-                    title={isBookmarked ? 'Bookmarked' : 'Bookmark this segment'}
-                  >
-                    <Star className={`w-4 h-4 ${isBookmarked ? 'text-gold fill-gold' : ''}`} />
-                  </button>
-                </div>
-
-                {/* Host House Tag */}
-                {house && (
-                  <div className="font-cinzel text-[11px] text-gold/90 mb-1">
-                    Host: <span className="text-white font-semibold">{house.houseName}</span>
-                  </div>
-                )}
-
-                {/* Segment Titles */}
-                <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-gold-2 transition-colors leading-snug mb-1">
-                  {segment.title}
-                </h3>
-                <p className="font-cinzel text-xs text-gold/80 italic mb-3">
-                  "{segment.gotTitle}"
-                </p>
-
-                {/* Description */}
-                <p className="font-sans text-xs text-bone-dim line-clamp-2 leading-relaxed mb-4">
-                  {segment.description}
-                </p>
-
-                {/* Tournament Metadata grid */}
-                <div className="grid grid-cols-2 gap-2 p-2.5 bg-ink-2/80 border border-iron text-[11px] mb-4">
-                  <div className="flex items-center gap-1.5 text-bone-dim">
-                    <Trophy className="w-3.5 h-3.5 text-gold shrink-0" />
-                    <div>
-                      <span className="text-ash block text-[9px] uppercase font-cinzel">Prize Vault</span>
-                      <span className="font-bold text-gold-2">{segment.prizePool}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-bone-dim">
-                    <Users className="w-3.5 h-3.5 text-gold shrink-0" />
-                    <div>
-                      <span className="text-ash block text-[9px] uppercase font-cinzel">Team Size</span>
-                      <span className="font-semibold text-bone">{segment.teamSize}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-bone-dim">
-                    <Clock className="w-3.5 h-3.5 text-ember shrink-0" />
-                    <div>
-                      <span className="text-ash block text-[9px] uppercase font-cinzel">Schedule</span>
-                      <span className="text-bone-dim truncate">{segment.date}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-bone-dim">
-                    <MapPin className="w-3.5 h-3.5 text-pink-400 shrink-0" />
-                    <div>
-                      <span className="text-ash block text-[9px] uppercase font-cinzel">Venue</span>
-                      <span className="text-bone-dim truncate">{segment.venue}</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Action Buttons */}
-              <div
-                className="pt-3 border-t border-iron/80 flex items-center justify-between gap-2"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => onOpenRulesModal(segment)}
-                >
-                  Rules & Criteria
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={() => onRegisterTickify(segment.title)}
-                >
-                  Tickify Entry
-                </Button>
-              </div>
-
-              {/* Hover Glow Ambient */}
-              <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </TiltCard>
-            </Reveal>
-          );
-        })}
-      </div>
-
-      {filteredSegments.length === 0 && (
-        <Reveal className="text-center py-16 frost-card border border-crimson/20">
-          <Swords className="w-12 h-12 text-ash mx-auto mb-3" />
-          <h3 className="font-cinzel text-lg font-bold text-bone-dim">No Tournaments Match Your Query</h3>
-          <p className="font-sans text-xs text-ash mt-1">Try resetting the filter or searching for another keyword.</p>
-        </Reveal>
-      )}
 
       {/* Global Registration Banner */}
-      <Reveal direction="zoom" className="frost-card p-8 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
+      <Reveal
+        direction="zoom"
+        className="frost-card p-8 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4"
+      >
         <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
           READY TO ENTER THE ARENA?
         </h3>
         <p className="font-sans text-xs md:text-sm text-bone-dim">
-          Every participant receives an official tournament badge, certificate of royal participation, and access to the Citadel grounds on Tickify.
+          Every participant receives an official tournament badge, certificate of royal
+          participation, and access to the Citadel grounds on Tickify.
         </p>
         <div className="pt-2">
-          <Button
-            href={FEST_METADATA.tickifyLink}
-            external
-          >
+          <Button href={FEST_METADATA.tickifyLink} external>
             REGISTER CONTINGENT ON TICKIFY
           </Button>
         </div>
       </Reveal>
-
     </div>
   );
 };

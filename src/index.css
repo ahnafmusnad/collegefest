@@ -1091,7 +1091,15 @@
 /* Small Council reel */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
-.council-track { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.council-track {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* symmetric gutter so the first/last copies can still be centred */
+  padding-inline: calc(50% - 90px);
+}
+@media (min-width: 768px) {
+  .council-track { padding-inline: calc(50% - 116px); }
+}
 .council-track[data-free="1"] { scroll-snap-type: none; }
 .council-slide { scroll-snap-align: center; scroll-snap-stop: always; }
 
@@ -1237,4 +1245,52 @@
 @media (prefers-reduced-motion: reduce) {
   .st-aura, .st-corner, .st-star, .st-gem { animation: none; }
   .st-ritual-inner::after { display: none; }
+}
+
+
+/* ============================================================
+   SEGMENTS — ornate banner frame around each trial group.
+   The artwork (/images/cardbg.png) already carries the frame,
+   banners and corner gems, so nothing extra is drawn on top.
+   ============================================================ */
+.seg-frame {
+  position: relative;
+  isolation: isolate;
+  background-color: #041012;
+  background-image: url("/images/cardbg.png");
+  background-size: 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 30px 70px -34px rgba(0, 0, 0, 0.95),
+    0 0 46px rgba(23, 104, 110, 0.18);
+  transition: box-shadow 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.seg-frame:hover {
+  box-shadow:
+    0 34px 78px -32px rgba(0, 0, 0, 0.95),
+    0 0 60px rgba(23, 104, 110, 0.28);
+}
+
+/* soft shade so the copy stays legible on top of the artwork */
+.seg-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(115% 90% at 50% 48%, rgba(2, 10, 11, 0.30) 0%, rgba(2, 10, 11, 0.10) 58%, transparent 100%);
+}
+
+/* content well */
+.seg-frame-body {
+  position: relative;
+  z-index: 3;
+  padding: 7rem 1.5rem 3.8rem;
+}
+@media (min-width: 640px) {
+  .seg-frame-body { padding: 8rem 3rem 3.4rem; }
+}
+@media (min-width: 1024px) {
+  .seg-frame-body { padding: 9rem 5rem 4rem; }
 }
