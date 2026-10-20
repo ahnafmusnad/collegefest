@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PageType } from '../types';
 import { FEST_METADATA, SOCIAL_LINKS } from '../data/festData';
 import Button from './ui/Button';
@@ -67,14 +67,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(72);
+
+  // Measure the header so the mobile/tablet menu can start right below it
+  // (keeps the navbar strip transparent, showing the hero artwork behind it)
+  const measureHeader = () => {
+    if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
+      measureHeader();
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', measureHeader);
+    measureHeader();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measureHeader);
+    };
   }, []);
+
+  useEffect(() => {
+    measureHeader();
+  }, [isScrolled, mobileMenuOpen]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -102,6 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? 'bg-ink/90 backdrop-blur-md border-b border-crimson/20 shadow-[0_4px_30px_rgba(0,0,0,0.8)] py-3'
@@ -167,32 +186,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* FULLSCREEN MOBILE & TABLET BURGER MENU WITH SWEEPING ANIMATION */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 min-[1180px]:hidden flex flex-col justify-between bg-ink text-white overflow-y-auto animate-fadeIn duration-300">
-          
-          {/* Background Frost Graphics */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(226,113,29,0.15)_0%,_rgba(11,9,7,0.98)_70%)] pointer-events-none" />
-
-          {/* Top Bar inside Fullscreen overlay */}
-          <div className="relative z-10 flex items-center justify-between p-5 border-b border-crimson/20">
-            <button onClick={() => handleNavClick('home')} className="flex items-center gap-3 text-left shrink-0 focus:outline-none">
-              <img src="/images/college-crest.png" alt="Chittagong College crest" className="h-9 w-auto" />
-              <span className="hidden sm:block w-px h-9 bg-iron" />
-              <span className="flex flex-col leading-none">
-                <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
-                <span className="font-cinzel text-[9px] md:text-[10px] tracking-[0.3em] text-bone-dim mt-1.5 uppercase">Da Chittagong College</span>
-              </span>
-            </button>
-
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-              }}
-              className="p-2.5 rounded-xl bg-ink-2/90 border border-crimson/40 text-bone-dim hover:text-white"
-              aria-label="Close Menu"
-            >
-              <X className="w-6 h-6" />
-            </button>
+        <>
+          {/* Opaque menu sheet — starts BELOW the navbar so the navbar stays
+              transparent and the hero artwork keeps showing through it */}
+          <div
+            className="fixed inset-x-0 bottom-0 z-30 bg-ink min-[1180px]:hidden"
+            style={{ top: headerHeight }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(226,113,29,0.15)_0%,_rgba(11,9,7,0.98)_70%)] pointer-events-none" />
           </div>
+
+          <div
+            className="fixed inset-0 z-30 min-[1180px]:hidden flex flex-col justify-between text-white overflow-y-auto animate-fadeIn duration-300"
+            style={{ paddingTop: headerHeight }}
+          >
 
           {/* Nav Items List */}
           <div className="relative z-10 flex-1 px-6 py-6 space-y-2.5 max-w-lg mx-auto w-full">
@@ -278,7 +285,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="uppercase">Snow: {snowMode}</span>
             </button>
           </div>
-        </div>
+          </div>
+        </>
       )}
     </>
   );

@@ -12,11 +12,20 @@ import ProclamationPlaque from '../components/ui/ProclamationPlaque';
 import Button from '../components/ui/Button';
 import { 
   Crown, 
-  Swords, 
   Ticket, 
-  Sparkles, 
-  Award
+  Sparkles
 } from 'lucide-react';
+
+/* The four headlining contests shown on the throne-room floor,
+   in herald order matching the great banner. */
+const FEATURED_SEGMENTS = [
+  'seg-debate-fest',
+  'seg-physics-auction',
+  'seg-physics-olympiad',
+  'seg-macro-photography'
+]
+  .map((id) => FEST_SEGMENTS.find((s) => s.id === id))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
 interface HomeProps {
   onNavigate: (page: PageType) => void;
@@ -263,70 +272,145 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* ========================================================
-          FEATURED TOURNAMENTS & BATTLES
+          FEATURED SEGMENTS & ARENAS — royal writ plaques
       ======================================================== */}
-      <section className="relative py-16 px-4 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase mb-2">
-              <Swords className="w-3.5 h-3.5" />
-              Grand Contests of Skill
-            </div>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
-              FEATURED SEGMENTS & ARENAS
-            </h2>
+      <section className="relative py-20 px-4 max-w-[88rem] mx-auto overflow-hidden">
+        {/* ambient teal glow behind the grid */}
+        <div className="absolute inset-x-0 top-1/3 h-[32rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(20,94,98,0.16),transparent_70%)] pointer-events-none" />
+
+
+        {/* ---------- centered header ---------- */}
+        <div className="relative text-center max-w-4xl mx-auto mb-14 space-y-4">
+          {/* top ornament */}
+          <div className="flex items-center justify-center gap-3 text-crimson-2" aria-hidden="true">
+            <span className="h-px w-16 sm:w-28 bg-gradient-to-r from-transparent to-crimson-2/70" />
+            <svg viewBox="0 0 12 12" className="h-2 w-2"><path d="M6 0L12 6L6 12L0 6Z" fill="currentColor" /></svg>
+            <span className="h-px w-16 sm:w-28 bg-gradient-to-l from-transparent to-crimson-2/70" />
           </div>
+
+
+          {/* eyebrow flanked by arrow rules */}
+          <div className="flex items-center justify-center gap-4" aria-hidden="true">
+            <svg viewBox="0 0 120 8" className="hidden sm:block h-2 w-24 lg:w-32 text-crimson-2/80">
+              <path d="M120 4H6M6 4l6-3M6 4l6 3" stroke="currentColor" strokeWidth="1" fill="none" />
+            </svg>
+            <p className="font-cinzel text-xs sm:text-sm font-semibold tracking-[0.42em] text-[#5bc9d6] uppercase">
+              The Great Contests
+            </p>
+            <svg viewBox="0 0 120 8" className="hidden sm:block h-2 w-24 lg:w-32 text-crimson-2/80">
+              <path d="M0 4h114M114 4l-6-3M114 4l-6 3" stroke="currentColor" strokeWidth="1" fill="none" />
+            </svg>
+          </div>
+
+
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide silver-text uppercase">
+            Featured Segments &amp; Arenas
+          </h2>
+
+
+          <p className="font-cinzel text-sm sm:text-base tracking-[0.34em] text-bone-dim uppercase">
+            Where Talent Meets Tradition
+          </p>
+
+
+          {/* bottom ornament */}
+          <GemDivider className="pt-1" />
+
+
+          {/* view-all button, floating right on large screens */}
+          <div className="hidden lg:block absolute right-0 bottom-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => onNavigate('segments')}
+            >
+              View All Segments
+            </Button>
+          </div>
+        </div>
+
+
+        {/* view-all button on small screens */}
+        <div className="lg:hidden text-center -mt-6 mb-10">
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => {
-              onNavigate('segments');
-            }}
+            onClick={() => onNavigate('segments')}
           >
-            VIEW ALL 8 SEGMENTS
+            View All Segments
           </Button>
         </div>
 
-        {/* Featured Segments Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {FEST_SEGMENTS.filter(s => s.isFeatured).slice(0, 3).map((segment, i) => (
-            <Reveal key={segment.id} delay={i * 100} className="h-full">
-            <TiltCard
-              onClick={() => {
-                onNavigate('segments');
-              }}
 
-              className="group relative h-full bg-gradient-to-b from-ink-2 via-ink-2 to-ink border border-crimson/25 hover:border-gold/80 p-6 shadow-[0_10px_28px_rgba(11,9,7,0.5)] flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="px-2.5 py-1 rounded-md text-[11px] font-cinzel font-semibold bg-ink-2/90 border border-crimson/40 text-gold-2">
-                    {segment.category}
-                  </span>
-                  <div className="flex items-center gap-1 text-gold font-cinzel text-xs font-bold">
-                    <Award className="w-3.5 h-3.5" />
-                    <span>{segment.prizePool}</span>
+        {/* ---------- the writ plaques ---------- */}
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-5">
+          {FEATURED_SEGMENTS.map((segment, i) => (
+            <Reveal key={segment.id} delay={i * 110} className="h-full">
+              <TiltCard
+                maxTilt={4}
+                scale={1.015}
+                baseShadowClassName="none"
+                onClick={() => onNavigate('segments')}
+                className="seg-wrap group relative h-full cursor-pointer"
+              >
+                <div className="seg-card h-full">
+                  <div className="seg-card-inner flex flex-col p-6 xl:p-5 2xl:p-6">
+                    {/* faint astrolabe sigil */}
+                    <svg className="seg-sigil" viewBox="0 0 100 100" fill="none" stroke="currentColor" aria-hidden="true">
+                      <circle cx="50" cy="50" r="46" strokeWidth="1" />
+                      <circle cx="50" cy="50" r="34" strokeWidth="0.75" />
+                      <circle cx="50" cy="50" r="10" strokeWidth="0.75" />
+                      <path d="M50 2v96M2 50h96M16 16l68 68M84 16L16 84" strokeWidth="0.6" />
+                      <path d="M50 30L70 50L50 70L30 50Z" strokeWidth="0.75" />
+                    </svg>
+
+
+                    {/* category, right-aligned with pip rule */}
+                    <div className="relative z-10 flex flex-col items-end gap-1.5 mb-5">
+                      <span className="font-cinzel text-[10px] font-semibold tracking-[0.28em] uppercase text-bone-dim">
+                        {segment.category}
+                      </span>
+                      <span className="seg-cat-rule w-24" />
+                    </div>
+
+
+                    {/* title + got title */}
+                    <h3 className="relative z-10 font-cinzel text-xl 2xl:text-2xl font-bold uppercase leading-tight text-gold-2 tracking-wide">
+                      {segment.title}
+                    </h3>
+                    <p className="relative z-10 mt-2 font-garamond italic text-[15px] [font-variant:small-caps] tracking-wide text-bone-dim">
+                      &ldquo;{segment.gotTitle}&rdquo;
+                    </p>
+
+
+                    {/* description */}
+                    <p className="relative z-10 mt-4 font-sans text-[12.5px] leading-relaxed text-bone-dim/90">
+                      {segment.description}
+                    </p>
+
+
+                    {/* footer */}
+                    <div className="relative z-10 mt-auto pt-5">
+                      <div className="h-px w-full bg-gradient-to-r from-iron/70 via-iron/40 to-transparent mb-4" />
+                      <div className="flex items-center gap-2 text-bone">
+                        <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-[#5bc9d6]" aria-hidden="true">
+                          <path d="M6 0.8L11.2 6L6 11.2L0.8 6Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+                        </svg>
+                        <span className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase">
+                          {segment.date}
+                        </span>
+                      </div>
+                      <span className="seg-link mt-2.5">
+                        Rules &amp; Entry
+                        <svg className="seg-arrow h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                          <path d="M2 8h11M9 4l4 4-4 4" />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-gold-2 transition-colors mb-1">
-                  {segment.title}
-                </h3>
-                <p className="font-cinzel text-xs text-gold/80 italic mb-3">
-                  "{segment.gotTitle}"
-                </p>
-                <p className="font-sans text-xs text-bone-dim line-clamp-3 mb-4 leading-relaxed">
-                  {segment.description}
-                </p>
-              </div>
-
-                <div className="pt-4 border-t border-iron flex items-center justify-between">
-                  <span className="text-xs text-bone-dim font-mono">{segment.date}</span>
-                  <span className="font-cinzel text-xs font-bold text-gold group-hover:underline">
-                    Rules & Entry &rarr;
-                  </span>
-                </div>
-            </TiltCard>
+                <span className="seg-notch-gem" aria-hidden="true" />
+              </TiltCard>
             </Reveal>
           ))}
         </div>

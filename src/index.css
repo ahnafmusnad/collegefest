@@ -647,12 +647,13 @@
 .hs-footer { flex-wrap: nowrap; }
 
 
-/* Hero throne backdrop — zoomed out on small screens so the whole scene reads */
+/* Hero throne backdrop — anchored to the top on small screens so the artwork
+   reaches behind the transparent navbar instead of starting below it */
 .hero-throne-bg {
   background-image: url('/images/iron-throne-hero.jpg');
   background-repeat: no-repeat;
-  background-position: center 30%;
-  background-size: auto 70%;
+  background-position: center top;
+  background-size: auto 80%;
 }
 @media (min-width: 1024px) {
   .hero-throne-bg {
@@ -830,4 +831,169 @@
   text-shadow:
     0 0 12px rgba(70, 207, 221, 0.45),
     0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+
+/* ============================================================
+   FEATURED SEGMENT CARDS — notched "royal writ" plaques
+   Concave corner cuts with a 1px teal border that follows the
+   notch, sampled to sit inside the dark-teal palette.
+   ============================================================ */
+.seg-card,
+.seg-card-inner {
+  --notch: 16px;
+  -webkit-mask:
+    radial-gradient(var(--notch) at 0 0, #0000 97%, #000) 0 0 / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 100% 0, #0000 97%, #000) 100% 0 / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 100% 100%, #0000 97%, #000) 100% 100% / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 0 100%, #0000 97%, #000) 0 100% / 51% 51% no-repeat;
+  mask:
+    radial-gradient(var(--notch) at 0 0, #0000 97%, #000) 0 0 / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 100% 0, #0000 97%, #000) 100% 0 / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 100% 100%, #0000 97%, #000) 100% 100% / 51% 51% no-repeat,
+    radial-gradient(var(--notch) at 0 100%, #0000 97%, #000) 0 100% / 51% 51% no-repeat;
+}
+
+
+/* outer layer = the 1px border (teal, slightly lit from the top) */
+.seg-card {
+  position: relative;
+  padding: 1px;
+  background: linear-gradient(
+    170deg,
+    rgba(91, 201, 214, 0.55) 0%,
+    rgba(47, 127, 132, 0.38) 38%,
+    rgba(47, 85, 87, 0.30) 100%
+  );
+  transition: filter 0.5s ease;
+}
+.seg-card:hover {
+  filter: drop-shadow(0 0 14px rgba(70, 207, 221, 0.22));
+}
+.seg-card:hover,
+.seg-wrap:hover .seg-card {
+  background: linear-gradient(
+    170deg,
+    rgba(140, 232, 242, 0.85) 0%,
+    rgba(70, 160, 168, 0.55) 40%,
+    rgba(47, 127, 132, 0.42) 100%
+  );
+}
+
+
+/* inner layer = the card surface */
+.seg-card-inner {
+  --notch: 15px;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(91, 201, 214, 0.10), transparent 55%),
+    linear-gradient(178deg, #0a2426 0%, #061a1c 48%, #041012 100%);
+}
+/* top sheen */
+.seg-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(248, 248, 248, 0.05), transparent 22%);
+}
+
+
+/* faint astrolabe watermark, lower-right */
+.seg-sigil {
+  position: absolute;
+  right: -2.75rem;
+  bottom: -2.75rem;
+  width: 11rem;
+  height: 11rem;
+  color: rgba(91, 201, 214, 0.10);
+  pointer-events: none;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s ease;
+}
+.seg-wrap:hover .seg-sigil {
+  color: rgba(91, 201, 214, 0.18);
+  transform: rotate(24deg) scale(1.06);
+}
+
+
+/* small diamond gem riding the bottom border, centred */
+.seg-notch-gem {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%) rotate(45deg);
+  background: #061a1c;
+  border: 1px solid rgba(91, 201, 214, 0.65);
+  pointer-events: none;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+.seg-wrap:hover .seg-notch-gem {
+  border-color: rgba(140, 232, 242, 0.95);
+  box-shadow: 0 0 8px rgba(70, 207, 221, 0.55);
+}
+
+
+/* category label rule with centred pip */
+.seg-cat-rule {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91, 201, 214, 0.55) 30%, rgba(91, 201, 214, 0.55) 70%, transparent);
+}
+.seg-cat-rule::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #061a1c;
+  border: 1px solid rgba(91, 201, 214, 0.7);
+}
+
+
+/* rules & entry link */
+.seg-link {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5bc9d6;
+  transition: color 0.35s ease;
+}
+.seg-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: #8ce8f2;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.seg-wrap:hover .seg-link { color: #8ce8f2; }
+.seg-wrap:hover .seg-link::after { transform: scaleX(1); transform-origin: left; }
+.seg-link .seg-arrow { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.seg-wrap:hover .seg-link .seg-arrow { transform: translateX(4px); }
+
+
+/* brushed-silver display title for the section header */
+.silver-text {
+  background: linear-gradient(180deg, #f8f8f8 8%, #c9d2d2 46%, #8a9b9b 78%, #c9d2d2 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.65));
 }
