@@ -105,7 +105,7 @@ export const Clubs: React.FC<ClubsProps> = ({
                   <button
                     type="button"
                     onClick={() => handlePledge(house)}
-                    className="w-full py-1.5 border border-crimson/40 text-gold-2 text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-crimson/20 hover:border-crimson/70 transition-colors"
+                    className="w-full py-1.5 border border-[#c9d2d2]/45 text-[#f8f8f8] text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-[#f8f8f8] hover:text-ink hover:border-[#f8f8f8] transition-colors"
                   >
                     Pledge
                   </button>

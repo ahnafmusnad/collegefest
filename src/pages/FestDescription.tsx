@@ -274,8 +274,8 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   }}
                   className={`btn-shine rounded-full px-7 py-3 text-[11px] font-bold uppercase tracking-[0.24em] transition-all duration-300 ${
                     isSelected
-                      ? 'border border-ember/70 bg-gradient-to-r from-crimson to-crimson-2 text-gold-2 shadow-[0_0_28px_-6px_rgba(23,104,110,0.8)]'
-                      : 'border border-iron/50 bg-ink-2/60 text-bone-dim hover:border-ember/50 hover:text-gold-2'
+                      ? 'border border-[#f8f8f8]/60 bg-gradient-to-b from-[#f8f8f8] to-[#9e9f9f] text-ink shadow-[0_14px_28px_-16px_rgba(0,0,0,0.95)]'
+                      : 'border border-iron/60 bg-transparent text-bone-dim hover:border-[#c9d2d2]/70 hover:text-[#f8f8f8]'
                   }`}
                 >
                   Day {day.day}: {day.gotTitle.split(':')[0]}

@@ -171,7 +171,7 @@
   left: -80%;
   width: 45%;
   height: 100%;
-  background: linear-gradient(115deg, transparent, rgba(66, 56, 56, 0.65), transparent);
+  background: linear-gradient(115deg, transparent, rgba(248, 248, 248, 0.3), transparent);
   transform: skewX(-20deg);
   transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
@@ -362,31 +362,39 @@
   text-transform: uppercase;
   line-height: 1.25;
   text-align: center;
-  color: #f8f8f8;
-  background: #0b3a3d;
-  border: 1px solid #2f7f84;
+  color: #06191b;
+  background: linear-gradient(180deg, #f8f8f8 0%, #d3dbdb 48%, #9e9f9f 100%);
+  border: 1px solid rgba(248, 248, 248, 0.55);
   border-radius: 12px;
-  box-shadow: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(2, 10, 11, 0.3),
+    0 14px 28px -16px rgba(0, 0, 0, 0.95);
   overflow: hidden;
   isolation: isolate;
   cursor: pointer;
-  transition: border-color 0.5s var(--ease), transform 0.2s ease, color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: border-color 0.5s var(--ease), transform 0.2s ease, color 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s var(--ease);
 }
-.btn--secondary { background: transparent; border-color: #2f5557; }
+.btn--secondary {
+  background: transparent;
+  color: #c9d2d2;
+  border-color: rgba(158, 159, 159, 0.45);
+  box-shadow: none;
+}
 .btn--sm { padding: 0.65rem 1.1rem; font-size: 0.7rem; }
 
 
-/* fill wipe from the bottom */
+/* fill wipe from the bottom — the steel turns to deep teal on hover */
 .btn::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: #dfeaea;
+  background: linear-gradient(180deg, #17686e 0%, #0e4b50 100%);
   transform: translateY(101%);
   transition: transform 0.55s var(--ease);
 }
-.btn--secondary::before { background: #0b3a3d; }
+.btn--secondary::before { background: rgba(201, 210, 210, 0.1); }
 
 
 .btn__label { display: inline-block; }
@@ -396,8 +404,14 @@
 
 /* hover (mouse), works at every screen width */
 @media (hover: hover) {
-  .btn:hover { border-color: #dfeaea; color: #020a0b; }
-  .btn--secondary:hover { border-color: #2f7f84; color: #f8f8f8; }
+  .btn:hover {
+    border-color: rgba(201, 210, 210, 0.9);
+    color: #f8f8f8;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 18px 34px -16px rgba(0, 0, 0, 0.95);
+  }
+  .btn--secondary:hover { border-color: rgba(248, 248, 248, 0.85); color: #f8f8f8; }
   .btn:hover::before { transform: translateY(0); }
   .btn:hover .btn__icon { transform: translate(3px, -3px); }
 }
@@ -405,8 +419,11 @@
 
 /* press effect for touch screens */
 @media (hover: none) {
-  .btn:active { border-color: #dfeaea; color: #020a0b; }
-  .btn--secondary:active { border-color: #2f7f84; color: #f8f8f8; }
+  .btn:active {
+    border-color: rgba(201, 210, 210, 0.9);
+    color: #f8f8f8;
+  }
+  .btn--secondary:active { border-color: rgba(248, 248, 248, 0.85); color: #f8f8f8; }
   .btn:active::before { transform: translateY(0); }
   .btn:active .btn__icon { transform: translate(3px, -3px); }
 }
