@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SPONSOR_TIERS } from '../data/festData';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
+import PageHero from '../components/ui/PageHero';
 import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
 import { 
@@ -42,23 +43,14 @@ export const Sponsorships: React.FC = () => {
   return (
     <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-16">
       
-      {/* Page Hero Banner */}
-      <Reveal direction="zoom">
-      <div className="relative overflow-hidden border-2 border-gold/30 bg-gradient-to-r from-ink-2 via-ink-3 to-ink-2 p-8 md:p-14 text-center">
-        <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-3/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-            <Coins className="w-3.5 h-3.5" />
-            The Treasuries of the Iron Bank
-          </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
-            ROYAL SPONSORSHIPS & PARTNERS
-          </h1>
-          <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
-            Align your house and enterprise with a national academic festival at one of Bengal’s most venerable citadels. Command unprecedented brand visibility among 1,000+ bright young minds from 25+ institutions, with a digital reach over 1,000,000+.
-          </p>
-        </div>
-      </div>
-      </Reveal>
+      {/* Page Hero */}
+      <PageHero
+        image="/images/college-winter-citadel.jpg"
+        icon={<Coins className="h-3.5 w-3.5 text-ember" />}
+        eyebrow="The Treasuries of the Iron Bank"
+        title="Royal Sponsorships & Partners"
+        description="Align your house and enterprise with a national academic festival at one of Bengal’s most venerable citadels. Command unprecedented brand visibility among 1,000+ bright young minds from 25+ institutions, with a digital reach over 1,000,000+."
+      />
 
       {/* ROI & Reach Statistics Banner */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

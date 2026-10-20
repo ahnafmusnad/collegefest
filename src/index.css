@@ -1040,3 +1040,32 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-ember, .animate-bob, .animate-fade-up { animation: none; }
 }
+
+
+/* Rolling scroll panel: twin-roller scripture used as a section backdrop.
+   Nine-slice via border-image: the spire ends stay crisp while the rod shafts
+   stretch vertically and the torn paper edges stretch horizontally. */
+.scroll-panel {
+  border-style: solid;
+  border-color: transparent;
+  border-width: 78px 92px;
+  border-image-source: url("/images/scroll-rolling.png");
+  border-image-slice: 21% 8% fill;
+  border-image-width: 78px 92px;
+  border-image-outset: 6px;
+  border-image-repeat: stretch;
+  background: transparent;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
+}
+@media (max-width: 1023px) {
+  .scroll-panel {
+    border-width: 56px 66px;
+    border-image-width: 56px 66px;
+  }
+}
+@media (max-width: 639px) {
+  .scroll-panel {
+    border-width: 40px 46px;
+    border-image-width: 40px 46px;
+  }
+}

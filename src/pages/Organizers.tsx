@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SMALL_COUNCIL } from '../data/festData';
 import { Reveal } from '../components/Reveal';
+import PageHero from '../components/ui/PageHero';
 import { TiltCard } from '../components/TiltCard';
 import { 
   Crown, 
@@ -42,27 +43,14 @@ export const Organizers: React.FC = () => {
   return (
     <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-16">
       
-      {/* Hero Banner */}
-      <Reveal direction="zoom">
-      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-14 text-center">
-        <div 
-          className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
-          style={{ backgroundImage: `url('/images/small-council-chamber.jpg')` }}
-        />
-        <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-            <Users className="w-3.5 h-3.5" />
-            The Citadel High Chamber
-          </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
-            THE SMALL COUNCIL & ORGANIZERS
-          </h1>
-          <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
-            Meet the architects, marshals, and visionaries steering Carnaval Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud.
-          </p>
-        </div>
-      </div>
-      </Reveal>
+      {/* Page Hero */}
+      <PageHero
+        image="/images/small-council-chamber.jpg"
+        icon={<Users className="h-3.5 w-3.5 text-ember" />}
+        eyebrow="The Citadel High Chamber"
+        title="The Small Council & Organizers"
+        description="Meet the architects, marshals, and visionaries steering Carnaval Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud."
+      />
 
       {/* Convener's Royal Proclamation */}
       <Reveal direction="zoom" className="frost-card p-6 md:p-10 border-2 border-crimson/40 relative overflow-hidden">

@@ -287,20 +287,16 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
           {/* Active day panel */}
           <div key={activeDaySchedule.day} className="animate-fade-up mx-auto mt-12 max-w-5xl">
-            <div className="corner-frame frost-card p-6 sm:p-10">
-              <span className="corner tl" />
-              <span className="corner tr" />
-              <span className="corner bl" />
-              <span className="corner br" />
+            <div className="scroll-panel mx-auto max-w-5xl space-y-6 px-2 py-3 sm:px-4 sm:py-4">
 
 
               {/* Day heading */}
               <div className="flex items-start gap-5 border-b border-iron/30 pb-7">
-                <div className="animate-float hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-ember/50 bg-ink-3/70 text-ember shadow-[0_0_22px_-4px_rgba(31,138,145,0.55)] sm:flex">
-                  <Compass className="h-6 w-6" />
+                <div className="animate-float hidden shrink-0 text-[#5bc9d6] sm:block">
+                  <Compass className="h-11 w-11" />
                 </div>
                 <div>
-                  <h3 className="font-cinzel text-2xl font-bold tracking-wide text-ember sm:text-3xl">
+                  <h3 className="font-cinzel text-2xl font-bold tracking-wide text-[#5bc9d6] sm:text-3xl">
                     {activeDaySchedule.gotTitle}
                   </h3>
                   <p className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
@@ -320,28 +316,28 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   return (
                     <li
                       key={`${activeDaySchedule.day}-${idx}`}
-                      className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-b border-iron/20 py-5 transition-colors duration-300 last:border-0 hover:bg-ink-3/30 sm:grid-cols-[92px_auto_1fr_auto] sm:gap-x-5 sm:px-3"
+                      className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-b border-iron/20 py-5 transition-colors duration-300 last:border-0 sm:grid-cols-[92px_auto_1fr_auto] sm:gap-x-5 sm:px-3"
                     >
                       {/* Time chip */}
-                      <span className="inline-flex items-center justify-center rounded-md border border-ember/40 bg-ink-3/50 px-3 py-1.5 text-[10px] font-bold tracking-[0.14em] text-ember transition-all duration-300 group-hover:border-ember group-hover:shadow-[0_0_14px_-3px_rgba(31,138,145,0.7)]">
+                      <span className="inline-flex items-center text-[11px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
                         {evt.time}
                       </span>
 
 
                       {/* Icon */}
-                      <span className="hidden h-10 w-10 items-center justify-center rounded-md border border-iron/40 bg-ink-2 text-gold transition-colors duration-300 group-hover:border-ember/50 group-hover:text-ember sm:flex">
-                        <Icon className="h-4 w-4" />
+                      <span className="hidden items-center justify-center text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2 sm:flex">
+                        <Icon className="h-5 w-5" />
                       </span>
 
 
                       {/* Title + house */}
                       <div className="col-span-2 sm:col-span-1">
-                        <p className="text-[15px] font-semibold text-gold-2 transition-colors duration-300 group-hover:text-white">
+                        <p className="text-[15px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2">
                           {evt.title}
                         </p>
                         {evt.house && (
-                          <p className="mt-1 text-[11px] tracking-wide text-ash">
-                            Presented by <span className="text-bone-dim">{evt.house}</span>
+                          <p className="mt-1 text-[11px] tracking-wide text-bone-dim">
+                            Presented by <span className="text-[#5bc9d6]">{evt.house}</span>
                           </p>
                         )}
                       </div>
@@ -350,14 +346,14 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                       {/* Venue + type */}
                       <div className="col-span-2 flex flex-wrap items-center gap-x-5 gap-y-2 sm:col-span-1 sm:justify-end">
                         <span className="inline-flex items-center gap-1.5 text-[11.5px] text-bone-dim">
-                          <MapPin className="h-3.5 w-3.5 text-ash" />
+                          <MapPin className="h-3.5 w-3.5 text-[#5bc9d6]" />
                           {evt.venue}
                         </span>
                         <span
-                          className={`rounded-full border px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] ${
+                          className={`text-[9px] font-bold uppercase tracking-[0.2em] ${
                             evt.type === 'ceremony'
-                              ? 'border-ember/50 bg-crimson/20 text-ember'
-                              : 'border-iron/50 bg-ink-3/40 text-bone-dim'
+                              ? 'text-[#5bc9d6]'
+                              : 'text-bone-dim'
                           }`}
                         >
                           {evt.type}

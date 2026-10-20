@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { FEST_SEGMENTS, FOUR_HOUSES, FEST_METADATA } from '../data/festData';
 import { Segment } from '../types';
 import { Reveal } from '../components/Reveal';
+import PageHero from '../components/ui/PageHero';
 import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
 import { 
@@ -55,29 +56,19 @@ export const Segments: React.FC<SegmentsProps> = ({
   return (
     <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-12">
       
-      {/* Page Hero Banner */}
-      <Reveal direction="zoom">
-      <div className="relative overflow-hidden border-2 border-crimson/30 bg-gradient-to-r from-ink via-ink-2 to-ink p-8 md:p-12 text-center">
-        <div className="relative z-10 max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-2/90 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-            <Swords className="w-3.5 h-3.5" />
-            The Citadel Trials of Skill
-          </div>
-          <h1 className="font-cinzel-dec text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider">
-            TOURNEYS & COMPETITIONS
-          </h1>
-          <p className="font-sans text-sm sm:text-base text-bone-dim leading-relaxed">
-            Over 150,000+ BDT in Gold Dragons and Valyrian steel crests await the champions. Select your trial, inspect the royal rules, and register your battalion on Tickify.
-          </p>
-
-          {/* Quick Prize Banner */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-ink-3/40 border border-gold/40 text-gold-2 font-cinzel text-xs sm:text-sm font-bold">
-            <Trophy className="w-4 h-4 text-gold" />
-            <span>Total Festival Prize Vault: <strong>150,000+ BDT</strong></span>
-          </div>
+      {/* Page Hero */}
+      <PageHero
+        image="/images/iron-throne-hero.jpg"
+        icon={<Swords className="h-3.5 w-3.5 text-ember" />}
+        eyebrow="The Citadel Trials of Skill"
+        title="Tourneys & Competitions"
+        description="Over 150,000+ BDT in Gold Dragons and Valyrian steel crests await the champions. Select your trial, inspect the royal rules, and register your battalion on Tickify."
+      >
+        <div className="inline-flex items-center gap-3 rounded-2xl border border-gold/40 bg-ink-3/40 px-5 py-2.5 font-cinzel text-xs font-bold text-gold-2 backdrop-blur-md sm:text-sm">
+          <Trophy className="h-4 w-4 text-gold" />
+          <span>Total Festival Prize Vault: <strong>150,000+ BDT</strong></span>
         </div>
-      </div>
-      </Reveal>
+      </PageHero>
 
       {/* Filter and Search Controls */}
       <Reveal>
