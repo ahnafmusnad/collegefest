@@ -80,13 +80,7 @@ export const Home: React.FC<HomeProps> = ({
       <section className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
         
         {/* Layer 1: Background Iron Throne Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ 
-            backgroundImage: `url('/images/iron-throne-hero.jpg')`,
-            backgroundPosition: 'center 35%'
-          }}
-        />
+        <div className="absolute inset-0 hero-throne-bg transition-all duration-700" />
 
         {/* Layer 2: Atmospheric Lighting & Gradients (visible throne with frosty vignette) */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/35 to-transparent" />

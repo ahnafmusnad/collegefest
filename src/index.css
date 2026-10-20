@@ -646,3 +646,17 @@
 .hs-link { white-space: nowrap; font-size: 10px; letter-spacing: 0.12em; }
 .hs-footer { flex-wrap: nowrap; }
 
+
+/* Hero throne backdrop — zoomed out on small screens so the whole scene reads */
+.hero-throne-bg {
+  background-image: url('/images/iron-throne-hero.jpg');
+  background-repeat: no-repeat;
+  background-position: center 30%;
+  background-size: auto 70%;
+}
+@media (min-width: 1024px) {
+  .hero-throne-bg {
+    background-position: center 35%;
+    background-size: cover;
+  }
+}
