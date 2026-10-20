@@ -3,6 +3,7 @@ import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
+import SpotlightCard from '../components/ui/SpotlightCard';
 import { CountUp } from '../components/CountUp';
 import SwordDivider from '../components/ui/SwordDivider';
 import Button from '../components/ui/Button';
@@ -304,15 +305,19 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
         {/* 4 Houses Grid with rich hover interactions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {FOUR_HOUSES.map((house, i) => (
             <Reveal key={house.id} delay={i * 100} className="h-full">
-            <TiltCard
+            <SpotlightCard
               onClick={() => {
                 onNavigate('clubs');
               }}
-
-              className="scroll-card group relative h-full p-6 flex flex-col justify-between"
+              className="group relative h-full flex flex-col justify-between"
+              intensity={0.22}
+              borderGlow={0.85}
+              spotlightSize={280}
+              proximity={90}
+              grain={0.06}
             >
               {/* Top Card Decor */}
               <div className="flex items-center justify-between mb-4">
@@ -372,9 +377,7 @@ export const Home: React.FC<HomeProps> = ({
                 </div>
               </div>
 
-              {/* Glow border sheen */}
-              <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </TiltCard>
+            </SpotlightCard>
             </Reveal>
           ))}
         </div>
