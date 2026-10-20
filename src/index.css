@@ -1086,3 +1086,27 @@
     border-image-width: 40px 46px;
   }
 }
+
+.about-fact {
+  border: 1px solid #2f5557;
+  outline: 1px solid rgba(47, 85, 87, 0.6);
+  outline-offset: -5px;
+  background: rgba(2, 10, 11, 0.45);
+  padding: 0.9rem 0.75rem;
+  text-align: center;
+}
+.about-fact__label {
+  font-family: "Cinzel", serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9e9f9f;
+}
+.about-fact__value {
+  margin-top: 0.35rem;
+  font-family: "Cinzel", serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #f8f8f8;
+}

@@ -6,6 +6,7 @@ import { TiltCard } from '../components/TiltCard';
 import HouseScroll from '../components/HouseScroll';
 import CountdownTablets from '../components/CountdownTablets';
 import StatsPanel from '../components/StatsPanel';
+import AboutFestPanel from '../components/AboutFestPanel';
 import SwordDivider from '../components/ui/SwordDivider';
 import GemDivider from '../components/ui/GemDivider';
 import ProclamationPlaque from '../components/ui/ProclamationPlaque';
@@ -179,6 +180,31 @@ export const Home: React.FC<HomeProps> = ({
       ======================================================== */}
       <section className="relative z-10 px-4 py-8">
         <StatsPanel />
+      </section>
+
+      {/* ========================================================
+          ABOUT THE FEST SECTION
+      ======================================================== */}
+      <section className="relative py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
+            <Crown className="w-3.5 h-3.5" />
+            The Saga Begins
+          </div>
+          <GemDivider className="py-1" />
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
+            About the Fest
+          </h2>
+          <GemDivider className="py-1" />
+        </div>
+
+        <Reveal direction="zoom">
+          <div className="scroll-panel mx-auto max-w-4xl px-2 py-3 sm:px-4 sm:py-4">
+            <AboutFestPanel />
+          </div>
+        </Reveal>
       </section>
 
       {/* ========================================================
