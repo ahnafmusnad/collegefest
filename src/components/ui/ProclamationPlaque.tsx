@@ -12,13 +12,13 @@ const Sparkle: React.FC<{ className?: string; delay?: string }> = ({ className =
     >
       <path
         d="M14 1.5 Q15.8 11.2 26.5 14 Q15.8 16.8 14 26.5 Q12.2 16.8 1.5 14 Q12.2 11.2 14 1.5 Z"
-        fill="rgba(70,207,221,0.22)"
-        stroke="#8ce8f2"
+        fill="rgba(158,159,159,0.18)"
+        stroke="#9e9f9f"
         strokeWidth="1.1"
       />
       <path
         d="M14 7 Q14.9 12.6 21 14 Q14.9 15.4 14 21 Q13.1 15.4 7 14 Q13.1 12.6 14 7 Z"
-        fill="rgba(140,232,242,0.55)"
+        fill="rgba(201,210,210,0.45)"
         stroke="none"
       />
     </svg>
@@ -39,7 +39,7 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
   return (
     <div className={`proclamation-plaque relative mx-auto w-[min(92vw,640px)] select-none ${className}`}>
       {/* soft ambient halo behind the frame */}
-      <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(ellipse_at_center,rgba(46,169,184,0.18)_0%,transparent_70%)] blur-md plaque-halo" />
+      <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(ellipse_at_center,rgba(23,104,110,0.22)_0%,transparent_70%)] blur-md plaque-halo" />
 
 
       <div className="relative h-[72px] sm:h-[92px] md:h-[104px]">
@@ -73,7 +73,7 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
                C 34 73 55 71 69 61
                C 81 51 90 45 122 45 Z"
             fill="url(#plaque-surface)"
-            stroke="#46cfdd"
+            stroke="#17686e"
             strokeWidth="1.6"
           />
 
@@ -92,7 +92,7 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
                C 52 73.8 69 76 81 67
                C 92 58 100 53 128 53 Z"
             fill="none"
-            stroke="#2fa9b8"
+            stroke="#145e62"
             strokeWidth="1"
             opacity="0.8"
           />
@@ -112,16 +112,16 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
             <path
               key={i}
               d={`M ${x} ${y - 4.5} L ${x + 4.5} ${y} L ${x} ${y + 4.5} L ${x - 4.5} ${y} Z`}
-              fill="#04211f"
-              stroke="#7fe3ee"
+              fill="#061a1c"
+              stroke="#9e9f9f"
               strokeWidth="1"
             />
           ))}
 
 
           {/* fine horizontal accent threads just inside the ends */}
-          <line x1="40" y1="75" x2="96" y2="75" stroke="#46cfdd" strokeWidth="0.8" opacity="0.5" />
-          <line x1="784" y1="75" x2="840" y2="75" stroke="#46cfdd" strokeWidth="0.8" opacity="0.5" />
+          <line x1="40" y1="75" x2="96" y2="75" stroke="#9e9f9f" strokeWidth="0.8" opacity="0.5" />
+          <line x1="784" y1="75" x2="840" y2="75" stroke="#9e9f9f" strokeWidth="0.8" opacity="0.5" />
         </svg>
 
 
