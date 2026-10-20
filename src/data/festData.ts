@@ -23,34 +23,6 @@ export const SOCIAL_LINKS = [
 
 export const FOUR_HOUSES: ClubHouse[] = [
   {
-    id: 'house-veritas',
-    name: 'Chittagong College Debating Society (CCDS)',
-    houseName: 'House Lannister',
-    motto: 'Hear Me Roar',
-    sigil: 'The Golden Lion',
-    iconName: 'Scroll',
-    logo: '/images/club-logos/ccds-debating-society.jpg',
-    colorScheme: {
-      primary: '#145e62', // Teal
-      secondary: '#17686e',
-      border: 'border-crimson/50',
-      glow: 'shadow-crimson/40',
-      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
-      accent: 'text-crimson-2'
-    },
-    lore: 'Forged in the debating chambers of the Red Citadel, House Lannister exists to build a culture of argument and inquiry at Chittagong College. Its debaters have stood tall in national tournaments alongside the country’s established institutions, sharpening critical thinking, research, public speaking and communication on the way to becoming one of Bangladesh’s leading debating societies.',
-    founded: '—',
-    achievements: [
-      'Champions – CUSD Nationals 2026',
-      'Champions – CUDS Nationals 2025',
-      'Runners-up – FSET 2025',
-      'Semi-Finalists – CSDS, PUDS & DCU Nationals 2026',
-      'Semi-Finalists – Drishty Debate Championship 2026'
-    ],
-    memberCount: 0,
-    points: 1240
-  },
-  {
     id: 'house-arcanum',
     name: 'Chittagong College Physics & Astronomy Club (CCPAC)',
     houseName: 'House Stark',
@@ -103,6 +75,34 @@ export const FOUR_HOUSES: ClubHouse[] = [
     ],
     memberCount: 150,
     points: 1190
+  },
+  {
+    id: 'house-veritas',
+    name: 'Chittagong College Debating Society (CCDS)',
+    houseName: 'House Lannister',
+    motto: 'Hear Me Roar',
+    sigil: 'The Golden Lion',
+    iconName: 'Scroll',
+    logo: '/images/club-logos/ccds-debating-society.jpg',
+    colorScheme: {
+      primary: '#145e62', // Teal
+      secondary: '#17686e',
+      border: 'border-crimson/50',
+      glow: 'shadow-crimson/40',
+      bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
+      accent: 'text-crimson-2'
+    },
+    lore: 'Forged in the debating chambers of the Red Citadel, House Lannister exists to build a culture of argument and inquiry at Chittagong College. Its debaters have stood tall in national tournaments alongside the country’s established institutions, sharpening critical thinking, research, public speaking and communication on the way to becoming one of Bangladesh’s leading debating societies.',
+    founded: '—',
+    achievements: [
+      'Champions – CUSD Nationals 2026',
+      'Champions – CUDS Nationals 2025',
+      'Runners-up – FSET 2025',
+      'Semi-Finalists – CSDS, PUDS & DCU Nationals 2026',
+      'Semi-Finalists – Drishty Debate Championship 2026'
+    ],
+    memberCount: 0,
+    points: 1240
   },
   {
     id: 'house-valorous',
