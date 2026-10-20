@@ -144,7 +144,6 @@ export function App() {
         {currentPage === 'clubs' && (
           <Clubs
             onNavigate={handleNavigate}
-            onOpenTickify={() => handleOpenTickify()}
             onPledgeHouse={handlePledgeHouse}
             userPledgedHouse={userPledgedHouse}
           />

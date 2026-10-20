@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageType } from '../types';
-import { FEST_METADATA, FOUR_HOUSES } from '../data/festData';
+import { FEST_METADATA } from '../data/festData';
 import { Crown, MapPin, Ticket, ExternalLink, Mail, Heart } from 'lucide-react';
 
 interface FooterProps {
@@ -16,27 +16,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Four Houses Banner Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 p-4 bg-ink/60 border border-crimson/20">
-          {FOUR_HOUSES.map((house) => (
-            <div
-              key={house.id}
-              onClick={() => {
-                onNavigate('clubs');
-              }}
-              className="p-3 border border-iron/80 hover:border-gold/50 bg-ink-2/30 hover:bg-ink-2/80 transition-all cursor-pointer group text-center"
-            >
-              <div className="flex items-center justify-center gap-1.5 font-cinzel text-xs font-bold text-bone group-hover:text-gold-2">
-                <span className="w-6 h-6 rounded bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
-                </span>
-                <span>{house.houseName}</span>
-              </div>
-              <p className="text-[11px] text-bone-dim truncate mt-0.5">{house.name}</p>
-            </div>
-          ))}
-        </div>
-
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           

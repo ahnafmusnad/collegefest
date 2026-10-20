@@ -7,21 +7,20 @@ import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
 import { 
   Shield, 
+  Crown,
+  Award,
   Swords, 
-  Check, 
-  Flame
+  Check
 } from 'lucide-react';
 
 interface ClubsProps {
   onNavigate: (page: PageType) => void;
-  onOpenTickify: () => void;
   onPledgeHouse: (house: ClubHouse) => void;
   userPledgedHouse: ClubHouse | null;
 }
 
 export const Clubs: React.FC<ClubsProps> = ({
   onNavigate,
-  onOpenTickify,
   onPledgeHouse,
   userPledgedHouse
 }) => {
@@ -73,39 +72,58 @@ export const Clubs: React.FC<ClubsProps> = ({
           const isPledged = userPledgedHouse?.id === house.id;
           return (
             <Reveal key={house.id} delay={i * 80} className="h-full">
-            <button
-              key={house.id}
-              onClick={() => {
-                setActiveHouseId(house.id);
-              }}
-
-              className={`relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between group h-full ${
+            <div
+              className={`relative h-full rounded-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
                 isSelected
                   ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold -translate-y-1'
                   : 'bg-ink-2/60 border-iron hover:border-crimson/40 hover:bg-ink-2/90'
               }`}
             >
-              {isPledged && (
-                <div className="absolute -top-2.5 right-3 bg-ember text-ink text-[10px] font-cinzel font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow">
-                  <Check className="w-3 h-3" />
-                  Your House
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveHouseId(house.id);
+                }}
+
+                className="text-left p-4 flex-1 flex flex-col gap-3 group"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 p-1 bg-white/90 border border-iron shrink-0 flex items-center justify-center">
+                    <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
+                  </div>
+
+                  <div className="min-w-0">
+                    <div className="font-cinzel text-[10px] sm:text-xs text-gold/80 font-semibold uppercase leading-snug line-clamp-2">
+                      {house.name.split('(')[0]}
+                    </div>
+                    <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1 mt-1">
+                      {house.houseName}
+                    </div>
+                  </div>
                 </div>
-              )}
 
-              <div className="mb-2">
-                <div className="font-cinzel text-xs text-gold/80 font-semibold uppercase">
-                  {house.name.split('(')[0]}
+                <div className="font-cinzel text-[11px] text-bone-dim italic line-clamp-1">
+                  "{house.motto}"
                 </div>
-              </div>
+              </button>
 
-              <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1">
-                {house.houseName}
+              <div className="px-3 pb-3">
+                {isPledged ? (
+                  <div className="flex items-center justify-center gap-1.5 py-1.5 bg-ember/15 border border-ember/50 text-ember text-[10px] font-cinzel font-bold uppercase tracking-wider">
+                    <Check className="w-3 h-3" />
+                    Your House
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handlePledge(house)}
+                    className="w-full py-1.5 border border-crimson/40 text-gold-2 text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-crimson/20 hover:border-crimson/70 transition-colors"
+                  >
+                    Pledge
+                  </button>
+                )}
               </div>
-
-              <div className="font-cinzel text-[11px] text-bone-dim italic mt-1 line-clamp-1">
-                "{house.motto}"
-              </div>
-            </button>
+            </div>
             </Reveal>
           );
         })}
@@ -117,42 +135,20 @@ export const Clubs: React.FC<ClubsProps> = ({
       <Reveal direction="zoom">
       <div className="frost-card border-2 border-crimson/40 p-5 md:p-8 space-y-6 relative overflow-hidden">
         
-        {/* Top House Banner — identity left, actions right (stacks on mobile) */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center border-b border-crimson/20 pb-6">
-          <div className="flex items-center gap-4 min-w-0">
-            <div className="w-16 h-16 md:w-20 md:h-20 p-2 bg-white border-2 border-gold overflow-hidden shrink-0 flex items-center justify-center">
-              <img src={activeHouse.logo} alt={`${activeHouse.name} logo`} className="w-full h-full object-contain" />
-            </div>
-            <div className="min-w-0">
-              <span className="font-cinzel text-[10px] md:text-xs font-bold text-gold uppercase tracking-widest block">
-                Citadel House Sigil: {activeHouse.sigil}
-              </span>
-              <h2 className="font-cinzel-dec text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight">
-                {activeHouse.name.split('(')[0]}
-              </h2>
-              <div className="font-cinzel text-sm font-semibold text-gold-2 mt-1">
-                {activeHouse.houseName}
-              </div>
-              <p className="font-cinzel text-xs md:text-sm text-gold-2/90 italic">
-                House Words: "{activeHouse.motto}"
-              </p>
-            </div>
+        {/* Top House Banner */}
+        <div className="border-b border-crimson/20 pb-5">
+          <span className="font-cinzel text-[10px] md:text-xs font-bold text-gold uppercase tracking-widest block">
+            Citadel House Sigil: {activeHouse.sigil}
+          </span>
+          <h2 className="font-cinzel-dec text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight mt-1">
+            {activeHouse.name.split('(')[0]}
+          </h2>
+          <div className="font-cinzel text-sm font-semibold text-gold-2 mt-1">
+            {activeHouse.houseName}
           </div>
-
-          {/* House Pledge Action */}
-          <div className="flex flex-row items-center gap-3 md:flex-col md:items-stretch">
-            <Button
-              className="w-full"
-              onClick={() => handlePledge(activeHouse)}
-            >
-              {userPledgedHouse?.id === activeHouse.id ? 'ALLEGIANCE SWORN' : `PLEDGE TO ${activeHouse.houseName.toUpperCase()}`}
-            </Button>
-
-            <div className="p-3 bg-ink-2/80 border border-iron text-center min-w-[120px]">
-              <div className="font-mono text-lg font-bold text-gold">{activeHouse.points}</div>
-              <div className="text-[10px] font-cinzel text-bone-dim uppercase">Citadel Points</div>
-            </div>
-          </div>
+          <p className="font-cinzel text-xs md:text-sm text-gold-2/90 italic">
+            House Words: "{activeHouse.motto}"
+          </p>
         </div>
 
         {/* House Vitals — 4 across on desktop, 2x2 on mobile */}
@@ -181,6 +177,26 @@ export const Clubs: React.FC<ClubsProps> = ({
               <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
             </div>
           </Reveal>
+        </div>
+
+        {/* Historic Trophies & Laurels — two columns on desktop, stacked on mobile */}
+        <div className="border-t border-crimson/20 pt-5 space-y-3">
+          <h3 className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest flex items-center gap-2">
+            <Award className="w-4 h-4 text-gold" />
+            Historic Trophies & Laurels
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+            {activeHouse.achievements.map((ach, i) => (
+              <Reveal key={i} delay={i * 90}>
+              <div
+                className="flex items-center gap-2.5 p-3 bg-ink-2/60 border border-iron/80 text-xs text-bone hover:border-crimson/40 transition-colors h-full"
+              >
+                <Crown className="w-3.5 h-3.5 text-gold shrink-0" />
+                <span>{ach}</span>
+              </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         {/* House Segments Showcase */}
@@ -232,42 +248,6 @@ export const Clubs: React.FC<ClubsProps> = ({
         </div>
 
       </div>
-      </Reveal>
-
-      {/* House Points Leaderboard */}
-      <section className="space-y-4">
-        <Reveal className="text-center max-w-2xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/30 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-            <Flame className="w-3.5 h-3.5 text-gold" />
-            The Citadel Leaderboard
-          </div>
-          <h2 className="font-cinzel text-2xl sm:text-3xl font-extrabold text-white">
-            HOUSE CHAMPIONSHIP POINTS
-          </h2>
-        </Reveal>
-
-        <Reveal delay={100}>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-iron/40 border border-iron overflow-hidden">
-          {[...FOUR_HOUSES].sort((a, b) => b.points - a.points).map((house, idx) => (
-            <div key={house.id} className="flex items-center gap-2 px-3 py-2.5 min-w-0 bg-ink-2">
-              <span className="font-mono text-xs font-bold text-gold shrink-0">#{idx + 1}</span>
-              <span className="text-xs text-bone truncate font-cinzel">{house.name.split('(')[0]}</span>
-              <span className="ml-auto font-mono text-xs font-bold text-gold-2 shrink-0">{house.points} PTS</span>
-            </div>
-          ))}
-        </div>
-        </Reveal>
-      </section>
-
-      {/* Registration CTA */}
-      <Reveal className="text-center pt-4">
-        <Button
-          onClick={() => {
-            onOpenTickify();
-          }}
-        >
-          CLAIM HOUSE WARRIOR PASS ON TICKIFY
-        </Button>
       </Reveal>
 
     </div>
