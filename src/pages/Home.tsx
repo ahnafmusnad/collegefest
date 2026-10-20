@@ -7,6 +7,7 @@ import HouseScroll from '../components/HouseScroll';
 import CountdownTablets from '../components/CountdownTablets';
 import StatsPanel from '../components/StatsPanel';
 import SwordDivider from '../components/ui/SwordDivider';
+import GemDivider from '../components/ui/GemDivider';
 import Button from '../components/ui/Button';
 import { 
   Crown, 
@@ -186,9 +187,11 @@ export const Home: React.FC<HomeProps> = ({
             <Crown className="w-3.5 h-3.5" />
             The Four Pillars of Chittagong College
           </div>
+          <GemDivider className="py-1" />
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
             THE FOUR GREAT HOUSES
           </h2>
+          <GemDivider className="py-1" />
           <p className="font-sans text-sm sm:text-base text-bone-dim">
             Every banner represents a legendary club forged within Chittagong College's historic grounds. Explore their lore, rally behind your champions, and vote for your House.
           </p>

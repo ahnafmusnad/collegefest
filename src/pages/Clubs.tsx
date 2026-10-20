@@ -7,11 +7,7 @@ import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
 import { 
   Shield, 
-  Crown, 
-  Award, 
-  Users, 
   Swords, 
-  Scroll, 
   Check, 
   Flame
 } from 'lucide-react';
@@ -119,38 +115,34 @@ export const Clubs: React.FC<ClubsProps> = ({
           ACTIVE HOUSE SHOWCASE DOSSIER
       ======================================================== */}
       <Reveal direction="zoom">
-      <div className="frost-card border-2 border-crimson/40 p-6 md:p-10 space-y-10 relative overflow-hidden">
+      <div className="frost-card border-2 border-crimson/40 p-5 md:p-8 space-y-6 relative overflow-hidden">
         
-        {/* Top House Banner */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-crimson/20 pb-8">
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-20 h-20 p-2 bg-white border-2 border-gold overflow-hidden shrink-0 flex items-center justify-center">
-                <img src={activeHouse.logo} alt={`${activeHouse.name} logo`} className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <span className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest block">
-                  Citadel House Sigil: {activeHouse.sigil}
-                </span>
-                <h2 className="font-cinzel-dec text-3xl sm:text-4xl font-extrabold text-white">
-                  {activeHouse.name.split('(')[0]}
-                </h2>
-              </div>
+        {/* Top House Banner — identity left, actions right (stacks on mobile) */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center border-b border-crimson/20 pb-6">
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="w-16 h-16 md:w-20 md:h-20 p-2 bg-white border-2 border-gold overflow-hidden shrink-0 flex items-center justify-center">
+              <img src={activeHouse.logo} alt={`${activeHouse.name} logo`} className="w-full h-full object-contain" />
             </div>
-
-            <div className="font-cinzel text-base font-semibold text-gold-2">
-              {activeHouse.houseName}
+            <div className="min-w-0">
+              <span className="font-cinzel text-[10px] md:text-xs font-bold text-gold uppercase tracking-widest block">
+                Citadel House Sigil: {activeHouse.sigil}
+              </span>
+              <h2 className="font-cinzel-dec text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight">
+                {activeHouse.name.split('(')[0]}
+              </h2>
+              <div className="font-cinzel text-sm font-semibold text-gold-2 mt-1">
+                {activeHouse.houseName}
+              </div>
+              <p className="font-cinzel text-xs md:text-sm text-gold-2/90 italic">
+                House Words: "{activeHouse.motto}"
+              </p>
             </div>
-
-            <p className="font-cinzel text-sm text-gold-2/90 italic">
-              House Words: "{activeHouse.motto}"
-            </p>
           </div>
 
           {/* House Pledge Action */}
-          <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex flex-row items-center gap-3 md:flex-col md:items-stretch">
             <Button
-              className="w-full sm:w-auto"
+              className="w-full"
               onClick={() => handlePledge(activeHouse)}
             >
               {userPledgedHouse?.id === activeHouse.id ? 'ALLEGIANCE SWORN' : `PLEDGE TO ${activeHouse.houseName.toUpperCase()}`}
@@ -163,84 +155,32 @@ export const Clubs: React.FC<ClubsProps> = ({
           </div>
         </div>
 
-        {/* House Lore Description */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-2 space-y-4">
-            <h3 className="font-cinzel text-base font-bold text-gold-2 uppercase tracking-wider flex items-center gap-2">
-              <Scroll className="w-4 h-4" />
-              The Chronicle & Philosophy
-            </h3>
-            <p className="font-sans text-sm text-bone-dim leading-relaxed">
-              {activeHouse.lore}
-            </p>
-
-            {/* Achievements */}
-            <div className="pt-4 space-y-2.5">
-              <h4 className="font-cinzel text-xs font-bold text-gold uppercase tracking-widest flex items-center gap-2">
-                <Award className="w-4 h-4 text-gold" />
-                Historic Trophies & Laurels
-              </h4>
-              <div className="space-y-2">
-                {activeHouse.achievements.map((ach, i) => (
-                  <Reveal key={i} delay={i * 90}>
-                  <div
-                    className="flex items-center gap-2.5 p-3 bg-ink-2/60 border border-iron/80 text-xs text-bone hover:border-crimson/40 transition-colors h-full"
-                  >
-                    <Crown className="w-3.5 h-3.5 text-gold shrink-0" />
-                    <span>{ach}</span>
-                  </div>
-                  </Reveal>
-                ))}
-              </div>
+        {/* House Vitals — 4 across on desktop, 2x2 on mobile */}
+        <div className="grid grid-cols-2 gap-2.5 md:grid-cols-4">
+          <Reveal delay={0}>
+            <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
+              <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Founded</div>
+              <div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>
             </div>
-          </div>
-
-          {/* House Vitals */}
-          <div className="space-y-4">
-            <h3 className="font-cinzel text-base font-bold text-gold-2 uppercase tracking-wider flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              House Vitals
-            </h3>
-            <div className="grid grid-cols-2 gap-2.5">
-              <Reveal delay={0}>
-                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Founded</div>
-                  <div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>
-                </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Members</div>
-                  <div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
-                </div>
-              </Reveal>
-              <Reveal delay={160}>
-                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Sigil</div>
-                  <div className="font-cinzel text-[11px] font-bold text-white leading-tight px-1">{activeHouse.sigil}</div>
-                </div>
-              </Reveal>
-              <Reveal delay={240}>
-                <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
-                  <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Crest Points</div>
-                  <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
-                </div>
-              </Reveal>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
+              <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Members</div>
+              <div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
             </div>
-
-            <Reveal delay={320}>
-              <div className="p-3.5 bg-ink-2/40 border border-crimson/20 space-y-2 text-xs">
-                <div className="flex items-center justify-between gap-2 text-bone-dim">
-                  <span className="shrink-0">House Words:</span>
-                  <span className="font-cinzel text-gold-2 italic text-right">"{activeHouse.motto}"</span>
-                </div>
-                <div className="flex items-center justify-between gap-2 text-bone-dim">
-                  <span className="shrink-0">Realm:</span>
-                  <span className="font-cinzel text-white text-right truncate">{activeHouse.name}</span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
+          </Reveal>
+          <Reveal delay={160}>
+            <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
+              <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Sigil</div>
+              <div className="font-cinzel text-[11px] font-bold text-white leading-tight px-1">{activeHouse.sigil}</div>
+            </div>
+          </Reveal>
+          <Reveal delay={240}>
+            <div className="p-3.5 bg-ink-2/80 border border-crimson/20 text-center h-full">
+              <div className="text-[10px] font-cinzel text-gold uppercase tracking-wider">Crest Points</div>
+              <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
+            </div>
+          </Reveal>
         </div>
 
         {/* House Segments Showcase */}
@@ -295,7 +235,7 @@ export const Clubs: React.FC<ClubsProps> = ({
       </Reveal>
 
       {/* House Points Leaderboard */}
-      <section className="space-y-6">
+      <section className="space-y-4">
         <Reveal className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/30 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
             <Flame className="w-3.5 h-3.5 text-gold" />
@@ -304,41 +244,19 @@ export const Clubs: React.FC<ClubsProps> = ({
           <h2 className="font-cinzel text-2xl sm:text-3xl font-extrabold text-white">
             HOUSE CHAMPIONSHIP POINTS
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-bone-dim">
-            Points are accumulated through tournament victories, participation quotas, and student cheering.
-          </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Reveal delay={100}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-iron/40 border border-iron overflow-hidden">
           {[...FOUR_HOUSES].sort((a, b) => b.points - a.points).map((house, idx) => (
-            <Reveal key={house.id} delay={idx * 100} className="h-full">
-            <TiltCard
-              className={`p-5 border text-center space-y-3 h-full ${
-                idx === 0
-                  ? 'bg-gradient-to-b from-ink-3/60 via-ink-2 to-ink border-gold/60'
-                  : 'bg-ink-2/60 border-iron'
-              }`}
-            >
-              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-ink border border-iron font-cinzel text-xs font-bold text-gold">
-                #{idx + 1}
-              </div>
-              <h3 className="font-cinzel text-base font-bold text-white">
-                {house.name.split('(')[0]}
-              </h3>
-              <p className="text-xs text-bone-dim truncate">{house.houseName}</p>
-              <div className="font-mono text-2xl font-black text-gold-2">
-                {house.points} PTS
-              </div>
-              <div className="w-full bg-ink-3 h-1.5 rounded-full overflow-hidden">
-                <div
-                  className="bg-gradient-to-r from-gold to-gold h-full rounded-full"
-                  style={{ width: `${(house.points / 1400) * 100}%` }}
-                />
-              </div>
-            </TiltCard>
-            </Reveal>
+            <div key={house.id} className="flex items-center gap-2 px-3 py-2.5 min-w-0 bg-ink-2">
+              <span className="font-mono text-xs font-bold text-gold shrink-0">#{idx + 1}</span>
+              <span className="text-xs text-bone truncate font-cinzel">{house.name.split('(')[0]}</span>
+              <span className="ml-auto font-mono text-xs font-bold text-gold-2 shrink-0">{house.points} PTS</span>
+            </div>
           ))}
         </div>
+        </Reveal>
       </section>
 
       {/* Registration CTA */}
