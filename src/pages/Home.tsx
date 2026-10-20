@@ -11,10 +11,10 @@ import SwordDivider from '../components/ui/SwordDivider';
 import GemDivider from '../components/ui/GemDivider';
 import ProclamationPlaque from '../components/ui/ProclamationPlaque';
 import Button from '../components/ui/Button';
+import SortingTrialBanner from '../components/SortingTrialBanner';
 import { 
   Crown, 
   Ticket, 
-  Sparkles
 } from 'lucide-react';
 
 /* The four headlining contests shown on the throne-room floor,
@@ -264,38 +264,7 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           SORTING HAT TRIAL BANNER
       ======================================================== */}
-      <section className="relative py-12 px-4 max-w-7xl mx-auto">
-        <Reveal direction="zoom">
-        <div className="relative bg-gradient-to-r from-ink-2/80 via-ink-2 to-ink-2/80 border-2 border-gold/40 p-8 md:p-12 overflow-hidden">
-          {/* Subtle watermark */}
-          <div className="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
-            <Crown className="w-80 h-80 text-gold" />
-          </div>
-
-          <div className="relative z-10 max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/40 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
-              The Iron Raven's Sorting Ceremony
-            </div>
-            <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
-              DISCOVER YOUR TRUE COLLEGE HOUSE
-            </h3>
-            <p className="font-sans text-sm md:text-base text-bone-dim leading-relaxed">
-              Are your words sharp enough for House Lannister? Does your mind master the gears of House Stark? Does your soul sing with House Targaryen, or do you command armies with House Baratheon? Take the 3-question trial now.
-            </p>
-            <div className="pt-2">
-              <Button
-                onClick={() => {
-                  onOpenSortingQuiz();
-                }}
-              >
-                BEGIN SORTING CEREMONY
-              </Button>
-            </div>
-          </div>
-        </div>
-        </Reveal>
-      </section>
+      <SortingTrialBanner onBegin={onOpenSortingQuiz} />
 
       {/* ========================================================
           FEATURED SEGMENTS & ARENAS — royal writ plaques
