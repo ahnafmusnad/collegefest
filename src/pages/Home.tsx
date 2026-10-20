@@ -3,7 +3,7 @@ import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
-import SpotlightCard from '../components/ui/SpotlightCard';
+import HouseScroll from '../components/HouseScroll';
 import { CountUp } from '../components/CountUp';
 import SwordDivider from '../components/ui/SwordDivider';
 import Button from '../components/ui/Button';
@@ -13,8 +13,6 @@ import {
   Swords, 
   Ticket, 
   Sparkles, 
-  ArrowRight, 
-  Flame, 
   Award,
   Users
 } from 'lucide-react';
@@ -68,6 +66,8 @@ export const Home: React.FC<HomeProps> = ({
     setHouseCheers(prev => ({ ...prev, [houseId]: prev[houseId] + 1 }));
     setHasCheered(prev => ({ ...prev, [houseId]: true }));
   };
+
+  const HOUSE_TILT = ['-rotate-[0.6deg]', 'rotate-[0.5deg]', '-rotate-[0.4deg]', 'rotate-[0.7deg]'];
 
   return (
     <div className="relative text-bone">
@@ -288,10 +288,10 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           THE FOUR GREAT HOUSES SECTION (CORE FESTIVAL IDENTITY)
       ======================================================== */}
-      <section className="relative py-20 px-4 max-w-7xl mx-auto">
+      <section className="relative py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
             <Crown className="w-3.5 h-3.5" />
             The Four Pillars of Chittagong College
@@ -304,86 +304,28 @@ export const Home: React.FC<HomeProps> = ({
           </p>
         </div>
 
-        {/* 4 Houses Grid with rich hover interactions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4 Houses Grid — torn scripture scrolls */}
+        <div className="houses-grid">
           {FOUR_HOUSES.map((house, i) => (
-            <Reveal key={house.id} delay={i * 100} className="h-full">
-            <SpotlightCard
-              onClick={() => {
-                onNavigate('clubs');
-              }}
-              className="group relative h-full flex flex-col justify-between"
-              intensity={0.22}
-              borderGlow={0.85}
-              spotlightSize={280}
-              proximity={90}
-              grain={0.06}
-            >
-              {/* Top Card Decor */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 p-1 bg-white border border-crimson/30 shadow-inner overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <img
-                    src={house.logo}
-                    alt={`${house.name} logo`}
-                    loading="lazy"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="text-right">
-                  {house.founded !== '—' && (
-                    <span className="font-cinzel text-[10px] text-gold uppercase tracking-widest block">Est. {house.founded}</span>
-                  )}
-                  {house.memberCount > 0 && (
-                    <span className="font-mono text-xs font-bold text-bone-dim">{house.memberCount}+ Members</span>
-                  )}
-                </div>
-              </div>
-
-              {/* House Name & Lore */}
-              <div className="space-y-2 mb-6">
-                <h3 className="font-cinzel-dec text-xl font-bold text-white group-hover:text-gold-2 transition-colors">
-                  {house.name.split('(')[0]}
-                </h3>
-                <div className="text-xs font-semibold text-gold font-cinzel">
-                  {house.houseName}
-                </div>
-                <p className="font-cinzel text-xs text-gold-2/80 italic">
-                  "{house.motto}"
-                </p>
-                <p className="font-sans text-xs text-bone-dim line-clamp-3 pt-2">
-                  {house.lore}
-                </p>
-              </div>
-
-              {/* Bottom Interactive Cheer / Vote & View Link */}
-              <div className="space-y-3 pt-4 border-t border-iron/80">
-                <div className="flex items-center justify-between">
-                  <button
-                    onClick={(e) => handleCheer(house.id, e)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-cinzel font-bold transition-all ${
-                      hasCheered[house.id]
-                        ? 'border-ember bg-ink-2/60 text-gold-2'
-                        : 'border-iron bg-ink-2/60 text-bone-dim hover:border-gold hover:text-white'
-                    }`}
-                  >
-                    <Flame className={`w-3.5 h-3.5 ${hasCheered[house.id] ? 'text-ember animate-bounce' : 'text-gold'}`} />
-                    <span>Cheer ({houseCheers[house.id]})</span>
-                  </button>
-
-                  <div className="flex items-center gap-1 text-xs font-cinzel text-gold group-hover:text-gold-2 group-hover:translate-x-1 transition-all">
-                    <span>View Lore</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-
-            </SpotlightCard>
+            <Reveal key={house.id} delay={i * 100} className="h-full w-full max-w-[340px]">
+              <HouseScroll
+                logo={house.logo}
+                name={house.name}
+                houseName={house.houseName}
+                motto={house.motto}
+                lore={house.lore}
+                cheerCount={houseCheers[house.id]}
+                cheered={!!hasCheered[house.id]}
+                tilt={HOUSE_TILT[i]}
+                onCheer={(e) => handleCheer(house.id, e)}
+                onViewLore={() => onNavigate('clubs')}
+              />
             </Reveal>
           ))}
         </div>
 
         {/* View All Clubs CTA */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-6">
           <Button
             variant="secondary"
             onClick={() => {
