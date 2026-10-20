@@ -121,7 +121,6 @@ export function App() {
         onNavigate={handleNavigate}
         snowMode={snowMode}
         onToggleSnow={handleToggleSnow}
-        onOpenTickifyModal={() => handleOpenTickify()}
       />
 
       {/* Page Content Body */}

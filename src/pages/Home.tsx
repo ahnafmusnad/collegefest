@@ -8,6 +8,7 @@ import CountdownTablets from '../components/CountdownTablets';
 import StatsPanel from '../components/StatsPanel';
 import SwordDivider from '../components/ui/SwordDivider';
 import GemDivider from '../components/ui/GemDivider';
+import ProclamationPlaque from '../components/ui/ProclamationPlaque';
 import Button from '../components/ui/Button';
 import { 
   Crown, 
@@ -91,13 +92,8 @@ export const Home: React.FC<HomeProps> = ({
         {/* Layer 3: Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
           
-          {/* Fest Proclamation Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ink/80 border border-gold/50 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-ember animate-ping" />
-            <span className="font-cinzel text-xs md:text-sm font-bold tracking-[0.25em] text-gold-2 uppercase">
-              Chittagong College &bull; December 18–19, 2026
-            </span>
-          </div>
+          {/* Fest Proclamation Plaque */}
+          <ProclamationPlaque />
 
           {/* Main Fest Heading */}
           <div className="space-y-2">

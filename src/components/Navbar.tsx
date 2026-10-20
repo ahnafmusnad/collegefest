@@ -7,7 +7,6 @@ import {
   Menu, 
   X, 
   CloudSnow, 
-  Ticket, 
   ChevronRight,
   Crown,
   Scroll,
@@ -58,15 +57,13 @@ interface NavbarProps {
   onNavigate: (page: PageType) => void;
   snowMode: 'gentle' | 'blizzard' | 'off';
   onToggleSnow: () => void;
-  onOpenTickifyModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentPage,
   onNavigate,
   snowMode,
-  onToggleSnow,
-  onOpenTickifyModal
+  onToggleSnow
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -151,17 +148,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="hidden md:block shrink-0">
                   <Button href={FEST_METADATA.tickifyLink} external size="sm">Register Now</Button>
                 </div>
-
-                {/* Quick pass preview modal button */}
-                <button
-                  onClick={() => {
-                    onOpenTickifyModal();
-                  }}
-                  className="hidden sm:inline-flex md:hidden items-center gap-1 px-2.5 py-1.5 rounded-lg border border-gold/60 text-xs text-gold-2 font-cinzel font-bold bg-ink-2/40"
-                >
-                  <Ticket className="w-3.5 h-3.5" />
-                  Passes
-                </button>
               </div>
 
               {/* Mobile / Tablet Burger Menu Toggle Button */}
