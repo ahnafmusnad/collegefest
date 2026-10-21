@@ -287,7 +287,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
           {/* Active day panel */}
           <div key={activeDaySchedule.day} className="animate-fade-up mx-auto mt-12 max-w-5xl">
-            <div className="scroll-panel mx-auto max-w-5xl space-y-6 px-2 py-3 sm:px-4 sm:py-4">
+            <div className="stone-panel mx-auto max-w-5xl space-y-6 px-2 py-3 sm:px-4 sm:py-4">
 
 
               {/* Day heading */}

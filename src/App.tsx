@@ -9,6 +9,7 @@ import { TickifyModal } from './components/TickifyModal';
 import { SortingQuizModal } from './components/SortingQuizModal';
 import { SegmentRulesModal } from './components/SegmentRulesModal';
 import { ScrollToTop } from './components/ScrollToTop';
+import { AncientScriptureBackground } from './components/AncientScriptureBackground';
 // Pages
 import { Home } from './pages/Home';
 import { FestDescription } from './pages/FestDescription';
@@ -102,8 +103,8 @@ export function App() {
   return (
     <div className="min-h-screen bg-ink text-bone selection:bg-crimson selection:text-ink flex flex-col relative font-sans">
 
-      {/* Background Grid Boxes */}
-      <div className="gridlines" aria-hidden="true" />
+      {/* Ancient Scripture Background */}
+      <AncientScriptureBackground />
 
       {/* Dynamic Falling Snow Simulation */}
       <SnowfallCanvas intensity={snowMode} aboveLoader={isLoading} />
