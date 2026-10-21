@@ -46,6 +46,15 @@
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
+  /* The root element owns the viewport scroll. Without this, a single
+     overflowing element (the 3D reveal flips, the full-bleed heroes)
+     makes the browser widen the layout viewport — every `position: fixed`
+     layer (header, loader, snowfall canvas) then becomes wider than the
+     screen, so the burger button and the centred loader drift off-frame. */
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: #020a0b;

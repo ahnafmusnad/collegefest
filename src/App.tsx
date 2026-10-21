@@ -124,8 +124,10 @@ export function App() {
         onToggleSnow={handleToggleSnow}
       />
 
-      {/* Page Content Body */}
-      <main className="flex-1 relative z-10">
+      {/* Page Content Body — `overflow-x-clip` keeps the scroll-reveal
+          transforms (3D flips, sideways sweeps) from widening the document
+          and dragging the fixed header/loader out of the viewport. */}
+      <main className="flex-1 relative z-10 overflow-x-clip">
         {currentPage === 'home' && (
           <Home
             onNavigate={handleNavigate}
