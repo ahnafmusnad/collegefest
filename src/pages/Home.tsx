@@ -149,6 +149,7 @@ export const Home: React.FC<HomeProps> = ({
             {/* Explore Tourneys */}
             <Button
               variant="secondary"
+              mobileLabel="Explore"
               onClick={() => {
                 onNavigate('segments');
               }}
@@ -159,6 +160,7 @@ export const Home: React.FC<HomeProps> = ({
             {/* Sorting Quiz */}
             <Button
               variant="secondary"
+              mobileLabel="Your House"
               onClick={() => {
                 onOpenSortingQuiz();
               }}
@@ -200,7 +202,7 @@ export const Home: React.FC<HomeProps> = ({
           <GemDivider className="py-1" />
         </div>
 
-        <Reveal direction="zoom">
+        <Reveal direction="flip" duration={1100}>
           <div className="scroll-panel mx-auto max-w-4xl px-2 py-3 sm:px-4 sm:py-4">
             <AboutFestPanel />
           </div>

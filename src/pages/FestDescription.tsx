@@ -182,7 +182,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
         ======================================================== */}
         <section id="fest-lore" className="grid items-center gap-14 lg:grid-cols-2">
           {/* Text column */}
-          <Reveal direction="right">
+          <Reveal direction="left">
             <Eyebrow align="start">A Heritage Spanning Over 150 Winters</Eyebrow>
             <h2 className={`font-cinzel mt-5 text-3xl font-bold leading-tight tracking-wide sm:text-[2.6rem] ${SILVER}`}>
               Where Ancient Wisdom Meets Fierce Ambition
@@ -198,7 +198,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             {/* Stats */}
             <div className="mt-9 grid grid-cols-3 gap-3 sm:gap-4">
               {LORE_STATS.map((s, i) => (
-                <Reveal key={s.label} delay={i * 120} direction="up">
+                <Reveal key={s.label} delay={i * 120}>
                   <div className="corner-frame h-full border border-ember/30 bg-ink-2/60 px-3 py-5 text-center backdrop-blur-sm transition-colors duration-300 hover:border-ember/60">
                     <span className="corner tl" />
                     <span className="corner tr" />
@@ -216,7 +216,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
           {/* Image column */}
-          <Reveal direction="left" className="relative">
+          <Reveal direction="right" className="relative">
             <div className="corner-frame relative overflow-hidden border border-iron/40">
               <span className="corner tl z-10" />
               <span className="corner tr z-10" />
@@ -419,7 +419,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
             {/* Active Location Detail Card */}
-            <Reveal key={selectedLocation} direction="left" className="lg:col-span-2 frost-card p-6 md:p-8 border-2 border-crimson/30 flex flex-col justify-between">
+            <Reveal key={selectedLocation} direction="right" className="lg:col-span-2 frost-card p-6 md:p-8 border-2 border-crimson/30 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase">
                   <MapPin className="w-3.5 h-3.5" />

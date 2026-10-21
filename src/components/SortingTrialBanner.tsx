@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './ui/Button';
 
 
 interface SortingTrialBannerProps {
@@ -113,21 +114,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
             {/* ritual button */}
             <div className="mt-9">
-              <button type="button" onClick={onBegin} className="st-ritual group cursor-pointer">
-                <span className="st-ritual-inner">
-                  Begin the Sorting Ritual
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="w-3.5 h-3.5 transition-transform duration-500 group-hover:translate-x-1.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    aria-hidden="true"
-                  >
-                    <path d="M2 8h11M9 4l4 4-4 4" />
-                  </svg>
-                </span>
-              </button>
+              <Button onClick={onBegin}>Begin the Sorting Ritual</Button>
             </div>
           </div>
         </div>

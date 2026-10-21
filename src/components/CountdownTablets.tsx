@@ -61,7 +61,7 @@ export default function CountdownTablets({ time }: { time: TimeLeft }) {
 
       <div className="grid grid-cols-4 gap-2 sm:gap-3">
         {units.map((u, i) => (
-          <Reveal key={u.label} delay={i * 110} className="h-full">
+          <Reveal key={u.label} delay={i * 110} direction="drop" className="h-full">
             <div className={`tab-tablet ${u.shape} h-full`}>
               <div className="tab-inner h-full">
                 <div className="tab-medal">

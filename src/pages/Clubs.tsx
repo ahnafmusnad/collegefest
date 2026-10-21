@@ -119,7 +119,7 @@ export const Clubs: React.FC<ClubsProps> = ({
       {/* ========================================================
           ACTIVE HOUSE SHOWCASE DOSSIER
       ======================================================== */}
-      <Reveal direction="zoom">
+      <Reveal direction="flip" duration={1100}>
       <div className="scroll-panel space-y-6 relative px-2 py-2 md:px-4 md:py-3">
         
         {/* Top House Banner */}

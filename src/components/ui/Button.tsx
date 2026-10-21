@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 
 type ButtonProps = {
   children: string;
+  /** Shorter label shown on small screens; the full label is kept from `sm` up. */
+  mobileLabel?: string;
   variant?: "primary" | "secondary";
   size?: "md" | "sm";
   href?: string;
@@ -13,6 +15,7 @@ type ButtonProps = {
 
 export default function Button({
   children,
+  mobileLabel,
   variant = "primary",
   size = "md",
   href,
@@ -28,7 +31,16 @@ export default function Button({
   const inner = (
     <>
       <span className="btn__label">
-        <span data-text={children}>{children}</span>
+        <span data-text={children}>
+          {mobileLabel ? (
+            <>
+              <span className="sm:hidden">{mobileLabel}</span>
+              <span className="hidden sm:inline">{children}</span>
+            </>
+          ) : (
+            children
+          )}
+        </span>
       </span>
       {external && <ArrowUpRight className="btn__icon" aria-hidden="true" />}
     </>

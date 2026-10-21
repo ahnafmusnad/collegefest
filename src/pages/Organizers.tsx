@@ -62,7 +62,7 @@ export const Organizers: React.FC = () => {
 
 
       {/* Volunteer Battalion Callout */}
-      <Reveal direction="zoom" className="frost-card p-8 md:p-10 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
+      <Reveal direction="flip" duration={1100} className="frost-card p-8 md:p-10 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
         <div className="w-12 h-12 rounded-full bg-ink-2 border border-gold flex items-center justify-center mx-auto text-gold">
           <Shield className="w-6 h-6" />
         </div>

@@ -770,7 +770,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
               type="button"
               onClick={onClose}
               aria-label="Close the royal map"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-crimson/40 bg-ink-2/80 text-gold transition-colors hover:border-gold hover:text-white"
+              className="ghost-btn flex h-9 w-9 items-center justify-center border border-gold/50 text-gold-2"
             >
               <X className="h-5 w-5" />
             </button>
@@ -810,7 +810,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-lg border border-iron/70 bg-ink-2/60 px-4 py-2.5 font-cinzel text-[10px] uppercase tracking-[0.18em] text-bone-dim transition-colors hover:border-gold/60 hover:text-white"
+                  className="ghost-btn border border-iron/70 px-4 py-2.5 font-cinzel text-[10px] uppercase tracking-[0.18em] text-gold-2"
                 >
                   Stay
                 </button>
