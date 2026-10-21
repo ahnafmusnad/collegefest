@@ -50,17 +50,45 @@
      overflowing element (the 3D reveal flips, the full-bleed heroes)
      makes the browser widen the layout viewport — every `position: fixed`
      layer (header, loader, snowfall canvas) then becomes wider than the
-     screen, so the burger button and the centred loader drift off-frame. */
+     screen, so the burger button and the centred loader drift off-frame.
+
+
+     `clip` (not `hidden`) is the fix that actually holds on phones:
+     hidden still allows programmatic / rubber-band panning on mobile
+     Chrome and turns <body> into a nested scroll container, which is
+     exactly what let the fixed navbar + loader slide sideways. `clip`
+     makes horizontal overflow impossible without a scroll container. */
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
   }
+
 
   body {
     font-family: var(--font-sans);
     background-color: #020a0b;
     color: #c9d2d2;
-    overflow-x: hidden;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
     scroll-behavior: smooth;
+  }
+
+
+  /* Belt-and-braces: the React root itself can never exceed the viewport,
+     so no child — however wide — can ever drag the layout viewport out. */
+  #root {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+
+  /* Older WebViews that predate `clip` fall back to hidden. */
+  @supports not (overflow-x: clip) {
+    html,
+    body,
+    #root {
+      overflow-x: hidden;
+    }
   }
 }
 

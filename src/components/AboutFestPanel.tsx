@@ -1,4 +1,3 @@
-import React from "react";
 
 // EDIT THESE LATER: the paragraphs.
 const ABOUT_TEXT = [

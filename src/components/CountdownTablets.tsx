@@ -1,4 +1,3 @@
-import React from "react";
 import { CalendarDays, Hourglass, Snowflake, Moon } from "lucide-react";
 import { Reveal } from "./Reveal";
 
