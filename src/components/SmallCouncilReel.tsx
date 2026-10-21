@@ -304,71 +304,47 @@ export default function SmallCouncilReel() {
                         if (!drag.current.moved) scrollToIndex(i);
                       }}
                       aria-label={`Center ${m.name}`}
-                      className={`group relative w-[180px] h-[258px] md:w-[232px] md:h-[332px] shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
+                      className={`group relative w-[180px] h-[270px] md:w-[232px] md:h-[348px] shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
                         isActive
-                          ? "scale-[1.03] md:scale-110 z-10 border border-gold-2/60 shadow-[0_0_60px_-12px_rgba(23,104,110,0.55),inset_0_1px_0_rgba(255,255,255,0.08)]"
-                          : "scale-[0.9] md:scale-[0.92] opacity-50 border border-iron/50 hover:opacity-75 hover:border-iron"
+                          ? "scale-[1.03] md:scale-110 z-10 shadow-[0_0_60px_-12px_rgba(23,104,110,0.65)]"
+                          : "scale-[0.9] md:scale-[0.92] opacity-50 hover:opacity-75"
                       }`}
                       style={{
-                        background: "linear-gradient(165deg, #0b282a 0%, #061a1c 55%, #020a0b 100%)",
+                        background: "#020a0b url(/images/council-card-frame.webp) center / 100% 100% no-repeat",
                       }}
                     >
                       {m.image ? (
-                        <>
-                          <img
-                            src={m.image}
-                            alt={m.name}
-                            loading="lazy"
-                            draggable={false}
-                            className="absolute inset-0 h-full w-full object-cover"
-                          />
-                          <span className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink via-ink/70 to-transparent pointer-events-none" />
-                        </>
+                        /* photo goes inside the frame's circle ring */
+                        <img
+                          src={m.image}
+                          alt={m.name}
+                          loading="lazy"
+                          draggable={false}
+                          className={`absolute left-1/2 top-[45.2%] -translate-x-1/2 -translate-y-1/2 w-[66%] aspect-square rounded-full object-cover border transition-colors duration-500 ${
+                            isActive ? "border-gold-2/50" : "border-iron/40"
+                          }`}
+                        />
                       ) : (
-                        <>
-                          {/* faint sigil ring */}
-                          <span
-                            className={`absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border transition-all duration-700 ${
-                              isActive ? "border-crimson-2/40 scale-100" : "border-iron/25 scale-90"
-                            }`}
-                          />
-                          {/* monogram */}
-                          <span
-                            className={`absolute inset-0 flex items-center justify-center pb-10 font-cinzel-dec text-7xl transition-all duration-500 ${
-                              isActive
-                                ? "text-gold-2 drop-shadow-[0_0_22px_rgba(248,248,248,0.35)]"
-                                : "text-iron"
-                            }`}
-                          >
-                            {getInitials(m.name)}
-                          </span>
-                        </>
+                        /* monogram, centred exactly on the frame's circle ring */
+                        <span
+                          className={`absolute left-0 right-0 top-[45.2%] -translate-y-1/2 flex items-center justify-center font-cinzel-dec text-6xl md:text-7xl leading-none transition-all duration-500 ${
+                            isActive
+                              ? "text-gold-2 drop-shadow-[0_0_22px_rgba(248,248,248,0.35)]"
+                              : "text-iron"
+                          }`}
+                        >
+                          {getInitials(m.name)}
+                        </span>
                       )}
 
 
                       {/* sheen */}
-                      <span className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_70%_at_50%_-10%,rgba(248,248,248,0.14),transparent_60%)]" />
+                      <span className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_70%_at_50%_-10%,rgba(248,248,248,0.12),transparent_60%)]" />
 
 
-                      {/* corner ticks */}
-                      {[
-                        "top-2 left-2 border-t border-l",
-                        "top-2 right-2 border-t border-r",
-                        "bottom-2 left-2 border-b border-l",
-                        "bottom-2 right-2 border-b border-r",
-                      ].map((pos) => (
-                        <span
-                          key={pos}
-                          className={`absolute w-3.5 h-3.5 transition-colors duration-500 ${pos} ${
-                            isActive ? "border-gold-2/80" : "border-iron/60"
-                          }`}
-                        />
-                      ))}
-
-
-                      {/* tag chip */}
+                      {/* tag chip: kept inside the frame's safe area, clear of the bottom ornaments */}
                       <span
-                        className={`absolute bottom-3 left-3 right-3 text-center font-cinzel text-[9px] tracking-[0.18em] uppercase px-2 py-2 border backdrop-blur-sm transition-colors duration-500 ${
+                        className={`absolute bottom-[16%] left-[14%] right-[14%] text-center font-cinzel text-[8px] md:text-[9px] leading-snug tracking-[0.14em] uppercase px-2 py-1.5 border backdrop-blur-sm transition-colors duration-500 ${
                           isActive
                             ? "border-gold-2/40 bg-ink/80 text-bone"
                             : "border-iron/50 bg-ink/60 text-bone-dim"

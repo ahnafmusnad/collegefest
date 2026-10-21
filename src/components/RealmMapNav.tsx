@@ -6,7 +6,10 @@ import {
   Plus,
   Minus,
   Crosshair,
-  ChevronRight,
+  CalendarDays,
+  MapPin,
+  Coins,
+  Users,
 } from 'lucide-react';
 import { PageType } from '../types';
 import {
@@ -33,6 +36,9 @@ interface Plane {
 const MIN_S = 1;
 const MAX_S = 4;
 
+/** Regnal numerals for the great list. */
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
 interface RealmMapNavProps {
   open: boolean;
   onClose: () => void;
@@ -51,7 +57,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
   currentPage,
   onNavigate,
 }) => {
-  const [view, setView] = useState<'map' | 'list'>('map');
+  const [view, setView] = useState<'map' | 'list'>('list');
   const [selected, setSelected] = useState<PageType>(currentPage);
   const [t, setT] = useState({ x: 0, y: 0, s: 1 });
   const [smooth, setSmooth] = useState(true);
@@ -63,7 +69,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<{ dist: number; mid: { x: number; y: number }; start: { x: number; y: number; s: number } } | null>(null);
   const dragMoved = useRef(false);
-  const openedOnce = useRef(false);
+  const mapEntered = useRef(false);
 
   /* ------------------------------------------------------- geometry ---- */
   const measure = useCallback(() => {
@@ -97,7 +103,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
     const ro = new ResizeObserver(() => measure());
     ro.observe(el);
     return () => ro.disconnect();
-  }, [open, measure]);
+  }, [open, view, measure]);
 
   const clampT = useCallback(
     (x: number, y: number, s: number, p: Plane) => {
@@ -128,21 +134,31 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
     [clampT]
   );
 
-  /* Cinematic entrance: open wide, then glide to the traveller's seat. */
+  /* Every opening lands on THE LIST first, the chart waits inside. */
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      mapEntered.current = false;
+      return;
+    }
     setSelected(currentPage);
     setCartoucheKey((k) => k + 1);
-    if (!openedOnce.current) {
-      openedOnce.current = true;
+    setView('list');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  /* Cinematic entrance on the chart: open wide, then glide to the traveller's seat. */
+  useEffect(() => {
+    if (!open || view !== 'map') return;
+    if (!mapEntered.current) {
+      mapEntered.current = true;
       setSmooth(false);
       setT({ x: 0, y: 0, s: 1 });
-      window.setTimeout(() => focusOn(currentPage, 1.55), 120);
+      window.setTimeout(() => focusOn(currentPage, 1.55), 160);
     } else {
       focusOn(currentPage, Math.max(t.s, 1.4));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, view]);
 
   /* Lock page scroll behind the chart. */
   useEffect(() => {
@@ -273,7 +289,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 animate-fadeIn" role="dialog" aria-modal="true" aria-label="Royal map of the realm">
+    <div className="fixed inset-0 z-50 animate-fadeIn" role="dialog" aria-modal="true" aria-label="Site menu — the royal map of the realm">
       {/* ============================ THE CHART ============================ */}
       {view === 'map' && (
         <div
@@ -465,62 +481,252 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
         </div>
       )}
 
-      {/* ============================ LIST VIEW ============================ */}
+      {/* ============================ LIST VIEW — THE KING'S MENU ============================ */}
       {view === 'list' && (
-        <div className="absolute inset-0 overflow-y-auto bg-ink">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(226,113,29,0.15)_0%,_rgba(11,9,7,0.98)_70%)] pointer-events-none" />
-          <div className="relative z-10 mx-auto w-full max-w-lg px-6 pb-10 pt-24">
-            <p className="font-cinzel text-xs uppercase tracking-[0.25em] text-gold/80 mb-3 px-2">Select Your Realm</p>
-            <div className="space-y-2.5">
-              {REALM_NODES.map((item, index) => {
-                const isActive = currentPage === item.page;
-                return (
-                  <button
-                    key={item.page}
-                    type="button"
-                    style={{ animationDelay: `${index * 60}ms` }}
-                    onClick={() => travel(item.page)}
-                    className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all duration-200 animate-fadeIn ${
-                      isActive
-                        ? 'bg-gradient-to-r from-ink-2/80 to-ink-2/50 border-gold'
-                        : 'bg-ink-2/40 border-iron/80 hover:bg-ink-2/90 hover:border-crimson/40'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${isActive ? 'bg-crimson/20 text-gold-2' : 'bg-ink-3/60 text-bone-dim'}`}>
-                        <NavIcon name={item.icon} className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className={`font-cinzel text-base font-bold ${isActive ? 'text-white' : 'text-bone'}`}>{item.name}</div>
-                        <div className="text-xs text-[#ffd98a] font-sans font-semibold tracking-wide">{item.alias}</div>
+        <div className="absolute inset-0 overflow-hidden bg-ink">
+          {/* ghosted royal chart + winter atmosphere behind the list */}
+          <img
+            src="/images/realm-map.jpg"
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className="menu-backdrop-img"
+          />
+          <div className="realm-tint absolute inset-0 pointer-events-none" />
+          <div className="realm-mist realm-mist--a pointer-events-none" aria-hidden="true" />
+          <div className="realm-mist realm-mist--b pointer-events-none" aria-hidden="true" />
+          <div className="realm-vignette pointer-events-none" aria-hidden="true" />
+
+
+          <div className="relative z-10 h-full overflow-y-auto overscroll-contain">
+            <div className="mx-auto flex min-h-full w-full max-w-7xl flex-col px-5 pb-5 pt-24 sm:px-8 lg:px-12 lg:pt-28">
+              {/* eyebrow */}
+              <div className="animate-fade-up mb-6 lg:mb-9">
+                <div className="flex items-center gap-4">
+                  <span className="hidden h-px w-12 bg-gradient-to-r from-transparent via-crimson-2/80 to-crimson-2/80 sm:block" aria-hidden="true" />
+                  <span className="menu-eyebrow-gem" aria-hidden="true" />
+                  <div className="leading-none">
+                    <p className="font-cinzel text-[10px] font-semibold uppercase tracking-[0.42em] text-gold-2/90 sm:text-[11px]">
+                      The King&rsquo;s Menu
+                    </p>
+                    <p className="mt-1.5 text-[12px] italic tracking-wide text-bone-dim">
+                      Choose thy realm — every road leads to glory
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="grid flex-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_360px]">
+                {/* ------------------- THE GREAT LIST ------------------- */}
+                <nav aria-label="Primary">
+                  <ul>
+                    {REALM_NODES.map((item, index) => {
+                      const isActive = currentPage === item.page;
+                      return (
+                        <li key={item.page}>
+                          <button
+                            type="button"
+                            style={{ animationDelay: `${140 + index * 80}ms` }}
+                            onClick={() => travel(item.page)}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`menu-row group ${isActive ? 'menu-row--active' : ''}`}
+                          >
+                            <span className="menu-row__numeral" aria-hidden="true">
+                              {ROMAN[index]}
+                            </span>
+                            <span className="min-w-0">
+                              <span className="menu-row__alias">
+                                {item.name}
+                                {item.kind === 'sea' && (
+                                  <em className="menu-row__sea">across the narrow sea</em>
+                                )}
+                              </span>
+                              <span className="menu-row__name">{item.alias}</span>
+                              <span className="menu-row__blurb">{item.blurb}</span>
+                              {isActive && (
+                                <span className="menu-row__here">
+                                  <i aria-hidden="true" />
+                                  You are here
+                                </span>
+                              )}
+                            </span>
+                            <span className="menu-row__sigil" aria-hidden="true">
+                              <span className="menu-row__sigil-ring" />
+                              <NavIcon name={item.icon} className="h-[17px] w-[17px] sm:h-5 sm:w-5" />
+                            </span>
+                            <span className="menu-row__rule" aria-hidden="true" />
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+
+
+                {/* ------------------- THE COURT PANEL ------------------- */}
+                <aside
+                  className="menu-court animate-fade-up hidden lg:block"
+                  style={{ animationDelay: '360ms' }}
+                  aria-label="The court — fest details"
+                >
+                  <svg className="menu-court__corner menu-court__corner--tl" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 13 V5 Q1 1 5 1 H13" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg>
+                  <svg className="menu-court__corner menu-court__corner--tr" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 13 V5 Q1 1 5 1 H13" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg>
+                  <svg className="menu-court__corner menu-court__corner--bl" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 13 V5 Q1 1 5 1 H13" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg>
+                  <svg className="menu-court__corner menu-court__corner--br" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 13 V5 Q1 1 5 1 H13" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg>
+
+
+                  <div className="p-6 xl:p-7">
+                    {/* crest & house */}
+                    <div className="flex items-center gap-4">
+                      <img src="/images/college-crest.png" alt="Chittagong College crest" className="h-14 w-auto" />
+                      <div className="leading-tight">
+                        <p className="font-cinzel-dec text-[15px] font-bold tracking-[0.08em] text-gold-2">
+                          The Court of Carnaval
+                        </p>
+                        <p className="mt-1 font-cinzel text-[8.5px] uppercase tracking-[0.3em] text-bone-dim">
+                          Da Chittagong College
+                        </p>
+                        <p className="mt-1.5 inline-block border border-crimson/50 bg-crimson/10 px-2 py-0.5 font-cinzel text-[8px] uppercase tracking-[0.24em] text-[#8fd4d9]">
+                          {FEST_METADATA.edition}
+                        </p>
                       </div>
                     </div>
-                    <ChevronRight className={`w-5 h-5 ${isActive ? 'text-ember' : 'text-ash'}`} />
-                  </button>
-                );
-              })}
-            </div>
 
-            <div className="pt-5 space-y-3">
-              <Button href={FEST_METADATA.tickifyLink} external className="w-full" onClick={onClose}>
-                REGISTER ON TICKIFY NOW
-              </Button>
-              <div className="pt-2">
-                <p className="text-center font-cinzel text-[11px] uppercase tracking-[0.25em] text-gold/70 mb-3">Follow the Carnaval</p>
-                <div className="flex items-center justify-center gap-3">
-                  {SOCIAL_LINKS.map((soc) => (
-                    <a
-                      key={soc.name}
-                      href={soc.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={soc.name}
-                      title={soc.name}
-                      className="w-11 h-11 flex items-center justify-center rounded-xl border border-crimson/40 bg-ink-2/60 text-gold hover:text-white hover:border-gold hover:bg-ink-3 transition-all hover:-translate-y-0.5"
+
+                    {/* the proclamation facts */}
+                    <dl className="mt-6 space-y-4 border-t border-iron/50 pt-6">
+                      <div className="flex gap-3.5">
+                        <CalendarDays className="mt-0.5 h-4 w-4 flex-none text-ember" aria-hidden="true" />
+                        <div>
+                          <dt className="font-cinzel text-[8.5px] uppercase tracking-[0.28em] text-ash">When the ravens fly</dt>
+                          <dd className="mt-1 text-[13px] font-medium text-bone">{FEST_METADATA.dates}</dd>
+                        </div>
+                      </div>
+                      <div className="flex gap-3.5">
+                        <MapPin className="mt-0.5 h-4 w-4 flex-none text-ember" aria-hidden="true" />
+                        <div>
+                          <dt className="font-cinzel text-[8.5px] uppercase tracking-[0.28em] text-ash">The Red Citadel</dt>
+                          <dd className="mt-1 text-[13px] font-medium leading-snug text-bone">{FEST_METADATA.venue}</dd>
+                        </div>
+                      </div>
+                      <div className="flex gap-3.5">
+                        <Coins className="mt-0.5 h-4 w-4 flex-none text-ember" aria-hidden="true" />
+                        <div>
+                          <dt className="font-cinzel text-[8.5px] uppercase tracking-[0.28em] text-ash">The royal purse</dt>
+                          <dd className="mt-1 text-[13px] font-medium text-bone">{FEST_METADATA.totalPrizePool} in prize gold</dd>
+                        </div>
+                      </div>
+                      <div className="flex gap-3.5">
+                        <Users className="mt-0.5 h-4 w-4 flex-none text-ember" aria-hidden="true" />
+                        <div>
+                          <dt className="font-cinzel text-[8.5px] uppercase tracking-[0.28em] text-ash">Banners sworn</dt>
+                          <dd className="mt-1 text-[13px] font-medium text-bone">{FEST_METADATA.expectedFootfall}</dd>
+                        </div>
+                      </div>
+                    </dl>
+
+
+                    {/* actions */}
+                    <div className="mt-6 space-y-2.5 border-t border-iron/50 pt-6">
+                      <Button href={FEST_METADATA.tickifyLink} external className="w-full" onClick={onClose}>
+                        Register on Tickify
+                      </Button>
+                      <button
+                        type="button"
+                        onClick={() => setView('map')}
+                        className="menu-maplink w-full"
+                      >
+                        <MapIcon className="h-4 w-4" aria-hidden="true" />
+                        Unfurl the Royal Map
+                      </button>
+                    </div>
+
+
+                    {/* follow */}
+                    <div className="mt-6 border-t border-iron/50 pt-5">
+                      <p className="font-cinzel text-[8.5px] uppercase tracking-[0.3em] text-ash">Follow the Carnaval</p>
+                      <div className="mt-3 flex items-center gap-2.5">
+                        {SOCIAL_LINKS.map((soc) => (
+                          <a
+                            key={soc.name}
+                            href={soc.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={soc.name}
+                            title={soc.name}
+                            className="menu-social"
+                          >
+                            <SocialGlyph icon={soc.icon} className="h-4 w-4" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+
+
+              {/* ------------------- BOTTOM STRIP ------------------- */}
+              <div
+                className="animate-fade-up mt-8 border-t border-iron/50 pb-2 pt-5"
+                style={{ animationDelay: '520ms' }}
+              >
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <p className="font-cinzel text-[9px] uppercase leading-relaxed tracking-[0.3em] text-ash">
+                    Winter is Coming <span className="text-iron">◆</span> Carnaval Da Chittagong College{' '}
+                    <span className="text-iron">◆</span> MMXXVI
+                  </p>
+
+
+                  {/* compact actions — the court panel is hidden below lg */}
+                  <div className="flex flex-wrap items-center gap-2.5 lg:hidden">
+                    <Button size="sm" href={FEST_METADATA.tickifyLink} external onClick={onClose}>
+                      Register Now
+                    </Button>
+                    <button
+                      type="button"
+                      onClick={() => setView('map')}
+                      className="menu-maplink menu-maplink--sm"
                     >
-                      <SocialGlyph icon={soc.icon} className="w-5 h-5" />
-                    </a>
-                  ))}
+                      <MapIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                      Royal Map
+                    </button>
+                    <span className="mx-1 hidden h-6 w-px bg-iron/60 sm:block" aria-hidden="true" />
+                    <div className="flex items-center gap-2">
+                      {SOCIAL_LINKS.map((soc) => (
+                        <a
+                          key={soc.name}
+                          href={soc.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={soc.name}
+                          title={soc.name}
+                          className="menu-social menu-social--sm"
+                        >
+                          <SocialGlyph icon={soc.icon} className="h-3.5 w-3.5" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+
+                  {/* desktop: only the socials echo down here */}
+                  <div className="hidden items-center gap-2.5 lg:flex">
+                    {SOCIAL_LINKS.map((soc) => (
+                      <a
+                        key={soc.name}
+                        href={soc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={soc.name}
+                        title={soc.name}
+                        className="menu-social menu-social--sm"
+                      >
+                        <SocialGlyph icon={soc.icon} className="h-3.5 w-3.5" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -534,8 +740,12 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
           <div className="flex items-center gap-3 min-w-0">
             <img src="/images/college-crest.png" alt="" className="h-9 w-auto sm:h-10" />
             <div className="min-w-0 leading-none">
-              <p className="font-cinzel-dec text-sm sm:text-base font-bold tracking-[0.14em] text-gold-2 truncate">The Royal Map</p>
-              <p className="mt-1 font-cinzel text-[8px] sm:text-[9px] uppercase tracking-[0.3em] text-bone-dim truncate">Chart your course through Carnaval</p>
+              <p className="font-cinzel-dec text-sm sm:text-base font-bold tracking-[0.14em] text-gold-2 truncate">
+                {view === 'list' ? "The King's Menu" : 'The Royal Map'}
+              </p>
+              <p className="mt-1 font-cinzel text-[8px] sm:text-[9px] uppercase tracking-[0.3em] text-bone-dim truncate">
+                {view === 'list' ? 'Six realms · one crown · choose thy road' : 'Chart your course through Carnaval'}
+              </p>
             </div>
           </div>
 

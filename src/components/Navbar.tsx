@@ -3,7 +3,7 @@ import { PageType } from '../types';
 import { FEST_METADATA } from '../data/festData';
 import Button from './ui/Button';
 import { RealmMapNav } from './RealmMapNav';
-import { CloudSnow, Map as MapIcon } from 'lucide-react';
+import { CloudSnow } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: PageType;
@@ -80,17 +80,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Button href={FEST_METADATA.tickifyLink} external size="sm">Register Now</Button>
               </div>
 
-              {/* THE ROYAL MAP — the ONLY menu button. No burger button anywhere. */}
+              {/* THE BURGER MENU — opens the royal navigation (the list first, the chart within). */}
               <button
                 onClick={() => setMapOpen(true)}
-                className="group relative flex items-center gap-2 rounded-lg border border-gold/40 bg-ink-2/80 px-2.5 py-2 text-gold transition-colors hover:border-gold hover:text-white"
-                aria-label="Open the Royal Map navigation"
+                className="group relative flex items-center gap-2.5 rounded-lg border border-gold/40 bg-ink-2/80 px-3 py-2.5 text-gold transition-colors hover:border-gold hover:text-white"
+                aria-label="Open the menu"
                 aria-haspopup="dialog"
                 aria-expanded={mapOpen}
-                title="Open the Royal Map"
+                title="Open the menu"
               >
-                <MapIcon className="h-5 w-5 transition-transform duration-300 group-hover:rotate-[-8deg] group-hover:scale-110" />
-                <span className="hidden min-[1180px]:inline font-cinzel text-[11px] font-semibold uppercase tracking-[0.16em]">Map</span>
+                <span className={`burger-icon ${mapOpen ? 'burger-icon--open' : ''}`} aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+                <span className="hidden min-[1180px]:inline font-cinzel text-[11px] font-semibold uppercase tracking-[0.16em]">Menu</span>
               </button>
             </div>
           </div>
