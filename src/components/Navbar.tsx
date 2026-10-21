@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* THE BURGER MENU — opens the royal navigation (the list first, the chart within). */}
               <button
                 onClick={() => setMapOpen(true)}
-                className="ghost-btn group relative flex items-center gap-2.5 border border-gold/40 px-3 py-2.5 text-gold-2"
+                className="ghost-btn round-btn group relative flex items-center gap-2.5 border border-gold/40 px-3 py-2.5 text-gold-2"
                 aria-label="Open the menu"
                 aria-haspopup="dialog"
                 aria-expanded={mapOpen}

@@ -2419,12 +2419,18 @@
 }
 
 
-/* ===== Square corners on EVERY button (map pins excluded) ===== */
-button:not([class*="realm-pin"]),
+/* ===== Square corners on EVERY button (map pins and .round-btn excluded) ===== */
+button:not([class*="realm-pin"]):not(.round-btn),
 a.btn,
 .btn,
-.ghost-btn,
+.ghost-btn:not(.round-btn),
 .hs-cheer,
 .map-ctl {
   border-radius: 0 !important;
+}
+
+
+/* Buttons that keep rounded corners (burger menu button, menu close button) */
+.round-btn {
+  border-radius: 0.5rem !important;
 }
