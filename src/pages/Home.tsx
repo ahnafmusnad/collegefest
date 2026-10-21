@@ -416,7 +416,7 @@ export const Home: React.FC<HomeProps> = ({
       ======================================================== */}
       <section className="relative py-16 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
-        <div className="frost-card p-8 md:p-12 border-2 border-gold/40 relative overflow-hidden text-center max-w-4xl mx-auto">
+        <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-8 pt-24 pb-8 md:px-12 md:pt-28 md:pb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-4">
             <Ticket className="w-3.5 h-3.5" />
             Official Ticketing Partner: Tickify

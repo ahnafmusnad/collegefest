@@ -1493,6 +1493,30 @@
 }
 
 
+/* ============================================================
+   TICKIFY BANNER: the same ornate frame used as a full background
+   The PNG (1619 x 971) is transparent outside the rails, so it is stretched
+   to the banner box: the frame lands exactly on the card edges and the wolf
+   crest sits at the top centre.
+   ============================================================ */
+.tickify-frame {
+  position: relative;
+  background-color: #010f10;
+  background-image: url("/images/pledge-frame.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s ease;
+}
+.tickify-frame:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 0 18px rgba(23, 104, 110, 0.4));
+}
+
+
 /* Stone fill for the stretchable middle of a tall card. It sits behind the content, overlaps the
    textured top and bottom slices by 40 source px and fades at both ends, so there is no seam. */
 .pledge-card::before {
