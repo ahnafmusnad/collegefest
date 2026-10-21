@@ -1294,3 +1294,217 @@
 @media (min-width: 1024px) {
   .seg-frame-body { padding: 9rem 5rem 4rem; }
 }
+
+
+/* ============================================================
+   LOADING SCREEN: "Winter Is Coming"
+   Ported from the carnival-cc project, colours mapped to the
+   teal / silver palette. All names are prefixed cl- on purpose.
+   ============================================================ */
+.cl-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 60%, #0b282a 0%, #020a0b 70%);
+  transition:
+    opacity 1s cubic-bezier(0.77, 0, 0.18, 1),
+    visibility 1s,
+    transform 1.2s cubic-bezier(0.77, 0, 0.18, 1),
+    filter 1s;
+}
+.cl-loader--done {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.18);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+
+.cl-frost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0 0, rgba(201, 210, 210, 0.22), transparent 35%),
+    radial-gradient(circle at 100% 0, rgba(201, 210, 210, 0.18), transparent 35%),
+    radial-gradient(circle at 0 100%, rgba(201, 210, 210, 0.18), transparent 35%),
+    radial-gradient(circle at 100% 100%, rgba(201, 210, 210, 0.22), transparent 35%);
+  opacity: 0;
+  animation: cl-frost-creep 2.8s ease-out forwards;
+}
+@keyframes cl-frost-creep {
+  to { opacity: 1; transform: scale(1.05); }
+}
+
+
+.cl-inner {
+  position: relative;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+
+.cl-sigil {
+  display: flex;
+  justify-content: center;
+  color: #f8f8f8;
+  margin-bottom: 1.4rem;
+  animation: cl-spin 5s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(248, 248, 248, 0.6));
+}
+.cl-sigil svg {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+@keyframes cl-spin {
+  to { transform: rotate(360deg); }
+}
+
+
+.cl-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  color: #f8f8f8;
+  font-size: clamp(2rem, 7vw, 4.6rem);
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+}
+.cl-title span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  letter-spacing: 0.6em;
+  transform: translateY(20px);
+  animation: cl-word 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.cl-title span:nth-child(1) { animation-delay: 0.25s; }
+.cl-title span:nth-child(2) { animation-delay: 0.75s; }
+.cl-title span:nth-child(3) { animation-delay: 1.25s; color: #c9d2d2; }
+@keyframes cl-word {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.12em;
+    transform: none;
+    text-shadow: 0 0 30px rgba(248, 248, 248, 0.35);
+  }
+}
+
+
+.cl-bar {
+  position: relative;
+  width: min(300px, 70vw);
+  height: 2px;
+  margin: 2rem auto 1.2rem;
+  overflow: hidden;
+  background: rgba(47, 85, 87, 0.55);
+}
+.cl-bar span {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: linear-gradient(90deg, #145e62, #f8f8f8);
+  box-shadow: 0 0 14px rgba(248, 248, 248, 0.7);
+  animation: cl-bar 2.6s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+@keyframes cl-bar {
+  to { width: 100%; }
+}
+
+
+.cl-sub {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #9e9f9f;
+  opacity: 0;
+  animation: cl-sub 1s 1.8s forwards;
+}
+@keyframes cl-sub {
+  to { opacity: 1; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-frost { animation: none; opacity: 1; }
+  .cl-sigil { animation: none; }
+  .cl-title span {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    letter-spacing: 0.12em;
+    transform: none;
+  }
+  .cl-bar span { animation: none; width: 100%; }
+  .cl-sub { animation: none; opacity: 1; }
+  .cl-loader { transition: opacity 0.3s; }
+  .cl-loader--done { transform: none; filter: none; }
+}
+
+
+
+
+/* ============================================================
+   PLEDGE CARD FRAME: each house card has its own ornate frame
+   Source images are 1619 x 971 px, drawn as a nine-slice with border-image so the
+   top diamond, corner ornaments and side diamonds are NEVER stretched, however tall
+   the card is. Slices (source px): top 500, right 130, bottom 151, left 130.
+   --u = rendered pixels per source-image pixel (card width / 1619).
+   ============================================================ */
+.pledge-card-wrap {
+  container-type: inline-size;
+  display: flex;
+  width: 100%;
+}
+
+
+.pledge-card {
+  /* fallback for browsers without container query units: a card about 290px wide */
+  --u: 0.18px;
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: calc(var(--u) * 651); /* top slice 500 + bottom slice 151 */
+  /* 215 source px clears the top diamond, 150 clears the bottom rail and diamond */
+  padding: calc(var(--u) * 215) 8% calc(var(--u) * 150);
+  border: 1px solid transparent;
+  border-image-source: url("/images/pledge-card-frame.png");
+  border-image-slice: 500 130 151 130; /* top right bottom left, in SOURCE pixels, no "fill" */
+  border-image-width: calc(var(--u) * 500) calc(var(--u) * 130) calc(var(--u) * 151) calc(var(--u) * 130);
+  border-image-repeat: stretch;
+  transition: filter 0.4s ease;
+}
+@supports (width: 1cqw) {
+  .pledge-card {
+    --u: calc(100cqw / 1619);
+  }
+}
+.pledge-card--stark {
+  border-image-source: url("/images/pledge-frame.png");
+}
+.pledge-card:hover,
+.pledge-card:focus-within {
+  filter: drop-shadow(0 0 14px rgba(23, 104, 110, 0.45));
+}
+
+
+/* Stone fill for the stretchable middle of a tall card. It sits behind the content, overlaps the
+   textured top and bottom slices by 40 source px and fades at both ends, so there is no seam. */
+.pledge-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: calc(var(--u) * 460) calc(var(--u) * 68) calc(var(--u) * 111);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .65 0 0 0 0 .68 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(90% 70% at 50% 50%, rgba(20, 94, 98, 0.1), transparent 75%),
+    #010f10;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--u) * 40), #000 calc(100% - var(--u) * 40), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--u) * 40), #000 calc(100% - var(--u) * 40), transparent 100%);
+}

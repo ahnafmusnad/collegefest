@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Snowflake, Shield } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Snowflake } from 'lucide-react';
 
 interface LoadingScreenProps {
   isLoading: boolean;
@@ -7,81 +7,69 @@ interface LoadingScreenProps {
   onFinish?: () => void;
 }
 
+const HOLD_MS = 2900; // how long the loader plays before it starts dissolving
+const EXIT_MS = 1200; // dissolve length, must match the CSS transition on .cl-loader
+
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   isLoading,
   targetPageName = 'The Citadel',
-  onFinish
+  onFinish,
 }) => {
-  const [progress, setProgress] = useState(0);
-  const [visible, setVisible] = useState(isLoading);
+  const [mounted, setMounted] = useState(isLoading);
+  const [leaving, setLeaving] = useState(false);
+  const [run, setRun] = useState(0); // changes on every new load so the CSS animations restart
+  const onFinishRef = useRef(onFinish);
 
+  // always call the latest onFinish (App recreates it when the target page changes)
   useEffect(() => {
-    if (isLoading) {
-      setVisible(true);
-      setProgress(15);
-      const timer1 = setTimeout(() => setProgress(65), 800);
-      const timer2 = setTimeout(() => setProgress(98), 1900);
-      const timer3 = setTimeout(() => {
-        setProgress(100);
-        setTimeout(() => {
-          setVisible(false);
-          if (onFinish) onFinish();
-        }, 450);
-      }, 2600);
+    onFinishRef.current = onFinish;
+  }, [onFinish]);
 
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-      };
-    } else {
-      setVisible(false);
-    }
-  }, [isLoading, onFinish]);
+  // start (or restart) the loader
+  useEffect(() => {
+    if (!isLoading) return;
+    setMounted(true);
+    setLeaving(false);
+    setRun((r) => r + 1);
+    const t = setTimeout(() => {
+      setLeaving(true); // begin the dissolve
+      onFinishRef.current?.(); // swap the page underneath while it dissolves
+    }, HOLD_MS);
+    return () => clearTimeout(t);
+  }, [isLoading]);
 
-  if (!visible) return null;
+  // unmount after the dissolve finishes
+  useEffect(() => {
+    if (!leaving) return;
+    const t = setTimeout(() => setMounted(false), EXIT_MS);
+    return () => clearTimeout(t);
+  }, [leaving]);
+
+  // lock page scroll while the loader is fully visible
+  useEffect(() => {
+    if (!mounted || leaving) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mounted, leaving]);
+
+  if (!mounted) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-300 ${progress === 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-
-      {/* Medieval Ice Runes & Circle */}
-      <div className="relative mb-8 flex items-center justify-center">
-        {/* Outer rotating rune ring */}
-        <div className="absolute h-36 w-36 rounded-full border border-crimson/30 border-dashed animate-rune-spin" />
-        <div className="absolute h-48 w-48 rounded-full border border-gold/15" />
-        
-        {/* Central glowing crest */}
-        <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-ink/80 border-2 border-gold">
-          <Shield className="h-10 w-10 text-gold animate-pulse" />
-          <Snowflake className="absolute h-6 w-6 text-gold-2 animate-spin" style={{ animationDuration: '8s' }} />
+    <div className={`cl-loader${leaving ? ' cl-loader--done' : ''}`} aria-hidden="true">
+      <React.Fragment key={run}>
+        <div className="cl-frost" />
+        <div className="cl-inner">
+          <div className="cl-sigil">
+            <Snowflake strokeWidth={1.6} />
+          </div>
+          <h2 className="cl-title"><span>Winter</span> <span>Is</span> <span>Coming</span></h2>
+          <div className="cl-bar"><span /></div>
+          <p className="cl-sub">Entering {targetPageName}…</p>
         </div>
-      </div>
-
-      {/* Medieval GOT Proclamation */}
-      <div className="relative z-10 text-center px-4">
-        <p className="font-cinzel text-xs tracking-[0.3em] uppercase text-gold/80 mb-2">
-          Winter Is Coming
-        </p>
-        <h2 className="font-cinzel-dec text-2xl md:text-3xl font-extrabold text-white tracking-widest mb-3">
-          CARNAVAL DA CHITTAGONG COLLEGE
-        </h2>
-        <p className="font-cinzel text-sm text-bone-dim tracking-wider">
-          Entering <span className="text-gold-2 font-semibold">{targetPageName}</span>
-        </p>
-      </div>
-
-      {/* Valyrian Steel Loading Gauge */}
-      <div className="relative z-10 mt-8 w-64 md:w-80 h-2 bg-ink-2 rounded-full border border-ink-2/60 overflow-hidden shadow-inner">
-        <div
-          className="h-full bg-gradient-to-r from-blood via-gold to-gold-2 transition-all duration-300 ease-out"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
-      {/* Small Frost Lore hint */}
-      <div className="relative z-10 mt-4 text-[11px] font-sans text-bone-dim tracking-wider uppercase">
-        Forging the Realm &bull; {progress}%
-      </div>
+      </React.Fragment>
     </div>
   );
 };

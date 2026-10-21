@@ -58,60 +58,59 @@ export const Clubs: React.FC<ClubsProps> = ({
         {FOUR_HOUSES.map((house, i) => {
           const isSelected = activeHouseId === house.id;
           const isPledged = userPledgedHouse?.id === house.id;
+          const isStark = house.houseName === 'House Stark';
           return (
             <Reveal key={house.id} delay={i * 80} className="h-full">
-            <div
-              className={`relative h-full rounded-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-                isSelected
-                  ? 'bg-gradient-to-b from-ink-2/90 to-ink-2 border-gold -translate-y-1'
-                  : 'bg-ink-2/60 border-iron hover:border-crimson/40 hover:bg-ink-2/90'
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveHouseId(house.id);
-                }}
-
-                className="text-left p-4 flex-1 flex flex-col gap-3 group"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 p-1 bg-white/90 border border-iron shrink-0 flex items-center justify-center">
-                    <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
-                  </div>
-
-                  <div className="min-w-0">
-                    <div className="font-cinzel text-[10px] sm:text-xs text-gold/80 font-semibold uppercase leading-snug line-clamp-2">
-                      {house.name.split('(')[0]}
-                    </div>
-                    <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1 mt-1">
-                      {house.houseName}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="font-cinzel text-[11px] text-bone-dim italic line-clamp-1">
-                  "{house.motto}"
-                </div>
-              </button>
-
-              <div className="px-3 pb-3">
-                {isPledged ? (
-                  <div className="flex items-center justify-center gap-1.5 py-1.5 bg-ember/15 border border-ember/50 text-ember text-[10px] font-cinzel font-bold uppercase tracking-wider">
-                    <Check className="w-3 h-3" />
-                    Your House
-                  </div>
-                ) : (
+              <div className="pledge-card-wrap h-full">
+                <div
+                  className={`pledge-card relative h-full transition-all duration-300 flex flex-col ${isStark ? 'pledge-card--stark' : ''} ${isSelected ? '-translate-y-1' : ''}`}
+                >
                   <button
-                    type="button"
-                    onClick={() => handlePledge(house)}
-                    className="w-full py-1.5 border border-[#c9d2d2]/45 text-[#f8f8f8] text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-[#f8f8f8] hover:text-ink hover:border-[#f8f8f8] transition-colors"
-                  >
-                    Pledge
-                  </button>
-                )}
+                        type="button"
+                        onClick={() => {
+                          setActiveHouseId(house.id);
+                        }}
+
+                        className="text-left p-4 flex-1 flex flex-col gap-3 group"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 p-1 bg-white/90 border border-iron shrink-0 flex items-center justify-center">
+                            <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
+                          </div>
+
+                          <div className="min-w-0">
+                            <div className="font-cinzel text-[10px] sm:text-xs text-gold/80 font-semibold uppercase leading-snug line-clamp-2">
+                              {house.name.split('(')[0]}
+                            </div>
+                            <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1 mt-1">
+                              {house.houseName}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="font-cinzel text-[11px] text-bone-dim italic line-clamp-1">
+                          "{house.motto}"
+                        </div>
+                      </button>
+
+                  <div className="px-3 pb-3">
+                    {isPledged ? (
+                      <div className="flex items-center justify-center gap-1.5 py-1.5 bg-ember/15 border border-ember/50 text-ember text-[10px] font-cinzel font-bold uppercase tracking-wider">
+                        <Check className="w-3 h-3" />
+                        Your House
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handlePledge(house)}
+                        className="w-full py-1.5 border border-[#c9d2d2]/45 text-[#f8f8f8] text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-[#f8f8f8] hover:text-ink hover:border-[#f8f8f8] transition-colors"
+                      >
+                        Pledge
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
             </Reveal>
           );
         })}

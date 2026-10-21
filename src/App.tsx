@@ -106,7 +106,7 @@ export function App() {
       <div className="gridlines" aria-hidden="true" />
 
       {/* Dynamic Falling Snow Simulation */}
-      <SnowfallCanvas intensity={snowMode} />
+      <SnowfallCanvas intensity={snowMode} aboveLoader={isLoading} />
 
       {/* Cinematic Winter Loading Screen */}
       <LoadingScreen

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 interface SnowfallCanvasProps {
   intensity?: 'gentle' | 'blizzard' | 'off';
+  aboveLoader?: boolean;
 }
 
 interface Flake {
@@ -15,7 +16,7 @@ interface Flake {
   swingSpeed: number;
 }
 
-export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gentle' }) => {
+export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gentle', aboveLoader = false }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gen
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-20"
+      className={`pointer-events-none fixed inset-0 ${aboveLoader ? 'z-[61]' : 'z-20'}`}
       style={{ opacity: intensity === 'blizzard' ? 0.85 : 0.65 }}
     />
   );
