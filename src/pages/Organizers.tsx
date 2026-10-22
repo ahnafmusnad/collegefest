@@ -2,7 +2,7 @@ import React from 'react';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
 import SmallCouncilReel from '../components/SmallCouncilReel';
-import { Crown, Shield, Users, Sparkles, Scroll } from 'lucide-react';
+import { Crown, Shield, Scroll } from 'lucide-react';
 
 
 export const Organizers: React.FC = () => {
@@ -13,7 +13,6 @@ export const Organizers: React.FC = () => {
       {/* Page Hero */}
       <PageHero
         image="/images/small-council-chamber.jpg"
-        icon={<Users className="h-3.5 w-3.5 text-ember" />}
         eyebrow="The Citadel High Chamber"
         title="The Small Council & Organizers"
         description="Meet the architects, marshals, and visionaries steering Carnaval Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud."
@@ -72,12 +71,6 @@ export const Organizers: React.FC = () => {
         <p className="font-sans text-xs md:text-sm text-bone leading-relaxed max-w-xl mx-auto">
           Over 120 dedicated student marshals from Chittagong College ensure smooth gate operations, technical logistics, medical safety, and stage management.
         </p>
-        <div className="pt-2">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-ink-2 border border-crimson/30 text-xs font-cinzel text-gold-2">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            <span>Honoring the City Watch of Chittagong College</span>
-          </div>
-        </div>
       </Reveal>
 
 

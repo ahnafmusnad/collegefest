@@ -1,162 +1,126 @@
 import React from 'react';
 import { PageType } from '../types';
-import { FEST_METADATA } from '../data/festData';
-import { Crown, MapPin, Ticket, ExternalLink, Mail, Heart } from 'lucide-react';
-
+import { MapPin, Mail } from 'lucide-react';
 interface FooterProps {
   onNavigate: (page: PageType) => void;
-  onOpenTickifyModal: () => void;
 }
-
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTickifyModal }) => {
+/* A single realm link — diamond marker fades in and the
+   line steps toward it on hover. */
+const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
+  <li>
+    <button
+      onClick={onClick}
+      className="group/link relative inline-flex items-center gap-0 text-left text-bone-dim transition-all duration-300 hover:text-gold-2 hover:tracking-wide"
+    >
+      <span
+        className="mr-0 inline-block h-1 w-1 rotate-45 bg-crimson-2 opacity-0 transition-all duration-300 group-hover/link:mr-2 group-hover/link:opacity-100"
+        aria-hidden="true"
+      />
+      {children}
+    </button>
+  </li>
+);
+/* Column heading with a forged diamond marker */
+const FooterHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <h4 className="mb-5 flex items-center gap-2.5 font-cinzel text-xs font-bold uppercase tracking-[0.22em] text-gold-2">
+    <span className="h-1.5 w-1.5 rotate-45 bg-gold shadow-[0_0_0_3px_rgba(158,159,159,0.15)]" aria-hidden="true" />
+    {children}
+  </h4>
+);
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="relative z-10 border-t border-crimson/20 bg-gradient-to-b from-ink via-ink to-ink text-bone-dim overflow-hidden pt-16 pb-12">
-      {/* Top icy divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          
+    <footer className="relative z-10 overflow-hidden border-t border-crimson/20 bg-gradient-to-b from-ink via-ink to-ink pt-16 pb-10 text-bone-dim">
+      {/* ---- Valyrian steel top divider: hairlines meeting a center gem ---- */}
+      <div className="absolute top-0 left-0 right-0" aria-hidden="true">
+        <div className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+        <div className="relative mx-auto -mt-[5px] flex w-fit items-center justify-center">
+          <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold/60" />
+          <span className="mx-2 h-2.5 w-2.5 rotate-45 border border-gold/60 bg-ink-2" />
+          <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold/60" />
+        </div>
+      </div>
+      {/* faint ambient glow + watermark */}
+      <div
+        className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[70%] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(23,104,110,0.25), transparent 70%)' }}
+        aria-hidden="true"
+      />
+      <span
+        className="pointer-events-none absolute -right-6 bottom-6 select-none font-cinzel-dec text-[11rem] font-black leading-none text-white/[0.025]"
+        aria-hidden="true"
+      >
+        1869
+      </span>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ---- Main Footer Grid ---- */}
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Fest Proclamation */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="space-y-4 md:col-span-2 lg:pr-10 lg:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-ink-2 border border-gold/50 flex items-center justify-center">
-                <Crown className="w-5 h-5 text-gold" />
+              <div className="relative flex h-11 w-11 items-center justify-center border border-gold/50 bg-ink-2">
+                <span className="absolute -top-px -left-px h-2 w-2 border-t border-l border-gold-2/70" aria-hidden="true" />
+                <span className="absolute -top-px -right-px h-2 w-2 border-t border-r border-gold-2/70" aria-hidden="true" />
+                <span className="absolute -bottom-px -left-px h-2 w-2 border-b border-l border-gold-2/70" aria-hidden="true" />
+                <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-gold-2/70" aria-hidden="true" />
+                <img
+                  src="/images/college-crest.png"
+                  alt="Chittagong College crest"
+                  className="h-8 w-8 object-contain"
+                />
               </div>
               <div>
-                <span className="font-cinzel text-xs text-gold font-bold tracking-widest block uppercase">
+                <span className="block font-cinzel text-[10px] font-bold uppercase tracking-[0.28em] text-gold">
                   Chittagong College &bull; Est. 1869
                 </span>
-                <span className="font-cinzel-dec text-lg font-black text-white block">
+                <span className="block font-cinzel-dec text-xl font-black text-white">
                   CARNAVAL DA CC
                 </span>
               </div>
             </div>
-
-            <p className="font-sans text-xs text-bone-dim leading-relaxed max-w-sm">
+            <p className="max-w-sm font-sans text-xs leading-relaxed text-bone-dim">
               The grand winter convergence uniting the Four Great Houses of Chittagong College in an epic saga of science, language, debate, and the art of the lens. Winter has arrived at the Citadel.
             </p>
-
-            <div className="flex items-center gap-2 text-xs text-bone-dim">
-              <MapPin className="w-4 h-4 text-gold shrink-0" />
+            <div className="flex items-start gap-2 text-xs text-bone-dim">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
               <span>Chawkbazar, College Road, Chittagong-4203, Bangladesh</span>
             </div>
           </div>
-
           {/* Quick Realms */}
-          <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-gold-2 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              The Realms
-            </h4>
-            <ul className="space-y-2 text-xs font-sans">
-              <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-gold-2 transition-colors">
-                  The Iron Throne (Home)
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('description')} className="hover:text-gold-2 transition-colors">
-                  Fest Chronicle & Schedule
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('clubs')} className="hover:text-gold-2 transition-colors">
-                  The 4 Great Houses (Clubs)
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('segments')} className="hover:text-gold-2 transition-colors">
-                  Tourneys & Competitions
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('sponsorships')} className="hover:text-gold-2 transition-colors">
-                  Iron Bank (Sponsorships)
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('organizers')} className="hover:text-gold-2 transition-colors">
-                  Small Council (Organizers)
-                </button>
-              </li>
+          <nav aria-label="Footer navigation">
+            <FooterHeading>The Realms</FooterHeading>
+            <ul className="space-y-2.5 font-sans text-xs">
+              <RealmLink onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
+              <RealmLink onClick={() => onNavigate('description')}>Fest Chronicle &amp; Schedule</RealmLink>
+              <RealmLink onClick={() => onNavigate('clubs')}>The 4 Great Houses (Clubs)</RealmLink>
+              <RealmLink onClick={() => onNavigate('segments')}>Tourneys &amp; Competitions</RealmLink>
+              <RealmLink onClick={() => onNavigate('sponsorships')}>Iron Bank (Sponsorships)</RealmLink>
+              <RealmLink onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
             </ul>
-          </div>
-
-          {/* Registration & Tickify */}
-          <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-gold-2 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              Tickify Portal
-            </h4>
-            <ul className="space-y-2.5 text-xs font-sans">
-              <li>
-                <a
-                  href={FEST_METADATA.tickifyLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-gold-2 hover:text-gold-2 font-semibold"
-                >
-                  <Ticket className="w-3.5 h-3.5" />
-                  <span>Direct Tickify Checkout</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <button
-                  onClick={onOpenTickifyModal}
-                  className="text-bone-dim hover:text-white transition-colors"
-                >
-                  View Pass Tiers & Pricing
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('segments')}
-                  className="text-bone-dim hover:text-white transition-colors"
-                >
-                  Segment Registration Rules
-                </button>
-              </li>
-              <li className="pt-2 text-[11px] text-ash">
-                Official Ticketing Partner: Tickify Live
-              </li>
-            </ul>
-          </div>
-
+          </nav>
           {/* Contact Treasury */}
           <div>
-            <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-gold-2 mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              Royal Ravens
-            </h4>
-            <div className="space-y-2 text-xs text-bone-dim">
+            <FooterHeading>Royal Ravens</FooterHeading>
+            <div className="space-y-3 text-xs text-bone-dim">
               <p>For inquiries, partnerships or royal scrolls:</p>
-              <div className="flex items-center gap-1.5 text-gold-2">
-                <Mail className="w-3.5 h-3.5" />
-                <span>carnavaldactgclg@gmail.com</span>
-              </div>
-              <p className="text-[11px] text-ash pt-1">
+              <a
+                href="mailto:carnavaldactgclg@gmail.com"
+                className="group/raven inline-flex items-center gap-2 border border-iron/50 bg-ink-2/60 px-3 py-2 text-gold-2 transition-colors duration-300 hover:border-crimson-2/60 hover:bg-ink-3/60"
+              >
+                <Mail className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/raven:-translate-y-0.5 group-hover/raven:translate-x-0.5" />
+                <span className="break-all">carnavaldactgclg@gmail.com</span>
+              </a>
+              <p className="text-[11px] text-ash">
                 Sponsorship Wing: +880 1776-810739
               </p>
             </div>
           </div>
         </div>
-
-        {/* Bottom Copyright & Valyrian Easter Egg */}
-        <div className="pt-8 border-t border-ink-2 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ash">
-          <p className="font-cinzel text-center md:text-left">
-            &copy; {new Date().getFullYear()} Carnaval Da Chittagong College. All Rights Reserved.
+        {/* ---- Bottom Copyright ---- */}
+        <div className="border-t border-ink-2 pt-7 text-center">
+          <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
+            &copy; 2026 Ahnaf Abrar Musnad. All rights reserved.
           </p>
-          <div className="flex items-center gap-2">
-            <span>Forged with</span>
-            <Heart className="w-3.5 h-3.5 text-crimson-2 fill-crimson-2 animate-pulse" />
-            <span>in Valyrian React & Tailwind for Chittagong College</span>
-          </div>
         </div>
-
       </div>
     </footer>
   );

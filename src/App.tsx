@@ -168,10 +168,7 @@ export function App() {
       </main>
 
       {/* Global Footer */}
-      <Footer
-        onNavigate={handleNavigate}
-        onOpenTickifyModal={() => handleOpenTickify()}
-      />
+      <Footer onNavigate={handleNavigate} />
 
       {/* Back to top button */}
       <ScrollToTop />

@@ -7,7 +7,6 @@ import PageHero from '../components/ui/PageHero';
 import { TiltCard } from '../components/TiltCard';
 import Button from '../components/ui/Button';
 import { 
-  Shield, 
   Crown,
   Award,
   Swords, 
@@ -47,7 +46,6 @@ export const Clubs: React.FC<ClubsProps> = ({
       {/* Page Hero */}
       <PageHero
         image="/images/four-houses-heraldry.jpg"
-        icon={<Shield className="h-3.5 w-3.5 text-ember" />}
         eyebrow="The Citadel Quadrumvirate"
         title="The Four Great Houses"
         description="Four legendary clubs anchor Chittagong College’s student body. Each house bears its own sigil, sacred motto, heroic ancestry, and fierce competitive fire."

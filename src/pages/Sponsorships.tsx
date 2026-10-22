@@ -51,7 +51,6 @@ export const Sponsorships: React.FC = () => {
       {/* Page Hero */}
       <PageHero
         image="/images/college-winter-citadel.jpg"
-        icon={<Coins className="h-3.5 w-3.5 text-ember" />}
         eyebrow="The Treasuries of the Iron Bank"
         title="Royal Sponsorships & Partners"
         description="Align your house and enterprise with a national academic festival at one of Bengal’s most venerable citadels. Command unprecedented brand visibility among 1,000+ bright young minds from 25+ institutions, with a digital reach over 1,000,000+."

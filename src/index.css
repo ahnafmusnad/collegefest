@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'GameOfThrones';
-  src: url('/fonts/Game of Thrones.ttf') format('truetype');
+  src: url('/fonts/GameOfThrones.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -446,13 +446,13 @@
     var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
     calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
   );
-  --edge: rgba(178, 204, 206, 0.85);
-  --edge-hi: rgba(220, 242, 240, 0.95);
-  --steel-hi: #42525a; --steel-mid: #25313a; --steel-lo: #121a20;
-  --sheen: rgba(160, 215, 220, 0.2);
-  --txt: #e9f3f2; --txt-hi: #ffffff;
-  --ember: rgba(31, 122, 129, 0.55);
-  --glint: rgba(210, 245, 242, 0.4);
+  --edge: rgba(214, 120, 128, 0.85);
+  --edge-hi: rgba(255, 190, 196, 0.95);
+  --steel-hi: #6a2330; --steel-mid: #44141e; --steel-lo: #230a10;
+  --sheen: rgba(255, 150, 160, 0.22);
+  --txt: #fbeeee; --txt-hi: #ffffff;
+  --ember: rgba(220, 70, 85, 0.55);
+  --glint: rgba(255, 215, 218, 0.4);
 
 
   position: relative;
@@ -527,11 +527,11 @@
 /* ---- DRAGONGLASS (secondary) — obsidian, smooth rounded tablet ---- */
 .btn--secondary {
   --shape: inset(0 round 12px);
-  --edge: rgba(150, 162, 163, 0.55);
-  --edge-hi: rgba(205, 218, 217, 0.85);
-  --txt: #ccd6d5; --txt-hi: #eef4f3;
-  --ember: rgba(150, 175, 173, 0.3);
-  --glint: rgba(215, 228, 226, 0.3);
+  --edge: rgba(170, 120, 126, 0.55);
+  --edge-hi: rgba(225, 175, 180, 0.85);
+  --txt: #e4d2d3; --txt-hi: #f7eeee;
+  --ember: rgba(200, 90, 100, 0.3);
+  --glint: rgba(240, 215, 217, 0.3);
   padding-left: 1.7rem;
   padding-right: 1.7rem;
 }
@@ -540,7 +540,7 @@
     /* glass reflection */
     linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 34%),
     radial-gradient(120% 60% at 50% -10%, rgba(190, 212, 210, 0.12), transparent 55%),
-    linear-gradient(180deg, #1d2427 0%, #0d1214 55%, #070a0b 100%);
+    linear-gradient(180deg, #2a1a1d 0%, #160c0e 55%, #0b0607 100%);
 }
 
 
@@ -909,47 +909,6 @@
 }
 
 
-/* ---------- framed stats panel ---------- */
-.sp-panel {
-  position: relative;
-  max-width: 64rem;
-  margin: 0 auto;
-  border: 1px solid rgba(201, 210, 210, 0.3);
-  background: #061a1c;
-}
-.sp-panel::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(201, 210, 210, 0.14);
-  pointer-events: none;
-}
-.sp-sep {
-  position: relative;
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(180deg, transparent, rgba(201, 210, 210, 0.35) 20%, rgba(201, 210, 210, 0.35) 80%, transparent);
-}
-.sp-sep::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  transform: translate(-50%, -50%) rotate(45deg);
-  background: #061a1c;
-  border: 1px solid rgba(201, 210, 210, 0.55);
-}
-.sp-bracket {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  color: rgba(201, 210, 210, 0.8);
-  pointer-events: none;
-}
-
-
 /* ---------- ornate proclamation plaque ---------- */
 .plaque-frame {
   filter: drop-shadow(0 0 5px rgba(23, 104, 110, 0.40));
@@ -1293,8 +1252,16 @@
 .animate-bob { animation: bobDown 2.2s ease-in-out infinite; }
 
 
+/* Ember-diamond pulse: used by the icon-free hero eyebrow rule */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(23, 104, 110, 0.55); opacity: 0.8; }
+  50% { box-shadow: 0 0 13px rgba(91, 201, 214, 0.9); opacity: 1; }
+}
+.animate-glow-pulse { animation: glowPulse 3.4s ease-in-out infinite; }
+
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-ember, .animate-bob, .animate-fade-up { animation: none; }
+  .animate-ember, .animate-bob, .animate-fade-up, .animate-glow-pulse { animation: none; }
 }
 
 
@@ -2022,8 +1989,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.07;
-  filter: grayscale(1) contrast(1.06) brightness(0.9);
+  opacity: 0.14;
+  filter: grayscale(1) contrast(1.04) brightness(1.05);
   transform: scale(1.12);
 }
 .menu-eyebrow-gem {
@@ -2816,4 +2783,113 @@ a.btn,
 .proclamation-panel,
 .proclamation-panel::before {
   border-radius: 1.25rem;
+}
+
+
+/* ============================================================
+   THE REALM IN NUMBERS — hanging tapestry stats (ns-*)
+   ============================================================ */
+/* heraldic overline rule + diamond */
+.ns-rule {
+  height: 1px;
+  width: clamp(28px, 9vw, 110px);
+  background: linear-gradient(90deg, transparent, rgba(216, 222, 217, 0.55), transparent);
+}
+.ns-diamond {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: #1f8f96;
+  flex: none;
+}
+/* the forged iron rod */
+.ns-rod {
+  background: linear-gradient(180deg, #5c7c7e 0%, #2f5557 48%, #122e30 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(231, 227, 216, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 3px 8px rgba(0, 0, 0, 0.6);
+}
+/* rod finials — faceted diamond caps */
+.ns-finial {
+  position: absolute;
+  top: 0;
+  width: 21px;
+  height: 21px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #6f8a8b 0%, #2f5557 55%, #0b282a 100%);
+  border: 1px solid rgba(216, 222, 217, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+/* hanging rings */
+.ns-ring {
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  border: 2.5px solid #7d989a;
+  background: #061a1c;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+/* sigil medallion */
+.ns-medallion {
+  border-width: 1.5px;
+  background: radial-gradient(circle at 50% 35%, rgba(11, 40, 42, 0.9), rgba(2, 10, 11, 0.95));
+  box-shadow: 0 0 0 3px rgba(2, 10, 11, 0.7);
+  transition: transform 0.45s ease;
+}
+/* gentle cloth sway — a wide tapestry barely stirs */
+@keyframes ns-sway {
+  0%, 100% { transform: rotate(-0.5deg); }
+  50%      { transform: rotate(0.5deg); }
+}
+.ns-sway {
+  transform-origin: 50% 0%;
+  animation: ns-sway 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+/* the cloth itself — deep woven teal, clipped to the forked hem */
+.ns-tapestry {
+  background: linear-gradient(180deg, #0c2c2e 0%, #082022 52%, #051516 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 93%, 50% 86.25%, 0 93%);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+/* wrapper carries the hover lift so it never fights the sway */
+.ns-tapestry-wrap {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
+}
+.ns-tapestry-wrap:hover {
+  transform: translateY(7px);
+  filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.55));
+}
+.ns-tapestry-wrap:hover .ns-sway {
+  animation-play-state: paused;
+}
+.ns-tapestry-wrap:hover .ns-medallion {
+  transform: scale(1.08);
+}
+.ns-tapestry-wrap:hover .ns-frame-edge {
+  stroke-opacity: 0.95;
+}
+.ns-frame-edge {
+  transition: stroke-opacity 0.45s ease;
+}
+/* tassels hanging from the hem points */
+.ns-tassel {
+  position: absolute;
+  width: 1.5px;
+  height: 20px;
+  background: linear-gradient(180deg, rgba(216, 222, 217, 0.55), rgba(216, 222, 217, 0.15));
+}
+.ns-tassel::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%) rotate(45deg);
+  background: #17686e;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ns-sway { animation: none; }
 }

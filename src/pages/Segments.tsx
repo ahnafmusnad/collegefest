@@ -5,7 +5,6 @@ import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
 import Button from '../components/ui/Button';
 import {
-  Swords,
   Trophy,
   Users,
   User,
@@ -230,7 +229,6 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
       {/* Page Hero */}
       <PageHero
         image="/images/iron-throne-hero.jpg"
-        icon={<Swords className="h-3.5 w-3.5 text-ember" />}
         eyebrow="The Citadel Trials of Skill"
         title="Tourneys & Competitions"
         description="Fifteen trials, three banners of contest. Choose your ground — group, solo or online — read the royal decrees, and register your name on Tickify."

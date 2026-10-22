@@ -180,7 +180,7 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FAST STATS & CITADEL HERALDRY STRIP
       ======================================================== */}
-      <section className="relative z-10 px-4 py-8">
+      <section className="relative z-10 px-3 py-9 sm:px-6 md:py-12 lg:py-16">
         <StatsPanel />
       </section>
 

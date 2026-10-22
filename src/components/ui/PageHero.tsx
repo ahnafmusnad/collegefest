@@ -1,5 +1,8 @@
 import React, { useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
+import EyebrowRule from './EyebrowRule';
+
+
 
 
 /* Brushed-silver heading look (same as the Fest page) */
@@ -10,12 +13,13 @@ const SILVER =
 interface PageHeroProps {
   image: string;
   imageAlt?: string;
-  icon: React.ReactNode;
   eyebrow: string;
   title: string;
   description: string;
   children?: React.ReactNode;
 }
+
+
 
 
 /**
@@ -26,7 +30,6 @@ interface PageHeroProps {
 export const PageHero: React.FC<PageHeroProps> = ({
   image,
   imageAlt = '',
-  icon,
   eyebrow,
   title,
   description,
@@ -35,9 +38,13 @@ export const PageHero: React.FC<PageHeroProps> = ({
   const heroRef = useRef<HTMLElement>(null);
 
 
+
+
   const scrollDown = () => {
     heroRef.current?.nextElementSibling?.scrollIntoView({ behavior: 'smooth' });
   };
+
+
 
 
   return (
@@ -57,6 +64,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
       </div>
 
 
+
+
       {/* Torch glows */}
       <div className="animate-ember pointer-events-none absolute bottom-24 left-[12%] h-40 w-40 rounded-full bg-ember/10 blur-3xl" />
       <div
@@ -65,14 +74,14 @@ export const PageHero: React.FC<PageHeroProps> = ({
       />
 
 
+
+
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-28 text-center">
-        <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-ember/45 bg-ink-2/60 px-6 py-2.5 backdrop-blur-md">
-          {icon}
-          <span className="text-[10px] font-bold uppercase tracking-[0.34em] text-bone">
-            {eyebrow}
-          </span>
-        </div>
+        {/* Eyebrow — the chronicler's rule: hairlines + ember diamonds, no icon */}
+        <EyebrowRule className="animate-fade-up">{eyebrow}</EyebrowRule>
+
+
 
 
         <h1
@@ -83,12 +92,16 @@ export const PageHero: React.FC<PageHeroProps> = ({
         </h1>
 
 
+
+
         <p
           className="animate-fade-up mx-auto mt-8 max-w-2xl text-sm leading-relaxed text-bone/90 sm:text-[15px]"
           style={{ animationDelay: '240ms' }}
         >
           {description}
         </p>
+
+
 
 
         {children && (
@@ -100,6 +113,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
           </div>
         )}
       </div>
+
+
 
 
       {/* Scroll cue */}
@@ -116,6 +131,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
     </section>
   );
 };
+
+
 
 
 export default PageHero;

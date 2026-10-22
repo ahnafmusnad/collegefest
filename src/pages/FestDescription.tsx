@@ -3,6 +3,7 @@ import { FEST_SCHEDULE, FAQS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import CitadelArenas from '../components/CitadelArenas';
 import Button from '../components/ui/Button';
+import EyebrowRule from '../components/ui/EyebrowRule';
 import { 
   MapPin, 
   ShieldCheck, 
@@ -129,12 +130,8 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
         <div className="relative z-10 mx-auto max-w-4xl px-6 pt-28 pb-24 text-center">
-          <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-ember/45 bg-ink-2/60 px-6 py-2.5 backdrop-blur-md">
-            <Crown className="h-3.5 w-3.5 text-ember" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.34em] text-bone">
-              The Chronicler's Parchment
-            </span>
-          </div>
+          {/* Eyebrow — the chronicler's rule: hairlines + ember diamonds, no icon */}
+          <EyebrowRule className="animate-fade-up">The Chronicler's Parchment</EyebrowRule>
 
 
           <h1
