@@ -21,7 +21,7 @@ export const Organizers: React.FC = () => {
 
 
       {/* Convener's Royal Proclamation */}
-      <Reveal direction="zoom" className="frost-card p-6 md:p-10 border-2 border-crimson/40 relative overflow-hidden">
+      <Reveal direction="zoom" className="frost-card proclamation-panel p-6 md:p-10 border-2 border-crimson/40 relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative shrink-0">
             <div className="w-24 h-24 md:w-32 md:h-32 overflow-hidden border-2 border-gold flex items-center justify-center bg-gradient-to-br from-ink-2 via-ink-3/40 to-ink">
@@ -62,14 +62,14 @@ export const Organizers: React.FC = () => {
 
 
       {/* Volunteer Battalion Callout */}
-      <Reveal direction="flip" duration={1100} className="frost-card p-8 md:p-10 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
+      <Reveal direction="flip" duration={1100} className="frost-card stone-panel p-8 md:p-10 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4">
         <div className="w-12 h-12 rounded-full bg-ink-2 border border-gold flex items-center justify-center mx-auto text-gold">
           <Shield className="w-6 h-6" />
         </div>
         <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
           THE CITADEL VOLUNTEER CORPS
         </h3>
-        <p className="font-sans text-xs md:text-sm text-bone-dim leading-relaxed max-w-xl mx-auto">
+        <p className="font-sans text-xs md:text-sm text-bone leading-relaxed max-w-xl mx-auto">
           Over 120 dedicated student marshals from Chittagong College ensure smooth gate operations, technical logistics, medical safety, and stage management.
         </p>
         <div className="pt-2">
