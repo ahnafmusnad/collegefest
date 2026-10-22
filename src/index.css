@@ -949,6 +949,65 @@
 
 
 /* ============================================================
+   "LORE OF THE RED CITADEL" — parchment text column & stone stat
+   ============================================================ */
+.lore-parchment {
+  position: relative;
+  isolation: isolate;
+  background: url('/images/parchment-card.png') center / 100% 100% no-repeat;
+  padding: clamp(1.9rem, 4.5vw, 3.2rem) clamp(1.35rem, 4vw, 2.9rem);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
+}
+.lore-parchment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 0%, rgba(2, 10, 11, 0.18), rgba(2, 10, 11, 0.4) 88%);
+}
+.lore-stone {
+  position: relative;
+  isolation: isolate;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(158, 159, 159, 0.32);
+  box-shadow:
+    inset 0 2px 12px rgba(0, 0, 0, 0.75),
+    inset 0 -8px 22px rgba(0, 0, 0, 0.6),
+    0 12px 22px -10px rgba(0, 0, 0, 0.85);
+  transition: translate 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+}
+.lore-stone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(2, 10, 11, 0.22), rgba(2, 10, 11, 0.55));
+}
+@media (hover: hover) {
+  .lore-stone:hover {
+    translate: 0 -5px;
+    border-color: rgba(47, 168, 176, 0.55);
+    box-shadow:
+      inset 0 2px 12px rgba(0, 0, 0, 0.7),
+      inset 0 -8px 22px rgba(0, 0, 0, 0.55),
+      0 20px 30px -12px rgba(0, 0, 0, 0.9),
+      0 0 22px rgba(47, 168, 176, 0.28);
+  }
+}
+.lore-stone--founding { background-image: url('/images/stone-1869.jpg'); }
+.lore-stone--houses   { background-image: url('/images/stone-houses.jpg'); }
+.lore-stone--days     { background-image: url('/images/stone-days.jpg'); }
+.lore-stone__value {
+  color: #f4fbfc;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 18px rgba(47, 168, 176, 0.5);
+}
+.lore-stone__label { color: #c9d2d2; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); }
+
+
+/* ============================================================
    FEATURED SEGMENT CARDS — notched "royal writ" plaques
    Concave corner cuts with a 1px teal border that follows the
    notch, sampled to sit inside the dark-teal palette.

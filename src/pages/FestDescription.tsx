@@ -74,9 +74,9 @@ const getEventIcon = (title: string, type: string): React.ElementType => {
 
 
 const LORE_STATS = [
-  { value: '1869', label: 'Citadel Founded' },
-  { value: '4 Houses', label: 'Club Alliance' },
-  { value: '2 Days', label: 'Winter Glory' }
+  { value: '1869', label: 'Citadel Founded', stone: 'lore-stone--founding' },
+  { value: '4 Houses', label: 'Club Alliance', stone: 'lore-stone--houses' },
+  { value: '2 Days', label: 'Winter Glory', stone: 'lore-stone--days' }
 ];
 
 
@@ -180,42 +180,36 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
         {/* ========================================================
             THE LORE OF THE RED CITADEL
         ======================================================== */}
-        <section id="fest-lore" className="grid items-center gap-14 lg:grid-cols-2">
-          {/* Text column */}
-          <Reveal direction="left">
-            <Eyebrow align="start">A Heritage Spanning Over 150 Winters</Eyebrow>
-            <h2 className={`font-cinzel mt-5 text-3xl font-bold leading-tight tracking-wide sm:text-[2.6rem] ${SILVER}`}>
+  <section id="fest-lore" className="grid items-center gap-14 lg:grid-cols-2">
+
+        {/* Text column */}
+        <Reveal direction="left">
+          <div className="lore-parchment">
+            <h2 className={`font-cinzel mt-0 text-xl font-bold leading-tight tracking-wide sm:text-[1.75rem] ${SILVER}`}>
               Where Ancient Wisdom Meets Fierce Ambition
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-bone/90 sm:text-[15px]">
+            <p className="mt-3 text-[12.5px] leading-[1.55] text-bone/90 sm:text-[13px]">
               Perched atop the legendary hills of Chawkbazar, Chittagong College has nurtured prime ministers, revolutionary scholars, scientists, and master artists. When the winter chill embraces the campus brick towers, the four guardian clubs—Physics & Astronomy, English Language & Literature, Debating, and the Photographic Society—raise their banners.
             </p>
-            <p className="font-garamond mt-4 text-[15px] italic leading-relaxed text-bone-dim">
+            <p className="font-garamond mt-2.5 text-[13px] italic leading-[1.55] text-bone-dim sm:text-[13.5px]">
               For two days, the campus transforms into an arena of science, language, debate, and the art of the lens. Whether you are stepping onto the debate podium or framing the perfect shot under the winter sky, you are part of this living saga.
             </p>
 
 
             {/* Stats */}
-            <div className="mt-9 grid grid-cols-3 gap-3 sm:gap-4">
+            <div className="mx-auto mt-3.5 grid max-w-sm grid-cols-3 gap-1.5 sm:gap-2.5">
               {LORE_STATS.map((s, i) => (
                 <Reveal key={s.label} delay={i * 120}>
-                  <div className="corner-frame h-full border border-ember/30 bg-ink-2/60 px-3 py-5 text-center backdrop-blur-sm transition-colors duration-300 hover:border-ember/60">
-                    <span className="corner tl" />
-                    <span className="corner tr" />
-                    <span className="corner bl" />
-                    <span className="corner br" />
-                    <p className="font-cinzel text-xl font-bold text-ember sm:text-2xl">{s.value}</p>
-                    <p className="mt-2 text-[8.5px] font-semibold uppercase tracking-[0.22em] text-bone-dim sm:text-[9.5px]">
-                      {s.label}
-                    </p>
+                  <div className="h-full px-1 py-2.5 text-center sm:px-1.5">
+                    <p className="lore-stone__value font-cinzel text-[15px] font-bold leading-none sm:text-lg">{s.value}</p>
+                    <p className="lore-stone__label mt-1 text-[6.5px] font-semibold uppercase leading-[1.2] tracking-[0.2em] sm:text-[8px]">{s.label}</p>
                   </div>
                 </Reveal>
               ))}
             </div>
-          </Reveal>
-
-
-          {/* Image column */}
+          </div>
+        </Reveal>
+        {/* Image column */}
           <Reveal direction="right" className="relative">
             <div className="corner-frame relative overflow-hidden border border-iron/40">
               <span className="corner tl z-10" />
