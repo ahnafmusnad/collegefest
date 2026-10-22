@@ -430,88 +430,168 @@
   }
 }
 
+/* ============================================================
+   .btn — FORGED OF THE REALM  (each variant is its own artifact)
+   Primary    = VALYRIAN STEEL blade — ripple-forged, teal ember
+   Secondary  = DRAGONGLASS tablet — obsidian glass, silver inlay
+   .btn--sm   = a slimmer forged cut
+   ============================================================ */
 .btn {
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+
+  /* ---- Valyrian steel (primary) ---- */
+  --cut: 15px;
+  --shape: polygon(
+    var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
+    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
+  );
+  --edge: rgba(178, 204, 206, 0.85);
+  --edge-hi: rgba(220, 242, 240, 0.95);
+  --steel-hi: #42525a; --steel-mid: #25313a; --steel-lo: #121a20;
+  --sheen: rgba(160, 215, 220, 0.2);
+  --txt: #e9f3f2; --txt-hi: #ffffff;
+  --ember: rgba(31, 122, 129, 0.55);
+  --glint: rgba(210, 245, 242, 0.4);
+
+
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.95rem 1.7rem;
+  padding: 0.95rem 2.1rem;
   font-family: "Cinzel", serif;
   font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.25;
   text-align: center;
-  color: #e7e3d8;
+  color: var(--txt);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   background: transparent;
-  border: 1px solid rgba(201, 210, 210, 0.7);
-  border-radius: 0;
-  box-shadow: none;
-  overflow: hidden;
-  isolation: isolate;
+  border: 0;
   cursor: pointer;
-  transition: border-color 0.5s var(--ease), transform 0.2s ease, color 0.45s var(--ease);
+  isolation: isolate;
+  filter:
+    drop-shadow(1px 0 0 var(--edge)) drop-shadow(-1px 0 0 var(--edge))
+    drop-shadow(0 1px 0 var(--edge)) drop-shadow(0 -1px 0 var(--edge))
+    drop-shadow(0.7px 0.7px 0 var(--edge)) drop-shadow(-0.7px 0.7px 0 var(--edge))
+    drop-shadow(0.7px -0.7px 0 var(--edge)) drop-shadow(-0.7px -0.7px 0 var(--edge))
+    drop-shadow(0 0 16px rgba(31, 122, 129, 0))
+    drop-shadow(0 10px 20px rgba(0, 0, 0, 0.55));
+  transition: color 0.45s var(--ease), filter 0.55s var(--ease), transform 0.2s ease;
 }
-.btn--secondary {
-  color: #c9d2d2;
-  border-color: rgba(158, 159, 159, 0.45);
-}
-.btn--sm { padding: 0.65rem 1.1rem; font-size: 0.7rem; }
 
 
-/* color fill wipes up from the bottom on hover */
+/* the forged plate */
 .btn::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
-  background: var(--btn-hover-fill);
-  transform: translateY(101%);
-  transition: transform 0.55s var(--ease);
+  z-index: -2;
+  clip-path: var(--shape);
+  background:
+    /* rivets near each point */
+    radial-gradient(circle at 13px 50%, rgba(228, 244, 242, 0.95) 0 1.1px, rgba(70, 92, 94, 0.55) 1.7px, transparent 2.6px),
+    radial-gradient(circle at calc(100% - 13px) 50%, rgba(228, 244, 242, 0.95) 0 1.1px, rgba(70, 92, 94, 0.55) 1.7px, transparent 2.6px),
+    /* folded-steel ripples */
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.045) 0 2px, rgba(0, 0, 0, 0.1) 2px 4px, rgba(255, 255, 255, 0) 4px 10px),
+    /* cold sheen from above */
+    radial-gradient(130% 70% at 50% -10%, var(--sheen), transparent 55%),
+    /* steel body */
+    linear-gradient(180deg, var(--steel-hi) 0%, var(--steel-mid) 46%, var(--steel-lo) 100%);
 }
 
 
-.btn__label { display: inline-block; }
+/* torchlight glint that sweeps the blade */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  clip-path: var(--shape);
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 0%, var(--glint) 50%, rgba(255, 255, 255, 0) 100%) -80% 0 / 46% 100% no-repeat;
+  pointer-events: none;
+  opacity: 0;
+  transition: background-position 0.85s var(--ease), opacity 0.35s ease;
+}
+
+
+.btn__label { display: inline-block; position: relative; z-index: 1; }
 .btn__label > span::after { display: none; }
-.btn__icon { width: 1em; height: 1em; flex-shrink: 0; transition: transform 0.5s var(--ease); }
+.btn__icon { width: 1em; height: 1em; flex-shrink: 0; position: relative; z-index: 1; transition: transform 0.5s var(--ease); }
 
 
-/* hover (mouse), works at every screen width */
+/* ---- DRAGONGLASS (secondary) — obsidian, smooth rounded tablet ---- */
+.btn--secondary {
+  --shape: inset(0 round 12px);
+  --edge: rgba(150, 162, 163, 0.55);
+  --edge-hi: rgba(205, 218, 217, 0.85);
+  --txt: #ccd6d5; --txt-hi: #eef4f3;
+  --ember: rgba(150, 175, 173, 0.3);
+  --glint: rgba(215, 228, 226, 0.3);
+  padding-left: 1.7rem;
+  padding-right: 1.7rem;
+}
+.btn--secondary::before {
+  background:
+    /* glass reflection */
+    linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 34%),
+    radial-gradient(120% 60% at 50% -10%, rgba(190, 212, 210, 0.12), transparent 55%),
+    linear-gradient(180deg, #1d2427 0%, #0d1214 55%, #070a0b 100%);
+}
+
+
+/* slimmer forged cut */
+.btn--sm { padding: 0.62rem 1.35rem; font-size: 0.7rem; --cut: 9px; }
+
+
+/* hover (mouse) — the steel wakes, teal ember glows */
 @media (hover: hover) {
-  .btn:hover,
-  .btn--secondary:hover {
-    border-color: #cfd8d4;
-    color: var(--btn-hover-text);
+  .btn:hover {
+    color: var(--txt-hi);
+    transform: translateY(-1px);
+    filter:
+      drop-shadow(1px 0 0 var(--edge-hi)) drop-shadow(-1px 0 0 var(--edge-hi))
+      drop-shadow(0 1px 0 var(--edge-hi)) drop-shadow(0 -1px 0 var(--edge-hi))
+      drop-shadow(0.7px 0.7px 0 var(--edge-hi)) drop-shadow(-0.7px 0.7px 0 var(--edge-hi))
+      drop-shadow(0.7px -0.7px 0 var(--edge-hi)) drop-shadow(-0.7px -0.7px 0 var(--edge-hi))
+      drop-shadow(0 0 16px var(--ember))
+      drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
   }
-  .btn:hover::before { transform: translateY(0); }
+  .btn:hover::after { background-position: 180% 0; opacity: 1; }
   .btn:hover .btn__icon { transform: translate(3px, -3px); }
 }
 
 
 /* press effect for touch screens */
 @media (hover: none) {
-  .btn:active,
-  .btn--secondary:active {
-    border-color: #cfd8d4;
-    color: var(--btn-hover-text);
+  .btn:active {
+    color: var(--txt-hi);
+    filter:
+      drop-shadow(1px 0 0 var(--edge-hi)) drop-shadow(-1px 0 0 var(--edge-hi))
+      drop-shadow(0 1px 0 var(--edge-hi)) drop-shadow(0 -1px 0 var(--edge-hi))
+      drop-shadow(0.7px 0.7px 0 var(--edge-hi)) drop-shadow(-0.7px 0.7px 0 var(--edge-hi))
+      drop-shadow(0.7px -0.7px 0 var(--edge-hi)) drop-shadow(-0.7px -0.7px 0 var(--edge-hi))
+      drop-shadow(0 0 16px var(--ember))
+      drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
   }
-  .btn:active::before { transform: translateY(0); }
+  .btn:active::after { background-position: 180% 0; opacity: 1; }
   .btn:active .btn__icon { transform: translate(3px, -3px); }
 }
 
 
 /* text roll, large screens only */
 @media (hover: hover) and (min-width: 1024px) {
-  .btn__label { position: relative; overflow: hidden; height: 1.25em; }
+  .btn__label { position: relative; overflow: hidden; height: 1.25em; z-index: 1; }
   .btn__label > span { position: relative; display: block; transition: transform 0.5s var(--ease); }
   .btn__label > span::after { display: block; content: attr(data-text); position: absolute; left: 0; top: 100%; }
   .btn:hover .btn__label > span { transform: translateY(-100%); }
 }
 .btn:active { transform: translateY(1px); }
-.btn:focus-visible { outline: 2px solid #dfeaea; outline-offset: 3px; }
+.btn:focus-visible { outline: 2px solid var(--edge-hi); outline-offset: 4px; }
 
 
 /* nav link: underline draws in on hover, draws out the other side on leave */
