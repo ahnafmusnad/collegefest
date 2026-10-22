@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { FEST_SCHEDULE, CAMPUS_LOCATIONS, FAQS } from '../data/festData';
+import { FEST_SCHEDULE, FAQS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
+import CitadelArenas from '../components/CitadelArenas';
 import Button from '../components/ui/Button';
 import { 
   MapPin, 
@@ -87,12 +88,10 @@ interface FestDescriptionProps {
 
 export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
   const [selectedDay, setSelectedDay] = useState<number>(1);
-  const [selectedLocation, setSelectedLocation] = useState<string>(CAMPUS_LOCATIONS[0].id);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
 
   const activeDaySchedule = FEST_SCHEDULE.find(d => d.day === selectedDay) || FEST_SCHEDULE[0];
-  const activeLocation = CAMPUS_LOCATIONS.find(l => l.id === selectedLocation) || CAMPUS_LOCATIONS[0];
 
 
   const toggleFaq = (index: number) => {
@@ -365,106 +364,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
         {/* ========================================================
             CAMPUS CITADEL INTERACTIVE MAP
         ======================================================== */}
-        <section className="space-y-6">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/30 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
-              <MapPin className="w-3.5 h-3.5" />
-              Geography of the Citadel
-            </div>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-extrabold text-white">
-              CAMPUS ARENAS & LANDMARKS
-            </h2>
-            <p className="font-sans text-xs sm:text-sm text-bone-dim">
-              Explore key tournament venues situated across Chittagong College's historic grounds.
-            </p>
-          </Reveal>
-
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-            {/* Location Buttons list */}
-            <div className="space-y-2">
-              {CAMPUS_LOCATIONS.map((loc, i) => {
-                const isSelected = selectedLocation === loc.id;
-                return (
-                  <Reveal key={loc.id} delay={i * 80}>
-                  <button
-                    className={`w-full text-left p-4 rounded-xl border transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-ink-2/80 border-gold'
-                        : 'bg-ink-2/60 border-iron hover:border-crimson/40'
-                    }`}
-                    onClick={() => {
-                      setSelectedLocation(loc.id);
-                    }}
-                  >
-                    <div className="font-cinzel text-sm font-bold text-white flex items-center justify-between">
-                      <span>{loc.name}</span>
-                      <MapPin className={`w-4 h-4 ${isSelected ? 'text-ember' : 'text-ash'}`} />
-                    </div>
-                    <div className="font-cinzel text-xs text-gold italic mt-0.5">
-                      "{loc.gotAlias}"
-                    </div>
-                  </button>
-                  </Reveal>
-                );
-              })}
-            </div>
-
-
-            {/* Active Location Detail Card */}
-            <Reveal key={selectedLocation} direction="right" className="lg:col-span-2 frost-card p-6 md:p-8 border-2 border-crimson/30 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase">
-                  <MapPin className="w-3.5 h-3.5" />
-                  Selected Venue
-                </div>
-                <div>
-                  <h3 className="font-cinzel-dec text-2xl font-bold text-white">
-                    {activeLocation.name}
-                  </h3>
-                  <p className="font-cinzel text-sm text-gold italic">
-                    The Citadel Alias: "{activeLocation.gotAlias}"
-                  </p>
-                </div>
-                <p className="font-sans text-sm text-bone-dim leading-relaxed">
-                  {activeLocation.description}
-                </p>
-
-
-                <div>
-                  <div className="font-cinzel text-xs font-bold text-gold-2 uppercase tracking-widest mb-2">
-                    Tournaments Hosted Here:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {activeLocation.eventsHosted.map((e, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 rounded-lg bg-ink-2/70 border border-crimson/30 text-xs text-gold-2 font-sans"
-                      >
-                        {e}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-
-              <div className="pt-6 mt-6 border-t border-iron flex items-center justify-between text-xs text-bone-dim">
-                <span>Location Coordinates: Chittagong College Heritage Campus</span>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={onOpenTickify}
-                >
-                  Book Event Pass
-                </Button>
-              </div>
-            </Reveal>
-
-
-          </div>
-        </section>
+        <CitadelArenas onBook={onOpenTickify} />
 
 
         {/* ========================================================
