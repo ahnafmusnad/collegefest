@@ -50,7 +50,7 @@ export default function CountdownTablets({ time }: { time: TimeLeft }) {
       <Reveal>
         <div className="mb-5 flex items-center justify-center gap-2 sm:gap-4">
           <FlourishRule />
-          <h2 className="whitespace-nowrap font-cinzel text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f8f8f8] sm:text-sm sm:tracking-[0.32em]">
+          <h2 className="whitespace-nowrap font-cinzel text-[11px] font-semibold uppercase tracking-[0.24em] text-[#e7e3d8] sm:text-sm sm:tracking-[0.32em]">
             Winter Descends In
           </h2>
           <FlourishRule flip />

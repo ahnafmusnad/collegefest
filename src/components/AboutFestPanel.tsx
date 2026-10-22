@@ -15,7 +15,7 @@ export default function AboutFestPanel() {
             key={i}
             className={`text-[17px] leading-[1.7] text-[#c9d2d2] ${
               i === 0
-                ? "first-letter:float-left first-letter:mr-2 first-letter:font-cinzel first-letter:text-5xl first-letter:font-bold first-letter:leading-[0.9] first-letter:text-[#f8f8f8]"
+                ? "first-letter:float-left first-letter:mr-2 first-letter:font-cinzel first-letter:text-5xl first-letter:font-bold first-letter:leading-[0.9] first-letter:text-[#e7e3d8]"
                 : ""
             }`}
             style={{ fontFamily: '"EB Garamond", Georgia, serif' }}

@@ -30,7 +30,7 @@ const LORE_IMAGE = '/images/red-keep.jpg';
 
 /* Brushed-silver heading look */
 const SILVER =
-  'text-gold-2 [text-shadow:0_1px_0_rgba(255,255,255,0.22),0_2px_6px_rgba(0,0,0,0.75),0_0_28px_rgba(31,138,145,0.25)]';
+  'text-gold-2 [text-shadow:0_1px_0_rgba(231,227,216,0.12),0_2px_6px_rgba(0,0,0,0.75),0_0_28px_rgba(31,138,145,0.25)]';
 
 
 /* Thin silver rule with a teal diamond in the centre */
@@ -267,8 +267,8 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   }}
                   className={`btn-shine rounded-full px-7 py-3 text-[11px] font-bold uppercase tracking-[0.24em] transition-all duration-300 ${
                     isSelected
-                      ? 'border border-[#f8f8f8]/60 bg-gradient-to-b from-[#f8f8f8] to-[#9e9f9f] text-ink shadow-[0_14px_28px_-16px_rgba(0,0,0,0.95)]'
-                      : 'border border-iron/60 bg-transparent text-bone-dim hover:border-[#c9d2d2]/70 hover:text-[#f8f8f8]'
+                      ? 'border border-[#e7e3d8]/60 bg-gradient-to-b from-[#e7e3d8] to-[#9e9f9f] text-ink shadow-[0_14px_28px_-16px_rgba(0,0,0,0.95)]'
+                      : 'border border-iron/60 bg-transparent text-bone-dim hover:border-[#c9d2d2]/70 hover:text-[#e7e3d8]'
                   }`}
                 >
                   Day {day.day}: {day.gotTitle.split(':')[0]}

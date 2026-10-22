@@ -282,7 +282,7 @@ export default function SmallCouncilReel() {
                       <span
                         className={`font-cinzel text-[9px] leading-relaxed tracking-[0.22em] uppercase text-center max-w-[150px] md:max-w-[200px] transition-colors duration-500 ${
                           isActive
-                            ? "text-gold-2 border border-gold-2/50 bg-ink/60 px-2.5 py-1.5 shadow-[0_0_24px_-6px_rgba(248,248,248,0.35)]"
+                            ? "text-gold-2 border border-gold-2/50 bg-ink/60 px-2.5 py-1.5 shadow-[0_0_24px_-6px_rgba(231,227,216,0.22)]"
                             : "text-ash"
                         }`}
                       >
@@ -329,7 +329,7 @@ export default function SmallCouncilReel() {
                         <span
                           className={`absolute left-0 right-0 top-[45.2%] -translate-y-1/2 flex items-center justify-center font-cinzel-dec text-6xl md:text-7xl leading-none transition-all duration-500 ${
                             isActive
-                              ? "text-gold-2 drop-shadow-[0_0_22px_rgba(248,248,248,0.35)]"
+                              ? "text-gold-2 drop-shadow-[0_0_22px_rgba(231,227,216,0.22)]"
                               : "text-iron"
                           }`}
                         >
@@ -339,7 +339,7 @@ export default function SmallCouncilReel() {
 
 
                       {/* sheen */}
-                      <span className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_70%_at_50%_-10%,rgba(248,248,248,0.12),transparent_60%)]" />
+                      <span className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_70%_at_50%_-10%,rgba(231,227,216,0.08),transparent_60%)]" />
 
 
                       {/* tag chip: kept inside the frame's safe area, clear of the bottom ornaments */}

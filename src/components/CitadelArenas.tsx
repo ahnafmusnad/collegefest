@@ -96,7 +96,7 @@ function RealmMap({ active }: { active: ArenaLocation }) {
             <path
               d={`M${cx} ${cy - 2.4} L${cx + 2.4} ${cy} L${cx} ${cy + 2.4} L${cx - 2.4} ${cy} Z`}
               fill={isActive ? '#9fe0d4' : '#145e62'}
-              stroke={isActive ? '#f8f8f8' : '#1f8f96'}
+              stroke={isActive ? '#e7e3d8' : '#1f8f96'}
               strokeWidth={isActive ? 0.7 : 0.5}
             />
           </g>

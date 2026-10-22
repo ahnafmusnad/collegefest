@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 
 /* Brushed-silver heading look (same as the Fest page) */
 const SILVER =
-  'text-gold-2 [text-shadow:0_1px_0_rgba(255,255,255,0.22),0_2px_6px_rgba(0,0,0,0.75),0_0_28px_rgba(31,138,145,0.25)]';
+  'text-gold-2 [text-shadow:0_1px_0_rgba(231,227,216,0.12),0_2px_6px_rgba(0,0,0,0.75),0_0_28px_rgba(31,138,145,0.25)]';
 
 
 interface PageHeroProps {

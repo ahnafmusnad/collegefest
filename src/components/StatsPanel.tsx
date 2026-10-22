@@ -40,7 +40,7 @@ export default function StatsPanel() {
                   <div className="flex items-center gap-2 text-[#c9d2d2]">
                     <s.icon className="h-5 w-5" aria-hidden="true" />
                     <span
-                      className="text-2xl font-semibold text-[#f8f8f8] md:text-3xl"
+                      className="text-2xl font-semibold text-[#e7e3d8] md:text-3xl"
                       style={{ fontFamily: '"EB Garamond", Georgia, serif' }}
                     >
                       <CountUp end={s.end} duration={1700} delay={i * 120} format={s.format} />
