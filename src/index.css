@@ -2519,3 +2519,112 @@ a.btn,
 .round-btn {
   border-radius: 0.5rem !important;
 }
+
+
+/* ============================================================
+   IRON BANK TIER CARDS — treasury ledger frame
+   ============================================================ */
+.tier-card {
+  position: relative;
+  isolation: isolate;
+  background-color: #031213;
+  background-image: url("/images/iron-bank-frame.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  padding: 2.6rem 1.5rem 1.9rem;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  transition:
+    translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+@media (min-width: 768px) {
+  .tier-card { padding: 3rem 1.9rem 2.1rem; }
+}
+
+
+/* legibility scrim — keeps the corner regalia visible, darkens behind text */
+.tier-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    78% 64% at 50% 54%,
+    rgba(2, 10, 11, 0.66),
+    rgba(2, 10, 11, 0.28) 60%,
+    transparent 80%
+  );
+}
+
+
+.tier-card:hover,
+.tier-card:focus-within {
+  translate: 0 -5px;
+  filter: drop-shadow(0 0 18px rgba(23, 104, 110, 0.38));
+}
+.tier-card--title:hover,
+.tier-card--title:focus-within {
+  filter: drop-shadow(0 0 26px rgba(23, 104, 110, 0.5));
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-card:hover,
+  .tier-card:focus-within {
+    translate: none;
+  }
+}
+
+
+/* ============================================================
+   IRON BANK STAT TABLETS — carved stone slabs
+   ============================================================ */
+.stat-tablet {
+  position: relative;
+  isolation: isolate;
+  background: #0b282a url("/images/stone-tablet.png") center / 100% 100% no-repeat;
+  padding: 1.5rem 1rem 1.3rem;
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.65),
+    inset 0 -6px 16px rgba(0, 0, 0, 0.5),
+    0 12px 22px -10px rgba(0, 0, 0, 0.85);
+  transition:
+    translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+.stat-tablet:hover,
+.stat-tablet:focus-within {
+  translate: 0 -4px;
+  filter: drop-shadow(0 0 14px rgba(23, 104, 110, 0.35)) brightness(1.06);
+}
+
+
+/* ============================================================
+   ROYAL GUILDS PROCLAMATION — wolf-crest pledge frame
+   ============================================================ */
+.guild-frame {
+  position: relative;
+  background-color: #010f10;
+  background-image: url("/images/pledge-frame.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  transition:
+    translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+.guild-frame:hover {
+  translate: 0 -4px;
+  filter: drop-shadow(0 0 18px rgba(23, 104, 110, 0.4));
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-tablet:hover,
+  .guild-frame:hover {
+    translate: none;
+  }
+}

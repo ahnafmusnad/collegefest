@@ -57,6 +57,8 @@ export interface SponsorTier {
   description: string;
   slots: string;
   perks: string[];
+  /** Patron brands sealed at this tier — shown on the Iron Bank cards. */
+  brands?: string[];
   color: string;
   borderColor: string;
 }
