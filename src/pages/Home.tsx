@@ -111,13 +111,18 @@ export const Home: React.FC<HomeProps> = ({
               CARNAVAL
             </h1>
             <SwordDivider className="mt-4 mb-4" />
+            {/* Bulletproof gradient text: the old bg-clip-text +
+                text-transparent + animated background-position combo
+                went invisible in Instagram's in-app browser (WebKit).
+                .frost-text-gradient keeps a solid fallback colour and
+                a static gradient; the glow animates on the wrapper. */}
             <p className="font-got text-lg sm:text-2xl md:text-3xl font-normal text-white tracking-[0.15em] sm:tracking-[0.3em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               DA{' '}
-              <span className="inline-block animate-gradient bg-gradient-to-r from-gold-2 via-bone to-ember bg-clip-text text-transparent">
-                CHITTAGONG
+              <span className="frost-glow">
+                <span className="frost-text-gradient whitespace-nowrap">CHITTAGONG</span>
               </span>{' '}
-              <span className="bg-gradient-to-r from-gold-2 via-gold-2 to-bone bg-clip-text text-transparent">
-                COLLEGE
+              <span className="frost-glow">
+                <span className="frost-text-gradient-soft whitespace-nowrap">COLLEGE</span>
               </span>
             </p>
             <p className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
@@ -300,9 +305,13 @@ export const Home: React.FC<HomeProps> = ({
           </div>
 
 
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide silver-text uppercase">
-            Featured Segments &amp; Arenas
-          </h2>
+          {/* drop-shadow lives on this wrapper, not on the clip-text
+              element itself — WebKit breaks filter + clip:text */}
+          <div className="drop-shadow-[0_4px_14px_rgba(0,0,0,0.65)]">
+            <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide silver-text uppercase">
+              Featured Segments &amp; Arenas
+            </h2>
+          </div>
 
 
           <p className="font-cinzel text-sm sm:text-base tracking-[0.34em] text-bone-dim uppercase">

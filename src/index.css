@@ -286,9 +286,189 @@
   }
 }
 
+/* NOTE: .animate-gradient is legacy. Never animate background-position
+   on text clipped with background-clip:text — in-app WebKit browsers
+   (Instagram / Facebook / Messenger) skip painting it entirely and the
+   text disappears (this is what hid "CHITTAGONG COLLEGE" after "DA" on
+   the home hero while Firefox rendered it fine). Kept for reference. */
 .animate-gradient {
   background-size: 200% auto;
   animation: gradientShift 6s linear infinite;
+}
+
+
+/* ============================================================
+   BULLETPROOF FROST GRADIENT TEXT  (hero: DA CHITTAGONG COLLEGE)
+   ------------------------------------------------------------
+   Engineered so the text can NEVER render invisible:
+     1. a solid silver fallback colour is declared first;
+     2. the transparent fill is applied only inside @supports,
+        so engines without background-clip:text keep readable
+        solid-coloured text instead of vanishing;
+     3. the gradient is static — no background-position animation;
+     4. the element is promoted to its own GPU layer (translateZ).
+   The shimmer lives on a WRAPPER span (.frost-glow), because a
+   filter on the clipped-text element itself is a second WebKit
+   invisibility bug.
+   ============================================================ */
+.frost-text-gradient,
+.frost-text-gradient-soft {
+  display: inline-block;
+  color: #d8ded9; /* solid fallback — never invisible */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+
+/* "CHITTAGONG" — bright silver swept toward teal */
+.frost-text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    #f4f7f2 0%,
+    #d8ded9 34%,
+    #bcd4d4 62%,
+    #4aa6ad 88%,
+    #d8ded9 100%
+  );
+}
+
+
+/* "COLLEGE" — soft brushed-silver sheen */
+.frost-text-gradient-soft {
+  background-image: linear-gradient(
+    100deg,
+    #d8ded9 0%,
+    #f0f4ee 45%,
+    #c9d2d2 100%
+  );
+}
+
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .frost-text-gradient,
+  .frost-text-gradient-soft {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+
+/* Breathing frost glow — animated on a wrapper, never on the
+   clipped-text element itself (filter + clip:text breaks WebKit). */
+@keyframes frostGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(159, 224, 212, 0.16))
+      drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(159, 224, 212, 0.42))
+      drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6));
+  }
+}
+
+
+.frost-glow {
+  display: inline-block;
+  animation: frostGlow 4.5s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   IN-APP BROWSER GATE — "Open The Gates" proclamation
+   Shown when the site is opened inside Instagram / Facebook /
+   TikTok etc. in-app browsers. Offers escape routes to a real
+   browser (see components/InAppBrowserGate.tsx).
+   ============================================================ */
+@keyframes gateFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+@keyframes gateRise {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+@keyframes sigilPulse {
+  0%, 100% { box-shadow: 0 0 22px rgba(31, 143, 150, 0.28); }
+  50% { box-shadow: 0 0 42px rgba(31, 143, 150, 0.55); }
+}
+
+
+.gate-fade {
+  animation: gateFade 0.45s ease forwards;
+}
+
+
+.gate-card {
+  animation: gateRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+
+.gate-sigil {
+  animation: sigilPulse 3.2s ease-in-out infinite;
+}
+
+
+/* Hex-cut ghost button — echoes the Valyrian steel .btn silhouette */
+.gate-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.82rem 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9d2d2;
+  border: 1px solid rgba(47, 85, 87, 0.85);
+  background: rgba(6, 26, 28, 0.6);
+  clip-path: polygon(
+    11px 0, calc(100% - 11px) 0, 100% 50%,
+    calc(100% - 11px) 100%, 11px 100%, 0 50%
+  );
+  cursor: pointer;
+  transition:
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    letter-spacing 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.gate-ghost:hover {
+  color: #9fe0d4;
+  border-color: rgba(91, 201, 214, 0.8);
+  background: rgba(11, 40, 42, 0.85);
+  letter-spacing: 0.27em;
+}
+
+
+.gate-ghost:active {
+  transform: scale(0.97);
+}
+
+
+.gate-ghost-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-fade,
+  .gate-card,
+  .gate-sigil {
+    animation: none;
+  }
 }
 
 /* Shimmer scanline effect on cards */
@@ -416,6 +596,12 @@
 
   .animate-gradient {
     animation: none;
+  }
+
+
+  .frost-glow {
+    animation: none;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6));
   }
 
   .btn-shine::after {
@@ -1202,13 +1388,27 @@
 .seg-wrap:hover .seg-link .seg-arrow { transform: translateX(4px); }
 
 
-/* brushed-silver display title for the section header */
+/* brushed-silver display title for the section header.
+   Bulletproofed like the hero gradient: solid fallback colour first,
+   transparent fill only inside @supports. The drop-shadow filter was
+   moved OFF this element onto a wrapper in JSX — a filter on the same
+   element as background-clip:text is another WebKit invisibility bug
+   (it would hide section titles in Instagram's browser too). */
 .silver-text {
-  background: linear-gradient(180deg, #e7e3d8 8%, #c9d2d2 46%, #8a9b9b 78%, #c9d2d2 96%);
+  color: #c9d2d2; /* solid fallback — never invisible */
+  background-image: linear-gradient(180deg, #e7e3d8 8%, #c9d2d2 46%, #8a9b9b 78%, #c9d2d2 96%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.65));
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .silver-text {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 

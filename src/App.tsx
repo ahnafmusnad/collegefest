@@ -10,6 +10,7 @@ import { SortingQuizModal } from './components/SortingQuizModal';
 import { SegmentRulesModal } from './components/SegmentRulesModal';
 import { ScrollToTop } from './components/ScrollToTop';
 import { AncientScriptureBackground } from './components/AncientScriptureBackground';
+import { InAppBrowserGate } from './components/InAppBrowserGate';
 // Pages
 import { Home } from './pages/Home';
 import { FestDescription } from './pages/FestDescription';
@@ -244,8 +245,14 @@ export function App() {
         }}
       />
 
+
+      {/* In-App Browser Gate — detects Instagram/Facebook/TikTok etc.
+          in-app browsers and hands the visitor over to a real browser
+          (Chrome / Firefox / device default), or offers a copy-link. */}
+      <InAppBrowserGate />
+
+
     </div>
   );
 }
-
 export default App;
