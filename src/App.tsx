@@ -18,9 +18,31 @@ import { Segments } from './pages/Segments';
 import { Sponsorships } from './pages/Sponsorships';
 import { Organizers } from './pages/Organizers';
 
+const PAGE_TYPES: PageType[] = [
+  'home',
+  'description',
+  'clubs',
+  'segments',
+  'sponsorships',
+  'organizers',
+];
+
+const pageToHash = (page: PageType): string => (page === 'home' ? '#/' : `#/${page}`);
+
+const pageFromLocation = (): PageType => {
+  if (window.location.hash.startsWith('#/')) {
+    const hash = window.location.hash.slice(2).toLowerCase();
+    return PAGE_TYPES.includes(hash as PageType) ? (hash as PageType) : 'home';
+  }
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/').pop()?.toLowerCase() ?? '';
+  return PAGE_TYPES.includes(path as PageType) ? (path as PageType) : 'home';
+};
+
+const initialPage = pageFromLocation();
+
 export function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>('home');
-  const [targetPage, setTargetPage] = useState<PageType>('home');
+  const [currentPage, setCurrentPage] = useState<PageType>(initialPage);
+  const [targetPage, setTargetPage] = useState<PageType>(initialPage);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Initial winter loading
   const [snowMode, setSnowMode] = useState<'gentle' | 'blizzard' | 'off'>('gentle');
   
@@ -54,12 +76,31 @@ export function App() {
     } catch {}
   };
 
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const page = pageFromLocation();
+      setTargetPage(page);
+      setCurrentPage(page);
+      setIsLoading(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
   // Page Navigation with Cinematic "Winter is Coming" Loading Screen
   const handleNavigate = useCallback((page: PageType) => {
     if (page === currentPage) {
+      window.history.replaceState(null, '', pageToHash(page));
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
+    window.history.pushState(null, '', pageToHash(page));
     setTargetPage(page);
     setIsLoading(true);
   }, [currentPage]);
