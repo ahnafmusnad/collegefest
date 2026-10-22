@@ -36,17 +36,21 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
   title = 'Chittagong College • December 18–19, 2026',
   className = '',
 }) => {
+  const [place, date] = title.includes('•')
+    ? title.split('•').map((p) => p.trim())
+    : [title, ''];
+
   return (
     <div className={`proclamation-plaque relative mx-auto w-[min(92vw,640px)] select-none ${className}`}>
       {/* soft ambient halo behind the frame */}
       <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(ellipse_at_center,rgba(23,104,110,0.22)_0%,transparent_70%)] blur-md plaque-halo" />
 
 
-      <div className="relative h-[72px] sm:h-[92px] md:h-[104px]">
+      <div className="relative h-[104px] sm:h-[60px] md:h-[70px]">
         {/* ---------- stretched heraldic outline ---------- */}
         <svg
           className="absolute inset-0 h-full w-full overflow-visible plaque-frame"
-          viewBox="0 0 880 150"
+          viewBox="0 36 880 78"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
@@ -131,10 +135,18 @@ export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
 
 
         {/* ---------- proclamation text ---------- */}
-        <div className="absolute inset-0 flex items-center justify-center px-[10%] sm:px-[13%]">
-          <span className="plaque-text whitespace-nowrap font-cinzel text-center text-[7px] font-semibold uppercase leading-none tracking-[0.12em] text-[#eaf7f8] sm:text-[11px] sm:tracking-[0.2em] md:text-[13px]">
-            {title}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-[7px] px-[8%] sm:flex-row sm:gap-3 sm:px-[13%]">
+          <span className="plaque-text whitespace-nowrap font-cinzel text-center text-[10px] font-semibold uppercase leading-none tracking-[0.3em] text-[#cfe6e8] sm:text-[11px] sm:tracking-[0.2em] md:text-[13px]">
+            {place}
           </span>
+          {date && (
+            <>
+              <span className="hidden text-[11px] leading-none text-gold sm:inline" aria-hidden="true">•</span>
+              <span className="plaque-date whitespace-nowrap font-cinzel text-center text-[clamp(12px,4.3vw,17px)] font-bold uppercase leading-none tracking-[0.14em] sm:text-[11px] sm:font-semibold sm:tracking-[0.2em] md:text-[13px]">
+                {date}
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>
