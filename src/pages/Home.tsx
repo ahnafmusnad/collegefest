@@ -111,18 +111,20 @@ export const Home: React.FC<HomeProps> = ({
               CARNAVAL
             </h1>
             <SwordDivider className="mt-4 mb-4" />
-            {/* Bulletproof gradient text: the old bg-clip-text +
-                text-transparent + animated background-position combo
-                went invisible in Instagram's in-app browser (WebKit).
-                .frost-text-gradient keeps a solid fallback colour and
-                a static gradient; the glow animates on the wrapper. */}
+            {/* The right-to-left colour sweep, RESTORED. The old
+                single-layer bg-clip-text + animated background-position
+                went invisible in Instagram's in-app WebKit browser, so
+                the sweep now lives on a ::before copy (data-text) laid
+                over SOLID silver base text — if a browser drops the
+                animated layer the words still render, never vanish.
+                The breathing glow still animates on the wrapper. */}
             <p className="font-got text-lg sm:text-2xl md:text-3xl font-normal text-white tracking-[0.15em] sm:tracking-[0.3em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               DA{' '}
               <span className="frost-glow">
-                <span className="frost-text-gradient whitespace-nowrap">CHITTAGONG</span>
+                <span className="sweep-text whitespace-nowrap" data-text="CHITTAGONG">CHITTAGONG</span>
               </span>{' '}
               <span className="frost-glow">
-                <span className="frost-text-gradient-soft whitespace-nowrap">COLLEGE</span>
+                <span className="sweep-text sweep-text-soft whitespace-nowrap" data-text="COLLEGE">COLLEGE</span>
               </span>
             </p>
             <p className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">

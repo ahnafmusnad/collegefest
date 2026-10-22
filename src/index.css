@@ -286,11 +286,14 @@
   }
 }
 
-/* NOTE: .animate-gradient is legacy. Never animate background-position
-   on text clipped with background-clip:text — in-app WebKit browsers
-   (Instagram / Facebook / Messenger) skip painting it entirely and the
-   text disappears (this is what hid "CHITTAGONG COLLEGE" after "DA" on
-   the home hero while Firefox rendered it fine). Kept for reference. */
+/* NOTE: .animate-gradient is legacy — do NOT reuse it on its own.
+   Animating background-position directly on the element whose text is
+   clipped with background-clip:text makes in-app WebKit browsers
+   (Instagram / Facebook / Messenger) skip painting it entirely — that
+   is what hid "CHITTAGONG COLLEGE" after "DA" on the home hero while
+   Firefox rendered it fine. The sweep was restored below as
+   .sweep-text, which animates a ::before COPY over solid base text,
+   so a dropped layer degrades gracefully instead of vanishing. */
 .animate-gradient {
   background-size: 200% auto;
   animation: gradientShift 6s linear infinite;
@@ -298,59 +301,73 @@
 
 
 /* ============================================================
-   BULLETPROOF FROST GRADIENT TEXT  (hero: DA CHITTAGONG COLLEGE)
+   HERO SWEEP TEXT  (hero: DA CHITTAGONG COLLEGE)
    ------------------------------------------------------------
-   Engineered so the text can NEVER render invisible:
-     1. a solid silver fallback colour is declared first;
-     2. the transparent fill is applied only inside @supports,
-        so engines without background-clip:text keep readable
-        solid-coloured text instead of vanishing;
-     3. the gradient is static — no background-position animation;
-     4. the element is promoted to its own GPU layer (translateZ).
-   The shimmer lives on a WRAPPER span (.frost-glow), because a
-   filter on the clipped-text element itself is a second WebKit
-   invisibility bug.
+   The beloved right-to-left colour sweep — RESTORED — rebuilt
+   as two layers so the text can NEVER render invisible again:
+   Layer 1 (the element's own text): solid brushed-silver fill.
+     No clip, no animation — it paints in every browser, always.
+   Layer 2 (::before with content: attr(data-text)): an exact
+     copy stacked on top, filled with the silver → bone → teal
+     gradient clipped to the glyphs, its background-position
+     gliding right → left on a 6s loop (the original sweep).
+   If an in-app WebKit browser (Instagram / Facebook) refuses
+   to paint the animated clip-text layer, it simply drops
+   Layer 2 — Layer 1 stays visible, so the worst case is calm
+   silver text, never missing text. (The InAppBrowserGate also
+   steers those users into a real browser.)
+   The gradient tiles every 200% (background-repeat: repeat),
+   so the 0% → 200% position slide loops with no visible seam.
    ============================================================ */
-.frost-text-gradient,
-.frost-text-gradient-soft {
+.sweep-text {
+  position: relative;
   display: inline-block;
-  color: #d8ded9; /* solid fallback — never invisible */
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: #d8ded9; /* Layer 1: solid base — never invisible */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
-
-
-/* "CHITTAGONG" — bright silver swept toward teal */
-.frost-text-gradient {
+/* Layer 2: the animated colour sweep, clipped to the glyphs */
+.sweep-text::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
   background-image: linear-gradient(
-    100deg,
-    #f4f7f2 0%,
-    #d8ded9 34%,
-    #bcd4d4 62%,
-    #4aa6ad 88%,
+    90deg,
+    #d8ded9 0%,   /* gold-2 : brushed silver mist */
+    #c9d2d2 50%,  /* bone   : soft silver         */
+    #17686e 100%  /* ember  : bright teal         */
+  );
+  background-size: 200% auto;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: heroSweep 6s linear infinite;
+  pointer-events: none;
+}
+/* "COLLEGE" — the same right-to-left sweep, in a softer silver
+   sheen with only a whisper of teal, matching the old static
+   from-gold-2 via-gold-2 to-bone look between sweeps. */
+.sweep-text-soft::before {
+  background-image: linear-gradient(
+    90deg,
+    #d8ded9 0%,
+    #f0f4ee 40%,
+    #c9d2d2 70%,
+    #7fb2b0 88%,
     #d8ded9 100%
   );
 }
-
-
-/* "COLLEGE" — soft brushed-silver sheen */
-.frost-text-gradient-soft {
-  background-image: linear-gradient(
-    100deg,
-    #d8ded9 0%,
-    #f0f4ee 45%,
-    #c9d2d2 100%
-  );
-}
-
-
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .frost-text-gradient,
-  .frost-text-gradient-soft {
-    color: transparent;
-    -webkit-text-fill-color: transparent;
+/* Right → left: with background-size 200%, driving the position
+   from 0% to 200% slides the gradient leftward across the glyphs
+   (same keyframe values as the original pre-49th-update sweep). */
+@keyframes heroSweep {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }
 
@@ -597,8 +614,10 @@
   .animate-gradient {
     animation: none;
   }
-
-
+  /* Freeze the hero colour sweep mid-gradient (static two-tone) */
+  .sweep-text::before {
+    animation: none;
+  }
   .frost-glow {
     animation: none;
     filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6));
