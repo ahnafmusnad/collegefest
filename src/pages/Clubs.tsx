@@ -45,7 +45,7 @@ export const Clubs: React.FC<ClubsProps> = ({
       
       {/* Page Hero */}
       <PageHero
-        image="/images/four-houses-heraldry.jpg"
+        image="/images/four-houses-heraldry.webp"
         eyebrow="The Citadel Quadrumvirate"
         title="The Four Great Houses"
         description="Four legendary clubs anchor Chittagong College’s student body. Each house bears its own sigil, sacred motto, heroic ancestry, and fierce competitive fire."

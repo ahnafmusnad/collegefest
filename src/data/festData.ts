@@ -29,7 +29,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'The North Remembers',
     sigil: 'The Direwolf',
     iconName: 'Cpu',
-    logo: '/images/club-logos/ccpac-physics-astronomy.png',
+    logo: '/images/club-logos/ccpac-physics-astronomy.webp',
     colorScheme: {
       primary: '#145e62', // Teal
       secondary: '#17686e',
@@ -55,7 +55,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Fire & Blood',
     sigil: 'The Three-Headed Dragon',
     iconName: 'Music',
-    logo: '/images/club-logos/muses-english-literature.jpg',
+    logo: '/images/club-logos/muses-english-literature.webp',
     colorScheme: {
       primary: '#145e62', // Teal
       secondary: '#17686e',
@@ -83,7 +83,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Lannisters Always Pay Their debt',
     sigil: 'The Golden Lion',
     iconName: 'Scroll',
-    logo: '/images/club-logos/ccds-debating-society.jpg',
+    logo: '/images/club-logos/ccds-debating-society.webp',
     colorScheme: {
       primary: '#145e62', // Teal
       secondary: '#17686e',
@@ -111,7 +111,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     motto: 'Ours Is The Fury',
     sigil: 'The Crowned Stag',
     iconName: 'Shield',
-    logo: '/images/club-logos/ccps-photographic-society.jpg',
+    logo: '/images/club-logos/ccps-photographic-society.webp',
     colorScheme: {
       primary: '#145e62', // Teal
       secondary: '#17686e',

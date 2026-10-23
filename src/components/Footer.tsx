@@ -63,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span className="absolute -bottom-px -left-px h-2 w-2 border-b border-l border-gold-2/70" aria-hidden="true" />
                 <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-gold-2/70" aria-hidden="true" />
                 <img
-                  src="/images/college-crest.png"
+                  src="/images/college-crest.webp"
                   alt="Chittagong College crest"
                   className="h-8 w-8 object-contain"
                 />

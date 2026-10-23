@@ -228,7 +228,7 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
     <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-12">
       {/* Page Hero */}
       <PageHero
-        image="/images/iron-throne-hero.jpg"
+        image="/images/iron-throne-hero.webp"
         eyebrow="The Citadel Trials of Skill"
         title="Tourneys & Competitions"
         description="Fifteen trials, three banners of contest. Choose your ground — group, solo or online — read the royal decrees, and register your name on Tickify."

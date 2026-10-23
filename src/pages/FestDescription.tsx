@@ -25,8 +25,8 @@ import {
 
 /* ---- Images used by this page. To use your own photos, just replace the
         files in public/images (or change these two paths). ---- */
-const HERO_IMAGE = '/images/hero-castle.jpg';
-const LORE_IMAGE = '/images/red-keep.jpg';
+const HERO_IMAGE = '/images/hero-castle.webp';
+const LORE_IMAGE = '/images/red-keep.webp';
 
 
 /* Brushed-silver heading look */

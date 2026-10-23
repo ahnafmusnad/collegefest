@@ -880,7 +880,7 @@
 }
 
 .house-scroll {
-  background: url("/images/parchment-card.png") center / 100% 100% no-repeat;
+  background: url("/images/parchment-card.webp") center / 100% 100% no-repeat;
   min-height: 420px;
   padding: 3.6rem 2rem 3.2rem;
   filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45));
@@ -1026,7 +1026,7 @@
 /* Hero throne backdrop — anchored to the top on small screens so the artwork
    reaches behind the transparent navbar instead of starting below it */
 .hero-throne-bg {
-  background-image: url('/images/iron-throne-hero.jpg');
+  background-image: url('/images/iron-throne-hero.webp');
   background-repeat: no-repeat;
   background-position: center top;
   background-size: auto 80%;
@@ -1199,7 +1199,7 @@
 .lore-parchment {
   position: relative;
   isolation: isolate;
-  background: url('/images/parchment-card.png') center / 100% 100% no-repeat;
+  background: url('/images/parchment-card.webp') center / 100% 100% no-repeat;
   padding: clamp(1.9rem, 4.5vw, 3.2rem) clamp(1.35rem, 4vw, 2.9rem);
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
 }
@@ -1242,9 +1242,9 @@
       0 0 22px rgba(47, 168, 176, 0.28);
   }
 }
-.lore-stone--founding { background-image: url('/images/stone-tablet.png'); }
-.lore-stone--houses   { background-image: url('/images/stone-tablet.png'); }
-.lore-stone--days     { background-image: url('/images/stone-tablet.png'); }
+.lore-stone--founding { background-image: url('/images/stone-tablet.webp'); }
+.lore-stone--houses   { background-image: url('/images/stone-tablet.webp'); }
+.lore-stone--days     { background-image: url('/images/stone-tablet.webp'); }
 .lore-stone__value {
   color: #f4fbfc;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 18px rgba(47, 168, 176, 0.5);
@@ -1491,7 +1491,7 @@
   border-style: solid;
   border-color: transparent;
   border-width: 78px 92px;
-  border-image-source: url("/images/scroll-rolling.png");
+  border-image-source: url("/images/scroll-rolling.webp");
   border-image-slice: 21% 8% fill;
   border-image-width: 78px 92px;
   border-image-outset: 6px;
@@ -1675,14 +1675,14 @@
 
 /* ============================================================
    SEGMENTS — ornate banner frame around each trial group.
-   The artwork (/images/cardbg.png) already carries the frame,
+   The artwork (/images/cardbg.webp) already carries the frame,
    banners and corner gems, so nothing extra is drawn on top.
    ============================================================ */
 .seg-frame {
   position: relative;
   isolation: isolate;
   background-color: #041012;
-  background-image: url("/images/cardbg.png");
+  background-image: url("/images/cardbg.webp");
   background-size: 100% 100%;
   background-position: center, center;
   background-repeat: no-repeat;
@@ -1898,7 +1898,7 @@
   /* 215 source px clears the top diamond, 150 clears the bottom rail and diamond */
   padding: calc(var(--u) * 215) 8% calc(var(--u) * 150);
   border: 1px solid transparent;
-  border-image-source: url("/images/pledge-card-frame.png");
+  border-image-source: url("/images/pledge-card-frame.webp");
   border-image-slice: 500 130 151 130; /* top right bottom left, in SOURCE pixels, no "fill" */
   border-image-width: calc(var(--u) * 500) calc(var(--u) * 130) calc(var(--u) * 151) calc(var(--u) * 130);
   border-image-repeat: stretch;
@@ -1910,7 +1910,7 @@
   }
 }
 .pledge-card--stark {
-  border-image-source: url("/images/pledge-frame.png");
+  border-image-source: url("/images/pledge-frame.webp");
 }
 .pledge-card:hover,
 .pledge-card:focus-within {
@@ -1927,7 +1927,7 @@
 .tickify-frame {
   position: relative;
   background-color: #010f10;
-  background-image: url("/images/pledge-frame.png");
+  background-image: url("/images/pledge-frame.webp");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
@@ -2521,7 +2521,7 @@
   border-style: solid;
   border-color: transparent;
   border-width: 62px;
-  border-image-source: url("/images/stone-tablet.png");
+  border-image-source: url("/images/stone-tablet.webp");
   border-image-slice: 135 fill;
   border-image-width: 62px;
   border-image-outset: 0;
@@ -2818,7 +2818,7 @@ a.btn,
   position: relative;
   isolation: isolate;
   background-color: #031213;
-  background-image: url("/images/iron-bank-frame.png");
+  background-image: url("/images/iron-bank-frame.webp");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
@@ -2874,7 +2874,7 @@ a.btn,
 .stat-tablet {
   position: relative;
   isolation: isolate;
-  background: #0b282a url("/images/stone-tablet.png") center / 100% 100% no-repeat;
+  background: #0b282a url("/images/stone-tablet.webp") center / 100% 100% no-repeat;
   padding: 1.5rem 1rem 1.3rem;
   box-shadow:
     inset 0 2px 10px rgba(0, 0, 0, 0.65),
@@ -2897,7 +2897,7 @@ a.btn,
 .guild-frame {
   position: relative;
   background-color: #010f10;
-  background-image: url("/images/pledge-frame.png");
+  background-image: url("/images/pledge-frame.webp");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
@@ -2968,7 +2968,7 @@ a.btn,
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url("/images/stone-teal.jpg") center / cover no-repeat;
+  background: url("/images/stone-teal.webp") center / cover no-repeat;
   opacity: 0.22;
   mix-blend-mode: soft-light;
 }
@@ -3009,7 +3009,7 @@ a.btn,
 .stone-panel {
   background:
     linear-gradient(180deg, rgba(2, 10, 11, 0.5) 0%, rgba(2, 10, 11, 0.68) 100%),
-    url("/images/stone-teal.jpg") center / cover no-repeat,
+    url("/images/stone-teal.webp") center / cover no-repeat,
     #061a1c;
   border-color: rgba(47, 85, 87, 0.7);
   box-shadow:

@@ -19,7 +19,7 @@ const getInitials = (name: string) =>
  * Members are rendered 3 times in a row. When the user stops scrolling
  * outside the middle copy, we silently jump by exactly one copy width,
  * so the reel never ends and never looks empty on either side.
- * Photos: set `image` on a member in festData.ts (e.g. "/images/council/name.jpg").
+ * Photos: set `image` on a member in festData.ts (e.g. "/images/council/name.webp").
  */
 export default function SmallCouncilReel() {
   const members = SMALL_COUNCIL;
@@ -221,7 +221,7 @@ export default function SmallCouncilReel() {
       <div
         className="absolute inset-0 bg-cover bg-center opacity-[0.13] pointer-events-none"
         style={{
-          backgroundImage: "url(/images/college-winter-citadel.jpg)",
+          backgroundImage: "url(/images/college-winter-citadel.webp)",
           maskImage: "radial-gradient(90% 80% at 50% 45%, #000 30%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(90% 80% at 50% 45%, #000 30%, transparent 100%)",
         }}

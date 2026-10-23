@@ -5,7 +5,7 @@ import { PageType } from '../types';
  * ------------------------------------------------------------------
  * Every entry of the site navigation is rendered as a realm / seat on
  * a hand-drawn Game-of-Thrones style map of the continent. Coordinates
- * are percentages of the map artwork (public/images/realm-map.jpg).
+ * are percentages of the map artwork (public/images/realm-map.webp).
  */
 
 export interface RealmNode {
@@ -144,7 +144,7 @@ export const REALM_ROADS: RealmRoad[] = [
   { a: 'sponsorships', b: 'organizers', kind: 'sea', cx: 92, cy: 28 },
 ];
 
-/** Intrinsic aspect ratio (w/h) of public/images/realm-map.jpg */
+/** Intrinsic aspect ratio (w/h) of public/images/realm-map.webp */
 export const MAP_ASPECT = 2000 / 1334;
 
 export function nodeByPage(page: PageType): RealmNode {
