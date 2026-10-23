@@ -7,8 +7,12 @@ interface LoadingScreenProps {
   onFinish?: () => void;
 }
 
-const HOLD_MS = 2900; // how long the loader plays before it starts dissolving
-const EXIT_MS = 1200; // dissolve length, must match the CSS transition on .cl-loader
+/* PERF FIX: these were 2900 / 1200, a 4.1 second wait.
+   App.tsx no longer triggers the loader on menu clicks, so this now only
+   plays ONCE, on first arrival. Trimmed to 1.8s total so the "Winter is
+   Coming" intro still lands without making people wait. */
+const HOLD_MS = 1200; // how long the loader plays before it starts dissolving
+const EXIT_MS = 600;  // dissolve length, must match the CSS transition on .cl-loader
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   isLoading,

@@ -1242,9 +1242,9 @@
       0 0 22px rgba(47, 168, 176, 0.28);
   }
 }
-.lore-stone--founding { background-image: url('/images/stone-1869.jpg'); }
-.lore-stone--houses   { background-image: url('/images/stone-houses.jpg'); }
-.lore-stone--days     { background-image: url('/images/stone-days.jpg'); }
+.lore-stone--founding { background-image: url('/images/stone-tablet.png'); }
+.lore-stone--houses   { background-image: url('/images/stone-tablet.png'); }
+.lore-stone--days     { background-image: url('/images/stone-tablet.png'); }
 .lore-stone__value {
   color: #f4fbfc;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 18px rgba(47, 168, 176, 0.5);
@@ -2634,29 +2634,52 @@
 }
 
 /* candlelight sheen sweeping up through a rune column */
+/* PERF FIX: this used inset:0 + background-size:100% 300% and animated
+   background-position. background-position is a PAINT property - the browser
+   has to re-rasterise the gradient on the CPU every single frame, on four rune
+   columns, forever, while also compositing mix-blend-mode:screen.
+
+
+   It now animates transform: translateY() instead, which the GPU handles
+   without repainting. The geometry is mathematically identical:
+
+
+     old: 300%-tall background image, position 115% -> -15%
+          offset = P * (H - 3H) = -2.3H -> +0.3H
+     new: 300%-tall element, translateY -76.67% -> +10%  (percentages of 3H)
+          = -2.3H -> +0.3H   <-- same travel
+
+
+   .rune-col already has overflow:hidden, so the taller element stays clipped
+   and nothing spills onto the page. */
 .rune-col-sheen {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 300%;
   background: linear-gradient(
     180deg,
     transparent 32%,
     rgba(148, 226, 232, 0.5) 50%,
     transparent 68%
   );
-  background-size: 100% 300%;
   background-repeat: no-repeat;
   mix-blend-mode: screen;
   animation: runeSheen 9s ease-in-out infinite;
+  will-change: transform;
 }
 
 .rune-col-right .rune-col-sheen       { animation-delay: 3.2s; }
 .rune-col-left-inner .rune-col-sheen  { animation-delay: 5.5s; }
 .rune-col-right-inner .rune-col-sheen { animation-delay: 7.4s; }
 
+/* PERF FIX: transform instead of background-position - see .rune-col-sheen
+   above for the geometry derivation. Same visual, GPU-driven. */
 @keyframes runeSheen {
-  0%   { background-position: 50% 115%; }
-  55%  { background-position: 50% -15%; }
-  100% { background-position: 50% -15%; }
+  0%   { transform: translateY(-76.67%); }
+  55%  { transform: translateY(10%); }
+  100% { transform: translateY(10%); }
 }
 
 /* --- the Night's Watch oath, written vertically like scripture --- */

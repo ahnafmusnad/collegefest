@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import HouseScroll from '../components/HouseScroll';
-import CountdownTablets from '../components/CountdownTablets';
+import LiveCountdown from '../components/LiveCountdown';
 import StatsPanel from '../components/StatsPanel';
 import AboutFestPanel from '../components/AboutFestPanel';
 import SwordDivider from '../components/ui/SwordDivider';
@@ -41,19 +41,11 @@ export const Home: React.FC<HomeProps> = ({
   onOpenSortingQuiz,
   userPledgedHouse
 }) => {
-  // Countdown Timer state
-  const computeTimeLeft = () => {
-    const difference = new Date(FEST_METADATA.countdownTarget).getTime() - Date.now();
-    if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000)
-    };
-  };
+  /* PERF FIX: the countdown timer and its 1-second setInterval used to live
+     right here, inside this 469-line component. Every tick re-rendered the
+     whole homepage. It now lives in <LiveCountdown />, a tiny leaf component
+     that re-renders on its own - see where <LiveCountdown /> is used below. */
 
-  const [timeLeft, setTimeLeft] = useState(computeTimeLeft);
 
   // House Cheer state (Interactive live cheers)
   const [houseCheers, setHouseCheers] = useState<Record<string, number>>({
@@ -63,14 +55,6 @@ export const Home: React.FC<HomeProps> = ({
     'house-valorous': 367
   });
   const [hasCheered, setHasCheered] = useState<Record<string, boolean>>({});
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(computeTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCheer = (houseId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -179,7 +163,7 @@ export const Home: React.FC<HomeProps> = ({
           {/* ========================================================
               LIVE COUNTDOWN TO THE FESTIVAL
           ======================================================== */}
-          <CountdownTablets time={timeLeft} />
+          <LiveCountdown />
 
         </div>
       </section>

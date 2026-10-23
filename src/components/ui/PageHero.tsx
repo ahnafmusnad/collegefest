@@ -54,9 +54,17 @@ export const PageHero: React.FC<PageHeroProps> = ({
     >
       {/* Backdrop photo */}
       <div className="absolute inset-0">
+        {/* PERF FIX: this is the Largest Contentful Paint element - the biggest
+            thing the browser paints on every page. fetchPriority="high" tells it
+            to jump the download queue instead of arriving last, and
+            decoding="async" keeps the image decode off the main thread so it
+            does not block scrolling. Deliberately NOT loading="lazy":
+            lazy-loading an above-the-fold hero makes LCP worse, not better. */}
         <img
           src={image}
           alt={imageAlt}
+          fetchPriority="high"
+          decoding="async"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/45 to-ink" />

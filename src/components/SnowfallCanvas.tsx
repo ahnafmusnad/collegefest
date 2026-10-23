@@ -56,16 +56,33 @@ export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gen
       });
     }
 
+    /* PERF FIX: the old loop set ctx.shadowBlur and ctx.shadowColor INSIDE the
+       per-flake loop. Canvas shadow-blur makes the browser render every shape
+       twice (once normal, once blurred) and composite them. At 85 flakes x 60fps
+       that was ~5,100 blur passes per second, forever - 10,800 in blizzard mode.
+
+
+       The glow was a 40%-opacity dark teal behind near-white flakes on a canvas
+       already faded to 0.65 - visually almost nothing. Dropping it removes
+       essentially the entire cost of this component.
+
+
+       Also removed: the dead `ctx.fillStyle = '#ffffff'` (it was overwritten on
+       every iteration). Added a pause when the tab is hidden so the snow stops
+       burning CPU in a background tab. */
+    ctx.shadowBlur = 0;
+
+
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      ctx.fillStyle = '#ffffff';
 
       for (let i = 0; i < flakes.length; i++) {
         const f = flakes[i];
         f.swing += f.swingSpeed;
         f.x += f.wind + Math.sin(f.swing) * 0.6;
         f.y += f.speed;
+
 
         if (f.y > height) {
           f.y = -10;
@@ -74,21 +91,34 @@ export const SnowfallCanvas: React.FC<SnowfallCanvasProps> = ({ intensity = 'gen
         if (f.x > width) f.x = 0;
         if (f.x < 0) f.x = width;
 
+
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(201, 210, 210, ${f.opacity})`;
-        ctx.shadowBlur = 6;
-        ctx.shadowColor = 'rgba(23, 104, 110, 0.4)';
         ctx.fill();
       }
+
 
       animationFrameId = requestAnimationFrame(render);
     };
 
+
+    /* Stop the loop entirely when the tab is in the background. */
+    const handleVisibility = () => {
+      cancelAnimationFrame(animationFrameId);
+      if (!document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+
     render();
+    document.addEventListener('visibilitychange', handleVisibility);
+
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
   }, [intensity]);
