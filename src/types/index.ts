@@ -27,6 +27,11 @@ export interface ClubHouse {
   achievements: string[];
   memberCount: number;
   points: number;
+  /** Official club links shown in the footer. Leave '' to hide a link. */
+  links: {
+    facebook: string;
+    website: string;
+  };
 }
 
 export interface Segment {

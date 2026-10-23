@@ -18,7 +18,9 @@ import {
   Compass,
   Feather,
   Gavel,
+  ScrollText,
   Sparkles,
+  Swords,
   Trophy
 } from 'lucide-react';
 
@@ -365,81 +367,164 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
         {/* ========================================================
-            THE CITADEL CODEX & SAFETY RULES
+            THE CITADEL CODEX & SAFETY RULES — carved stone decrees
         ======================================================== */}
-        <Reveal className="bg-gradient-to-r from-ink via-ink-2 to-ink border border-crimson/30 p-8 space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-ink-2 border border-gold/50">
-              <ShieldCheck className="w-6 h-6 text-gold" />
-            </div>
-            <div>
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
-                The Citadel Codex: Rules of Honor
-              </h3>
-              <p className="text-xs text-bone-dim font-cinzel">Strictly enforced by the Commander of the City Watch</p>
-            </div>
-          </div>
+        <section>
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <Eyebrow>The Law of the Land</Eyebrow>
+            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
+              The Citadel Codex
+            </h2>
+            <p className="mt-3 font-cinzel text-[11px] uppercase tracking-[0.3em] text-bone-dim sm:text-xs">
+              Rules of Honor — enforced by the Commander of the City Watch
+            </p>
+            <OrnamentRule className="mt-6" />
+          </Reveal>
 
+          <Reveal direction="zoom" duration={1100} className="mt-10">
+            <div className="stone-panel relative px-4 py-8 sm:px-8 sm:py-10">
+              {/* corner brackets */}
+              <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/60" aria-hidden="true" />
+              <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/60" aria-hidden="true" />
+              <span className="pointer-events-none absolute bottom-2 left-2 h-5 w-5 border-b-2 border-l-2 border-gold-2/60" aria-hidden="true" />
+              <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans text-bone-dim">
-            <Reveal delay={0}>
-              <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
-                <div className="font-cinzel font-bold text-gold-2 text-sm">Valid Identification</div>
-                <p className="text-bone-dim">All students and warriors must carry their institution ID card along with their digital or printed Tickify QR Pass for access.</p>
+              {/* shield medallion crest */}
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2" aria-hidden="true">
+                <span className="flex h-12 w-12 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_24px_rgba(91,201,214,0.45)]">
+                  <ShieldCheck className="h-5 w-5 -rotate-45 text-[#8ce8f2]" />
+                </span>
               </div>
-            </Reveal>
-            <Reveal delay={100}>
-              <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
-                <div className="font-cinzel font-bold text-gold-2 text-sm">Sanctity of the Arena</div>
-                <p className="text-bone-dim">No weapons with sharpened steel, fire hazards, or prohibited items. Prop weapons for cosplay must pass inspection at the North Gate.</p>
+
+              <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-3 sm:gap-5">
+                {[
+                  {
+                    numeral: 'I',
+                    icon: <ScrollText className="h-4 w-4" />,
+                    title: 'Valid Identification',
+                    body: 'All students and warriors must carry their institution ID card along with their digital or printed Tickify QR Pass for access.'
+                  },
+                  {
+                    numeral: 'II',
+                    icon: <Swords className="h-4 w-4" />,
+                    title: 'Sanctity of the Arena',
+                    body: 'No weapons with sharpened steel, fire hazards, or prohibited items. Prop weapons for cosplay must pass inspection at the North Gate.'
+                  },
+                  {
+                    numeral: 'III',
+                    icon: <Gavel className="h-4 w-4" />,
+                    title: 'Knightly Conduct',
+                    body: 'Respect all house delegates, faculty grand maesters, and volunteer marshals. Unruly conduct results in immediate banishment.'
+                  }
+                ].map((decree, i) => (
+                  <Reveal key={decree.numeral} delay={i * 110} className="h-full">
+                    <div className="codex-decree relative h-full p-5 sm:p-6">
+                      {/* hanging numeral seal */}
+                      <div className="flex items-center justify-between">
+                        <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/45 bg-ink-2/90">
+                          <span className="font-cinzel text-sm font-bold -rotate-45 text-[#8ce8f2]">{decree.numeral}</span>
+                        </span>
+                        <span className="text-[#5bc9d6]">{decree.icon}</span>
+                      </div>
+
+                      <h3 className="mt-4 font-cinzel text-[15px] font-bold tracking-wide text-white sm:text-base">
+                        {decree.title}
+                      </h3>
+                      <span className="mt-2 block h-px w-10 bg-gradient-to-r from-[#5bc9d6]/70 to-transparent" aria-hidden="true" />
+                      <p className="mt-3 text-xs leading-relaxed text-bone-dim sm:text-[13px]">
+                        {decree.body}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
               </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="p-4 bg-ink-2/60 border border-iron space-y-1 h-full">
-                <div className="font-cinzel font-bold text-gold-2 text-sm">Knightly Conduct</div>
-                <p className="text-bone-dim">Respect all house delegates, faculty grand maesters, and volunteer marshals. Unruly conduct results in immediate banishment.</p>
+
+              {/* enforcement strip */}
+              <div className="mt-6 flex items-center justify-center gap-3 border-t border-[#5bc9d6]/20 pt-5 text-center">
+                <span className="hidden h-px w-16 bg-gradient-to-r from-transparent to-[#5bc9d6]/40 sm:block" aria-hidden="true" />
+                <p className="font-cinzel text-[9px] uppercase tracking-[0.26em] text-[#9fd8d2] sm:text-[10px]">
+                  Breaking the Codex earns swift banishment beyond the walls
+                </p>
+                <span className="hidden h-px w-16 bg-gradient-to-l from-transparent to-[#5bc9d6]/40 sm:block" aria-hidden="true" />
               </div>
-            </Reveal>
-          </div>
-        </Reveal>
+            </div>
+          </Reveal>
+        </section>
 
 
         {/* ========================================================
-            ROYAL FAQ ACCORDION
+            ROYAL FAQ ACCORDION — ravens of inquiry
         ======================================================== */}
-        <section className="space-y-6">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/30 text-gold-2 text-xs font-cinzel uppercase tracking-widest">
+        <section className="space-y-10">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-2 border border-[#5bc9d6]/40 bg-ink-2/80 px-4 py-1.5 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2] sm:text-xs">
               <HelpCircle className="w-3.5 h-3.5" />
               Answers from the Citadel
             </div>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-extrabold text-white">
-              FREQUENTLY ASKED QUESTIONS
+            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
+              Frequently Asked Questions
             </h2>
+            <p className="mt-3 font-garamond text-sm italic text-bone-dim sm:text-[15px]">
+              Send no raven before reading these — the maesters have answered the realm&rsquo;s most common calls.
+            </p>
+            <OrnamentRule className="mt-6" />
           </Reveal>
 
 
-          <div className="max-w-3xl mx-auto space-y-3">
+          <div className="mx-auto max-w-3xl space-y-3.5">
             {FAQS.map((faq, index) => {
               const isOpen = openFaqIndex === index;
               return (
                 <Reveal key={index} delay={index * 80}>
-                <div
-                  className="frost-card border border-crimson/20 overflow-hidden transition-all"
-                >
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full flex items-center justify-between p-4 md:p-5 text-left font-cinzel text-sm md:text-base font-bold text-white hover:text-gold-2"
-                  >
-                    <span className="pr-4">{faq.q}</span>
-                    {isOpen ? <ChevronUp className="w-5 h-5 text-gold shrink-0" /> : <ChevronDown className="w-5 h-5 text-ash shrink-0" />}
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-xs md:text-sm text-bone-dim font-sans leading-relaxed border-t border-iron/60 bg-ink/40 animate-fadeIn">
-                      {faq.a}
+                  <div className={`faq-item relative ${isOpen ? 'faq-item--open' : ''}`}>
+                    {/* question number plaque */}
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(index)}
+                      aria-expanded={isOpen}
+                      className="flex w-full items-center gap-3.5 p-4 text-left sm:gap-4 sm:p-5"
+                    >
+                      <span
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center border font-cinzel text-xs font-bold transition-colors duration-300 sm:h-10 sm:w-10 ${
+                          isOpen
+                            ? 'border-[#5bc9d6]/70 bg-[#17686e]/30 text-[#8ce8f2]'
+                            : 'border-iron/70 bg-ink-2/80 text-bone-dim'
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+
+                      <span
+                        className={`flex-1 font-cinzel text-[13px] font-bold leading-snug transition-colors duration-300 sm:text-[15px] ${
+                          isOpen ? 'text-[#dcefee]' : 'text-bone hover:text-white'
+                        }`}
+                      >
+                        {faq.q}
+                      </span>
+
+                      {/* diamond toggle */}
+                      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center" aria-hidden="true">
+                        <span className={`faq-diamond absolute h-3 w-3 rotate-45 border ${isOpen ? 'border-transparent' : 'border-ash/70 bg-transparent'}`} />
+                        {isOpen ? (
+                          <ChevronUp className="relative h-4 w-4 text-ink" />
+                        ) : (
+                          <ChevronDown className="relative h-4 w-4 text-ash" />
+                        )}
+                      </span>
+                    </button>
+
+                    {/* smooth reveal body */}
+                    <div className="faq-body">
+                      <div>
+                        <div className="border-t border-[#5bc9d6]/20 px-4 pb-5 pt-4 sm:px-5 sm:pl-[4.75rem]">
+                          <p className="text-xs leading-relaxed text-bone-dim sm:text-sm">
+                            {faq.a}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </div>
                 </Reveal>
               );
             })}

@@ -173,7 +173,6 @@ export function App() {
         {currentPage === 'home' && (
           <Home
             onNavigate={handleNavigate}
-            onOpenTickify={() => handleOpenTickify()}
             onOpenSortingQuiz={() => setSortingQuizOpen(true)}
             userPledgedHouse={userPledgedHouse}
           />

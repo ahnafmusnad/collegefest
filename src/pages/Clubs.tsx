@@ -51,62 +51,68 @@ export const Clubs: React.FC<ClubsProps> = ({
         description="Four legendary clubs anchor Chittagong College’s student body. Each house bears its own sigil, sacred motto, heroic ancestry, and fierce competitive fire."
       />
 
-      {/* House Selector Tabs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {/* House Selector Tabs — carved stone sigil banners.
+          (The old border-image nine-slice frame could render empty on
+          mobile browsers without solid container-query support; these
+          use plain layered backgrounds, so they always paint.) */}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {FOUR_HOUSES.map((house, i) => {
           const isSelected = activeHouseId === house.id;
           const isPledged = userPledgedHouse?.id === house.id;
-          const isStark = house.houseName === 'House Stark';
           return (
             <Reveal key={house.id} delay={i * 80} className="h-full">
-              <div className="pledge-card-wrap h-full">
-                <div
-                  className={`pledge-card relative h-full transition-all duration-300 flex flex-col ${isStark ? 'pledge-card--stark' : ''} ${isSelected ? '-translate-y-1' : ''}`}
+              <div
+                className={`house-sigil-card ${isSelected ? 'house-sigil-card--active' : ''}`}
+              >
+                {/* corner brackets */}
+                <span className="pointer-events-none absolute top-1.5 left-1.5 h-3.5 w-3.5 border-t border-l border-gold-2/60" aria-hidden="true" />
+                <span className="pointer-events-none absolute top-1.5 right-1.5 h-3.5 w-3.5 border-t border-r border-gold-2/60" aria-hidden="true" />
+                <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-3.5 w-3.5 border-b border-l border-gold-2/60" aria-hidden="true" />
+                <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-3.5 w-3.5 border-b border-r border-gold-2/60" aria-hidden="true" />
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveHouseId(house.id);
+                  }}
+                  aria-pressed={isSelected}
+                  className="group flex flex-1 flex-col gap-2.5 p-3.5 text-left sm:p-4"
                 >
-                  <button
-                        type="button"
-                        onClick={() => {
-                          setActiveHouseId(house.id);
-                        }}
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-iron bg-white/90 p-1 transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12">
+                      <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="h-full w-full object-contain" />
+                    </div>
 
-                        className="text-left p-4 flex-1 flex flex-col gap-3 group"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-11 h-11 sm:w-12 sm:h-12 p-1 bg-white/90 border border-iron shrink-0 flex items-center justify-center">
-                            <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="w-full h-full object-contain" />
-                          </div>
-
-                          <div className="min-w-0">
-                            <div className="font-cinzel text-[10px] sm:text-xs text-gold/80 font-semibold uppercase leading-snug line-clamp-2">
-                              {house.name.split('(')[0]}
-                            </div>
-                            <div className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors line-clamp-1 mt-1">
-                              {house.houseName}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="font-cinzel text-[11px] text-bone-dim italic line-clamp-1">
-                          "{house.motto}"
-                        </div>
-                      </button>
-
-                  <div className="px-3 pb-3">
-                    {isPledged ? (
-                      <div className="flex items-center justify-center gap-1.5 py-1.5 bg-ember/15 border border-ember/50 text-ember text-[10px] font-cinzel font-bold uppercase tracking-wider">
-                        <Check className="w-3 h-3" />
-                        Your House
+                    <div className="min-w-0">
+                      <div className="font-cinzel text-[9px] font-semibold uppercase leading-snug text-[#9fd8d2] line-clamp-2 sm:text-[11px]">
+                        {house.name.split('(')[0]}
                       </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => handlePledge(house)}
-                        className="w-full py-1.5 border border-[#c9d2d2]/45 text-[#e7e3d8] text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] hover:bg-[#e7e3d8] hover:text-ink hover:border-[#e7e3d8] transition-colors"
-                      >
-                        Pledge
-                      </button>
-                    )}
+                      <div className="mt-1 font-cinzel text-sm font-bold text-white transition-colors group-hover:text-[#8ce8f2] line-clamp-1">
+                        {house.houseName}
+                      </div>
+                    </div>
                   </div>
+
+                  <div className="font-cinzel text-[10px] italic text-bone-dim line-clamp-1 sm:text-[11px]">
+                    &ldquo;{house.motto}&rdquo;
+                  </div>
+                </button>
+
+                <div className="px-3 pb-3">
+                  {isPledged ? (
+                    <div className="flex items-center justify-center gap-1.5 border border-[#5bc9d6]/50 bg-[#17686e]/20 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-wider text-[#8ce8f2]">
+                      <Check className="w-3 h-3" />
+                      Your House
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handlePledge(house)}
+                      className="w-full border border-[#c9d2d2]/45 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] text-[#e7e3d8] transition-colors hover:border-[#8ce8f2] hover:bg-[#8ce8f2] hover:text-ink"
+                    >
+                      Pledge
+                    </button>
+                  )}
                 </div>
               </div>
             </Reveal>

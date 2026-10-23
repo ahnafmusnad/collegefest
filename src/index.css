@@ -261,6 +261,13 @@
   animation: runeSpin 40s linear infinite;
 }
 
+/* Counter-turning twin of .animate-rune-spin — used by the
+   Protector of the Realm shrine so nested sigils orbit against
+   each other. Same transform-box caveat as its sibling. */
+.animate-rune-spin-rev {
+  animation: runeSpin 58s linear infinite reverse;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -645,19 +652,21 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
 
-  /* ---- Valyrian steel (primary) ---- */
+  /* ---- Valyrian steel (primary) — retinted to the realm's teal/ice.
+         (It used to be a maroon-brown steel that clashed with the
+         dark-teal & brushed-silver palette.) ---- */
   --cut: 15px;
   --shape: polygon(
     var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
     calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
   );
-  --edge: rgba(214, 120, 128, 0.85);
-  --edge-hi: rgba(255, 190, 196, 0.95);
-  --steel-hi: #6a2330; --steel-mid: #44141e; --steel-lo: #230a10;
-  --sheen: rgba(255, 150, 160, 0.22);
-  --txt: #fbeeee; --txt-hi: #ffffff;
-  --ember: rgba(220, 70, 85, 0.55);
-  --glint: rgba(255, 215, 218, 0.4);
+  --edge: rgba(91, 201, 214, 0.6);
+  --edge-hi: rgba(159, 224, 212, 0.95);
+  --steel-hi: #1d7d84; --steel-mid: #115258; --steel-lo: #08282c;
+  --sheen: rgba(159, 224, 212, 0.24);
+  --txt: #eaf6f5; --txt-hi: #ffffff;
+  --ember: rgba(91, 201, 214, 0.5);
+  --glint: rgba(214, 244, 248, 0.42);
 
 
   position: relative;
@@ -729,14 +738,14 @@
 .btn__icon { width: 1em; height: 1em; flex-shrink: 0; position: relative; z-index: 1; transition: transform 0.5s var(--ease); }
 
 
-/* ---- DRAGONGLASS (secondary) — obsidian, smooth rounded tablet ---- */
+/* ---- DRAGONGLASS (secondary) — blue-black obsidian tablet ---- */
 .btn--secondary {
   --shape: inset(0 round 12px);
-  --edge: rgba(170, 120, 126, 0.55);
-  --edge-hi: rgba(225, 175, 180, 0.85);
-  --txt: #e4d2d3; --txt-hi: #f7eeee;
-  --ember: rgba(200, 90, 100, 0.3);
-  --glint: rgba(240, 215, 217, 0.3);
+  --edge: rgba(122, 168, 176, 0.5);
+  --edge-hi: rgba(159, 224, 212, 0.85);
+  --txt: #dcecec; --txt-hi: #f2fbfa;
+  --ember: rgba(91, 201, 214, 0.32);
+  --glint: rgba(214, 244, 248, 0.3);
   padding-left: 1.7rem;
   padding-right: 1.7rem;
 }
@@ -744,8 +753,38 @@
   background:
     /* glass reflection */
     linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 34%),
-    radial-gradient(120% 60% at 50% -10%, rgba(190, 212, 210, 0.12), transparent 55%),
-    linear-gradient(180deg, #2a1a1d 0%, #160c0e 55%, #0b0607 100%);
+    radial-gradient(120% 60% at 50% -10%, rgba(159, 224, 212, 0.14), transparent 55%),
+    linear-gradient(180deg, #14343a 0%, #0a1e22 55%, #050f12 100%);
+}
+
+
+/* ---- FROSTGLASS (glass) — bluish translucent glass, hex-cut ---- */
+.btn--glass {
+  --shape: polygon(
+    var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
+    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
+  );
+  --edge: rgba(91, 201, 214, 0.45);
+  --edge-hi: rgba(159, 224, 212, 0.9);
+  --txt: #cdeef2; --txt-hi: #ffffff;
+  --ember: rgba(91, 201, 214, 0.45);
+  --glint: rgba(214, 244, 248, 0.35);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+}
+.btn--glass::before {
+  background:
+    /* icy sheen from above */
+    linear-gradient(160deg, rgba(159, 224, 212, 0.22) 0%, rgba(159, 224, 212, 0.04) 38%),
+    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.18), transparent 55%),
+    linear-gradient(180deg, rgba(23, 104, 110, 0.42) 0%, rgba(11, 40, 42, 0.55) 60%, rgba(5, 20, 22, 0.62) 100%);
+}
+.btn--glass:hover::before,
+.btn--glass:active::before {
+  background:
+    linear-gradient(160deg, rgba(159, 224, 212, 0.3) 0%, rgba(159, 224, 212, 0.08) 40%),
+    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.24), transparent 55%),
+    linear-gradient(180deg, rgba(31, 138, 145, 0.55) 0%, rgba(17, 82, 88, 0.62) 60%, rgba(8, 40, 44, 0.68) 100%);
 }
 
 
@@ -1871,6 +1910,76 @@
 }
 
 
+
+
+/* ============================================================
+   HOUSE SIGIL CARD — the four selectable house banners on the
+   Clubs page. Rebuilt WITHOUT border-image nine-slicing (the old
+   pledge-card frame relied on container-query units that several
+   mobile / in-app browsers resolve badly — on phones the cards
+   and their frame artwork could vanish entirely). Plain layered
+   backgrounds can never fail like that: carved teal stone under
+   a cold vignette, silver corner brackets, ice glow when chosen.
+   ============================================================ */
+.house-sigil-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(23, 104, 110, 0.25), transparent 60%),
+    linear-gradient(180deg, rgba(2, 10, 11, 0.42) 0%, rgba(2, 10, 11, 0.72) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(47, 85, 87, 0.75);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
+    inset 0 0 34px rgba(0, 0, 0, 0.42),
+    0 12px 26px -16px rgba(0, 0, 0, 0.95);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.45s ease;
+}
+.house-sigil-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(159, 224, 212, 0.14);
+  pointer-events: none;
+  transition: border-color 0.35s ease;
+}
+.house-sigil-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(91, 201, 214, 0.55);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
+    inset 0 0 34px rgba(0, 0, 0, 0.42),
+    0 0 24px rgba(23, 104, 110, 0.35),
+    0 18px 34px -18px rgba(0, 0, 0, 0.95);
+}
+.house-sigil-card:hover::before { border-color: rgba(159, 224, 212, 0.3); }
+/* the chosen house — ice-crowned */
+.house-sigil-card--active {
+  border-color: rgba(91, 201, 214, 0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
+    inset 0 0 40px rgba(23, 104, 110, 0.28),
+    0 0 30px rgba(23, 104, 110, 0.5),
+    0 16px 32px -16px rgba(0, 0, 0, 0.95);
+}
+.house-sigil-card--active::before { border-color: rgba(159, 224, 212, 0.4); }
+/* glowing crest bar under the chosen card */
+.house-sigil-card--active::after {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(91, 201, 214, 0.9), transparent);
+  box-shadow: 0 0 14px rgba(91, 201, 214, 0.8);
+}
 
 
 /* ============================================================
@@ -3004,6 +3113,110 @@ a.btn,
   .arena-sparkle { animation: none; }
 }
 
+
+/* ===== FAQ ravens: the accordion items on the Fest page ===== */
+.faq-item {
+  border: 1px solid rgba(47, 85, 87, 0.6);
+  background:
+    linear-gradient(180deg, rgba(6, 26, 28, 0.92) 0%, rgba(2, 10, 11, 0.94) 100%);
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.9);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.faq-item:hover { border-color: rgba(91, 201, 214, 0.45); }
+.faq-item--open {
+  border-color: rgba(91, 201, 214, 0.6);
+  box-shadow:
+    0 0 26px rgba(23, 104, 110, 0.35),
+    0 14px 30px -18px rgba(0, 0, 0, 0.95);
+}
+/* smooth height reveal without measuring pixels */
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item--open .faq-body { grid-template-rows: 1fr; }
+.faq-body > div { overflow: hidden; }
+/* diamond toggle — turns a quarter when the raven speaks */
+.faq-diamond {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.faq-item--open .faq-diamond {
+  transform: rotate(225deg);
+  background: rgba(91, 201, 214, 0.9);
+  box-shadow: 0 0 12px rgba(91, 201, 214, 0.7);
+}
+/* codex decree cards */
+.codex-decree {
+  background:
+    linear-gradient(180deg, rgba(2, 10, 11, 0.55) 0%, rgba(2, 10, 11, 0.75) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(47, 85, 87, 0.7);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.45s ease;
+}
+.codex-decree:hover {
+  transform: translateY(-5px);
+  border-color: rgba(91, 201, 214, 0.55);
+  box-shadow: 0 0 26px rgba(23, 104, 110, 0.35), 0 18px 34px -20px rgba(0, 0, 0, 0.95);
+}
+
+
+/* ===== Rules scroll: the segment-decree modal slab =====
+   Carved teal stone (stone-teal.webp) under a cold vignette,
+   framed like a royal decree. The OUTER modal wrapper owns the
+   scrolling, so on phones the decree can never be taller than
+   the screen with its top chopped off. */
+.rules-scroll {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(23, 104, 110, 0.28), transparent 55%),
+    linear-gradient(180deg, rgba(2, 10, 11, 0.62) 0%, rgba(2, 10, 11, 0.78) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(91, 201, 214, 0.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.8),
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 44px rgba(23, 104, 110, 0.32),
+    0 40px 80px -30px rgba(0, 0, 0, 0.95);
+}
+/* inner hairline frame */
+.rules-scroll::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(159, 224, 212, 0.16);
+  pointer-events: none;
+}
+
+/* diamond close sigil — spins a quarter turn on hover */
+.sigil-close {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.sigil-close:hover {
+  transform: rotate(135deg);
+  border-color: rgba(159, 224, 212, 0.9);
+  background: rgba(23, 104, 110, 0.5);
+  box-shadow: 0 0 18px rgba(91, 201, 214, 0.5);
+}
+
+/* ===== Quiz trial: the sorting modal shares the carved stone ===== */
+.trial-stone {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(23, 104, 110, 0.26), transparent 55%),
+    linear-gradient(180deg, rgba(2, 10, 11, 0.6) 0%, rgba(2, 10, 11, 0.78) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(91, 201, 214, 0.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.8),
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 44px rgba(23, 104, 110, 0.32),
+    0 40px 80px -30px rgba(0, 0, 0, 0.95);
+}
 
 /* ===== Stone panel: carved teal stone as a card background ===== */
 .stone-panel {

@@ -56,21 +56,24 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-crimson/40 p-6 md:p-8 overflow-hidden text-bone max-h-[92vh] overflow-y-auto">
-        
+    /* Outer layer owns the scroll — on phones the pass hall always starts
+       at the top instead of being shoved above the viewport. */
+    <div className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/80 backdrop-blur-md animate-fadeIn">
+      <div className="flex min-h-full items-center justify-center p-3 sm:p-6">
+      <div className="trial-stone relative m-auto w-full max-w-2xl p-5 text-bone sm:p-8">
+
         {/* Top medieval accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-crimson via-gold-2 to-gold" />
-        
-        {/* Close Button */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#17686e] via-[#8ce8f2] to-[#17686e]" />
+
+        {/* diamond sigil close button */}
         <button
           onClick={() => {
             onClose();
           }}
-          className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+          className="sigil-close absolute top-4 right-4 z-20 flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/50 bg-ink-2/85 text-bone-dim hover:text-white"
           aria-label="Close modal"
         >
-          <X className="w-6 h-6" />
+          <X className="h-4 w-4 -rotate-45" />
         </button>
 
         {/* Header */}
@@ -147,9 +150,10 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
 
         {/* Security Note */}
         <div className="mt-4 flex items-center justify-center gap-2 text-center text-[11px] text-bone-dim">
-          <Shield className="w-3.5 h-3.5 text-gold" />
+          <Shield className="w-3.5 h-3.5 text-[#5bc9d6]" />
           <span>Tickets are encrypted with Valyrian QR codes and managed by Tickify</span>
         </div>
+      </div>
       </div>
     </div>
   );

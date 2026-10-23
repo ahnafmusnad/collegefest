@@ -30,14 +30,12 @@ const FEATURED_SEGMENTS = [
 
 interface HomeProps {
   onNavigate: (page: PageType) => void;
-  onOpenTickify: () => void;
   onOpenSortingQuiz: () => void;
   userPledgedHouse: ClubHouse | null;
 }
 
 export const Home: React.FC<HomeProps> = ({
   onNavigate,
-  onOpenTickify,
   onOpenSortingQuiz,
   userPledgedHouse
 }) => {
@@ -111,14 +109,14 @@ export const Home: React.FC<HomeProps> = ({
                 <span className="sweep-text sweep-text-soft whitespace-nowrap" data-text="COLLEGE">COLLEGE</span>
               </span>
             </p>
-            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
+            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#a5ddd6] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
               "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory."
             </p>
           </div>
 
           {/* User Pledged House Badge if available */}
           {userPledgedHouse && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-gold text-gold-2 text-xs font-cinzel tracking-widest">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-[#5bc9d6]/50 text-[#bfe9e4] text-xs font-cinzel tracking-widest">
               <span className="w-6 h-6 rounded-md bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center">
                 <img src={userPledgedHouse.logo} alt="" className="w-full h-full object-contain" />
               </span>
@@ -139,7 +137,7 @@ export const Home: React.FC<HomeProps> = ({
 
             {/* Explore Tourneys */}
             <Button
-              variant="secondary"
+              variant="glass"
               mobileLabel="Explore"
               onClick={() => {
                 onNavigate('segments');
@@ -150,7 +148,7 @@ export const Home: React.FC<HomeProps> = ({
 
             {/* Sorting Quiz */}
             <Button
-              variant="secondary"
+              variant="glass"
               mobileLabel="Your House"
               onClick={() => {
                 onOpenSortingQuiz();
@@ -182,12 +180,12 @@ export const Home: React.FC<HomeProps> = ({
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
+            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
             The Saga Begins
           </div>
           <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold silver-text tracking-wide">
             About the Fest
           </h2>
           <GemDivider className="py-1" />
@@ -207,12 +205,12 @@ export const Home: React.FC<HomeProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
+            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
             The Four Pillars of Chittagong College
           </div>
           <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#dcefee] tracking-wide [text-shadow:0_2px_10px_rgba(0,0,0,0.7),0_0_30px_rgba(91,201,214,0.25)]">
             THE FOUR GREAT HOUSES
           </h2>
           <GemDivider className="py-1" />
@@ -244,7 +242,7 @@ export const Home: React.FC<HomeProps> = ({
         {/* View All Clubs CTA */}
         <div className="text-center mt-6">
           <Button
-            variant="secondary"
+            variant="glass"
             onClick={() => {
               onNavigate('clubs');
             }}
@@ -325,7 +323,7 @@ export const Home: React.FC<HomeProps> = ({
         {/* view-all button on small screens */}
         <div className="lg:hidden text-center -mt-6 mb-10">
           <Button
-            variant="secondary"
+            variant="glass"
             size="sm"
             onClick={() => onNavigate('segments')}
           >
@@ -414,8 +412,8 @@ export const Home: React.FC<HomeProps> = ({
       <section className="relative py-16 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
         <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-8 pt-24 pb-8 md:px-12 md:pt-28 md:pb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-4">
-            <Ticket className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[#8ce8f2] text-xs font-cinzel uppercase tracking-widest mb-4">
+            <Ticket className="w-3.5 h-3.5 text-[#5bc9d6]" />
             Official Ticketing Partner: Tickify
           </div>
           <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-wide mb-3">
@@ -432,16 +430,6 @@ export const Home: React.FC<HomeProps> = ({
               className="w-full sm:w-auto"
             >
               BOOK TICKETS ON TICKIFY
-            </Button>
-
-            <Button
-              variant="secondary"
-              className="w-full sm:w-auto"
-              onClick={() => {
-                onOpenTickify();
-              }}
-            >
-              View Pass Tiers & Perks
             </Button>
           </div>
         </div>

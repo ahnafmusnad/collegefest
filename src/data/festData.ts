@@ -46,7 +46,11 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'Multiple national-team selections and honourable mentions'
     ],
     memberCount: 0,
-    points: 1310
+    points: 1310,
+    links: {
+      facebook: 'https://www.facebook.com/61572631723477/',
+      website: 'https://ccpac.vercel.app'
+    }
   },
   {
     id: 'house-melodia',
@@ -74,7 +78,9 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'Cultural Event 2026 – vibrant programme with 150+ students'
     ],
     memberCount: 150,
-    points: 1190
+    points: 1190,
+    /* ✏️ PASTE THE MUSES' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
+    links: { facebook: '', website: '' }
   },
   {
     id: 'house-veritas',
@@ -102,7 +108,9 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'Semi-Finalists – Drishty Debate Championship 2026'
     ],
     memberCount: 0,
-    points: 1240
+    points: 1240,
+    /* ✏️ PASTE CCDS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
+    links: { facebook: '', website: '' }
   },
   {
     id: 'house-valorous',
@@ -128,7 +136,9 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'College archives and social media features amplifying student creativity'
     ],
     memberCount: 0,
-    points: 1280
+    points: 1280,
+    /* ✏️ PASTE CCPS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
+    links: { facebook: '', website: '' }
   }
 ];
 
@@ -594,41 +604,93 @@ export const SPONSOR_TIERS: SponsorTier[] = [
 
 export const SMALL_COUNCIL: OrganizerMember[] = [
   {
-    id: 'council-1',
-    name: 'Prof. Mohammad Mozahidul Islam Chowdhury',
-    gotTitle: 'Grand Maester of the Citadel',
-    modernRole: 'Principal, Chittagong College & Chief Patron',
-    category: 'advisory',
-    batch: 'Government College Leadership',
-    department: 'Principal, Chittagong College',
-    houseAllegiance: 'Protector of All Four Houses',
-    quote: 'Carnaval da Chittagong College gives today’s students the chance to write a chapter of their own.',
+    id: 'council-6',
+    name: 'Mehraj Tajwar',
+    gotTitle: 'High Architect',
+    modernRole: 'Organizer, Segments & Stage',
+    category: 'steward',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Builder of the Tourney Grounds',
+    quote: 'From the first riddle to the final crest — we forge the trials that legends are made of.',
+    image: '',
+    socials: { email: 'tajwarmht@gmail.com' }
+  },
+  {
+    id: 'council-7',
+    name: 'Labib Hasan Mahmud',
+    gotTitle: 'Commander of the City Watch',
+    modernRole: 'Volunteer & Logistics Coordinator',
+    category: 'guard',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Shield of the Realm',
+    quote: 'Discipline and hospitality are our sacred vows — no warrior shall go unguided at the Citadel.',
+    image: '',
+    socials: { email: 'labibhasan2900@gmail.com' }
+  },
+  {
+    id: 'council-5',
+    name: 'Apurba Das Joy',
+    gotTitle: 'Lord Marshal of the Citadel',
+    modernRole: 'Organizer, Operations & Coordination',
+    category: 'steward',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Commander of the Grounds',
+    quote: 'Every segment, every stall, every banner — the Citadel shall stand ready for the realm’s brightest minds.',
+    image: '',
+    socials: { email: 'apurbasadjoy99@gmail.com' }
+  },
+  {
+    id: 'council-8',
+    name: 'Ahnaf Azim',
+    gotTitle: 'Herald of the Realm',
+    modernRole: 'Head, Publicity & Outreach',
+    category: 'steward',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Voice that Rallies the Banners',
+    quote: 'Let every raven carry the word — from the first banner raised to the last torch lit, the realm shall know of this Carnaval.',
     image: '',
     socials: { email: 'carnavaldactgclg@gmail.com' }
   },
   {
-    id: 'council-2',
-    name: 'Prof. Md. Shawkat Iqbal Faruquee',
-    gotTitle: 'Keeper of the Realm',
-    modernRole: 'Vice Principal, Chittagong College',
-    category: 'advisory',
-    batch: 'Government College Leadership',
-    department: 'Vice Principal, Chittagong College',
-    houseAllegiance: 'Guardian of the Citadel Gates',
-    quote: 'Chittagong College proudly supports opportunities that encourage students beyond the classroom.',
+    id: 'council-9',
+    name: 'Fariha Marium Masud',
+    gotTitle: 'Maester of the Scrolls',
+    modernRole: 'Registration & Records Keeper',
+    category: 'steward',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Keeper of Every Name Sworn',
+    quote: 'Every champion begins as a name upon a scroll — and no name sworn to this tourney shall ever be misplaced.',
     image: '',
     socials: { email: 'carnavaldactgclg@gmail.com' }
   },
   {
-    id: 'council-3',
-    name: 'Prof. Anowar Malek Mozumdar',
-    gotTitle: 'Hand of the King',
-    modernRole: 'Fest Convenor, Department of Islamic History',
-    category: 'council',
-    batch: 'Department of Islamic History, Chittagong College',
-    department: 'Convenor, Carnaval Da Chittagong College',
-    houseAllegiance: 'Voice of the Four Houses',
-    quote: 'This platform has been built with dedication, transparency, and professionalism. May this Carnaval be a grand success.',
+    id: 'council-10',
+    name: 'Rajarshi Das Gupta',
+    gotTitle: 'Steward of the Lists',
+    modernRole: 'Segment Scheduling & Coordination',
+    category: 'steward',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Keeper of the Tourney Order',
+    quote: 'Sixteen trials, one grand design — every bout and every round shall fall in its appointed hour.',
+    image: '',
+    socials: { email: 'carnavaldactgclg@gmail.com' }
+  },
+  {
+    id: 'council-11',
+    name: 'Jit Chowdhury',
+    gotTitle: 'Warden of the Grounds',
+    modernRole: 'Venue Setup & Infrastructure',
+    category: 'guard',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Forge and Framework of the Citadel',
+    quote: 'Stage, gate, and ground — before the first horn sounds, the Citadel itself shall be worthy of its champions.',
     image: '',
     socials: { email: 'carnavaldactgclg@gmail.com' }
   },
@@ -646,45 +708,73 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     socials: { email: 'sabbirhossa711@gmail.com' }
   },
   {
-    id: 'council-5',
-    name: 'Apurba Das Joy',
-    gotTitle: 'Lord Marshal of the Citadel',
-    modernRole: 'Organizer, Operations & Coordination',
+    id: 'council-12',
+    name: 'Sudhriti Paul',
+    gotTitle: 'Voice of the Court',
+    modernRole: 'Media & Communications',
     category: 'steward',
     batch: 'Organizing Committee',
     department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Commander of the Grounds',
-    quote: 'Every segment, every stall, every banner — the Citadel shall stand ready for the realm’s brightest minds.',
+    houseAllegiance: 'Chronicler of the Carnaval',
+    quote: 'Every victory, every song, every face in the crowd — this court shall see them written into legend.',
     image: '',
-    socials: { email: 'apurbasadjoy99@gmail.com' }
+    socials: { email: 'carnavaldactgclg@gmail.com' }
   },
   {
-    id: 'council-6',
-    name: 'Mehraj Tajwar',
-    gotTitle: 'High Architect',
-    modernRole: 'Organizer, Segments & Stage',
+    id: 'council-13',
+    name: 'Khadiza Nower Namira',
+    gotTitle: 'Keeper of the Coffers',
+    modernRole: 'Finance & Budgeting',
     category: 'steward',
     batch: 'Organizing Committee',
     department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Builder of the Tourney Grounds',
-    quote: 'From the first riddle to the final crest — we forge the trials that legends are made of.',
+    houseAllegiance: 'Guardian of the Citadel Treasury',
+    quote: 'A realm is only as strong as its stewardship — every coin shall serve the glory of this gathering.',
     image: '',
-    socials: { email: 'tajwarmht@gmail.com' }
+    socials: { email: 'carnavaldactgclg@gmail.com' }
   },
   {
-    id: 'council-7',
-    name: 'Labib Hasan',
-    gotTitle: 'Commander of the City Watch',
-    modernRole: 'Volunteer & Logistics Coordinator',
+    id: 'council-14',
+    name: 'Arithra Chowdhury',
+    gotTitle: 'Knight of the Gate',
+    modernRole: 'Crowd Control & Discipline',
     category: 'guard',
     batch: 'Organizing Committee',
     department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Shield of the Realm',
-    quote: 'Discipline and hospitality are our sacred vows — no warrior shall go unguided at the Citadel.',
+    houseAllegiance: 'Shield at the Citadel Doors',
+    quote: 'Order at the gates makes joy within the walls — every guest shall pass in peace, and leave with honor.',
     image: '',
-    socials: { email: 'labibhasan2900@gmail.com' }
+    socials: { email: 'carnavaldactgclg@gmail.com' }
+  },
+  {
+    id: 'council-15',
+    name: 'Rabab Nayeem Siha',
+    gotTitle: 'Steward of Hospitality',
+    modernRole: 'Guest Care & Refreshments',
+    category: 'guard',
+    batch: 'Organizing Committee',
+    department: 'Carnaval Da Chittagong College',
+    houseAllegiance: 'Warmth of the Great Hall',
+    quote: 'No guest of the Citadel shall want for welcome — bread, warmth, and good cheer await all who gather here.',
+    image: '',
+    socials: { email: 'carnavaldactgclg@gmail.com' }
   }
 ];
+
+/* The High Seat — honored alone on the Organizers page, above the council reel. */
+export const PROTECTOR_OF_THE_REALM: OrganizerMember = {
+  id: 'protector-1',
+  name: 'Prof. Mohammad Mozahidul Islam Chowdhury',
+  gotTitle: 'Protector of the Realm',
+  modernRole: 'Principal, Chittagong College & Chief Patron',
+  category: 'advisory',
+  batch: 'Government College Leadership',
+  department: 'Principal, Chittagong College',
+  houseAllegiance: 'Protector of All Four Houses',
+  quote: 'Carnaval da Chittagong College gives today’s students the chance to write a chapter of their own.',
+  image: '',
+  socials: { email: 'carnavaldactgclg@gmail.com' }
+};
 
 export const FEST_SCHEDULE: FestDaySchedule[] = [
   {

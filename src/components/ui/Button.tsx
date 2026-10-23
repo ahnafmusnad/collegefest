@@ -4,7 +4,7 @@ type ButtonProps = {
   children: string;
   /** Shorter label shown on small screens; the full label is kept from `sm` up. */
   mobileLabel?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "glass";
   size?: "md" | "sm";
   href?: string;
   external?: boolean;
@@ -24,7 +24,13 @@ export default function Button({
   className = "",
   type = "button",
 }: ButtonProps) {
-  const classes = ["btn", variant === "secondary" && "btn--secondary", size === "sm" && "btn--sm", className]
+  const classes = [
+    "btn",
+    variant === "secondary" && "btn--secondary",
+    variant === "glass" && "btn--glass",
+    size === "sm" && "btn--sm",
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
