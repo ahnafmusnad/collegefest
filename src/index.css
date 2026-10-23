@@ -1969,6 +1969,66 @@
     0 16px 32px -16px rgba(0, 0, 0, 0.95);
 }
 .house-sigil-card--active::before { border-color: rgba(159, 224, 212, 0.4); }
+/* ============================================================
+   HOUSE DOSSIER — the active-house showcase on the Clubs page.
+   Replaces the old .scroll-panel nine-slice frame here. That
+   border-image (scroll-rolling.webp) hit a Chromium mobile sizing
+   bug when the panel contained the nested 3D-tilt segment cards:
+   the element ballooned to ~30,000 × 55,000 px on phones and the
+   whole section vanished into a bottomless stretched-paper void.
+   Layered stone backgrounds have no intrinsic-size feedback loop,
+   so this can never blow up. The scroll "roller rods" are drawn
+   as plain gradient bars with diamond finials instead.
+   ============================================================ */
+.house-dossier {
+  position: relative;
+  background:
+    radial-gradient(130% 70% at 50% 0%, rgba(23, 104, 110, 0.2), transparent 55%),
+    linear-gradient(180deg, rgba(2, 10, 11, 0.5) 0%, rgba(2, 10, 11, 0.78) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(47, 85, 87, 0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.7),
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(23, 104, 110, 0.22),
+    0 30px 60px -30px rgba(0, 0, 0, 0.95);
+}
+.house-dossier::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(159, 224, 212, 0.15);
+  pointer-events: none;
+}
+/* roller rod — the horizontal scroll shaft with diamond finials.
+   No `position` here on purpose: the element carries Tailwind's
+   `absolute` utility at the JSX site. Unlayered CSS beats Tailwind's
+   layered utilities, so a `position: relative` here would win the
+   cascade and turn left-6/right-6 into RELATIVE offsets — shifting
+   the rod ~24px right on every viewport. */
+.dossier-rod {
+  height: 7px;
+  background: linear-gradient(180deg, #5c7c7e 0%, #2f5557 48%, #122e30 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(231, 227, 216, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 3px 8px rgba(0, 0, 0, 0.6);
+}
+.dossier-rod::before,
+.dossier-rod::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%) rotate(45deg);
+  background: linear-gradient(135deg, #6f8a8b 0%, #2f5557 55%, #0b282a 100%);
+  border: 1px solid rgba(159, 224, 212, 0.35);
+  box-shadow: 0 0 10px rgba(91, 201, 214, 0.35);
+}
+.dossier-rod::before { left: -8px; }
+.dossier-rod::after { right: -8px; }
 /* glowing crest bar under the chosen card */
 .house-sigil-card--active::after {
   content: "";

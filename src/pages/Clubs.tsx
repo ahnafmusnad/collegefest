@@ -123,9 +123,24 @@ export const Clubs: React.FC<ClubsProps> = ({
       {/* ========================================================
           ACTIVE HOUSE SHOWCASE DOSSIER
       ======================================================== */}
-      <Reveal direction="flip" duration={1100}>
-      <div className="scroll-panel space-y-6 relative px-2 py-2 md:px-4 md:py-3">
-        
+      {/* direction="flip" (3D perspective rotateX) breaks the reveal
+          observer's intersection math for tall elements on mobile
+          Chrome — the dossier never became visible there. A 2D zoom
+          entrance is projection-safe at any height. */}
+      <Reveal direction="zoom" duration={1100}>
+      <div className="house-dossier space-y-6 relative px-3 py-6 sm:px-5 sm:py-7 md:px-7 md:py-8">
+        {/* top roller rod + crest */}
+        <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
+        <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
+          <span className="flex h-8 w-8 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_18px_rgba(91,201,214,0.45)]">
+            <Crown className="h-3.5 w-3.5 -rotate-45 text-[#8ce8f2]" />
+          </span>
+        </div>
+        {/* corner brackets */}
+        <span className="pointer-events-none absolute top-1.5 left-1.5 h-5 w-5 border-t-2 border-l-2 border-gold-2/60" aria-hidden="true" />
+        <span className="pointer-events-none absolute top-1.5 right-1.5 h-5 w-5 border-t-2 border-r-2 border-gold-2/60" aria-hidden="true" />
+        <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-5 w-5 border-b-2 border-l-2 border-gold-2/60" aria-hidden="true" />
+        <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
         {/* Top House Banner */}
         <div className="border-b border-crimson/20 pb-5">
           <span className="font-cinzel text-[10px] md:text-xs font-bold text-[#5bc9d6] uppercase tracking-widest block">
@@ -237,7 +252,8 @@ export const Clubs: React.FC<ClubsProps> = ({
             ))}
           </div>
         </div>
-
+        {/* bottom roller rod */}
+        <div className="dossier-rod absolute bottom-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
       </div>
       </Reveal>
 

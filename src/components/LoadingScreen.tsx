@@ -7,11 +7,12 @@ interface LoadingScreenProps {
   onFinish?: () => void;
 }
 
-/* PERF FIX: these were 2900 / 1200, a 4.1 second wait.
-   App.tsx no longer triggers the loader on menu clicks, so this now only
-   plays ONCE, on first arrival. Trimmed to 1.8s total so the "Winter is
-   Coming" intro still lands without making people wait. */
-const HOLD_MS = 1200; // how long the loader plays before it starts dissolving
+/* The "Winter Is Coming" word animation finishes at ~2.55s (last word
+   starts at 1.25s + 1.3s duration) and the subtitle/bar settle by ~2.8s.
+   Holding only 1.2s dissolved the loader while "Is Coming" was still
+   blurring in — so the intro never fully showed. Hold to 3s so the whole
+   proclamation lands, then dissolve. Still only plays once on arrival. */
+const HOLD_MS = 3000; // how long the loader plays before it starts dissolving
 const EXIT_MS = 600;  // dissolve length, must match the CSS transition on .cl-loader
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({
