@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 
 /* ============================================================
@@ -209,10 +209,37 @@ const OATH_LINES = [
 
 
 export function AncientScriptureBackground() {
+  /* PERF: the ambient loops (ring rotation, mist drift, rune sheens,
+     fragment pulses) force the compositor to re-blend this large fixed
+     isolation group every frame. On a 1080p desktop that cost ~40fps of
+     scroll headroom. While the user scrolls we pause every animation so
+     the background becomes a static, cacheable layer; 180ms after the
+     scroll settles the machinery quietly resumes. */
+  const rootRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    let timer = 0;
+    const onScroll = () => {
+      root.dataset.scrolling = '1';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        delete root.dataset.scrolling;
+      }, 180);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+
   return (
-    <div className="scripture-bg" aria-hidden="true">
+    <div ref={rootRef} className="scripture-bg" aria-hidden="true">
       {/* parchment grain + cold mist + vignette */}
-      <div className="scripture-noise" />
       <div className="scripture-mist" />
 
 
