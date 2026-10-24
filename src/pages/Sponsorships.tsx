@@ -194,16 +194,18 @@ export const Sponsorships: React.FC = () => {
                 </div>
 
 
-                {/* Bottom CTA */}
-                <div className="relative z-10 pt-4 mt-4 border-t border-iron/60">
+                {/* Bottom CTA — compact ghost cut so it never covers the
+                    frame's bottom ornament */}
+                <div className="relative z-10 pt-3.5 mt-3.5 border-t border-iron/60 text-center">
                   <Button
-                    className="w-full"
+                    size="sm"
+                    className="btn--ghost"
                     href="#sponsor-form"
                     onClick={() => {
                       setFormData(prev => ({ ...prev, tierInterested: tier.name }));
                     }}
                   >
-                    SELECT THIS TIER & CONTACT
+                    Select Tier
                   </Button>
                 </div>
               </TiltCard>
@@ -215,15 +217,15 @@ export const Sponsorships: React.FC = () => {
 
 
       {/* Guild & Strategic Partners — royal proclamation on the wolf-crest frame */}
-      <Reveal className="guild-frame text-center px-6 pt-16 pb-12 md:pt-20 md:pb-14 space-y-4">
-        <div className="inline-flex items-center gap-2 font-cinzel text-xs text-gold uppercase tracking-widest font-bold">
+      <Reveal className="guild-frame text-center px-5 pt-12 pb-9 md:pt-14 md:pb-10 space-y-3">
+        <div className="inline-flex items-center gap-2 font-cinzel text-[11px] text-gold uppercase tracking-widest font-bold">
           <ScrollText className="w-3.5 h-3.5 text-ember" />
           The Royal Guilds & Envoys
         </div>
-        <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
+        <h3 className="font-cinzel text-lg md:text-xl font-bold text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
           Strategic In-Kind & Infrastructure Partners
         </h3>
-        <p className="font-garamond italic text-sm text-bone/90 max-w-xl mx-auto leading-relaxed">
+        <p className="font-garamond italic text-xs md:text-[13px] text-bone/90 max-w-lg mx-auto leading-relaxed">
           The ticketing guilds, press houses and envoys of the realm set their
           seals upon this page — sworn allies of the Carnaval, recorded in the
           ledger of the Iron Bank.
@@ -243,19 +245,19 @@ export const Sponsorships: React.FC = () => {
 
 
         {/* Guild entries — content sits open on the frame, no card chrome */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 max-w-3xl mx-auto pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 max-w-2xl mx-auto pt-1">
           {/* Tickify */}
-          <div className="space-y-3 md:pr-10">
+          <div className="space-y-2.5 md:pr-10">
             <div className="flex justify-center">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-ember/15 border border-ember/50 text-ember text-[10px] font-cinzel uppercase tracking-wider">
                 <Sparkles className="w-3 h-3" />
                 Official Ticketing Guild
               </span>
             </div>
-            <h4 className="font-cinzel-dec text-xl font-bold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
-              Tickify <span className="font-cinzel text-sm font-semibold text-bone-dim">(tickify.live)</span>
+            <h4 className="font-cinzel-dec text-lg font-bold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
+              Tickify <span className="font-cinzel text-xs font-semibold text-bone-dim">(tickify.live)</span>
             </h4>
-            <p className="text-xs text-bone-dim leading-relaxed max-w-xs mx-auto">
+            <p className="text-[11px] text-bone-dim leading-relaxed max-w-xs mx-auto">
               Powering the entire festival admission ecosystem with instant passes, student identity verification, and live gate scanning.
             </p>
             <div className="pt-1">
@@ -267,17 +269,17 @@ export const Sponsorships: React.FC = () => {
 
 
           {/* Media Guild */}
-          <div className="space-y-3 md:pl-10 md:border-l border-iron/40">
+          <div className="space-y-2.5 md:pl-10 md:border-l border-iron/40">
             <div className="flex justify-center">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-crimson/15 border border-crimson/50 text-crimson-2 text-[10px] font-cinzel uppercase tracking-wider">
                 <Crown className="w-3 h-3" />
                 Press & Media Guild
               </span>
             </div>
-            <h4 className="font-cinzel text-xl font-bold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
+            <h4 className="font-cinzel text-lg font-bold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
               10–15 Press & Media Outlets
             </h4>
-            <p className="text-xs text-bone-dim leading-relaxed max-w-xs mx-auto">
+            <p className="text-[11px] text-bone-dim leading-relaxed max-w-xs mx-auto">
               Print, electronic, and campus press representatives covering the festival with live dispatches and student champion chronicles.
             </p>
             <div className="text-[11px] text-bone-dim italic font-garamond">
@@ -291,7 +293,7 @@ export const Sponsorships: React.FC = () => {
       {/* ========================================================
           PETITION THE MASTER OF COIN (SPONSOR CONTACT FORM)
           ======================================================== */}
-      <Reveal direction="zoom" className="relative bg-gradient-to-b from-ink-2/90 via-ink-2 to-ink border-2 border-crimson/40 rounded-2xl overflow-hidden p-6 md:p-12" id="sponsor-form">
+      <Reveal direction="zoom" className="tickify-frame relative overflow-hidden p-6 md:p-10" id="sponsor-form">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-3 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest">

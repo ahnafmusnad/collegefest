@@ -258,12 +258,12 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
       {/* Global Registration Banner */}
       <Reveal
         direction="zoom"
-        className="frost-card p-8 border border-crimson/40 text-center max-w-3xl mx-auto space-y-4"
+        className="tickify-frame relative overflow-hidden p-7 md:p-9 text-center max-w-3xl mx-auto space-y-3"
       >
-        <h3 className="font-cinzel text-xl md:text-2xl font-bold text-white">
+        <h3 className="font-cinzel text-lg md:text-xl font-bold text-white">
           READY TO ENTER THE ARENA?
         </h3>
-        <p className="font-sans text-xs md:text-sm text-bone-dim">
+        <p className="font-sans text-[11px] md:text-xs text-bone-dim max-w-md mx-auto">
           Every participant receives an official tournament badge, certificate of royal
           participation, and access to the Citadel grounds on Tickify.
         </p>

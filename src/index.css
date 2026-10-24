@@ -707,7 +707,9 @@
 }
 
 
-/* the forged plate */
+/* the forged plate — the bevel shape comes from clip-path; the fill is
+   the custom btn.webp artwork stretched to the button, with the steel
+   gradient underneath as a fallback if the image is missing. */
 .btn::before {
   content: "";
   position: absolute;
@@ -715,14 +717,7 @@
   z-index: -2;
   clip-path: var(--shape);
   background:
-    /* rivets near each point */
-    radial-gradient(circle at 13px 50%, rgba(228, 244, 242, 0.95) 0 1.1px, rgba(70, 92, 94, 0.55) 1.7px, transparent 2.6px),
-    radial-gradient(circle at calc(100% - 13px) 50%, rgba(228, 244, 242, 0.95) 0 1.1px, rgba(70, 92, 94, 0.55) 1.7px, transparent 2.6px),
-    /* folded-steel ripples */
-    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.045) 0 2px, rgba(0, 0, 0, 0.1) 2px 4px, rgba(255, 255, 255, 0) 4px 10px),
-    /* cold sheen from above */
-    radial-gradient(130% 70% at 50% -10%, var(--sheen), transparent 55%),
-    /* steel body */
+    url("/images/btn.webp") center / 100% 100% no-repeat,
     linear-gradient(180deg, var(--steel-hi) 0%, var(--steel-mid) 46%, var(--steel-lo) 100%);
 }
 
@@ -782,22 +777,31 @@
 }
 .btn--glass::before {
   background:
-    /* icy sheen from above */
-    linear-gradient(160deg, rgba(159, 224, 212, 0.22) 0%, rgba(159, 224, 212, 0.04) 38%),
-    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.18), transparent 55%),
+    url("/images/btn.webp") center / 100% 100% no-repeat,
     linear-gradient(180deg, rgba(23, 104, 110, 0.42) 0%, rgba(11, 40, 42, 0.55) 60%, rgba(5, 20, 22, 0.62) 100%);
 }
 .btn--glass:hover::before,
 .btn--glass:active::before {
   background:
-    linear-gradient(160deg, rgba(159, 224, 212, 0.3) 0%, rgba(159, 224, 212, 0.08) 40%),
-    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.24), transparent 55%),
-    linear-gradient(180deg, rgba(31, 138, 145, 0.55) 0%, rgba(17, 82, 88, 0.62) 60%, rgba(8, 40, 44, 0.68) 100%);
+    /* teal wake on hover, layered over the artwork */
+    linear-gradient(180deg, rgba(31, 138, 145, 0.3) 0%, rgba(8, 40, 44, 0.3) 100%),
+    url("/images/btn.webp") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(17, 82, 88, 0.62) 0%, rgba(8, 40, 44, 0.68) 100%);
 }
 
 
 /* slimmer forged cut */
 .btn--sm { padding: 0.62rem 1.35rem; font-size: 0.7rem; --cut: 9px; }
+/* ---- GHOST — transparent forged cut that lets the frame artwork
+     show through; used where an opaque plate would cover the art. ---- */
+.btn--ghost::before {
+  background: linear-gradient(180deg, rgba(23, 104, 110, 0.16) 0%, rgba(5, 20, 22, 0.32) 100%);
+}
+@media (hover: hover) {
+  .btn--ghost:hover::before {
+    background: linear-gradient(180deg, rgba(31, 138, 145, 0.34) 0%, rgba(8, 40, 44, 0.42) 100%);
+  }
+}
 
 
 /* hover (mouse) — the steel wakes, teal ember glows */
@@ -2133,6 +2137,10 @@
   /* 215 source px clears the top diamond, 150 clears the bottom rail and diamond */
   padding: calc(var(--u) * 215) 8% calc(var(--u) * 150);
   border: 1px solid transparent;
+  /* themed interior behind the transparent frame centre */
+  background:
+    radial-gradient(110% 70% at 50% 0%, rgba(23, 104, 110, 0.16), transparent 62%),
+    linear-gradient(180deg, rgba(7, 39, 42, 0.9) 0%, rgba(3, 17, 19, 0.92) 100%);
   border-image-source: url("/images/pledge-card-frame.webp");
   border-image-slice: 500 130 151 130; /* top right bottom left, in SOURCE pixels, no "fill" */
   border-image-width: calc(var(--u) * 500) calc(var(--u) * 130) calc(var(--u) * 151) calc(var(--u) * 130);
@@ -3191,11 +3199,13 @@ a.btn,
    ============================================================ */
 .guild-frame {
   position: relative;
-  background-color: #010f10;
-  background-image: url("/images/pledge-frame.webp");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
+  /* The wolf-crest frame is transparent in the middle; a flat near-black
+     fill used to show through as a hard black box. A layered deep-teal
+     vellum now reads as candlelit parchment instead. */
+  background:
+    url("/images/pledge-frame.webp") center / 100% 100% no-repeat,
+    radial-gradient(120% 80% at 50% 0%, rgba(23, 104, 110, 0.18), transparent 60%),
+    linear-gradient(180deg, #07272a 0%, #04191c 55%, #020d0f 100%);
   box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
   transition:
     translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
