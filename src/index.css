@@ -1071,11 +1071,18 @@
   background-repeat: no-repeat;
   background-position: center top;
   background-size: auto 80%;
+  /* Mobile-only dim: on phones the throne artwork was outshining the
+     headline text, so we pull its brightness down on small screens.
+     This div is empty (background-image only), so the filter affects
+     the throne art alone — never the text, which lives in a separate
+     z-10 layer. The >=1024px block below resets the filter for desktop. */
+  filter: brightness(0.72) saturate(0.95);
 }
 @media (min-width: 1024px) {
   .hero-throne-bg {
     background-position: center 35%;
     background-size: cover;
+    filter: none;
   }
 }
 
