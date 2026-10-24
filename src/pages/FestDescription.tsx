@@ -276,29 +276,29 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
           {/* Active day panel */}
-          <div key={activeDaySchedule.day} className="animate-fade-up mx-auto mt-12 max-w-5xl">
-            <div className="stone-panel mx-auto max-w-5xl space-y-6 px-2 py-3 sm:px-4 sm:py-4">
+          <div key={activeDaySchedule.day} className="animate-fade-up mx-auto mt-10 max-w-5xl">
+            <div className="stone-panel mx-auto max-w-5xl space-y-4 px-2 py-2.5 sm:px-4 sm:py-3">
+
+
 
 
               {/* Day heading */}
-              <div className="flex items-start gap-5 border-b border-iron/30 pb-7">
+              <div className="flex items-start gap-4 border-b border-iron/30 pb-5">
                 <div className="animate-float hidden shrink-0 text-[#5bc9d6] sm:block">
-                  <Compass className="h-11 w-11" />
+                  <Compass className="h-9 w-9" />
                 </div>
                 <div>
-                  <h3 className="font-cinzel text-2xl font-bold tracking-wide text-[#5bc9d6] sm:text-3xl">
+                  <h3 className="font-cinzel text-xl font-bold tracking-wide text-[#5bc9d6] sm:text-2xl">
                     {activeDaySchedule.gotTitle}
                   </h3>
-                  <p className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
+                  <p className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
                     {activeDaySchedule.date}
                   </p>
-                  <p className="font-garamond mt-3 max-w-2xl text-[15px] italic leading-relaxed text-bone/85">
+                  <p className="font-garamond mt-2 max-w-2xl text-xs italic leading-relaxed text-bone/85 sm:text-[13px]">
                     {activeDaySchedule.description}
                   </p>
                 </div>
               </div>
-
-
               {/* Timeline rows */}
               <ol className="mt-2">
                 {activeDaySchedule.events.map((evt, idx) => {
@@ -306,10 +306,10 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   return (
                     <li
                       key={`${activeDaySchedule.day}-${idx}`}
-                      className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-b border-iron/20 py-5 transition-colors duration-300 last:border-0 sm:grid-cols-[92px_auto_1fr_auto] sm:gap-x-5 sm:px-3"
+                      className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1.5 border-b border-iron/20 py-3.5 transition-colors duration-300 last:border-0 sm:grid-cols-[84px_auto_1fr_auto] sm:gap-x-5 sm:px-3"
                     >
                       {/* Time chip */}
-                      <span className="inline-flex items-center text-[11px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
+                      <span className="inline-flex items-center text-[10px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
                         {evt.time}
                       </span>
 
@@ -322,20 +322,22 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
                       {/* Title + house */}
                       <div className="col-span-2 sm:col-span-1">
-                        <p className="text-[15px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2">
+                        <p className="text-[13px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2 sm:text-sm">
                           {evt.title}
                         </p>
                         {evt.house && (
-                          <p className="mt-1 text-[11px] tracking-wide text-bone-dim">
+                          <p className="mt-0.5 text-[10px] tracking-wide text-bone-dim">
                             Presented by <span className="text-[#5bc9d6]">{evt.house}</span>
                           </p>
                         )}
                       </div>
 
 
+
+
                       {/* Venue + type */}
-                      <div className="col-span-2 flex flex-wrap items-center gap-x-5 gap-y-2 sm:col-span-1 sm:justify-end">
-                        <span className="inline-flex items-center gap-1.5 text-[11.5px] text-bone-dim">
+                      <div className="col-span-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 sm:col-span-1 sm:justify-end">
+                        <span className="inline-flex items-center gap-1.5 text-[10.5px] text-bone-dim">
                           <MapPin className="h-3.5 w-3.5 text-[#5bc9d6]" />
                           {evt.venue}
                         </span>
