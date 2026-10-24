@@ -109,8 +109,8 @@ export const Home: React.FC<HomeProps> = ({
                 <span className="sweep-text sweep-text-soft whitespace-nowrap" data-text="COLLEGE">COLLEGE</span>
               </span>
             </p>
-            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#a5ddd6] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
-              "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory."
+            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#e0a3a3] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
+              &ldquo;Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
             </p>
           </div>
 
@@ -169,14 +169,14 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FAST STATS & CITADEL HERALDRY STRIP
       ======================================================== */}
-      <section className="relative z-10 px-3 py-14 sm:px-6 md:py-20 lg:py-24">
+      <section className="relative z-10 px-3 py-16 sm:px-6 md:py-24 lg:py-28">
         <StatsPanel />
       </section>
 
       {/* ========================================================
           ABOUT THE FEST SECTION
       ======================================================== */}
-      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="relative py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
@@ -191,7 +191,7 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
         <Reveal direction="flip" duration={1100}>
-          <div className="scroll-panel mx-auto max-w-4xl px-2 py-3 sm:px-4 sm:py-4">
+          <div className="scroll-panel mx-auto max-w-4xl px-2 py-2 sm:px-4 sm:py-2.5">
             <AboutFestPanel />
           </div>
         </Reveal>
@@ -200,10 +200,10 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           THE FOUR GREAT HOUSES SECTION (CORE FESTIVAL IDENTITY)
       ======================================================== */}
-      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="relative py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
             <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
             The Four Pillars of Chittagong College
@@ -220,7 +220,7 @@ export const Home: React.FC<HomeProps> = ({
         {/* 4 Houses Grid — torn scripture scrolls */}
         <div className="houses-grid">
           {FOUR_HOUSES.map((house, i) => (
-            <Reveal key={house.id} delay={i * 100} className="h-full w-full max-w-[340px]">
+            <Reveal key={house.id} delay={i * 100} className="h-full w-full max-w-[320px]">
               <HouseScroll
                 logo={house.logo}
                 name={house.name}
@@ -258,7 +258,7 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FEATURED SEGMENTS & ARENAS — royal writ plaques
       ======================================================== */}
-      <section className="relative py-24 md:py-28 px-4 max-w-[88rem] mx-auto overflow-hidden">
+      <section className="relative py-28 md:py-32 px-4 max-w-[88rem] mx-auto overflow-hidden">
         {/* ambient teal glow behind the grid */}
         <div className="absolute inset-x-0 top-1/3 h-[32rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(20,94,98,0.16),transparent_70%)] pointer-events-none" />
 
@@ -331,7 +331,7 @@ export const Home: React.FC<HomeProps> = ({
 
 
         {/* ---------- the writ plaques ---------- */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-7">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 xl:gap-8">
           {FEATURED_SEGMENTS.map((segment, i) => (
             <Reveal key={segment.id} delay={i * 110} className="h-full">
               <TiltCard
@@ -342,7 +342,7 @@ export const Home: React.FC<HomeProps> = ({
                 className="seg-wrap group relative h-full cursor-pointer"
               >
                 <div className="seg-card h-full">
-                  <div className="seg-card-inner flex flex-col p-6 xl:p-5 2xl:p-6">
+                  <div className="seg-card-inner flex flex-col p-4 xl:p-3.5">
                     {/* faint astrolabe sigil */}
                     <svg className="seg-sigil" viewBox="0 0 100 100" fill="none" stroke="currentColor" aria-hidden="true">
                       <circle cx="50" cy="50" r="46" strokeWidth="1" />
@@ -354,41 +354,41 @@ export const Home: React.FC<HomeProps> = ({
 
 
                     {/* category, right-aligned with pip rule */}
-                    <div className="relative z-10 flex flex-col items-end gap-1.5 mb-5">
-                      <span className="font-cinzel text-[10px] font-semibold tracking-[0.28em] uppercase text-bone-dim">
+                    <div className="relative z-10 flex flex-col items-end gap-1 mb-3">
+                      <span className="font-cinzel text-[9px] font-semibold tracking-[0.28em] uppercase text-bone-dim">
                         {segment.category}
                       </span>
-                      <span className="seg-cat-rule w-24" />
+                      <span className="seg-cat-rule w-16" />
                     </div>
 
 
                     {/* title + got title */}
-                    <h3 className="relative z-10 font-cinzel text-xl 2xl:text-2xl font-bold uppercase leading-tight text-gold-2 tracking-wide">
+                    <h3 className="relative z-10 font-cinzel text-base xl:text-lg font-bold uppercase leading-tight text-gold-2 tracking-wide">
                       {segment.title}
                     </h3>
-                    <p className="relative z-10 mt-2 font-garamond italic text-[15px] [font-variant:small-caps] tracking-wide text-bone-dim">
+                    <p className="relative z-10 mt-1.5 font-garamond italic text-[12.5px] [font-variant:small-caps] tracking-wide text-bone-dim">
                       &ldquo;{segment.gotTitle}&rdquo;
                     </p>
 
 
                     {/* description */}
-                    <p className="relative z-10 mt-4 font-sans text-[12.5px] leading-relaxed text-bone-dim/90">
+                    <p className="relative z-10 mt-2.5 font-sans text-[11px] leading-snug text-bone-dim/90">
                       {segment.description}
                     </p>
 
 
                     {/* footer */}
-                    <div className="relative z-10 mt-auto pt-5">
-                      <div className="h-px w-full bg-gradient-to-r from-iron/70 via-iron/40 to-transparent mb-4" />
+                    <div className="relative z-10 mt-auto pt-3">
+                      <div className="h-px w-full bg-gradient-to-r from-iron/70 via-iron/40 to-transparent mb-2.5" />
                       <div className="flex items-center gap-2 text-bone">
-                        <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-[#5bc9d6]" aria-hidden="true">
+                        <svg viewBox="0 0 12 12" className="h-2 w-2 text-[#5bc9d6]" aria-hidden="true">
                           <path d="M6 0.8L11.2 6L6 11.2L0.8 6Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
                         </svg>
-                        <span className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase">
+                        <span className="font-sans text-[10px] font-medium tracking-[0.18em] uppercase">
                           {segment.date}
                         </span>
                       </div>
-                      <span className="seg-link mt-2.5">
+                      <span className="seg-link mt-1.5">
                         Rules &amp; Entry
                         <svg className="seg-arrow h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                           <path d="M2 8h11M9 4l4 4-4 4" />
@@ -407,17 +407,17 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           TICKIFY PORTAL BANNER
       ======================================================== */}
-      <section className="relative py-20 md:py-24 px-4 max-w-7xl mx-auto">
+      <section className="relative py-24 md:py-28 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
-        <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-8 pt-24 pb-8 md:px-12 md:pt-28 md:pb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[#8ce8f2] text-xs font-cinzel uppercase tracking-widest mb-4">
+        <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-6 py-8 md:px-10 md:py-9">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[11px] font-cinzel uppercase tracking-widest mb-3">
             <Ticket className="w-3.5 h-3.5 text-[#5bc9d6]" />
             Official Ticketing Partner: Tickify
           </div>
-          <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-wide mb-3">
+          <h2 className="font-cinzel text-lg sm:text-2xl md:text-[1.7rem] font-extrabold text-white tracking-wide mb-2">
             SECURE YOUR WRIT OF ADMISSION ON TICKIFY
           </h2>
-          <p className="font-sans text-sm md:text-base text-bone-dim max-w-xl mx-auto mb-8">
+          <p className="font-sans text-xs md:text-sm text-bone-dim max-w-lg mx-auto mb-5">
             From the General Citadel Pass to the Knight's Tournament Writ, get your tickets verified with Valyrian QR codes directly on Tickify.
           </p>
 

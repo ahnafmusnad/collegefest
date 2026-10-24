@@ -102,117 +102,113 @@ const GroupFrameCard: React.FC<{
   const dateSummary = FEST_METADATA.dates;
 
   return (
-    <article className="seg-frame">
+    <article className={`seg-frame seg-frame--${group.key}`}>
       <div className="seg-frame-body">
         {/* ── Header ─────────────────────────────────────────── */}
-        <header className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 font-cinzel text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#5bc9d6]">
+        <header className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 font-cinzel text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.35em] text-[#5bc9d6]">
             <span className="h-px w-8 bg-[#5bc9d6]/40" />
             Trial Group {group.numeral}
             <span className="h-px w-8 bg-[#5bc9d6]/40" />
           </div>
 
-          <h3 className="font-got text-3xl sm:text-4xl md:text-5xl text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)]">
+          <h3 className="font-got text-2xl sm:text-3xl md:text-4xl lg:text-[1.5rem] text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)]">
             {group.title}
           </h3>
 
-          <p className="font-cinzel text-xs sm:text-sm italic text-bone-dim">
+          <p className="font-cinzel text-[10px] sm:text-xs italic text-bone-dim">
             &ldquo;{group.gotTitle}&rdquo; &mdash; {group.blurb}
           </p>
 
-          <div className="flex items-center justify-center gap-2 pt-1 font-cinzel text-[10px] uppercase tracking-[0.28em] text-bone-dim">
+          <div className="flex items-center justify-center gap-2 pt-0.5 font-cinzel text-[9px] uppercase tracking-[0.28em] text-bone-dim">
             <span className="text-[#5bc9d6]">{group.icon}</span>
             <span>{group.formatLabel}</span>
           </div>
         </header>
 
         {/* ── Roster ─────────────────────────────────────────── */}
-        <div
-          className={`mt-10 grid gap-3.5 ${
-            group.segmentIds.length >= 4 ? 'md:grid-cols-2' : 'md:grid-cols-1'
-          }`}
-        >
+        <div className="mt-5 grid gap-3 md:grid-cols-2 lg:mt-4 lg:grid-cols-1">
           {segments.map((seg) => (
             <button
               key={seg.id}
               type="button"
               onClick={() => onOpenRulesModal(seg)}
-              className="group/row flex min-w-0 items-center gap-3 text-left px-4 py-3.5 border border-[#5bc9d6]/20 bg-ink/50 hover:bg-ink-2/85 hover:border-[#8ce8f2]/60 transition-all duration-300"
+              className="group/row flex min-w-0 items-center gap-2 text-left px-3 py-2 rounded-lg border border-[#5bc9d6]/20 bg-ink/50 hover:bg-ink-2/85 hover:border-[#8ce8f2]/60 transition-all duration-300"
             >
-              <Gem className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]/80 group-hover/row:text-[#8ce8f2] group-hover/row:drop-shadow-[0_0_6px_rgba(140,232,242,0.8)] transition-all" />
+              <Gem className="h-2.5 w-2.5 shrink-0 text-[#5bc9d6]/80 group-hover/row:text-[#8ce8f2] group-hover/row:drop-shadow-[0_0_6px_rgba(140,232,242,0.8)] transition-all" />
 
               <span className="min-w-0 flex-1">
-                <span className="block font-cinzel text-sm sm:text-[15px] font-bold text-bone group-hover/row:text-gold-2 transition-colors truncate">
+                <span className="block font-cinzel text-xs sm:text-[13px] font-bold text-bone group-hover/row:text-gold-2 transition-colors truncate">
                   {seg.title}
                 </span>
-                <span className="block font-cinzel text-[10px] sm:text-[11px] italic text-ash truncate">
+                <span className="block font-cinzel text-[8px] sm:text-[9px] italic text-ash truncate">
                   {seg.gotTitle} &middot; {seg.venue}
                 </span>
               </span>
 
               <span className="shrink-0 text-right">
-                <span className="block font-cinzel text-[11px] font-bold text-gold-2 tabular-nums">
+                <span className="block font-cinzel text-[9px] font-bold text-gold-2 tabular-nums">
                   {seg.goldDragons.toLocaleString()}
                 </span>
-                <span className="block font-cinzel text-[8px] uppercase tracking-[0.18em] text-ash">
+                <span className="block font-cinzel text-[7px] uppercase tracking-[0.18em] text-ash">
                   Gold
                 </span>
               </span>
 
-              <ScrollText className="h-4 w-4 shrink-0 text-ash opacity-0 -translate-x-1 group-hover/row:opacity-100 group-hover/row:translate-x-0 group-hover/row:text-[#8ce8f2] transition-all duration-300" />
+              <ScrollText className="h-3.5 w-3.5 shrink-0 text-ash opacity-0 -translate-x-1 group-hover/row:opacity-100 group-hover/row:translate-x-0 group-hover/row:text-[#8ce8f2] transition-all duration-300" />
             </button>
           ))}
         </div>
 
         {/* ── Condensed decree: prize / venue / dates / format ─ */}
-        <div className="mt-9 grid grid-cols-2 lg:grid-cols-4 gap-5 border-t border-[#5bc9d6]/20 pt-5">
-          <div className="flex items-start gap-2.5">
-            <Trophy className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 border-t border-[#5bc9d6]/20 pt-4">
+          <div className="flex items-start gap-2">
+            <Trophy className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
-              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+              <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
                 Prize Vault
               </span>
-              <span className="block text-xs sm:text-sm font-bold text-gold-2">
+              <span className="block text-[11px] sm:text-xs font-bold text-gold-2">
                 {totalDragons.toLocaleString()} BDT
               </span>
-              <span className="block text-[10px] text-bone-dim">Crests &amp; Medals</span>
+              <span className="block text-[9px] text-bone-dim">Crests &amp; Medals</span>
             </div>
           </div>
 
-          <div className="flex items-start gap-2.5">
-            <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+          <div className="flex items-start gap-2">
+            <MapPin className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
-              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+              <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
                 Venue
               </span>
-              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+              <span className="block text-[11px] sm:text-xs font-semibold text-bone leading-snug">
                 {venueSummary}
               </span>
             </div>
           </div>
 
-          <div className="flex items-start gap-2.5">
-            <CalendarDays className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+          <div className="flex items-start gap-2">
+            <CalendarDays className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
-              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+              <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
                 Dates
               </span>
-              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+              <span className="block text-[11px] sm:text-xs font-semibold text-bone leading-snug">
                 {dateSummary}
               </span>
             </div>
           </div>
 
-          <div className="flex items-start gap-2.5">
-            <ShieldHalf className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
+          <div className="flex items-start gap-2">
+            <ShieldHalf className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
-              <span className="block font-cinzel text-[9px] uppercase tracking-[0.2em] text-ash">
+              <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
                 Format
               </span>
-              <span className="block text-xs sm:text-sm font-semibold text-bone leading-snug">
+              <span className="block text-[11px] sm:text-xs font-semibold text-bone leading-snug">
                 {group.formatLabel}
               </span>
-              <span className="block text-[10px] text-bone-dim">
+              <span className="block text-[9px] text-bone-dim">
                 {segments.length} trials &middot; entry via Tickify
               </span>
             </div>
@@ -225,7 +221,7 @@ const GroupFrameCard: React.FC<{
 
 export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-20">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-28">
       {/* Page Hero */}
       <PageHero
         image="/images/iron-throne-hero.webp"
@@ -249,8 +245,9 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
         </div>
       </Reveal>
 
-      {/* Three framed group banners */}
-      <div className="space-y-16">
+      {/* Three framed group banners — stacked on mobile, all three
+          abreast on desktop, each keeping its compact mobile shape. */}
+      <div className="grid grid-cols-1 gap-16 lg:grid-cols-3 lg:items-start lg:gap-5">
         {SEGMENT_GROUPS.map((group, idx) => (
           <Reveal key={group.key} delay={idx * 80}>
             <GroupFrameCard group={group} onOpenRulesModal={onOpenRulesModal} />

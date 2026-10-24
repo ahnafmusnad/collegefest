@@ -1,0 +1,23 @@
+## HOW TO REPLACE AN IMAGE (your WebP question)
+
+Every image is referenced in the code by its exact path, e.g.
+`/images/hero-castle.webp`. The project already ships
+`optimize-images.mjs`, which converts PNG/JPG → WebP and rewrites every
+reference automatically.
+
+**Option A — same file name (easiest, no code change):**
+1. Convert your new image to `.webp` (drag it into https://squoosh.app,
+   or run `npx cwebp new-image.png -o public/images/hero-castle.webp`).
+2. Overwrite the existing file in `public/images/` with the new one,
+   keeping the exact same name and `.webp` extension.
+3. Rebuild. Done — no code edit needed.
+
+**Option B — drop in a raw PNG/JPG and let the script do it:**
+1. Put the new file in `public/images/`.
+2. Run `node optimize-images.mjs` — it converts every PNG/JPG to WebP
+   (max 1600px wide) and rewrites all references in `src/` for you.
+
+**Option C — different name/extension:**
+After converting, find every place the old file is referenced with
+`grep -rn "old-name" src/ public/ index.html` and update those strings
+to the new file name.

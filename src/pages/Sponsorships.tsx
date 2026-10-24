@@ -46,7 +46,7 @@ export const Sponsorships: React.FC = () => {
 
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
       
       {/* Page Hero */}
       <PageHero
@@ -58,7 +58,7 @@ export const Sponsorships: React.FC = () => {
 
 
       {/* ROI & Reach Statistics Banner */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-8">
         {[
           { label: 'On-Ground Footfall', value: '1,000+', desc: 'Students, Teachers & Guardians', icon: Users },
           { label: 'Participating Institutions', value: '25+', desc: 'SSC & HSC Level', icon: Building2 },
@@ -106,9 +106,10 @@ export const Sponsorships: React.FC = () => {
 
 
         {/* Sponsor Tier Cards Grid with 3D LIFT & TEAL GLOW */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {SPONSOR_TIERS.map((tier, i) => {
             const isTitle = tier.id === 'tier-title';
+            const tierKey = tier.id.replace('tier-', '');
             return (
               <Reveal key={tier.id} delay={i * 120} className="h-full">
               <TiltCard
@@ -117,7 +118,7 @@ export const Sponsorships: React.FC = () => {
                 maxTilt={8}
                 glareClassName="rounded-none"
                 shadowClassName={isTitle ? '0 28px 55px rgba(2, 14, 16, 0.65), 0 0 42px rgba(23, 104, 110, 0.28)' : '0 18px 40px rgba(2, 10, 11, 0.6)'}
-                className={`tier-card relative h-full flex flex-col justify-between group ${isTitle ? 'tier-card--title' : ''}`}
+                className={`tier-card tier-card--${tierKey} relative h-full flex flex-col justify-between group ${isTitle ? 'tier-card--title' : ''}`}
               >
                 {/* Crown Ribbon for Title */}
                 {isTitle && (
@@ -139,35 +140,29 @@ export const Sponsorships: React.FC = () => {
                   </div>
 
 
-                  {/* Tier Title */}
-                  <h3 className="font-cinzel-dec text-2xl font-black text-white text-center group-hover:text-bone transition-colors">
-                    {tier.name}
-                  </h3>
-                  <p className="font-cinzel text-xs text-gold/90 italic text-center">
-                    "{tier.gotTitle}"
-                  </p>
-
-
-                  {/* sigil rule */}
-                  <div className="flex items-center justify-center gap-2 mt-3 mb-5" aria-hidden="true">
-                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
-                    <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
-                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
-                  </div>
-
-
-                  {/* Slot Availability */}
-                  <div className="p-3.5 bg-ink/80 border border-iron mb-6 text-center">
-                    <span className="text-[10px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
-                    <span className={`font-cinzel text-lg sm:text-xl font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
-                      {tier.slots}
-                    </span>
-                  </div>
-
-
-                  <p className="text-xs text-bone-dim leading-relaxed mb-6 text-center">
-                    {tier.description}
-                  </p>
+                   {/* Tier Title */}
+                   <h3 className="font-cinzel-dec text-xl font-black text-white text-center group-hover:text-bone transition-colors">
+                     {tier.name}
+                   </h3>
+                   <p className="font-cinzel text-[11px] text-gold/90 italic text-center">
+                     "{tier.gotTitle}"
+                   </p>
+                   {/* sigil rule */}
+                   <div className="flex items-center justify-center gap-2 mt-2 mb-4" aria-hidden="true">
+                     <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
+                     <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
+                     <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
+                   </div>
+                   {/* Slot Availability */}
+                   <div className="p-2.5 bg-ink/80 border border-iron mb-4 text-center">
+                     <span className="text-[9px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
+                     <span className={`font-cinzel text-base sm:text-lg font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
+                       {tier.slots}
+                     </span>
+                   </div>
+                   <p className="text-[11px] text-bone-dim leading-relaxed mb-4 text-center">
+                     {tier.description}
+                   </p>
 
 
                   {/* Brands sealed at this tier */}
@@ -200,7 +195,7 @@ export const Sponsorships: React.FC = () => {
 
 
                 {/* Bottom CTA */}
-                <div className="relative z-10 pt-6 mt-6 border-t border-iron/60">
+                <div className="relative z-10 pt-4 mt-4 border-t border-iron/60">
                   <Button
                     className="w-full"
                     href="#sponsor-form"

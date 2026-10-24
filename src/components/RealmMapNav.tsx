@@ -38,6 +38,29 @@ const MAX_S = 4;
 
 /** Regnal numerals for the great list. */
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+/** Plain real-world names for the list view (the map keeps the fantasy
+    place names). Shown as the big line of each row. */
+const REAL_LABELS: Record<PageType, string> = {
+  home: 'Home Page',
+  description: 'Event Description',
+  clubs: 'The Clubs',
+  segments: 'Segments & Competitions',
+  sponsorships: 'Sponsorship Details',
+  organizers: 'Organizers',
+};
+/** List-only ordering: the Small Council sits where the Iron Bank used
+    to be, and the Iron Bank closes the roll. The map keeps its own
+    coordinates and is untouched. */
+const LIST_ORDER: PageType[] = [
+  'home',
+  'description',
+  'clubs',
+  'segments',
+  'organizers',
+  'sponsorships',
+];
+/** Menu socials — YouTube removed from the list view. */
+const MENU_SOCIALS = SOCIAL_LINKS.filter((soc) => soc.icon !== 'Youtube');
 
 interface RealmMapNavProps {
   open: boolean;
@@ -521,7 +544,8 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                 {/* ------------------- THE GREAT LIST ------------------- */}
                 <nav aria-label="Primary">
                   <ul>
-                    {REALM_NODES.map((item, index) => {
+                    {LIST_ORDER.map((page, index) => {
+                      const item = nodeByPage(page);
                       const isActive = currentPage === item.page;
                       return (
                         <li key={item.page}>
@@ -537,12 +561,11 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                             </span>
                             <span className="min-w-0">
                               <span className="menu-row__alias">
-                                {item.name}
-                                {item.kind === 'sea' && (
-                                  <em className="menu-row__sea">across the narrow sea</em>
-                                )}
+                                {REAL_LABELS[item.page]}
                               </span>
-                              <span className="menu-row__name">{item.alias}</span>
+                              <span className="menu-row__name">
+                                {item.alias}
+                              </span>
                               <span className="menu-row__blurb">{item.blurb}</span>
                               {isActive && (
                                 <span className="menu-row__here">
@@ -647,7 +670,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                     <div className="mt-6 border-t border-iron/50 pt-5">
                       <p className="font-cinzel text-[8.5px] uppercase tracking-[0.3em] text-ash">Follow the Carnaval</p>
                       <div className="mt-3 flex items-center gap-2.5">
-                        {SOCIAL_LINKS.map((soc) => (
+                        {MENU_SOCIALS.map((soc) => (
                           <a
                             key={soc.name}
                             href={soc.url}
@@ -694,7 +717,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                     </button>
                     <span className="mx-1 hidden h-6 w-px bg-iron/60 sm:block" aria-hidden="true" />
                     <div className="flex items-center gap-2">
-                      {SOCIAL_LINKS.map((soc) => (
+                      {MENU_SOCIALS.map((soc) => (
                         <a
                           key={soc.name}
                           href={soc.url}
@@ -713,7 +736,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
 
                   {/* desktop: only the socials echo down here */}
                   <div className="hidden items-center gap-2.5 lg:flex">
-                    {SOCIAL_LINKS.map((soc) => (
+                    {MENU_SOCIALS.map((soc) => (
                       <a
                         key={soc.name}
                         href={soc.url}

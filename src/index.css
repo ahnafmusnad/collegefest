@@ -922,8 +922,8 @@
 
 .house-scroll {
   background: url("/images/parchment-card.webp") center / 100% 100% no-repeat;
-  min-height: 420px;
-  padding: 3.6rem 2rem 3.2rem;
+  min-height: 355px;
+  padding: 2.9rem 1.5rem 2.4rem;
   filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45));
   transition: translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -931,8 +931,8 @@
   .house-scroll:hover { translate: 0 -6px; }
 }
 .hs-logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.9rem;
+  height: 2.9rem;
   flex-shrink: 0;
   border-radius: 9999px;
   border: 1px solid rgba(158, 159, 159, 0.7);
@@ -940,31 +940,31 @@
   object-fit: cover;
 }
 .hs-name {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   font-family: "Cinzel", serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #e7e3d8;
 }
-@media (min-width: 1280px) { .hs-name { font-size: 16px; } }
+@media (min-width: 1280px) { .hs-name { font-size: 14.5px; } }
 .hs-house {
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
   font-family: "Cinzel", serif;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #9e9f9f;
 }
-.hs-rule { margin-top: 0.75rem; height: 1px; width: 5rem; background: rgba(158, 159, 159, 0.5); }
+.hs-rule { margin-top: 0.6rem; height: 1px; width: 4rem; background: rgba(158, 159, 159, 0.5); }
 .hs-serif { font-family: "EB Garamond", Georgia, serif; }
-.hs-motto { margin-top: 0.75rem; font-size: 15px; font-style: italic; color: #c9d2d2; }
+.hs-motto { margin-top: 0.55rem; font-size: 13.5px; font-style: italic; color: #c9d2d2; }
 .hs-lore {
-  margin-top: 0.5rem;
-  font-size: 14px;
-  line-height: 1.45;
+  margin-top: 0.4rem;
+  font-size: 12.5px;
+  line-height: 1.4;
   color: #c9d2d2;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -973,7 +973,7 @@
 }
 .hs-footer {
   margin-top: auto;
-  padding-top: 0.9rem;
+  padding-top: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1013,14 +1013,14 @@
 .houses-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
+  gap: 2.75rem;
   justify-items: center;
 }
 @media (min-width: 640px) {
   .houses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1180px) {
-  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem; }
 }
 
 .hs-cheer {
@@ -1248,7 +1248,9 @@
   position: relative;
   isolation: isolate;
   background: url('/images/parchment-card.webp') center / 100% 100% no-repeat;
-  padding: clamp(1.9rem, 4.5vw, 3.2rem) clamp(1.35rem, 4vw, 2.9rem);
+  /* Top/bottom padding clears the rolled corner folds of the artwork so
+     the heading and text always sit on the flat middle of the parchment. */
+  padding: clamp(3rem, 6.5vw, 4.4rem) clamp(1.6rem, 4.5vw, 3.1rem);
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
 }
 .lore-parchment::before {
@@ -1370,10 +1372,10 @@
 /* faint astrolabe watermark, lower-right */
 .seg-sigil {
   position: absolute;
-  right: -2.75rem;
-  bottom: -2.75rem;
-  width: 11rem;
-  height: 11rem;
+  right: -2.25rem;
+  bottom: -2.25rem;
+  width: 9rem;
+  height: 9rem;
   color: rgba(91, 201, 214, 0.10);
   pointer-events: none;
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s ease;
@@ -1745,6 +1747,54 @@
     0 0 60px rgba(23, 104, 110, 0.28);
 }
 
+
+/* Each trial group bears its own metal: crimson for the marching
+   banners, gold for the lone champions, teal for the ravens overseas.
+   The ::after tint sits above the artwork, below the ::before scrim. */
+.seg-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.seg-frame--group::after {
+  background: linear-gradient(170deg, rgba(158, 42, 43, 0.32), rgba(158, 42, 43, 0.09) 46%, transparent 76%);
+}
+.seg-frame--solo::after {
+  background: linear-gradient(170deg, rgba(222, 178, 76, 0.28), rgba(222, 178, 76, 0.08) 46%, transparent 76%);
+}
+.seg-frame--online::after {
+  background: linear-gradient(170deg, rgba(31, 138, 145, 0.34), rgba(31, 138, 145, 0.1) 46%, transparent 76%);
+}
+.seg-frame--group {
+  box-shadow:
+    0 30px 70px -34px rgba(0, 0, 0, 0.95),
+    0 0 46px rgba(158, 42, 43, 0.26);
+}
+.seg-frame--solo {
+  box-shadow:
+    0 30px 70px -34px rgba(0, 0, 0, 0.95),
+    0 0 46px rgba(222, 178, 76, 0.24);
+}
+.seg-frame--online {
+  box-shadow:
+    0 30px 70px -34px rgba(0, 0, 0, 0.95),
+    0 0 46px rgba(31, 138, 145, 0.3);
+}
+.seg-frame--group h3 {
+  color: #e7b3b3;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.85), 0 0 26px rgba(158, 42, 43, 0.4);
+}
+.seg-frame--solo h3 {
+  color: #f0d194;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.85), 0 0 26px rgba(222, 178, 76, 0.4);
+}
+.seg-frame--online h3 {
+  color: #9fe0d4;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.85), 0 0 26px rgba(31, 138, 145, 0.45);
+}
+
 /* soft shade so the copy stays legible on top of the artwork */
 .seg-frame::before {
   content: "";
@@ -1759,14 +1809,21 @@
 .seg-frame-body {
   position: relative;
   z-index: 3;
-  padding: 7rem 1.5rem 3.8rem;
+  padding: 4.5rem 1.25rem 2.4rem;
 }
 @media (min-width: 640px) {
-  .seg-frame-body { padding: 8rem 3rem 3.4rem; }
+  .seg-frame-body { padding: 5rem 2.25rem 2.6rem; }
 }
+/* On desktop the three frames sit abreast, each ~1/3 wide, so the well
+   drops back to the mobile padding to keep the compact card shape. */
 @media (min-width: 1024px) {
-  .seg-frame-body { padding: 9rem 5rem 4rem; }
+  .seg-frame-body { padding: 4.5rem 1.15rem 2.1rem; }
 }
+/* The frame artwork stretches to 100% height, so its top ornament grows
+   with the card. Each group compensates for its own height so the header
+   hugs the ornament instead of floating in dead space. */
+.seg-frame--group .seg-frame-body { padding-top: 5.25rem; }
+.seg-frame--online .seg-frame-body { padding-top: 6.75rem; }
 
 
 /* ============================================================
@@ -2104,15 +2161,29 @@
    ============================================================ */
 .tickify-frame {
   position: relative;
-  background-color: #010f10;
-  background-image: url("/images/pledge-frame.webp");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
-  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  isolation: isolate;
+  background:
+    radial-gradient(130% 70% at 50% 0%, rgba(23, 104, 110, 0.22), transparent 55%),
+    linear-gradient(180deg, rgba(2, 10, 11, 0.55) 0%, rgba(2, 10, 11, 0.8) 100%),
+    url("/images/stone-teal.webp") center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(47, 85, 87, 0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(2, 10, 11, 0.7),
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(23, 104, 110, 0.22),
+    0 30px 60px -30px rgba(0, 0, 0, 0.95);
   transition:
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     filter 0.5s ease;
+}
+/* inner hairline frame, same language as the house dossier */
+.tickify-frame::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(159, 224, 212, 0.15);
+  pointer-events: none;
 }
 .tickify-frame:hover {
   transform: translateY(-4px);
@@ -2661,6 +2732,7 @@
   justify-content: center;
   width: 38px;
   height: 38px;
+  border-radius: 9999px;
   border: 1px solid rgba(23, 104, 110, 0.45);
   background: rgba(6, 26, 28, 0.6);
   color: #9e9f9f;
@@ -3020,17 +3092,42 @@ a.btn,
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
-  padding: 2.6rem 1.5rem 1.9rem;
+  padding: 2.2rem 1.35rem 1.6rem;
   box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
   transition:
     translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.5s ease;
 }
 @media (min-width: 768px) {
-  .tier-card { padding: 3rem 1.9rem 2.1rem; }
+  .tier-card { padding: 2.5rem 1.7rem 1.8rem; }
 }
-
-
+/* Per-tier metal tint over the shared Iron Bank frame. Each tier glows
+   in its own metal — crimson for the crown, teal for power, silver for
+   platinum, gold for gold, pale bone for the guilds. The ::after
+   legibility scrim stacks above, so text stays readable and the corner
+   regalia stay visible. */
+.tier-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.tier-card--title::before {
+  background: linear-gradient(165deg, rgba(158, 42, 43, 0.34), rgba(158, 42, 43, 0.1) 48%, transparent 72%);
+}
+.tier-card--power::before {
+  background: linear-gradient(165deg, rgba(31, 138, 145, 0.3), rgba(31, 138, 145, 0.09) 48%, transparent 72%);
+}
+.tier-card--platinum::before {
+  background: linear-gradient(165deg, rgba(210, 222, 230, 0.26), rgba(210, 222, 230, 0.08) 48%, transparent 72%);
+}
+.tier-card--gold::before {
+  background: linear-gradient(165deg, rgba(222, 178, 76, 0.3), rgba(222, 178, 76, 0.09) 48%, transparent 72%);
+}
+.tier-card--cosponsor::before {
+  background: linear-gradient(165deg, rgba(201, 210, 210, 0.14), rgba(201, 210, 210, 0.05) 48%, transparent 72%);
+}
 /* legibility scrim — keeps the corner regalia visible, darkens behind text */
 .tier-card::after {
   content: "";

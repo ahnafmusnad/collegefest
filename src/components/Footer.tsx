@@ -1,37 +1,9 @@
 import React from 'react';
 import { PageType } from '../types';
-import { FOUR_HOUSES } from '../data/festData';
 import { MapPin, Mail } from 'lucide-react';
 interface FooterProps {
   onNavigate: (page: PageType) => void;
 }
-/* Official club abbreviation, e.g. "(CCPAC)" -> "CCPAC" */
-const clubAbbr = (name: string): string => name.match(/\(([^)]+)\)\s*$/)?.[1] ?? name.split(' ')[0];
-/* Brand glyphs drawn inline (this lucide build ships no brand icons) */
-const FacebookGlyph: React.FC = () => (
-  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
-    <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H9v3h2.3v7h2.2z" />
-  </svg>
-);
-const GlobeGlyph: React.FC = () => (
-  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
-  </svg>
-);
-/* Square icon link — diamond dot appears on hover */
-const HouseIconLink: React.FC<{ href: string; label: string; children: React.ReactNode }> = ({ href, label, children }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    aria-label={label}
-    title={label}
-    className="group/ico inline-flex h-8 w-8 items-center justify-center border border-iron/60 bg-ink-2/70 text-bone-dim transition-all duration-300 hover:border-[#5bc9d6]/70 hover:text-[#9fe0d4] hover:shadow-[0_0_16px_-4px_rgba(91,201,214,0.6)] hover:-translate-y-0.5"
-  >
-    {children}
-  </a>
-);
 /* A single realm link — diamond marker fades in and the
    line steps toward it on hover. */
 const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
@@ -143,68 +115,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
         </div>
-
-        {/* ---- Banners of the Four Great Houses ---- */}
-        <div className="mb-12 border border-iron/40 bg-ink-2/50 px-5 py-6 sm:px-7">
-          <div className="mb-5 flex items-center gap-4">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-iron/70" />
-            <h4 className="flex items-center gap-2.5 font-cinzel text-xs font-bold uppercase tracking-[0.26em] text-gold-2">
-              <span className="h-1.5 w-1.5 rotate-45 bg-[#5bc9d6] shadow-[0_0_8px_rgba(91,201,214,0.8)]" aria-hidden="true" />
-              The Four Great Houses
-              <span className="h-1.5 w-1.5 rotate-45 bg-[#5bc9d6] shadow-[0_0_8px_rgba(91,201,214,0.8)]" aria-hidden="true" />
-            </h4>
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-iron/70" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FOUR_HOUSES.map((house) => (
-              <div
-                key={house.id}
-                className="group/house relative flex items-center gap-3 border border-iron/40 bg-ink/60 px-3.5 py-3 transition-all duration-300 hover:border-[#5bc9d6]/50 hover:bg-ink-3/40"
-              >
-                {/* corner ticks */}
-                <span className="pointer-events-none absolute -top-px -left-px h-2 w-2 border-t border-l border-gold-2/50" aria-hidden="true" />
-                <span className="pointer-events-none absolute -bottom-px -right-px h-2 w-2 border-b border-r border-gold-2/50" aria-hidden="true" />
-
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-iron bg-white/90 p-1 transition-transform duration-300 group-hover/house:scale-105">
-                  <img src={house.logo} alt={`${clubAbbr(house.name)} crest`} loading="lazy" className="h-full w-full object-contain" />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-cinzel text-[11px] font-bold tracking-wide text-bone transition-colors group-hover/house:text-[#9fe0d4]">
-                    {clubAbbr(house.name)}
-                  </p>
-                  <p className="truncate font-cinzel text-[9px] uppercase tracking-[0.18em] text-ash">
-                    {house.houseName}
-                  </p>
-                </div>
-
-                <div className="flex shrink-0 items-center gap-1.5">
-                  {house.links.facebook ? (
-                    <HouseIconLink href={house.links.facebook} label={`${clubAbbr(house.name)} on Facebook`}>
-                      <FacebookGlyph />
-                    </HouseIconLink>
-                  ) : null}
-                  {house.links.website ? (
-                    <HouseIconLink href={house.links.website} label={`${clubAbbr(house.name)} official website`}>
-                      <GlobeGlyph />
-                    </HouseIconLink>
-                  ) : null}
-                  {!house.links.facebook && !house.links.website && (
-                    <span className="font-cinzel text-[8px] uppercase tracking-[0.14em] text-ash/80">
-                      Links&nbsp;soon
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-ash">
-            Follow the banners — chronicles, tourney notices &amp; house glory
-          </p>
-        </div>
-
         {/* ---- Bottom Copyright ---- */}
         <div className="border-t border-ink-2 pt-7 text-center">
           <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">

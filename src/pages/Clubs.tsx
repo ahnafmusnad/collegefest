@@ -41,7 +41,7 @@ export const Clubs: React.FC<ClubsProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
       
       {/* Page Hero */}
       <PageHero
@@ -55,7 +55,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           (The old border-image nine-slice frame could render empty on
           mobile browsers without solid container-query support; these
           use plain layered backgrounds, so they always paint.) */}
-      <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-6 md:gap-7 md:grid-cols-4">
         {FOUR_HOUSES.map((house, i) => {
           const isSelected = activeHouseId === house.id;
           const isPledged = userPledgedHouse?.id === house.id;
@@ -128,7 +128,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           Chrome — the dossier never became visible there. A 2D zoom
           entrance is projection-safe at any height. */}
       <Reveal direction="zoom" duration={1100}>
-      <div className="house-dossier space-y-8 relative px-3 py-6 sm:px-5 sm:py-7 md:px-7 md:py-8">
+      <div className="house-dossier space-y-5 relative px-3 py-5 sm:px-5 sm:py-6 md:px-7 md:py-7">
         {/* top roller rod + crest */}
         <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
         <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
@@ -142,33 +142,33 @@ export const Clubs: React.FC<ClubsProps> = ({
         <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-5 w-5 border-b-2 border-l-2 border-gold-2/60" aria-hidden="true" />
         <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
         {/* Top House Banner */}
-        <div className="border-b border-crimson/20 pb-5">
+        <div className="border-b border-crimson/20 pb-4">
           <span className="font-cinzel text-[10px] md:text-xs font-bold text-[#5bc9d6] uppercase tracking-widest block">
             Citadel House Sigil: {activeHouse.sigil}
           </span>
-          <h2 className="font-cinzel-dec text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight mt-1">
+          <h2 className="font-cinzel-dec text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-tight mt-1">
             {activeHouse.name.split('(')[0]}
           </h2>
-          <div className="font-cinzel text-sm font-semibold text-gold-2 mt-1">
+          <div className="font-cinzel text-[13px] font-semibold text-gold-2 mt-1">
             {activeHouse.houseName}
           </div>
-          <p className="font-cinzel text-xs md:text-sm text-gold-2/90 italic">
+          <p className="font-cinzel text-[11px] md:text-xs text-gold-2/90 italic">
             House Words: "{activeHouse.motto}"
           </p>
         </div>
 
         {/* House Vitals — 4 across on desktop, 2x2 on mobile */}
-        <div className="grid grid-cols-2 gap-y-5 gap-x-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-y-3 gap-x-3 md:grid-cols-4">
           <Reveal delay={0}>
             <div className="text-center h-full">
               <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Founded</div>
-              <div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>
+              <div className="font-cinzel text-base font-bold text-white">{activeHouse.founded}</div>
             </div>
           </Reveal>
           <Reveal delay={80}>
             <div className="text-center h-full">
               <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Members</div>
-              <div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
+              <div className="font-cinzel text-base font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
             </div>
           </Reveal>
           <Reveal delay={160}>
@@ -180,22 +180,22 @@ export const Clubs: React.FC<ClubsProps> = ({
           <Reveal delay={240}>
             <div className="text-center h-full">
               <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Crest Points</div>
-              <div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>
+              <div className="font-mono text-base font-bold text-gold-2">{activeHouse.points}</div>
             </div>
           </Reveal>
         </div>
 
         {/* Historic Trophies & Laurels — two columns on desktop, stacked on mobile */}
-        <div className="border-t border-crimson/20 pt-5 space-y-3">
+        <div className="border-t border-crimson/20 pt-4 space-y-2.5">
           <h3 className="font-cinzel text-xs font-bold text-[#5bc9d6] uppercase tracking-widest flex items-center gap-2">
             <Award className="w-4 h-4 text-[#5bc9d6]" />
             Historic Trophies & Laurels
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2.5">
             {activeHouse.achievements.map((ach, i) => (
               <Reveal key={i} delay={i * 90}>
               <div
-                className="flex items-start gap-2.5 text-[13px] text-bone h-full"
+                className="flex items-start gap-2.5 text-[12px] leading-snug text-bone h-full"
               >
                 <Crown className="w-3.5 h-3.5 text-[#5bc9d6] shrink-0 mt-px" />
                 <span>{ach}</span>
@@ -206,9 +206,9 @@ export const Clubs: React.FC<ClubsProps> = ({
         </div>
 
         {/* House Segments Showcase */}
-        <div className="pt-4 border-t border-crimson/20 space-y-4">
+        <div className="pt-3 border-t border-crimson/20 space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="font-cinzel text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <h3 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <Swords className="w-4 h-4 text-[#5bc9d6]" />
               Tournament Segments Commanded by {activeHouse.houseName}
             </h3>
@@ -221,7 +221,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-6">
             {houseSegments.map((seg, i) => (
               <Reveal key={seg.id} delay={i * 90} className="h-full">
               <TiltCard

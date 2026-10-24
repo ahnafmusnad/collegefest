@@ -172,7 +172,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
       {/* ---------- all other sections ---------- */}
-      <div className="mx-auto max-w-7xl space-y-32 px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-40 px-4 py-24 sm:px-6 lg:px-8">
 
 
         {/* ========================================================
@@ -183,24 +183,22 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
         {/* Text column */}
         <Reveal direction="left">
           <div className="lore-parchment">
-            <h2 className={`font-cinzel mt-0 text-xl font-bold leading-tight tracking-wide sm:text-[1.75rem] ${SILVER}`}>
+            <h2 className={`font-cinzel mt-0 text-base font-bold leading-tight tracking-wide sm:text-lg ${SILVER}`}>
               Where Ancient Wisdom Meets Fierce Ambition
             </h2>
-            <p className="mt-4 text-[14px] leading-[1.7] text-bone/90 sm:text-[15px]">
-              Perched atop the legendary hills of Chawkbazar, Chittagong College has nurtured prime ministers, revolutionary scholars, scientists, and master artists. When the winter chill embraces the campus brick towers, the four guardian clubs—Physics & Astronomy, English Language & Literature, Debating, and the Photographic Society—raise their banners.
+            <p className="mt-2.5 text-[12px] leading-[1.6] text-bone/90 sm:text-[13px]">
+              Perched atop the hills of Chawkbazar, Chittagong College has nurtured prime ministers, scholars, scientists, and artists. When winter embraces the campus towers, the four guardian clubs—Physics & Astronomy, English Literature, Debating, and Photography—raise their banners.
             </p>
-            <p className="font-garamond mt-3 text-[15px] italic leading-[1.7] text-bone-dim sm:text-[16px]">
-              For two days, the campus transforms into an arena of science, language, debate, and the art of the lens. Whether you are stepping onto the debate podium or framing the perfect shot under the winter sky, you are part of this living saga.
+            <p className="font-garamond mt-2 text-[12.5px] italic leading-[1.6] text-bone-dim sm:text-[13.5px]">
+              For two days the campus becomes an arena of science, language, debate, and the lens — and you are part of this living saga.
             </p>
-
-
             {/* Stats */}
-            <div className="mx-auto mt-3.5 grid max-w-sm grid-cols-3 gap-1.5 sm:gap-2.5">
+            <div className="mx-auto mt-3 grid max-w-xs grid-cols-3 gap-1.5 sm:max-w-sm sm:gap-2.5">
               {LORE_STATS.map((s, i) => (
                 <Reveal key={s.label} delay={i * 120}>
-                  <div className="h-full px-1 py-2.5 text-center sm:px-1.5">
-                    <p className="lore-stone__value font-cinzel text-[15px] font-bold leading-none sm:text-lg">{s.value}</p>
-                    <p className="lore-stone__label mt-1 text-[6.5px] font-semibold uppercase leading-[1.2] tracking-[0.2em] sm:text-[8px]">{s.label}</p>
+                  <div className="h-full px-1 py-2 text-center sm:px-1.5">
+                    <p className="lore-stone__value font-cinzel text-[13px] font-bold leading-none sm:text-[15px]">{s.value}</p>
+                    <p className="lore-stone__label mt-1 text-[6.5px] font-semibold uppercase leading-[1.2] tracking-[0.2em] sm:text-[7.5px]">{s.label}</p>
                   </div>
                 </Reveal>
               ))}

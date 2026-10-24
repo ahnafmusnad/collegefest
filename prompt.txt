@@ -1,566 +1,484 @@
-# MASTER IMPLEMENTATION PROMPT — Carnaval Da Chittagong College (collegefest)
-
-> **HOW TO USE:** Paste this ENTIRE file to your AI model. It is a complete, self-contained
-> work order: project context first, then 10 numbered changes with exact code. Apply every
-> change in order, exactly as written, then run the verification checklist at the end.
-
+You are editing the React + Vite + Tailwind project "collegefest".
+Apply tasks 1–10 exactly. Preserve all indentation. Do not reformat
+surrounding code. After all tasks, run `npm run build` and fix only errors
+that these edits caused.
 ---
-
-## THE PROMPT
-
-You are an expert React + TypeScript + Tailwind CSS engineer. You will modify the project at
-**github.com/ahnafmusnad/collegefest** (a Game-of-Thrones-themed college fest website:
-"Carnaval Da Chittagong College"). Work on a clean checkout, run `npm install` first.
-
-### HARD RULES
-
-1. Apply each change **exactly** as written. Do not rename classes, do not "improve" the code,
-   do not reformat untouched code, do not add dependencies (none are needed).
-2. If a **FIND** block does not match because that change was already applied, skip that step.
-3. Never break the theme. The design system lives in `src/index.css` as Tailwind v4 `@theme`
-   tokens — reuse them, never introduce new color tokens or gold/amber accents.
-4. After all changes: `npx tsc --noEmit` must pass and `npm run build` must succeed.
-
-### PROJECT CONTEXT
-
-- Stack: Vite 7 + React 19 + TypeScript + Tailwind CSS v4 (`@theme` in `src/index.css`),
-  `vite-plugin-singlefile`, hash-based routing in `src/App.tsx` (no react-router).
-- Theme: **"Dark Teal & Brushed Silver"**. Tokens (names are counter-intuitive — `crimson` is
-  actually TEAL, `gold` is actually SILVER):
-  - `ink #020a0b` page bg · `ink-2 #061a1c` card surface · `ink-3 #0b282a` raised surface
-  - `iron #2f5557` borders · `crimson #145e62` / `crimson-2 #17686e` teal accents
-  - `gold #9e9f9f` silver mid · `gold-2 #d8ded9` brushed silver · `bone #c9d2d2` body text
-  - `bone-dim #9e9f9f` · `ash #7f8a8a` dimmest text · `white #e7e3d8` parchment off-white
-  - Ice-blue accents used across UI: `#5bc9d6` (bright), `#8ce8f2` (brighter), `#9fd8d2` /
-    `#bfe9e4` / `#dcefee` (soft tints).
-- Fonts: `font-cinzel` (headings), `font-cinzel-dec` (ornate display), `font-garamond`
-  (italic lore text), `font-got` (GameOfThrones.ttf hero glyphs), default sans = Plus Jakarta Sans.
-- Design language: sharp corners (NO rounded-2xl), hairline rules meeting center diamonds,
-  rotated-square "diamond" motifs, corner brackets (`border-t border-l` spans), carved-stone
-  image backgrounds (`/images/stone-teal.webp`, `/images/stone-tablet.webp`), `Reveal`
-  scroll-entrance wrapper component, `frost-card` / `stone-panel` / `scroll-panel` CSS classes.
-- Data lives in `src/data/festData.ts`; types in `src/types/index.ts`.
-- `lucide-react` here is an older build: it has `Crown, Shield, Scroll, MapPin, Mail, Trophy,
-  Users, User, Globe, ShieldAlert, ShieldCheck, ScrollText, Gem, Swords, Gavel, X, Check,
-  Ticket, Copy, HelpCircle, ChevronUp/Down/Left/Right, Sparkles, Atom, BookOpen, Brain,
-  Camera, Compass, Feather, ArrowUpRight` — but **NO `Facebook` brand icon** (use inline SVG).
-- Modal fix pattern used throughout: the OUTER fixed layer gets `overflow-y-auto
-  overscroll-contain`, the inner wrapper is `flex min-h-full items-center justify-center
-  p-3 sm:p-6`, and the panel uses `m-auto`. This guarantees tall modals scroll from the top
-  on phones instead of being clipped above the viewport.
-
----
-
-## CHANGE 1 — Small Council reel: new member roster
-
-**File: `src/data/festData.ts`**
-
-**FIND** the entire existing `export const SMALL_COUNCIL: OrganizerMember[] = [ ... ];` array
-(it starts with `council-1` Prof. Mohammad Mozahidul Islam Chowdhury and ends with `council-7`
-Labib Hasan) and **REPLACE** the whole array, then add the `PROTECTOR_OF_THE_REALM` export
-directly after it. This removes Mozahidul Islam, Shawkat Iqbal and Anowar Malek from the reel,
-renames "Labib Hasan" → "Labib Hasan Mahmud", adds 8 new members, and orders the reel exactly
-as listed below (12 cards):
-
-```ts
-export const SMALL_COUNCIL: OrganizerMember[] = [
-  {
-    id: 'council-6',
-    name: 'Mehraj Tajwar',
-    gotTitle: 'High Architect',
-    modernRole: 'Organizer, Segments & Stage',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Builder of the Tourney Grounds',
-    quote: 'From the first riddle to the final crest — we forge the trials that legends are made of.',
-    image: '',
-    socials: { email: 'tajwarmht@gmail.com' }
-  },
-  {
-    id: 'council-7',
-    name: 'Labib Hasan Mahmud',
-    gotTitle: 'Commander of the City Watch',
-    modernRole: 'Volunteer & Logistics Coordinator',
-    category: 'guard',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Shield of the Realm',
-    quote: 'Discipline and hospitality are our sacred vows — no warrior shall go unguided at the Citadel.',
-    image: '',
-    socials: { email: 'labibhasan2900@gmail.com' }
-  },
-  {
-    id: 'council-5',
-    name: 'Apurba Das Joy',
-    gotTitle: 'Lord Marshal of the Citadel',
-    modernRole: 'Organizer, Operations & Coordination',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Commander of the Grounds',
-    quote: 'Every segment, every stall, every banner — the Citadel shall stand ready for the realm’s brightest minds.',
-    image: '',
-    socials: { email: 'apurbasadjoy99@gmail.com' }
-  },
-  {
-    id: 'council-8',
-    name: 'Ahnaf Azim',
-    gotTitle: 'Herald of the Realm',
-    modernRole: 'Head, Publicity & Outreach',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Voice that Rallies the Banners',
-    quote: 'Let every raven carry the word — from the first banner raised to the last torch lit, the realm shall know of this Carnaval.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-9',
-    name: 'Fariha Marium Masud',
-    gotTitle: 'Maester of the Scrolls',
-    modernRole: 'Registration & Records Keeper',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Keeper of Every Name Sworn',
-    quote: 'Every champion begins as a name upon a scroll — and no name sworn to this tourney shall ever be misplaced.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-10',
-    name: 'Rajarshi Das Gupta',
-    gotTitle: 'Steward of the Lists',
-    modernRole: 'Segment Scheduling & Coordination',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Keeper of the Tourney Order',
-    quote: 'Sixteen trials, one grand design — every bout and every round shall fall in its appointed hour.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-11',
-    name: 'Jit Chowdhury',
-    gotTitle: 'Warden of the Grounds',
-    modernRole: 'Venue Setup & Infrastructure',
-    category: 'guard',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Forge and Framework of the Citadel',
-    quote: 'Stage, gate, and ground — before the first horn sounds, the Citadel itself shall be worthy of its champions.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-4',
-    name: 'Sabbir Hossain',
-    gotTitle: 'Master of Coin',
-    modernRole: 'Head, Sponsorship Wing',
-    category: 'council',
-    batch: 'Organizing Committee',
-    department: 'Sponsorship Wing, Carnaval Da Chittagong College',
-    houseAllegiance: 'House of Partnerships & Alliances',
-    quote: 'We invite your house to join ours — let us build a partnership that empowers the leaders of tomorrow.',
-    image: '',
-    socials: { email: 'sabbirhossa711@gmail.com' }
-  },
-  {
-    id: 'council-12',
-    name: 'Sudhriti Paul',
-    gotTitle: 'Voice of the Court',
-    modernRole: 'Media & Communications',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Chronicler of the Carnaval',
-    quote: 'Every victory, every song, every face in the crowd — this court shall see them written into legend.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-13',
-    name: 'Khadiza Nower Namira',
-    gotTitle: 'Keeper of the Coffers',
-    modernRole: 'Finance & Budgeting',
-    category: 'steward',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Guardian of the Citadel Treasury',
-    quote: 'A realm is only as strong as its stewardship — every coin shall serve the glory of this gathering.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-14',
-    name: 'Arithra Chowdhury',
-    gotTitle: 'Knight of the Gate',
-    modernRole: 'Crowd Control & Discipline',
-    category: 'guard',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Shield at the Citadel Doors',
-    quote: 'Order at the gates makes joy within the walls — every guest shall pass in peace, and leave with honor.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  },
-  {
-    id: 'council-15',
-    name: 'Rabab Nayeem Siha',
-    gotTitle: 'Steward of Hospitality',
-    modernRole: 'Guest Care & Refreshments',
-    category: 'guard',
-    batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
-    houseAllegiance: 'Warmth of the Great Hall',
-    quote: 'No guest of the Citadel shall want for welcome — bread, warmth, and good cheer await all who gather here.',
-    image: '',
-    socials: { email: 'carnavaldactgclg@gmail.com' }
-  }
-];
-
-/* The High Seat — honored alone on the Organizers page, above the council reel. */
-export const PROTECTOR_OF_THE_REALM: OrganizerMember = {
-  id: 'protector-1',
-  name: 'Prof. Mohammad Mozahidul Islam Chowdhury',
-  gotTitle: 'Protector of the Realm',
-  modernRole: 'Principal, Chittagong College & Chief Patron',
-  category: 'advisory',
-  batch: 'Government College Leadership',
-  department: 'Principal, Chittagong College',
-  houseAllegiance: 'Protector of All Four Houses',
-  quote: 'Carnaval da Chittagong College gives today’s students the chance to write a chapter of their own.',
-  image: '',
-  socials: { email: 'carnavaldactgclg@gmail.com' }
-};
-```
-
-The reel component (`src/components/SmallCouncilReel.tsx`) reads `SMALL_COUNCIL` dynamically —
-do NOT touch it. Its counter/progress bar will automatically show 12.
-
----
-
-## CHANGE 2 — "Protector of the Realm" solo card (Organizers page)
-
-On the Small Council page (`src/pages/Organizers.tsx`), the old section **"Proclamation from
-the Office of the Convenor"** (a panel featuring Prof. Anowar Malek Mozumdar) is removed and
-replaced by a single centered solo card for Prof. Mozahidul Islam as *Protector of the Realm*
-— nothing left or right of it, wrapped in slow-turning geometric sigils.
-
-### 2a. NEW FILE `src/components/ProtectorSoloCard.tsx`
-
+## TASK 1 — `src/pages/Home.tsx` (new quote + more breathing room)
+**1a.** FIND:
 ```tsx
-import { Reveal } from './Reveal';
-import { PROTECTOR_OF_THE_REALM } from '../data/festData';
-
-/**
- * PROTECTOR OF THE REALM — solo high-seat card.
- * Replaces the old "Proclamation from the Office of the Convenor" panel.
- * One card, dead centre, nothing flanking it — wrapped in slow-turning
- * geometric sigils (rotating squares, diamond ring, crosshair hairlines,
- * pulsing corner gems) so it reads like a shrine, not a section.
- */
-export default function ProtectorSoloCard() {
-  const p = PROTECTOR_OF_THE_REALM;
-
+            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#a5ddd6] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
+              "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory."
+            </p>
+```
+REPLACE:
+```tsx
+            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#e0a3a3] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
+              &ldquo;Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
+            </p>
+```
+**1b.** FIND:
+```tsx
+      <section className="relative z-10 px-3 py-14 sm:px-6 md:py-20 lg:py-24">
+        <StatsPanel />
+      </section>
+```
+REPLACE:
+```tsx
+      <section className="relative z-10 px-3 py-16 sm:px-6 md:py-24 lg:py-28">
+        <StatsPanel />
+      </section>
+```
+**1c.** In the "About the Fest" section header, FIND:
+```tsx
+      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
+            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
+            The Saga Begins
+          </div>
+```
+REPLACE:
+```tsx
+      <section className="relative py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
+            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
+            The Saga Begins
+          </div>
+```
+**1d.** The About scripture wrapper, FIND:
+```tsx
+        <Reveal direction="flip" duration={1100}>
+          <div className="scroll-panel mx-auto max-w-4xl px-2 py-3 sm:px-4 sm:py-4">
+            <AboutFestPanel />
+          </div>
+        </Reveal>
+```
+REPLACE:
+```tsx
+        <Reveal direction="flip" duration={1100}>
+          <div className="scroll-panel mx-auto max-w-4xl px-2 py-2 sm:px-4 sm:py-2.5">
+            <AboutFestPanel />
+          </div>
+        </Reveal>
+```
+**1e.** The Four Houses section, FIND:
+```tsx
+      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+```
+REPLACE:
+```tsx
+      <section className="relative py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+```
+**1f.** Featured segments section, FIND:
+```tsx
+      <section className="relative py-24 md:py-28 px-4 max-w-[88rem] mx-auto overflow-hidden">
+```
+REPLACE:
+```tsx
+      <section className="relative py-28 md:py-32 px-4 max-w-[88rem] mx-auto overflow-hidden">
+```
+**1g.** Featured segments card grid, FIND:
+```tsx
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-7">
+```
+REPLACE:
+```tsx
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10 xl:gap-8">
+```
+**1h.** Tickify banner section, FIND:
+```tsx
+      <section className="relative py-20 md:py-24 px-4 max-w-7xl mx-auto">
+```
+REPLACE:
+```tsx
+      <section className="relative py-24 md:py-28 px-4 max-w-7xl mx-auto">
+```
+---
+## TASK 2 — `src/components/AboutFestPanel.tsx` (smaller scripture text)
+Replace the ENTIRE file with:
+```tsx
+// EDIT THESE LATER: the paragraphs.
+const ABOUT_TEXT = [
+  "Carnaval Da Chittagong College is the grand winter fest of Chittagong College, held on December 18–19, 2026.",
+  "Four Houses, eight segments, and a prize vault of over 150,000 BDT waiting for the victors.",
+  "Winter is coming. Choose your House, and write your name in the saga.",
+];
+export default function AboutFestPanel() {
   return (
-    <section className="relative py-6 md:py-10 overflow-hidden">
-      {/* ambient halo behind the shrine */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full bg-crimson/10 blur-[130px] pointer-events-none" />
-
-      {/* eyebrow — a proclamation line above the card */}
-      <Reveal direction="down" className="relative z-10 text-center px-6">
-        <div className="inline-flex items-center gap-4">
-          <span className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-iron" />
-          <p className="font-cinzel text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-crimson-2">
-            The High Seat of the Citadel
+    <div className="mx-auto max-w-2xl px-3 py-2 sm:px-4 sm:py-2.5">
+      <div className="space-y-2 text-left">
+        {ABOUT_TEXT.map((text, i) => (
+          <p
+            key={i}
+            className={`text-[13.5px] leading-[1.55] text-[#c9d2d2] sm:text-[14.5px] ${
+              i === 0
+                ? "first-letter:float-left first-letter:mr-1.5 first-letter:font-cinzel first-letter:text-4xl first-letter:font-bold first-letter:leading-[0.9] first-letter:text-[#e7e3d8]"
+                : ""
+            }`}
+            style={{ fontFamily: '"EB Garamond", Georgia, serif' }}
+          >
+            {text}
           </p>
-          <span className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-iron" />
-        </div>
-      </Reveal>
-
-      {/* the shrine itself */}
-      <Reveal direction="zoom" duration={1100} className="relative z-10 mt-10 md:mt-14 px-4">
-        <div className="relative max-w-[400px] mx-auto">
-
-          {/* ---- orbiting geometry (behind the card) ---- */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
-            {/* outer square, turning slow */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%+110px)] aspect-square border border-iron/35 animate-rune-spin" />
-            {/* second square, offset + counter-spinning */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%+58px)] aspect-square border border-iron/25 rotate-45 animate-rune-spin-rev" />
-            {/* hairline crosshairs */}
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-px w-[calc(100%+220px)] bg-gradient-to-r from-transparent via-iron/50 to-transparent" />
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[calc(100%+180px)] bg-gradient-to-b from-transparent via-iron/50 to-transparent" />
-          </div>
-
-          {/* ---- corner gems of the orbit ---- */}
-          {[
-            'left-1/2 -top-7 -translate-x-1/2',
-            'left-1/2 -bottom-7 -translate-x-1/2',
-            '-left-7 top-1/2 -translate-y-1/2',
-            '-right-7 top-1/2 -translate-y-1/2',
-          ].map((pos) => (
-            <span
-              key={pos}
-              aria-hidden="true"
-              className={`absolute ${pos} z-20 h-2.5 w-2.5 rotate-45 border border-gold-2/70 bg-ink animate-glow-pulse`}
-            />
-          ))}
-
-          {/* ---- the card ---- */}
-          <div className="frost-card relative border-2 border-iron/60 bg-ink-2 p-8 md:p-10 text-center overflow-visible">
-            {/* inner hairline frame */}
-            <div className="pointer-events-none absolute inset-2 border border-iron/30" aria-hidden="true" />
-
-            {/* corner brackets */}
-            <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-            <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-            <span className="pointer-events-none absolute bottom-2 left-2 h-5 w-5 border-b-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-            <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-
-            {/* monogram sigil: circle ring inside a rotating diamond */}
-            <div className="relative mx-auto mb-7 h-28 w-28 md:h-32 md:w-32">
-              <div className="absolute inset-0 rotate-45 border border-gold-2/50" aria-hidden="true" />
-              <div className="absolute inset-2 rotate-45 border border-iron/60" aria-hidden="true" />
-              <div className="absolute inset-0 rounded-full border border-gold-2/40 animate-rune-spin-rev" style={{ borderStyle: 'dashed' }} aria-hidden="true" />
-              <div className="absolute inset-[10px] rounded-full border border-iron/50 bg-gradient-to-br from-ink-2 via-ink-3/50 to-ink flex items-center justify-center">
-                <span className="font-cinzel-dec text-4xl md:text-[44px] font-black text-gold-2 drop-shadow-[0_0_22px_rgba(216,222,217,0.28)]">
-                  MI
-                </span>
-              </div>
-              {/* crown notch */}
-              <svg viewBox="0 0 24 24" className="absolute -top-4 left-1/2 -translate-x-1/2 h-5 w-5 text-gold-2" fill="currentColor" aria-hidden="true">
-                <path d="M2.5 18.5h19v2h-19zM2 7l4.6 3.4L12 4l5.4 6.4L22 7l-1.6 9H3.6z" />
-              </svg>
-            </div>
-
-            {/* titles */}
-            <p className="font-cinzel text-[9px] md:text-[10px] tracking-[0.52em] uppercase text-crimson-2">
-              By Decree of the Citadel
-            </p>
-            <h2 className="mt-3 font-cinzel text-2xl md:text-[27px] font-bold tracking-[0.14em] uppercase text-gold-2 st-title">
-              {p.gotTitle}
-            </h2>
-
-            {/* diamond divider */}
-            <div className="mt-4 mb-5 flex items-center justify-center gap-3" aria-hidden="true">
-              <span className="h-px w-14 bg-gradient-to-r from-transparent to-gold-2/60" />
-              <span className="h-1.5 w-1.5 rotate-45 bg-crimson-2 animate-glow-pulse" />
-              <span className="h-px w-14 bg-gradient-to-l from-transparent to-gold-2/60" />
-            </div>
-
-            {/* the man himself */}
-            <h3 className="font-cinzel text-lg md:text-xl font-semibold text-white leading-snug">
-              {p.name}
-            </h3>
-            <p className="mt-2 font-garamond italic text-bone-dim text-sm md:text-base">
-              {p.modernRole}
-            </p>
-
-            {/* his words, kept */}
-            <p className="mt-6 font-garamond italic text-bone-dim text-[13px] md:text-sm leading-relaxed">
-              &ldquo;{p.quote}&rdquo;
-            </p>
-
-            {/* allegiance chip */}
-            <p className="mt-7 inline-block border border-gold-2/40 bg-ink/80 px-4 py-2 font-cinzel text-[9px] md:text-[10px] tracking-[0.26em] uppercase text-bone">
-              {p.houseAllegiance}
-            </p>
-          </div>
-        </div>
-      </Reveal>
-    </section>
+        ))}
+      </div>
+      <div className="my-4 h-px w-full bg-[#9e9f9f]/35" />
+    </div>
   );
 }
 ```
-
-### 2b. `src/index.css` — add the counter-spin animation
-
-**FIND:**
-
-```css
-.animate-rune-spin {
-  animation: runeSpin 40s linear infinite;
-}
-```
-
-**REPLACE WITH** (keeps the original rule, adds the reverse twin):
-
-```css
-.animate-rune-spin {
-  animation: runeSpin 40s linear infinite;
-}
-
-/* Counter-turning twin of .animate-rune-spin — used by the
-   Protector of the Realm shrine so nested sigils orbit against
-   each other. Same transform-box caveat as its sibling. */
-.animate-rune-spin-rev {
-  animation: runeSpin 58s linear infinite reverse;
-}
-```
-
-### 2c. `src/pages/Organizers.tsx` — swap the proclamation panel
-
-**FIND** (top imports):
-
-```tsx
-import React from 'react';
-import { Reveal } from '../components/Reveal';
-import PageHero from '../components/ui/PageHero';
-import SmallCouncilReel from '../components/SmallCouncilReel';
-import { Crown, Shield, Scroll } from 'lucide-react';
-```
-
-**REPLACE WITH:**
-
-```tsx
-import React from 'react';
-import { Reveal } from '../components/Reveal';
-import PageHero from '../components/ui/PageHero';
-import SmallCouncilReel from '../components/SmallCouncilReel';
-import ProtectorSoloCard from '../components/ProtectorSoloCard';
-import { Shield } from 'lucide-react';
-```
-
-**FIND** the entire Convener's Royal Proclamation block — it starts with the comment
-`{/* Convener's Royal Proclamation */}`, then `<Reveal direction="zoom" className="frost-card
-proclamation-panel ...` and ends at that block's closing `</Reveal>` (it contains the "AM"
-monogram, the `<Crown>` badge, the quote text and the line
-`Prof. Anowar Malek Mozumdar`). **REPLACE** the whole block with:
-
-```tsx
-      {/* Protector of the Realm — solo high-seat card (replaces the
-          old "Proclamation from the Office of the Convenor" panel) */}
-      <ProtectorSoloCard />
-```
-
-Keep everything else in `Organizers.tsx` untouched (PageHero above, SmallCouncilReel and the
-Volunteer Corps callout below).
-
 ---
-
-## CHANGE 3 — Footer: social media + website links of all four houses
-
-### 3a. `src/types/index.ts` — extend `ClubHouse`
-
-**FIND:**
-
-```ts
-  lore: string;
-  founded: string;
-  achievements: string[];
-  memberCount: number;
-  points: number;
+## TASK 3 — `src/pages/FestDescription.tsx` (smaller prologue, off the folds)
+**3a.** Container rhythm, FIND:
+```tsx
+      <div className="mx-auto max-w-7xl space-y-32 px-4 py-24 sm:px-6 lg:px-8">
+```
+REPLACE:
+```tsx
+      <div className="mx-auto max-w-7xl space-y-40 px-4 py-24 sm:px-6 lg:px-8">
+```
+**3b.** The lore parchment content, FIND:
+```tsx
+          <div className="lore-parchment">
+            <h2 className={`font-cinzel mt-0 text-xl font-bold leading-tight tracking-wide sm:text-[1.75rem] ${SILVER}`}>
+              Where Ancient Wisdom Meets Fierce Ambition
+            </h2>
+            <p className="mt-4 text-[14px] leading-[1.7] text-bone/90 sm:text-[15px]">
+              Perched atop the legendary hills of Chawkbazar, Chittagong College has nurtured prime ministers, revolutionary scholars, scientists, and master artists. When the winter chill embraces the campus brick towers, the four guardian clubs—Physics & Astronomy, English Language & Literature, Debating, and the Photographic Society—raise their banners.
+            </p>
+            <p className="font-garamond mt-3 text-[15px] italic leading-[1.7] text-bone-dim sm:text-[16px]">
+              For two days, the campus transforms into an arena of science, language, debate, and the art of the lens. Whether you are stepping onto the debate podium or framing the perfect shot under the winter sky, you are part of this living saga.
+            </p>
+            {/* Stats */}
+            <div className="mx-auto mt-3.5 grid max-w-sm grid-cols-3 gap-1.5 sm:gap-2.5">
+              {LORE_STATS.map((s, i) => (
+                <Reveal key={s.label} delay={i * 120}>
+                  <div className="h-full px-1 py-2.5 text-center sm:px-1.5">
+                    <p className="lore-stone__value font-cinzel text-[15px] font-bold leading-none sm:text-lg">{s.value}</p>
+                    <p className="lore-stone__label mt-1 text-[6.5px] font-semibold uppercase leading-[1.2] tracking-[0.2em] sm:text-[8px]">{s.label}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+```
+REPLACE:
+```tsx
+          <div className="lore-parchment">
+            <h2 className={`font-cinzel mt-0 text-base font-bold leading-tight tracking-wide sm:text-lg ${SILVER}`}>
+              Where Ancient Wisdom Meets Fierce Ambition
+            </h2>
+            <p className="mt-2.5 text-[12px] leading-[1.6] text-bone/90 sm:text-[13px]">
+              Perched atop the hills of Chawkbazar, Chittagong College has nurtured prime ministers, scholars, scientists, and artists. When winter embraces the campus towers, the four guardian clubs—Physics & Astronomy, English Literature, Debating, and Photography—raise their banners.
+            </p>
+            <p className="font-garamond mt-2 text-[12.5px] italic leading-[1.6] text-bone-dim sm:text-[13.5px]">
+              For two days the campus becomes an arena of science, language, debate, and the lens — and you are part of this living saga.
+            </p>
+            {/* Stats */}
+            <div className="mx-auto mt-3 grid max-w-xs grid-cols-3 gap-1.5 sm:max-w-sm sm:gap-2.5">
+              {LORE_STATS.map((s, i) => (
+                <Reveal key={s.label} delay={i * 120}>
+                  <div className="h-full px-1 py-2 text-center sm:px-1.5">
+                    <p className="lore-stone__value font-cinzel text-[13px] font-bold leading-none sm:text-[15px]">{s.value}</p>
+                    <p className="lore-stone__label mt-1 text-[6.5px] font-semibold uppercase leading-[1.2] tracking-[0.2em] sm:text-[7.5px]">{s.label}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+```
+---
+## TASK 4 — `src/index.css` (four exact edits)
+**4a.** FIND:
+```css
+.houses-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
+}
+@media (min-width: 640px) {
+  .houses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1180px) {
+  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
 }
 ```
-
-**REPLACE WITH:**
-
-```ts
-  lore: string;
-  founded: string;
-  achievements: string[];
-  memberCount: number;
-  points: number;
-  /** Official club links shown in the footer. Leave '' to hide a link. */
-  links: {
-    facebook: string;
-    website: string;
-  };
+REPLACE:
+```css
+.houses-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.25rem;
+  justify-items: center;
+}
+@media (min-width: 640px) {
+  .houses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1180px) {
+  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem; }
 }
 ```
-
-### 3b. `src/data/festData.ts` — add `links` to each of the 4 houses in `FOUR_HOUSES`
-
-In each house entry, add the `links` field right after `points:` (fix the trailing commas).
-Only CCPAC's links are verified — leave the other three as `''` and keep the ✏️ comments so
-the club URLs can be pasted in later. The footer renders icon links only when non-empty and
-shows a subtle "Links soon" placeholder otherwise.
-
-- **house-arcanum** (CCPAC): after `points: 1310`
-
-```ts
-    memberCount: 0,
-    points: 1310,
-    links: {
-      facebook: 'https://www.facebook.com/61572631723477/',
-      website: 'https://ccpac.vercel.app'
-    }
-  },
+**4b.** FIND:
+```css
+.lore-parchment {
+  position: relative;
+  isolation: isolate;
+  background: url('/images/parchment-card.webp') center / 100% 100% no-repeat;
+  padding: clamp(1.9rem, 4.5vw, 3.2rem) clamp(1.35rem, 4vw, 2.9rem);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
+}
 ```
-
-- **house-melodia** (The Muses): after `points: 1190`
-
-```ts
-    memberCount: 150,
-    points: 1190,
-    /* ✏️ PASTE THE MUSES' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
-  },
+REPLACE:
+```css
+.lore-parchment {
+  position: relative;
+  isolation: isolate;
+  background: url('/images/parchment-card.webp') center / 100% 100% no-repeat;
+  /* Top/bottom padding clears the rolled corner folds of the artwork so
+     the heading and text always sit on the flat middle of the parchment. */
+  padding: clamp(3rem, 6.5vw, 4.4rem) clamp(1.6rem, 4.5vw, 3.1rem);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
+}
 ```
-
-- **house-veritas** (CCDS): after `points: 1240`
-
-```ts
-    memberCount: 0,
-    points: 1240,
-    /* ✏️ PASTE CCDS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
-  },
+**4c.** FIND:
+```css
+.menu-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(23, 104, 110, 0.45);
+  background: rgba(6, 26, 28, 0.6);
+  color: #9e9f9f;
 ```
-
-- **house-valorous** (CCPS, the LAST entry before `];`): after `points: 1280`
-
-```ts
-    memberCount: 0,
-    points: 1280,
-    /* ✏️ PASTE CCPS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
-  }
-];
+REPLACE:
+```css
+.menu-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid rgba(23, 104, 110, 0.45);
+  background: rgba(6, 26, 28, 0.6);
+  color: #9e9f9f;
 ```
-
-### 3c. `src/components/Footer.tsx` — FULL FILE (replace entire contents)
-
+**4d.** FIND:
+```css
+.tier-card {
+  position: relative;
+  isolation: isolate;
+  background-color: #031213;
+  background-image: url("/images/iron-bank-frame.webp");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  padding: 2.6rem 1.5rem 1.9rem;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  transition:
+    translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+@media (min-width: 768px) {
+  .tier-card { padding: 3rem 1.9rem 2.1rem; }
+}
+/* legibility scrim — keeps the corner regalia visible, darkens behind text */
+.tier-card::after {
+```
+REPLACE:
+```css
+.tier-card {
+  position: relative;
+  isolation: isolate;
+  background-color: #031213;
+  background-image: url("/images/iron-bank-frame.webp");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  padding: 2.2rem 1.35rem 1.6rem;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.95);
+  transition:
+    translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+@media (min-width: 768px) {
+  .tier-card { padding: 2.5rem 1.7rem 1.8rem; }
+}
+/* Per-tier metal tint over the shared Iron Bank frame. Each tier glows
+   in its own metal — crimson for the crown, teal for power, silver for
+   platinum, gold for gold, pale bone for the guilds. The ::after
+   legibility scrim stacks above, so text stays readable and the corner
+   regalia stay visible. */
+.tier-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.tier-card--title::before {
+  background: linear-gradient(165deg, rgba(158, 42, 43, 0.34), rgba(158, 42, 43, 0.1) 48%, transparent 72%);
+}
+.tier-card--power::before {
+  background: linear-gradient(165deg, rgba(31, 138, 145, 0.3), rgba(31, 138, 145, 0.09) 48%, transparent 72%);
+}
+.tier-card--platinum::before {
+  background: linear-gradient(165deg, rgba(210, 222, 230, 0.26), rgba(210, 222, 230, 0.08) 48%, transparent 72%);
+}
+.tier-card--gold::before {
+  background: linear-gradient(165deg, rgba(222, 178, 76, 0.3), rgba(222, 178, 76, 0.09) 48%, transparent 72%);
+}
+.tier-card--cosponsor::before {
+  background: linear-gradient(165deg, rgba(201, 210, 210, 0.14), rgba(201, 210, 210, 0.05) 48%, transparent 72%);
+}
+/* legibility scrim — keeps the corner regalia visible, darkens behind text */
+.tier-card::after {
+```
+---
+## TASK 5 — `src/pages/Clubs.tsx` (compact, readable dossier)
+**5a.** FIND:
+```tsx
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
+```
+REPLACE:
+```tsx
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
+```
+**5b.** FIND:
+```tsx
+      <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4">
+```
+REPLACE:
+```tsx
+      <div className="grid grid-cols-2 gap-5 md:gap-7 md:grid-cols-4">
+```
+**5c.** FIND:
+```tsx
+      <div className="house-dossier space-y-8 relative px-3 py-6 sm:px-5 sm:py-7 md:px-7 md:py-8">
+```
+REPLACE:
+```tsx
+      <div className="house-dossier space-y-5 relative px-3 py-5 sm:px-5 sm:py-6 md:px-7 md:py-7">
+```
+**5d.** FIND:
+```tsx
+        <div className="border-b border-crimson/20 pb-5">
+          <span className="font-cinzel text-[10px] md:text-xs font-bold text-[#5bc9d6] uppercase tracking-widest block">
+            Citadel House Sigil: {activeHouse.sigil}
+          </span>
+          <h2 className="font-cinzel-dec text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight mt-1">
+            {activeHouse.name.split('(')[0]}
+          </h2>
+          <div className="font-cinzel text-sm font-semibold text-gold-2 mt-1">
+            {activeHouse.houseName}
+          </div>
+          <p className="font-cinzel text-xs md:text-sm text-gold-2/90 italic">
+            House Words: "{activeHouse.motto}"
+          </p>
+        </div>
+```
+REPLACE:
+```tsx
+        <div className="border-b border-crimson/20 pb-4">
+          <span className="font-cinzel text-[10px] md:text-xs font-bold text-[#5bc9d6] uppercase tracking-widest block">
+            Citadel House Sigil: {activeHouse.sigil}
+          </span>
+          <h2 className="font-cinzel-dec text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-tight mt-1">
+            {activeHouse.name.split('(')[0]}
+          </h2>
+          <div className="font-cinzel text-[13px] font-semibold text-gold-2 mt-1">
+            {activeHouse.houseName}
+          </div>
+          <p className="font-cinzel text-[11px] md:text-xs text-gold-2/90 italic">
+            House Words: "{activeHouse.motto}"
+          </p>
+        </div>
+```
+**5e.** In the "House Vitals" grid, change the container and the two `text-lg`
+values. FIND:
+```tsx
+        <div className="grid grid-cols-2 gap-y-5 gap-x-3 md:grid-cols-4">
+```
+REPLACE:
+```tsx
+        <div className="grid grid-cols-2 gap-y-3 gap-x-3 md:grid-cols-4">
+```
+Then within that same block, change the three value lines:
+- `<div className="font-cinzel text-lg font-bold text-white">{activeHouse.founded}</div>` →
+  `<div className="font-cinzel text-base font-bold text-white">{activeHouse.founded}</div>`
+- `<div className="font-cinzel text-lg font-bold text-white">{activeHouse.memberCount > 0 ? \`${activeHouse.memberCount}+\` : '—'}</div>` →
+  `<div className="font-cinzel text-base font-bold text-white">{activeHouse.memberCount > 0 ? \`${activeHouse.memberCount}+\` : '—'}</div>`
+- `<div className="font-mono text-lg font-bold text-gold-2">{activeHouse.points}</div>` →
+  `<div className="font-mono text-base font-bold text-gold-2">{activeHouse.points}</div>`
+**5f.** FIND:
+```tsx
+        <div className="border-t border-crimson/20 pt-5 space-y-3">
+          <h3 className="font-cinzel text-xs font-bold text-[#5bc9d6] uppercase tracking-widest flex items-center gap-2">
+            <Award className="w-4 h-4 text-[#5bc9d6]" />
+            Historic Trophies & Laurels
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+            {activeHouse.achievements.map((ach, i) => (
+              <Reveal key={i} delay={i * 90}>
+              <div
+                className="flex items-start gap-2.5 text-[13px] text-bone h-full"
+              >
+```
+REPLACE:
+```tsx
+        <div className="border-t border-crimson/20 pt-4 space-y-2.5">
+          <h3 className="font-cinzel text-xs font-bold text-[#5bc9d6] uppercase tracking-widest flex items-center gap-2">
+            <Award className="w-4 h-4 text-[#5bc9d6]" />
+            Historic Trophies & Laurels
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2.5">
+            {activeHouse.achievements.map((ach, i) => (
+              <Reveal key={i} delay={i * 90}>
+              <div
+                className="flex items-start gap-2.5 text-[12px] leading-snug text-bone h-full"
+              >
+```
+**5g.** FIND:
+```tsx
+        <div className="pt-4 border-t border-crimson/20 space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-cinzel text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
+```
+REPLACE:
+```tsx
+        <div className="pt-3 border-t border-crimson/20 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+```
+**5h.** FIND:
+```tsx
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
+```
+REPLACE:
+```tsx
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-5">
+```
+---
+## TASK 6 — `src/components/Footer.tsx` (remove house socials block)
+Replace the ENTIRE file with:
 ```tsx
 import React from 'react';
 import { PageType } from '../types';
-import { FOUR_HOUSES } from '../data/festData';
 import { MapPin, Mail } from 'lucide-react';
 interface FooterProps {
   onNavigate: (page: PageType) => void;
 }
-/* Official club abbreviation, e.g. "(CCPAC)" -> "CCPAC" */
-const clubAbbr = (name: string): string => name.match(/\(([^)]+)\)\s*$/)?.[1] ?? name.split(' ')[0];
-/* Brand glyphs drawn inline (this lucide build ships no brand icons) */
-const FacebookGlyph: React.FC = () => (
-  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
-    <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H9v3h2.3v7h2.2z" />
-  </svg>
-);
-const GlobeGlyph: React.FC = () => (
-  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
-  </svg>
-);
-/* Square icon link — diamond dot appears on hover */
-const HouseIconLink: React.FC<{ href: string; label: string; children: React.ReactNode }> = ({ href, label, children }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    aria-label={label}
-    title={label}
-    className="group/ico inline-flex h-8 w-8 items-center justify-center border border-iron/60 bg-ink-2/70 text-bone-dim transition-all duration-300 hover:border-[#5bc9d6]/70 hover:text-[#9fe0d4] hover:shadow-[0_0_16px_-4px_rgba(91,201,214,0.6)] hover:-translate-y-0.5"
-  >
-    {children}
-  </a>
-);
 /* A single realm link — diamond marker fades in and the
    line steps toward it on hover. */
 const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
@@ -672,68 +590,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
         </div>
-
-        {/* ---- Banners of the Four Great Houses ---- */}
-        <div className="mb-12 border border-iron/40 bg-ink-2/50 px-5 py-6 sm:px-7">
-          <div className="mb-5 flex items-center gap-4">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-iron/70" />
-            <h4 className="flex items-center gap-2.5 font-cinzel text-xs font-bold uppercase tracking-[0.26em] text-gold-2">
-              <span className="h-1.5 w-1.5 rotate-45 bg-[#5bc9d6] shadow-[0_0_8px_rgba(91,201,214,0.8)]" aria-hidden="true" />
-              The Four Great Houses
-              <span className="h-1.5 w-1.5 rotate-45 bg-[#5bc9d6] shadow-[0_0_8px_rgba(91,201,214,0.8)]" aria-hidden="true" />
-            </h4>
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-iron/70" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FOUR_HOUSES.map((house) => (
-              <div
-                key={house.id}
-                className="group/house relative flex items-center gap-3 border border-iron/40 bg-ink/60 px-3.5 py-3 transition-all duration-300 hover:border-[#5bc9d6]/50 hover:bg-ink-3/40"
-              >
-                {/* corner ticks */}
-                <span className="pointer-events-none absolute -top-px -left-px h-2 w-2 border-t border-l border-gold-2/50" aria-hidden="true" />
-                <span className="pointer-events-none absolute -bottom-px -right-px h-2 w-2 border-b border-r border-gold-2/50" aria-hidden="true" />
-
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-iron bg-white/90 p-1 transition-transform duration-300 group-hover/house:scale-105">
-                  <img src={house.logo} alt={`${clubAbbr(house.name)} crest`} loading="lazy" className="h-full w-full object-contain" />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-cinzel text-[11px] font-bold tracking-wide text-bone transition-colors group-hover/house:text-[#9fe0d4]">
-                    {clubAbbr(house.name)}
-                  </p>
-                  <p className="truncate font-cinzel text-[9px] uppercase tracking-[0.18em] text-ash">
-                    {house.houseName}
-                  </p>
-                </div>
-
-                <div className="flex shrink-0 items-center gap-1.5">
-                  {house.links.facebook ? (
-                    <HouseIconLink href={house.links.facebook} label={`${clubAbbr(house.name)} on Facebook`}>
-                      <FacebookGlyph />
-                    </HouseIconLink>
-                  ) : null}
-                  {house.links.website ? (
-                    <HouseIconLink href={house.links.website} label={`${clubAbbr(house.name)} official website`}>
-                      <GlobeGlyph />
-                    </HouseIconLink>
-                  ) : null}
-                  {!house.links.facebook && !house.links.website && (
-                    <span className="font-cinzel text-[8px] uppercase tracking-[0.14em] text-ash/80">
-                      Links&nbsp;soon
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-ash">
-            Follow the banners — chronicles, tourney notices &amp; house glory
-          </p>
-        </div>
-
         {/* ---- Bottom Copyright ---- */}
         <div className="border-t border-ink-2 pt-7 text-center">
           <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
@@ -745,1513 +601,250 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   );
 };
 ```
-
 ---
-
-## CHANGE 4 — Buttons: kill the brown, add bluish glass
-
-The `.btn` CSS currently uses MAROON steel colors (`#6a2330`, `#44141e`, pinkish edge
-`rgba(214,120,128,...)`) and the secondary uses brownish obsidian — that is why every button
-looks brown. Retint primary to teal Valyrian steel, secondary to blue-black obsidian, and add
-a new **blue frosted-glass** variant.
-
-### 4a. `src/index.css` — primary button palette
-
-**FIND:**
-
-```css
-  /* ---- Valyrian steel (primary) ---- */
-  --cut: 15px;
-  --shape: polygon(
-    var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
-    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
-  );
-  --edge: rgba(214, 120, 128, 0.85);
-  --edge-hi: rgba(255, 190, 196, 0.95);
-  --steel-hi: #6a2330; --steel-mid: #44141e; --steel-lo: #230a10;
-  --sheen: rgba(255, 150, 160, 0.22);
-  --txt: #fbeeee; --txt-hi: #ffffff;
-  --ember: rgba(220, 70, 85, 0.55);
-  --glint: rgba(255, 215, 218, 0.4);
-```
-
-**REPLACE WITH:**
-
-```css
-  /* ---- Valyrian steel (primary) — retinted to the realm's teal/ice.
-         (It used to be a maroon-brown steel that clashed with the
-         dark-teal & brushed-silver palette.) ---- */
-  --cut: 15px;
-  --shape: polygon(
-    var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
-    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
-  );
-  --edge: rgba(91, 201, 214, 0.6);
-  --edge-hi: rgba(159, 224, 212, 0.95);
-  --steel-hi: #1d7d84; --steel-mid: #115258; --steel-lo: #08282c;
-  --sheen: rgba(159, 224, 212, 0.24);
-  --txt: #eaf6f5; --txt-hi: #ffffff;
-  --ember: rgba(91, 201, 214, 0.5);
-  --glint: rgba(214, 244, 248, 0.42);
-```
-
-### 4b. `src/index.css` — secondary palette + NEW glass variant
-
-**FIND** (the whole DRAGONGLASS block):
-
-```css
-/* ---- DRAGONGLASS (secondary) — obsidian, smooth rounded tablet ---- */
-.btn--secondary {
-  --shape: inset(0 round 12px);
-  --edge: rgba(170, 120, 126, 0.55);
-  --edge-hi: rgba(225, 175, 180, 0.85);
-  --txt: #e4d2d3; --txt-hi: #f7eeee;
-  --ember: rgba(200, 90, 100, 0.3);
-  --glint: rgba(240, 215, 217, 0.3);
-  padding-left: 1.7rem;
-  padding-right: 1.7rem;
-}
-.btn--secondary::before {
-  background:
-    /* glass reflection */
-    linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 34%),
-    radial-gradient(120% 60% at 50% -10%, rgba(190, 212, 210, 0.12), transparent 55%),
-    linear-gradient(180deg, #2a1a1d 0%, #160c0e 55%, #0b0607 100%);
-}
-```
-
-**REPLACE WITH:**
-
-```css
-/* ---- DRAGONGLASS (secondary) — blue-black obsidian tablet ---- */
-.btn--secondary {
-  --shape: inset(0 round 12px);
-  --edge: rgba(122, 168, 176, 0.5);
-  --edge-hi: rgba(159, 224, 212, 0.85);
-  --txt: #dcecec; --txt-hi: #f2fbfa;
-  --ember: rgba(91, 201, 214, 0.32);
-  --glint: rgba(214, 244, 248, 0.3);
-  padding-left: 1.7rem;
-  padding-right: 1.7rem;
-}
-.btn--secondary::before {
-  background:
-    /* glass reflection */
-    linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 34%),
-    radial-gradient(120% 60% at 50% -10%, rgba(159, 224, 212, 0.14), transparent 55%),
-    linear-gradient(180deg, #14343a 0%, #0a1e22 55%, #050f12 100%);
-}
-
-
-/* ---- FROSTGLASS (glass) — bluish translucent glass, hex-cut ---- */
-.btn--glass {
-  --shape: polygon(
-    var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%,
-    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%
-  );
-  --edge: rgba(91, 201, 214, 0.45);
-  --edge-hi: rgba(159, 224, 212, 0.9);
-  --txt: #cdeef2; --txt-hi: #ffffff;
-  --ember: rgba(91, 201, 214, 0.45);
-  --glint: rgba(214, 244, 248, 0.35);
-  backdrop-filter: blur(12px) saturate(1.15);
-  -webkit-backdrop-filter: blur(12px) saturate(1.15);
-}
-.btn--glass::before {
-  background:
-    /* icy sheen from above */
-    linear-gradient(160deg, rgba(159, 224, 212, 0.22) 0%, rgba(159, 224, 212, 0.04) 38%),
-    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.18), transparent 55%),
-    linear-gradient(180deg, rgba(23, 104, 110, 0.42) 0%, rgba(11, 40, 42, 0.55) 60%, rgba(5, 20, 22, 0.62) 100%);
-}
-.btn--glass:hover::before,
-.btn--glass:active::before {
-  background:
-    linear-gradient(160deg, rgba(159, 224, 212, 0.3) 0%, rgba(159, 224, 212, 0.08) 40%),
-    radial-gradient(120% 60% at 50% -10%, rgba(214, 244, 248, 0.24), transparent 55%),
-    linear-gradient(180deg, rgba(31, 138, 145, 0.55) 0%, rgba(17, 82, 88, 0.62) 60%, rgba(8, 40, 44, 0.68) 100%);
-}
-```
-
-### 4c. `src/components/ui/Button.tsx` — FULL FILE (replace entire contents)
-
+## TASK 7 — `src/components/RealmMapNav.tsx` (menu list fixes)
+**7a.** FIND:
 ```tsx
-import { ArrowUpRight } from "lucide-react";
-
-type ButtonProps = {
-  children: string;
-  /** Shorter label shown on small screens; the full label is kept from `sm` up. */
-  mobileLabel?: string;
-  variant?: "primary" | "secondary" | "glass";
-  size?: "md" | "sm";
-  href?: string;
-  external?: boolean;
-  onClick?: () => void;
-  className?: string;
-  type?: "button" | "submit";
+/** Regnal numerals for the great list. */
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+```
+REPLACE:
+```tsx
+/** Regnal numerals for the great list. */
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+/** Plain real-world names for the list view (the map keeps the fantasy
+    place names). Shown as the big line of each row. */
+const REAL_LABELS: Record<PageType, string> = {
+  home: 'Home Page',
+  description: 'Event Description',
+  clubs: 'The Clubs',
+  segments: 'Segments & Competitions',
+  sponsorships: 'Sponsorship Details',
+  organizers: 'Organizers',
 };
-
-export default function Button({
-  children,
-  mobileLabel,
-  variant = "primary",
-  size = "md",
-  href,
-  external,
-  onClick,
-  className = "",
-  type = "button",
-}: ButtonProps) {
-  const classes = [
-    "btn",
-    variant === "secondary" && "btn--secondary",
-    variant === "glass" && "btn--glass",
-    size === "sm" && "btn--sm",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const inner = (
-    <>
-      <span className="btn__label">
-        <span data-text={children}>
-          {mobileLabel ? (
-            <>
-              <span className="sm:hidden">{mobileLabel}</span>
-              <span className="hidden sm:inline">{children}</span>
-            </>
-          ) : (
-            children
-          )}
-        </span>
-      </span>
-      {external && <ArrowUpRight className="btn__icon" aria-hidden="true" />}
-    </>
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        onClick={onClick}
-        className={classes}
-        {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      >
-        {inner}
-      </a>
-    );
-  }
-
-  return (
-    <button type={type} onClick={onClick} className={classes}>
-      {inner}
-    </button>
-  );
-}
+/** List-only ordering: the Small Council sits where the Iron Bank used
+    to be, and the Iron Bank closes the roll. The map keeps its own
+    coordinates and is untouched. */
+const LIST_ORDER: PageType[] = [
+  'home',
+  'description',
+  'clubs',
+  'segments',
+  'organizers',
+  'sponsorships',
+];
+/** Menu socials — YouTube removed from the list view. */
+const MENU_SOCIALS = SOCIAL_LINKS.filter((soc) => soc.icon !== 'Youtube');
 ```
-
+**7b.** The list render loop, FIND:
+```tsx
+                <nav aria-label="Primary">
+                  <ul>
+                    {REALM_NODES.map((item, index) => {
+                      const isActive = currentPage === item.page;
+                      return (
+                        <li key={item.page}>
+                          <button
+                            type="button"
+                            style={{ animationDelay: `${140 + index * 80}ms` }}
+                            onClick={() => travel(item.page)}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`menu-row group ${isActive ? 'menu-row--active' : ''}`}
+                          >
+                            <span className="menu-row__numeral" aria-hidden="true">
+                              {ROMAN[index]}
+                            </span>
+                            <span className="min-w-0">
+                              <span className="menu-row__alias">
+                                {item.name}
+                                {item.kind === 'sea' && (
+                                  <em className="menu-row__sea">across the narrow sea</em>
+                                )}
+                              </span>
+                              <span className="menu-row__name">{item.alias}</span>
+```
+REPLACE:
+```tsx
+                <nav aria-label="Primary">
+                  <ul>
+                    {LIST_ORDER.map((page, index) => {
+                      const item = nodeByPage(page);
+                      const isActive = currentPage === item.page;
+                      return (
+                        <li key={item.page}>
+                          <button
+                            type="button"
+                            style={{ animationDelay: `${140 + index * 80}ms` }}
+                            onClick={() => travel(item.page)}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`menu-row group ${isActive ? 'menu-row--active' : ''}`}
+                          >
+                            <span className="menu-row__numeral" aria-hidden="true">
+                              {ROMAN[index]}
+                            </span>
+                            <span className="min-w-0">
+                              <span className="menu-row__alias">
+                                {REAL_LABELS[item.page]}
+                                {item.kind === 'sea' && (
+                                  <em className="menu-row__sea">across the narrow sea</em>
+                                )}
+                              </span>
+                              <span className="menu-row__name">
+                                {item.name} &middot; {item.alias}
+                              </span>
+```
+**7c.** Replace all THREE occurrences of `{SOCIAL_LINKS.map((soc) => (` in this
+file with `{MENU_SOCIALS.map((soc) => (`. (They are the three social link
+rows inside the list view.) Do NOT change anything in the map view.
 ---
-
-## CHANGE 5 — Segment rules popup: rebuild + mobile responsive + stone-teal bg
-
-Clicking any segment (e.g. Physics Olympiad) opens `SegmentRulesModal`. The old modal's
-centered-flex layout clipped its top on phones. Replace the ENTIRE file with the version
-below: carved `stone-teal.webp` slab, diamond sigil close button (spins on hover), themed
-decree rows, fully scrollable on mobile/tablet, Esc-to-close, body scroll lock.
-
-### NEW CONTENT for `src/components/SegmentRulesModal.tsx` (replace entire contents)
-
+## TASK 8 — `src/pages/Sponsorships.tsx` (tier tints + compact cards)
+**8a.** FIND:
 ```tsx
-import React, { useEffect } from 'react';
-import { X, Trophy, MapPin, Clock, Users, ShieldAlert, ScrollText, Gem } from 'lucide-react';
-import { Segment } from '../types';
-import { FOUR_HOUSES, FEST_METADATA } from '../data/festData';
-import Button from './ui/Button';
-
-interface SegmentRulesModalProps {
-  segment: Segment | null;
-  onClose: () => void;
-  onRegisterTickify: (segmentName: string) => void;
-}
-
-/* One quick-fact cell of the decree header */
-const FactCell: React.FC<{ icon: React.ReactNode; label: string; value: string }> = ({ icon, label, value }) => (
-  <div className="flex items-center gap-2.5 border border-[#5bc9d6]/20 bg-ink/60 px-3 py-2.5 backdrop-blur-sm">
-    <span className="flex h-7 w-7 shrink-0 rotate-45 items-center justify-center border border-[#5bc9d6]/40 bg-ink-2/80">
-      <span className="-rotate-45 text-[#5bc9d6]">{icon}</span>
-    </span>
-    <div className="min-w-0">
-      <div className="text-[8.5px] font-cinzel uppercase tracking-[0.22em] text-ash">{label}</div>
-      <div className="truncate text-[12px] font-bold text-gold-2 sm:text-[13px]">{value}</div>
-    </div>
-  </div>
-);
-
-/**
- * SEGMENT RULES MODAL — "The Royal Decree".
- * Carved teal-stone slab (stone-teal.webp), diamond sigil close button,
- * and — critically — the OUTER layer owns the scroll, so on phones the
- * decree always starts at the top and scrolls to its seal. Nothing is
- * ever clipped off-screen.
- */
-export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
-  segment,
-  onClose,
-  onRegisterTickify
-}) => {
-  /* esc-to-close + body scroll lock while the decree is open */
-  useEffect(() => {
-    if (!segment) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [segment, onClose]);
-
-  if (!segment) return null;
-
-  const house = FOUR_HOUSES.find(h => h.id === segment.houseId);
-
-  return (
-    <div
-      className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/85 backdrop-blur-md animate-fadeIn"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${segment.title} rules`}
-    >
-      {/* min-h-full + m-auto = centred when short, scrollable-from-top when tall */}
-      <div className="flex min-h-full items-center justify-center p-3 sm:p-6">
-        <div
-          className="rules-scroll relative m-auto w-full max-w-2xl p-5 text-bone sm:p-8 md:p-9"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* corner brackets */}
-          <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute bottom-2 left-2 h-5 w-5 border-b-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-
-          {/* top crest */}
-          <div className="pointer-events-none absolute -top-3.5 left-1/2 hidden -translate-x-1/2 sm:block" aria-hidden="true">
-            <span className="flex h-7 w-7 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_16px_rgba(91,201,214,0.45)]">
-              <Gem className="h-3 w-3 -rotate-45 text-[#5bc9d6]" />
-            </span>
-          </div>
-
-          {/* diamond sigil close button */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close decree"
-            className="sigil-close absolute top-4 right-4 z-20 flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/50 bg-ink-2/85 text-bone-dim hover:text-white sm:top-5 sm:right-5"
-          >
-            <X className="h-4 w-4 -rotate-45" />
-          </button>
-
-          {/* ── Decree header ─────────────────────────────── */}
-          <div className="pr-10">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="border border-[#5bc9d6]/45 bg-ink/70 px-2.5 py-1 font-cinzel text-[9px] font-bold uppercase tracking-[0.24em] text-[#8ce8f2] sm:text-[10px]">
-                {segment.category}
-              </span>
-              {house && (
-                <span className="flex items-center gap-1.5 border border-iron/70 bg-ink/70 px-2.5 py-1 font-cinzel text-[9px] font-bold uppercase tracking-[0.2em] text-bone-dim sm:text-[10px]">
-                  <span className="h-1 w-1 rotate-45 bg-[#5bc9d6]" aria-hidden="true" />
-                  Host: {house.houseName}
-                </span>
-              )}
-              <span className="border border-iron/70 bg-ink/70 px-2.5 py-1 font-cinzel text-[9px] font-bold uppercase tracking-[0.2em] text-bone-dim sm:text-[10px]">
-                Entry {segment.entryFee}
-              </span>
-            </div>
-
-            <h2 className="mt-3 font-cinzel text-xl font-bold tracking-wide text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.8)] sm:text-2xl md:text-[27px]">
-              {segment.title}
-            </h2>
-            <p className="mt-1.5 flex items-center gap-2 font-garamond text-sm italic text-[#9fd8d2] sm:text-[15px]">
-              <ScrollText className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]" />
-              The Citadel Proclamation: &ldquo;{segment.gotTitle}&rdquo;
-            </p>
-          </div>
-
-          {/* ── Quick facts ───────────────────────────────── */}
-          <div className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-4">
-            <FactCell icon={<Trophy className="h-3.5 w-3.5" />} label="Prize Vault" value={segment.prizePool} />
-            <FactCell icon={<Users className="h-3.5 w-3.5" />} label="Team Size" value={segment.teamSize} />
-            <FactCell icon={<MapPin className="h-3.5 w-3.5" />} label="Citadel Venue" value={segment.venue} />
-            <FactCell icon={<Clock className="h-3.5 w-3.5" />} label="Schedule" value={segment.time} />
-          </div>
-
-          {/* ── Description ───────────────────────────────── */}
-          <p className="mt-5 border-l-2 border-[#5bc9d6]/40 pl-4 text-[13px] leading-relaxed text-bone/90 sm:text-sm">
-            {segment.description}
-          </p>
-
-          {/* ── Tournament Decrees ────────────────────────── */}
-          <div className="mt-6">
-            <div className="mb-3 flex items-center gap-2.5">
-              <ShieldAlert className="h-4 w-4 shrink-0 text-[#5bc9d6]" />
-              <h3 className="font-cinzel text-[11px] font-bold uppercase tracking-[0.26em] text-gold-2 sm:text-xs">
-                Tournament Decrees &amp; Rules of Engagement
-              </h3>
-              <span className="h-px flex-1 bg-gradient-to-r from-[#5bc9d6]/40 to-transparent" aria-hidden="true" />
-            </div>
-            <ul className="space-y-2">
-              {segment.rules.map((rule, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-3 border border-iron/40 bg-ink/55 px-3.5 py-2.5 text-xs leading-relaxed text-bone-dim backdrop-blur-sm transition-colors duration-300 hover:border-[#5bc9d6]/40 hover:text-bone sm:text-[13px]"
-                >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#5bc9d6]/80" aria-hidden="true" />
-                  <span>
-                    <span className="font-cinzel font-bold text-gold-2">Decree {idx + 1}.</span>{' '}
-                    {rule}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* ── Judging criteria ──────────────────────────── */}
-          <div className="mt-6">
-            <div className="mb-3 flex items-center gap-2.5">
-              <Gem className="h-4 w-4 shrink-0 text-[#5bc9d6]" />
-              <h3 className="font-cinzel text-[11px] font-bold uppercase tracking-[0.26em] text-gold-2 sm:text-xs">
-                Judging Criteria &amp; Scoring
-              </h3>
-              <span className="h-px flex-1 bg-gradient-to-r from-[#5bc9d6]/40 to-transparent" aria-hidden="true" />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {segment.judgingCriteria.map((crit, idx) => (
-                <span
-                  key={idx}
-                  className="border border-[#5bc9d6]/35 bg-ink/60 px-3 py-1.5 text-[11px] font-semibold text-[#bfe9e4] transition-all duration-300 hover:border-[#5bc9d6]/70 hover:shadow-[0_0_14px_-4px_rgba(91,201,214,0.6)] sm:text-xs"
-                >
-                  {crit}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Actions ───────────────────────────────────── */}
-          <div className="mt-7 flex flex-col gap-3 border-t border-[#5bc9d6]/25 pt-5 sm:flex-row sm:items-center">
-            <Button
-              className="w-full flex-1"
-              onClick={() => {
-                onRegisterTickify(segment.title);
-              }}
-            >
-              {`REGISTER VIA TICKIFY (${segment.entryFee})`}
-            </Button>
-
-            <Button
-              variant="glass"
-              size="sm"
-              className="w-full sm:w-auto"
-              href={FEST_METADATA.tickifyLink}
-              external
-            >
-              Tickify Portal
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
 ```
-
----
-
-## CHANGE 6 — Sorting quiz popup: mobile responsive + stone-teal bg
-
-The "Which House Are You?" popup (`SortingQuizModal`) had the same mobile clipping problem
-(content shoved above the viewport). Rebuild it with the scroll-safe pattern + carved stone
-slab + diamond progress rail.
-
-### 6a. `src/index.css` — modal slab styles (needed by Changes 5, 6 and 7)
-
-**FIND:**
-
-```css
-/* ===== Stone panel: carved teal stone as a card background ===== */
-.stone-panel {
-```
-
-**INSERT BEFORE IT** (so the file reads: new blocks, then the stone-panel block):
-
-```css
-/* ===== FAQ ravens: the accordion items on the Fest page ===== */
-.faq-item {
-  border: 1px solid rgba(47, 85, 87, 0.6);
-  background:
-    linear-gradient(180deg, rgba(6, 26, 28, 0.92) 0%, rgba(2, 10, 11, 0.94) 100%);
-  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.9);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-.faq-item:hover { border-color: rgba(91, 201, 214, 0.45); }
-.faq-item--open {
-  border-color: rgba(91, 201, 214, 0.6);
-  box-shadow:
-    0 0 26px rgba(23, 104, 110, 0.35),
-    0 14px 30px -18px rgba(0, 0, 0, 0.95);
-}
-/* smooth height reveal without measuring pixels */
-.faq-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.faq-item--open .faq-body { grid-template-rows: 1fr; }
-.faq-body > div { overflow: hidden; }
-/* diamond toggle — turns a quarter when the raven speaks */
-.faq-diamond {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, box-shadow 0.3s ease;
-}
-.faq-item--open .faq-diamond {
-  transform: rotate(225deg);
-  background: rgba(91, 201, 214, 0.9);
-  box-shadow: 0 0 12px rgba(91, 201, 214, 0.7);
-}
-/* codex decree cards */
-.codex-decree {
-  background:
-    linear-gradient(180deg, rgba(2, 10, 11, 0.55) 0%, rgba(2, 10, 11, 0.75) 100%),
-    url("/images/stone-teal.webp") center / cover no-repeat,
-    #061a1c;
-  border: 1px solid rgba(47, 85, 87, 0.7);
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s ease,
-    box-shadow 0.45s ease;
-}
-.codex-decree:hover {
-  transform: translateY(-5px);
-  border-color: rgba(91, 201, 214, 0.55);
-  box-shadow: 0 0 26px rgba(23, 104, 110, 0.35), 0 18px 34px -20px rgba(0, 0, 0, 0.95);
-}
-
-
-/* ===== Rules scroll: the segment-decree modal slab =====
-   Carved teal stone (stone-teal.webp) under a cold vignette,
-   framed like a royal decree. The OUTER modal wrapper owns the
-   scrolling, so on phones the decree can never be taller than
-   the screen with its top chopped off. */
-.rules-scroll {
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgba(23, 104, 110, 0.28), transparent 55%),
-    linear-gradient(180deg, rgba(2, 10, 11, 0.62) 0%, rgba(2, 10, 11, 0.78) 100%),
-    url("/images/stone-teal.webp") center / cover no-repeat,
-    #061a1c;
-  border: 1px solid rgba(91, 201, 214, 0.35);
-  box-shadow:
-    inset 0 0 0 1px rgba(2, 10, 11, 0.8),
-    inset 0 0 60px rgba(0, 0, 0, 0.5),
-    0 0 44px rgba(23, 104, 110, 0.32),
-    0 40px 80px -30px rgba(0, 0, 0, 0.95);
-}
-/* inner hairline frame */
-.rules-scroll::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(159, 224, 212, 0.16);
-  pointer-events: none;
-}
-
-/* diamond close sigil — spins a quarter turn on hover */
-.sigil-close {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-}
-.sigil-close:hover {
-  transform: rotate(135deg);
-  border-color: rgba(159, 224, 212, 0.9);
-  background: rgba(23, 104, 110, 0.5);
-  box-shadow: 0 0 18px rgba(91, 201, 214, 0.5);
-}
-
-/* ===== Quiz trial: the sorting modal shares the carved stone ===== */
-.trial-stone {
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgba(23, 104, 110, 0.26), transparent 55%),
-    linear-gradient(180deg, rgba(2, 10, 11, 0.6) 0%, rgba(2, 10, 11, 0.78) 100%),
-    url("/images/stone-teal.webp") center / cover no-repeat,
-    #061a1c;
-  border: 1px solid rgba(91, 201, 214, 0.35);
-  box-shadow:
-    inset 0 0 0 1px rgba(2, 10, 11, 0.8),
-    inset 0 0 60px rgba(0, 0, 0, 0.5),
-    0 0 44px rgba(23, 104, 110, 0.32),
-    0 40px 80px -30px rgba(0, 0, 0, 0.95);
-}
-
-/* ===== Stone panel: carved teal stone as a card background ===== */
-.stone-panel {
-```
-
-> Note: the `faq-item` / `codex-decree` blocks above are used later by Change 9 — inserting
-> them here keeps every CSS edit in one place.
-
-### 6b. NEW CONTENT for `src/components/SortingQuizModal.tsx` (replace entire contents)
-
+REPLACE:
 ```tsx
-import React, { useState, useEffect } from 'react';
-import { X, Shield, Sparkles, Crown } from 'lucide-react';
-import confetti from 'canvas-confetti';
-import { SORTING_QUESTIONS, FOUR_HOUSES } from '../data/festData';
-import { ClubHouse } from '../types';
-import Button from './ui/Button';
-
-interface SortingQuizModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onPledgeHouse: (house: ClubHouse) => void;
-}
-
-/**
- * THE IRON RAVEN'S TRIAL — house sorting quiz.
- * The outer layer owns the scroll (overflow-y-auto + min-h-full + m-auto),
- * so on phones the trial always starts at the top and scrolls naturally
- * instead of getting shoved above the screen. Carved teal-stone slab.
- */
-export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
-  isOpen,
-  onClose,
-  onPledgeHouse
-}) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [houseTallies, setHouseTallies] = useState<Record<string, number>>({
-    'house-veritas': 0,
-    'house-arcanum': 0,
-    'house-melodia': 0,
-    'house-valorous': 0
-  });
-  const [sortedHouse, setSortedHouse] = useState<ClubHouse | null>(null);
-
-  /* esc-to-close + body scroll lock */
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  const handleSelectOption = (houseId: string) => {
-    const updated = { ...houseTallies, [houseId]: houseTallies[houseId] + 1 };
-    setHouseTallies(updated);
-
-    if (currentQuestionIndex + 1 < SORTING_QUESTIONS.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      // Determine winner
-      let highestHouseId = 'house-veritas';
-      let maxScore = -1;
-      for (const [hId, score] of Object.entries(updated)) {
-        if (score > maxScore) {
-          maxScore = score;
-          highestHouseId = hId;
-        }
-      }
-      const matched = FOUR_HOUSES.find(h => h.id === highestHouseId) || FOUR_HOUSES[0];
-      setSortedHouse(matched);
-
-      // Confetti burst
-      try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-      } catch {}
-    }
-  };
-
-  const handleReset = () => {
-    setCurrentQuestionIndex(0);
-    setHouseTallies({
-      'house-veritas': 0,
-      'house-arcanum': 0,
-      'house-melodia': 0,
-      'house-valorous': 0
-    });
-    setSortedHouse(null);
-  };
-
-  const handlePledge = () => {
-    if (sortedHouse) {
-      onPledgeHouse(sortedHouse);
-      onClose();
-    }
-  };
-
-  const currentQ = SORTING_QUESTIONS[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / SORTING_QUESTIONS.length) * 100;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/85 backdrop-blur-md animate-fadeIn"
-      role="dialog"
-      aria-modal="true"
-      aria-label="The Iron Raven's Trial"
-    >
-      <div className="flex min-h-full items-center justify-center p-3 sm:p-6">
-        <div className="trial-stone relative m-auto w-full max-w-xl p-5 text-bone sm:p-8">
-          {/* corner brackets */}
-          <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute bottom-2 left-2 h-5 w-5 border-b-2 border-l-2 border-gold-2/70" aria-hidden="true" />
-          <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/70" aria-hidden="true" />
-
-          {/* diamond sigil close button */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close the trial"
-            className="sigil-close absolute top-4 right-4 z-20 flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/50 bg-ink-2/85 text-bone-dim hover:text-white"
-          >
-            <X className="h-4 w-4 -rotate-45" />
-          </button>
-
-          {!sortedHouse ? (
-            <div key={currentQuestionIndex} className="animate-fadeIn">
-              {/* header */}
-              <div className="pr-10 text-center sm:pr-0">
-                <div className="inline-flex items-center gap-1.5 border border-[#5bc9d6]/45 bg-ink/70 px-3 py-1 font-cinzel text-[10px] uppercase tracking-[0.28em] text-[#8ce8f2]">
-                  <Shield className="w-3.5 h-3.5" />
-                  The Iron Raven&rsquo;s Trial
-                </div>
-                <h2 className="mt-3 font-cinzel text-lg font-bold tracking-wide text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.8)] sm:text-xl md:text-2xl">
-                  WHICH HOUSE OF THE CITADEL SHALL CLAIM YOU?
-                </h2>
-                <p className="mt-1.5 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#9fd8d2] sm:text-[11px]">
-                  Question {currentQuestionIndex + 1} of {SORTING_QUESTIONS.length}
-                </p>
-              </div>
-
-              {/* trial progress rail */}
-              <div className="mt-4 flex items-center gap-3">
-                <span className="font-cinzel text-[9px] tracking-[0.2em] text-ash tabular-nums">
-                  {String(currentQuestionIndex + 1).padStart(2, '0')}
-                </span>
-                <div className="relative h-px flex-1 bg-iron/60">
-                  <span
-                    className="absolute inset-y-0 left-0 bg-[#5bc9d6]/90 shadow-[0_0_10px_rgba(91,201,214,0.7)] transition-all duration-500"
-                    style={{ width: `${progress}%` }}
-                  />
-                  {/* diamond pips per question */}
-                  {SORTING_QUESTIONS.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`absolute top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 transition-colors duration-300 ${
-                        i < currentQuestionIndex
-                          ? 'bg-[#5bc9d6]'
-                          : i === currentQuestionIndex
-                          ? 'bg-gold-2 shadow-[0_0_8px_rgba(216,222,217,0.8)]'
-                          : 'bg-ink-3'
-                      }`}
-                      style={{ left: `${((i + 1) / SORTING_QUESTIONS.length) * 100}%` }}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <span className="font-cinzel text-[9px] tracking-[0.2em] text-ash tabular-nums">
-                  {String(SORTING_QUESTIONS.length).padStart(2, '0')}
-                </span>
-              </div>
-
-              {/* question */}
-              <div className="relative mt-5 border border-[#5bc9d6]/25 bg-ink/60 px-4 py-4 backdrop-blur-sm sm:px-5">
-                <span className="pointer-events-none absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-t border-r border-[#5bc9d6]/50 bg-ink-2" aria-hidden="true" />
-                <p className="text-center font-cinzel text-[15px] font-medium leading-snug text-white sm:text-base md:text-lg">
-                  &ldquo;{currentQ.question}&rdquo;
-                </p>
-              </div>
-
-              {/* options */}
-              <div className="mt-4 space-y-2.5">
-                {currentQ.options.map((opt, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => handleSelectOption(opt.houseId)}
-                    className="group flex w-full items-center gap-3 border border-iron/60 bg-ink-2/60 p-3.5 text-left text-[13px] leading-relaxed text-bone backdrop-blur-sm transition-all duration-300 hover:translate-x-1 hover:border-[#5bc9d6]/60 hover:bg-ink-3/50 hover:text-white hover:shadow-[0_0_20px_-6px_rgba(91,201,214,0.5)] sm:text-sm"
-                  >
-                    <span
-                      className="h-1.5 w-1.5 shrink-0 rotate-45 bg-[#5bc9d6]/50 transition-all duration-300 group-hover:bg-[#8ce8f2] group-hover:shadow-[0_0_8px_rgba(140,232,242,0.9)]"
-                      aria-hidden="true"
-                    />
-                    <span className="flex-1">{opt.text}</span>
-                    <Sparkles className="h-4 w-4 shrink-0 text-[#5bc9d6] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            /* ── Result View ─────────────────────────────── */
-            <div className="animate-fadeIn text-center">
-              <div className="inline-flex items-center gap-1.5 border border-[#5bc9d6]/45 bg-ink/70 px-3 py-1 font-cinzel text-[10px] uppercase tracking-[0.28em] text-[#8ce8f2]">
-                The Raven Has Spoken
-              </div>
-
-              <div className="relative mx-auto mt-5 h-24 w-24">
-                <span className="absolute inset-0 rotate-45 border border-[#5bc9d6]/50" aria-hidden="true" />
-                <div className="absolute inset-[9px] flex items-center justify-center overflow-hidden rounded-full border-2 border-gold-2/60 bg-white p-2.5">
-                  <img src={sortedHouse.logo} alt={`${sortedHouse.name} logo`} className="h-full w-full object-contain" />
-                </div>
-              </div>
-
-              <h3 className="mt-5 font-cinzel text-[10px] uppercase tracking-[0.34em] text-[#9fd8d2]">
-                You Have Been Claimed By
-              </h3>
-              <h2 className="mt-1.5 font-cinzel-dec text-2xl font-extrabold text-white [text-shadow:0_0_26px_rgba(91,201,214,0.35)] sm:text-3xl">
-                {sortedHouse.houseName}
-              </h2>
-              <p className="mt-1.5 font-cinzel text-sm italic text-gold-2/90">
-                &ldquo;{sortedHouse.motto}&rdquo;
-              </p>
-
-              <div className="mt-5 border border-[#5bc9d6]/25 bg-ink/60 p-4 text-left backdrop-blur-sm">
-                <div className="mb-1 flex items-center gap-2 font-cinzel text-[13px] font-bold text-gold-2">
-                  <Crown className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]" />
-                  {sortedHouse.name}
-                </div>
-                <p className="text-xs leading-relaxed text-bone-dim sm:text-sm">{sortedHouse.lore}</p>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button className="flex-1" onClick={handlePledge}>
-                  PLEDGE ALLEGIANCE &amp; WEAR CREST
-                </Button>
-
-                <Button variant="glass" size="sm" className="flex-1" onClick={handleReset}>
-                  Retake the Trial
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
 ```
-
----
-
-## CHANGE 7 — Tickify popup: same mobile scroll fix + stone look
-
-The Tickify pass modal is still opened from the Segments page, Fest page CTA and the realm
-map — give it the same scroll-safe wrapper (do NOT delete this modal).
-
-In `src/components/TickifyModal.tsx` **FIND:**
-
+**8b.** FIND:
 ```tsx
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-gradient-to-b from-ink-2 via-ink-2 to-ink border-2 border-crimson/40 p-6 md:p-8 overflow-hidden text-bone max-h-[92vh] overflow-y-auto">
-        
-        {/* Top medieval accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-crimson via-gold-2 to-gold" />
-        
-        {/* Close Button */}
-        <button
-          onClick={() => {
-            onClose();
-          }}
-          className="absolute top-4 right-4 p-2 text-bone-dim hover:text-white rounded-lg hover:bg-white/10 transition-colors"
-          aria-label="Close modal"
-        >
-          <X className="w-6 h-6" />
-        </button>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
 ```
-
-**REPLACE WITH:**
-
+REPLACE:
 ```tsx
-  return (
-    /* Outer layer owns the scroll — on phones the pass hall always starts
-       at the top instead of being shoved above the viewport. */
-    <div className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="flex min-h-full items-center justify-center p-3 sm:p-6">
-      <div className="trial-stone relative m-auto w-full max-w-2xl p-5 text-bone sm:p-8">
-
-        {/* Top medieval accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#17686e] via-[#8ce8f2] to-[#17686e]" />
-
-        {/* diamond sigil close button */}
-        <button
-          onClick={() => {
-            onClose();
-          }}
-          className="sigil-close absolute top-4 right-4 z-20 flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/50 bg-ink-2/85 text-bone-dim hover:text-white"
-          aria-label="Close modal"
-        >
-          <X className="h-4 w-4 -rotate-45" />
-        </button>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
 ```
-
-Then, at the BOTTOM of the same file, **FIND** the closing block:
-
+**8c.** Tier card class, FIND:
 ```tsx
-        {/* Security Note */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-center text-[11px] text-bone-dim">
-          <Shield className="w-3.5 h-3.5 text-gold" />
-          <span>Tickets are encrypted with Valyrian QR codes and managed by Tickify</span>
-        </div>
-      </div>
-    </div>
-  );
-```
-
-**REPLACE WITH** (one extra closing `</div>` for the new wrapper, teal shield icon):
-
-```tsx
-        {/* Security Note */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-center text-[11px] text-bone-dim">
-          <Shield className="w-3.5 h-3.5 text-[#5bc9d6]" />
-          <span>Tickets are encrypted with Valyrian QR codes and managed by Tickify</span>
-        </div>
-      </div>
-      </div>
-    </div>
-  );
-```
-
----
-
-## CHANGE 8 — 4 Houses page: fix invisible section + missing bg on mobile
-
-Root cause: the house selector cards use `.pledge-card` — a `border-image` nine-slice frame
-scaled with container-query units (`100cqw`). In mobile / in-app browsers that resolve those
-units badly, the frame artwork and the cards themselves render empty. Replace the selector
-cards with robust layered-background stone cards (plain CSS backgrounds can never fail).
-
-### 8a. `src/index.css` — new card class
-
-**FIND:**
-
-```css
-/* ============================================================
-   PLEDGE CARD FRAME: each house card has its own ornate frame
-```
-
-**INSERT BEFORE IT:**
-
-```css
-/* ============================================================
-   HOUSE SIGIL CARD — the four selectable house banners on the
-   Clubs page. Rebuilt WITHOUT border-image nine-slicing (the old
-   pledge-card frame relied on container-query units that several
-   mobile / in-app browsers resolve badly — on phones the cards
-   and their frame artwork could vanish entirely). Plain layered
-   backgrounds can never fail like that: carved teal stone under
-   a cold vignette, silver corner brackets, ice glow when chosen.
-   ============================================================ */
-.house-sigil-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background:
-    radial-gradient(120% 70% at 50% -10%, rgba(23, 104, 110, 0.25), transparent 60%),
-    linear-gradient(180deg, rgba(2, 10, 11, 0.42) 0%, rgba(2, 10, 11, 0.72) 100%),
-    url("/images/stone-teal.webp") center / cover no-repeat,
-    #061a1c;
-  border: 1px solid rgba(47, 85, 87, 0.75);
-  box-shadow:
-    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
-    inset 0 0 34px rgba(0, 0, 0, 0.42),
-    0 12px 26px -16px rgba(0, 0, 0, 0.95);
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s ease,
-    box-shadow 0.45s ease;
-}
-.house-sigil-card::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(159, 224, 212, 0.14);
-  pointer-events: none;
-  transition: border-color 0.35s ease;
-}
-.house-sigil-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(91, 201, 214, 0.55);
-  box-shadow:
-    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
-    inset 0 0 34px rgba(0, 0, 0, 0.42),
-    0 0 24px rgba(23, 104, 110, 0.35),
-    0 18px 34px -18px rgba(0, 0, 0, 0.95);
-}
-.house-sigil-card:hover::before { border-color: rgba(159, 224, 212, 0.3); }
-/* the chosen house — ice-crowned */
-.house-sigil-card--active {
-  border-color: rgba(91, 201, 214, 0.8);
-  box-shadow:
-    inset 0 0 0 1px rgba(2, 10, 11, 0.6),
-    inset 0 0 40px rgba(23, 104, 110, 0.28),
-    0 0 30px rgba(23, 104, 110, 0.5),
-    0 16px 32px -16px rgba(0, 0, 0, 0.95);
-}
-.house-sigil-card--active::before { border-color: rgba(159, 224, 212, 0.4); }
-/* glowing crest bar under the chosen card */
-.house-sigil-card--active::after {
-  content: "";
-  position: absolute;
-  left: 18%;
-  right: 18%;
-  bottom: -1px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(91, 201, 214, 0.9), transparent);
-  box-shadow: 0 0 14px rgba(91, 201, 214, 0.8);
-}
-
-
-/* ============================================================
-   PLEDGE CARD FRAME: each house card has its own ornate frame
-```
-
-(Leave the old `.pledge-card` CSS in place — it becomes unused but is harmless.)
-
-### 8b. `src/pages/Clubs.tsx` — replace the House Selector Tabs block
-
-**FIND** the block that starts with `{/* House Selector Tabs */}` and the grid
-`<div className="grid grid-cols-2 md:grid-cols-4 gap-3">`, running through its final closing
-`</div>` right before the `{/* ========================================================
-ACTIVE HOUSE SHOWCASE DOSSIER` comment (it contains `pledge-card-wrap`, `pledge-card`,
-`pledge-card--stark`, `isStark`, the Pledge buttons). **REPLACE** the entire block with:
-
-```tsx
-      {/* House Selector Tabs — carved stone sigil banners.
-          (The old border-image nine-slice frame could render empty on
-          mobile browsers without solid container-query support; these
-          use plain layered backgrounds, so they always paint.) */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        {FOUR_HOUSES.map((house, i) => {
-          const isSelected = activeHouseId === house.id;
-          const isPledged = userPledgedHouse?.id === house.id;
-          return (
-            <Reveal key={house.id} delay={i * 80} className="h-full">
-              <div
-                className={`house-sigil-card ${isSelected ? 'house-sigil-card--active' : ''}`}
+          {SPONSOR_TIERS.map((tier, i) => {
+            const isTitle = tier.id === 'tier-title';
+            return (
+              <Reveal key={tier.id} delay={i * 120} className="h-full">
+              <TiltCard
+                maxTilt={8}
+                glareClassName="rounded-none"
+                shadowClassName={isTitle ? '0 28px 55px rgba(2, 14, 16, 0.65), 0 0 42px rgba(23, 104, 110, 0.28)' : '0 18px 40px rgba(2, 10, 11, 0.6)'}
+                className={`tier-card relative h-full flex flex-col justify-between group ${isTitle ? 'tier-card--title' : ''}`}
               >
-                {/* corner brackets */}
-                <span className="pointer-events-none absolute top-1.5 left-1.5 h-3.5 w-3.5 border-t border-l border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute top-1.5 right-1.5 h-3.5 w-3.5 border-t border-r border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-3.5 w-3.5 border-b border-l border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-3.5 w-3.5 border-b border-r border-gold-2/60" aria-hidden="true" />
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setActiveHouseId(house.id);
-                  }}
-                  aria-pressed={isSelected}
-                  className="group flex flex-1 flex-col gap-2.5 p-3.5 text-left sm:p-4"
-                >
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-iron bg-white/90 p-1 transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12">
-                      <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="h-full w-full object-contain" />
-                    </div>
-
-                    <div className="min-w-0">
-                      <div className="font-cinzel text-[9px] font-semibold uppercase leading-snug text-[#9fd8d2] line-clamp-2 sm:text-[11px]">
-                        {house.name.split('(')[0]}
-                      </div>
-                      <div className="mt-1 font-cinzel text-sm font-bold text-white transition-colors group-hover:text-[#8ce8f2] line-clamp-1">
-                        {house.houseName}
-                      </div>
-                    </div>
+```
+REPLACE:
+```tsx
+          {SPONSOR_TIERS.map((tier, i) => {
+            const isTitle = tier.id === 'tier-title';
+            const tierKey = tier.id.replace('tier-', '');
+            return (
+              <Reveal key={tier.id} delay={i * 120} className="h-full">
+              <TiltCard
+                maxTilt={8}
+                glareClassName="rounded-none"
+                shadowClassName={isTitle ? '0 28px 55px rgba(2, 14, 16, 0.65), 0 0 42px rgba(23, 104, 110, 0.28)' : '0 18px 40px rgba(2, 10, 11, 0.6)'}
+                className={`tier-card tier-card--${tierKey} relative h-full flex flex-col justify-between group ${isTitle ? 'tier-card--title' : ''}`}
+              >
+```
+**8d.** FIND:
+```tsx
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+```
+REPLACE:
+```tsx
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+```
+**8e.** Tier card body, FIND:
+```tsx
+                  {/* Tier Title */}
+                  <h3 className="font-cinzel-dec text-2xl font-black text-white text-center group-hover:text-bone transition-colors">
+                    {tier.name}
+                  </h3>
+                  <p className="font-cinzel text-xs text-gold/90 italic text-center">
+                    "{tier.gotTitle}"
+                  </p>
+                  {/* sigil rule */}
+                  <div className="flex items-center justify-center gap-2 mt-3 mb-5" aria-hidden="true">
+                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
+                    <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
+                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
                   </div>
-
-                  <div className="font-cinzel text-[10px] italic text-bone-dim line-clamp-1 sm:text-[11px]">
-                    &ldquo;{house.motto}&rdquo;
+                  {/* Slot Availability */}
+                  <div className="p-3.5 bg-ink/80 border border-iron mb-6 text-center">
+                    <span className="text-[10px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
+                    <span className={`font-cinzel text-lg sm:text-xl font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
+                      {tier.slots}
+                    </span>
                   </div>
-                </button>
-
-                <div className="px-3 pb-3">
-                  {isPledged ? (
-                    <div className="flex items-center justify-center gap-1.5 border border-[#5bc9d6]/50 bg-[#17686e]/20 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-wider text-[#8ce8f2]">
-                      <Check className="w-3 h-3" />
-                      Your House
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => handlePledge(house)}
-                      className="w-full border border-[#c9d2d2]/45 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] text-[#e7e3d8] transition-colors hover:border-[#8ce8f2] hover:bg-[#8ce8f2] hover:text-ink"
-                    >
-                      Pledge
-                    </button>
-                  )}
-                </div>
-              </div>
-            </Reveal>
-          );
-        })}
-      </div>
+                  <p className="text-xs text-bone-dim leading-relaxed mb-6 text-center">
+                    {tier.description}
+                  </p>
 ```
-
-Keep the rest of `Clubs.tsx` (the ACTIVE HOUSE SHOWCASE DOSSIER below) exactly as-is.
-
----
-
-## CHANGE 9 — Fest page: restyle "The Citadel Codex" + FAQ sections
-
-File: `src/pages/FestDescription.tsx`
-
-### 9a. Add two icon imports
-
-**FIND:**
-
+REPLACE:
 ```tsx
-  Compass,
-  Feather,
-  Gavel,
-  Sparkles,
-  Trophy
-} from 'lucide-react';
-```
-
-**REPLACE WITH:**
-
-```tsx
-  Compass,
-  Feather,
-  Gavel,
-  ScrollText,
-  Sparkles,
-  Swords,
-  Trophy
-} from 'lucide-react';
-```
-
-### 9b. Replace the Codex section
-
-**FIND** the whole block from the comment
-`{/* ========================================================
-THE CITADEL CODEX & SAFETY RULES
-======================================================== */}`
-through its closing `</Reveal>` (the plain panel containing the rounded-xl ShieldCheck icon
-box and three flat `bg-ink-2/60 border border-iron` cards). **REPLACE WITH:**
-
-```tsx
-        {/* ========================================================
-            THE CITADEL CODEX & SAFETY RULES — carved stone decrees
-        ======================================================== */}
-        <section>
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <Eyebrow>The Law of the Land</Eyebrow>
-            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
-              The Citadel Codex
-            </h2>
-            <p className="mt-3 font-cinzel text-[11px] uppercase tracking-[0.3em] text-bone-dim sm:text-xs">
-              Rules of Honor — enforced by the Commander of the City Watch
-            </p>
-            <OrnamentRule className="mt-6" />
-          </Reveal>
-
-          <Reveal direction="zoom" duration={1100} className="mt-10">
-            <div className="stone-panel relative px-4 py-8 sm:px-8 sm:py-10">
-              {/* corner brackets */}
-              <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/60" aria-hidden="true" />
-              <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/60" aria-hidden="true" />
-              <span className="pointer-events-none absolute bottom-2 left-2 h-5 w-5 border-b-2 border-l-2 border-gold-2/60" aria-hidden="true" />
-              <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
-
-              {/* shield medallion crest */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2" aria-hidden="true">
-                <span className="flex h-12 w-12 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_24px_rgba(91,201,214,0.45)]">
-                  <ShieldCheck className="h-5 w-5 -rotate-45 text-[#8ce8f2]" />
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-3 sm:gap-5">
-                {[
-                  {
-                    numeral: 'I',
-                    icon: <ScrollText className="h-4 w-4" />,
-                    title: 'Valid Identification',
-                    body: 'All students and warriors must carry their institution ID card along with their digital or printed Tickify QR Pass for access.'
-                  },
-                  {
-                    numeral: 'II',
-                    icon: <Swords className="h-4 w-4" />,
-                    title: 'Sanctity of the Arena',
-                    body: 'No weapons with sharpened steel, fire hazards, or prohibited items. Prop weapons for cosplay must pass inspection at the North Gate.'
-                  },
-                  {
-                    numeral: 'III',
-                    icon: <Gavel className="h-4 w-4" />,
-                    title: 'Knightly Conduct',
-                    body: 'Respect all house delegates, faculty grand maesters, and volunteer marshals. Unruly conduct results in immediate banishment.'
-                  }
-                ].map((decree, i) => (
-                  <Reveal key={decree.numeral} delay={i * 110} className="h-full">
-                    <div className="codex-decree relative h-full p-5 sm:p-6">
-                      {/* hanging numeral seal */}
-                      <div className="flex items-center justify-between">
-                        <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/45 bg-ink-2/90">
-                          <span className="font-cinzel text-sm font-bold -rotate-45 text-[#8ce8f2]">{decree.numeral}</span>
-                        </span>
-                        <span className="text-[#5bc9d6]">{decree.icon}</span>
-                      </div>
-
-                      <h3 className="mt-4 font-cinzel text-[15px] font-bold tracking-wide text-white sm:text-base">
-                        {decree.title}
-                      </h3>
-                      <span className="mt-2 block h-px w-10 bg-gradient-to-r from-[#5bc9d6]/70 to-transparent" aria-hidden="true" />
-                      <p className="mt-3 text-xs leading-relaxed text-bone-dim sm:text-[13px]">
-                        {decree.body}
-                      </p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-
-              {/* enforcement strip */}
-              <div className="mt-6 flex items-center justify-center gap-3 border-t border-[#5bc9d6]/20 pt-5 text-center">
-                <span className="hidden h-px w-16 bg-gradient-to-r from-transparent to-[#5bc9d6]/40 sm:block" aria-hidden="true" />
-                <p className="font-cinzel text-[9px] uppercase tracking-[0.26em] text-[#9fd8d2] sm:text-[10px]">
-                  Breaking the Codex earns swift banishment beyond the walls
-                </p>
-                <span className="hidden h-px w-16 bg-gradient-to-l from-transparent to-[#5bc9d6]/40 sm:block" aria-hidden="true" />
-              </div>
-            </div>
-          </Reveal>
-        </section>
-```
-
-(`Eyebrow`, `OrnamentRule`, `SILVER` and `Reveal` already exist in this file — reuse them,
-do not redefine them. `.stone-panel` and `.codex-decree` come from the CSS in Change 6a.)
-
-### 9c. Replace the FAQ section
-
-**FIND** the whole block from the comment
-`{/* ========================================================
-ROYAL FAQ ACCORDION
-======================================================== */}`
-through its closing `</section>` (the flat `frost-card` accordion using ChevronUp/Down only).
-**REPLACE WITH:**
-
-```tsx
-        {/* ========================================================
-            ROYAL FAQ ACCORDION — ravens of inquiry
-        ======================================================== */}
-        <section className="space-y-10">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-2 border border-[#5bc9d6]/40 bg-ink-2/80 px-4 py-1.5 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2] sm:text-xs">
-              <HelpCircle className="w-3.5 h-3.5" />
-              Answers from the Citadel
-            </div>
-            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
-              Frequently Asked Questions
-            </h2>
-            <p className="mt-3 font-garamond text-sm italic text-bone-dim sm:text-[15px]">
-              Send no raven before reading these — the maesters have answered the realm&rsquo;s most common calls.
-            </p>
-            <OrnamentRule className="mt-6" />
-          </Reveal>
-
-
-          <div className="mx-auto max-w-3xl space-y-3.5">
-            {FAQS.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
-              return (
-                <Reveal key={index} delay={index * 80}>
-                  <div className={`faq-item relative ${isOpen ? 'faq-item--open' : ''}`}>
-                    {/* question number plaque */}
-                    <button
-                      type="button"
-                      onClick={() => toggleFaq(index)}
-                      aria-expanded={isOpen}
-                      className="flex w-full items-center gap-3.5 p-4 text-left sm:gap-4 sm:p-5"
-                    >
-                      <span
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center border font-cinzel text-xs font-bold transition-colors duration-300 sm:h-10 sm:w-10 ${
-                          isOpen
-                            ? 'border-[#5bc9d6]/70 bg-[#17686e]/30 text-[#8ce8f2]'
-                            : 'border-iron/70 bg-ink-2/80 text-bone-dim'
-                        }`}
-                        aria-hidden="true"
-                      >
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-
-                      <span
-                        className={`flex-1 font-cinzel text-[13px] font-bold leading-snug transition-colors duration-300 sm:text-[15px] ${
-                          isOpen ? 'text-[#dcefee]' : 'text-bone hover:text-white'
-                        }`}
-                      >
-                        {faq.q}
-                      </span>
-
-                      {/* diamond toggle */}
-                      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center" aria-hidden="true">
-                        <span className={`faq-diamond absolute h-3 w-3 rotate-45 border ${isOpen ? 'border-transparent' : 'border-ash/70 bg-transparent'}`} />
-                        {isOpen ? (
-                          <ChevronUp className="relative h-4 w-4 text-ink" />
-                        ) : (
-                          <ChevronDown className="relative h-4 w-4 text-ash" />
-                        )}
-                      </span>
-                    </button>
-
-                    {/* smooth reveal body */}
-                    <div className="faq-body">
-                      <div>
-                        <div className="border-t border-[#5bc9d6]/20 px-4 pb-5 pt-4 sm:px-5 sm:pl-[4.75rem]">
-                          <p className="text-xs leading-relaxed text-bone-dim sm:text-sm">
-                            {faq.a}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                  {/* Tier Title */}
+                  <h3 className="font-cinzel-dec text-xl font-black text-white text-center group-hover:text-bone transition-colors">
+                    {tier.name}
+                  </h3>
+                  <p className="font-cinzel text-[11px] text-gold/90 italic text-center">
+                    "{tier.gotTitle}"
+                  </p>
+                  {/* sigil rule */}
+                  <div className="flex items-center justify-center gap-2 mt-2 mb-4" aria-hidden="true">
+                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
+                    <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
+                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
                   </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </section>
+                  {/* Slot Availability */}
+                  <div className="p-2.5 bg-ink/80 border border-iron mb-4 text-center">
+                    <span className="text-[9px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
+                    <span className={`font-cinzel text-base sm:text-lg font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
+                      {tier.slots}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-bone-dim leading-relaxed mb-4 text-center">
+                    {tier.description}
+                  </p>
 ```
-
+**8f.** FIND:
+```tsx
+                {/* Bottom CTA */}
+                <div className="relative z-10 pt-6 mt-6 border-t border-iron/60">
+```
+REPLACE:
+```tsx
+                {/* Bottom CTA */}
+                <div className="relative z-10 pt-4 mt-4 border-t border-iron/60">
+```
 ---
-
-## CHANGE 10 — Home page: remove "View Pass Tiers" button, color variety, glass buttons
-
-### 10a. `src/pages/Home.tsx` — remove the `onOpenTickify` prop
-
-**FIND:**
-
+## TASK 9 — `src/pages/Segments.tsx`
+**9a.** FIND:
 ```tsx
-interface HomeProps {
-  onNavigate: (page: PageType) => void;
-  onOpenTickify: () => void;
-  onOpenSortingQuiz: () => void;
-  userPledgedHouse: ClubHouse | null;
-}
-
-export const Home: React.FC<HomeProps> = ({
-  onNavigate,
-  onOpenTickify,
-  onOpenSortingQuiz,
-  userPledgedHouse
-}) => {
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-20">
 ```
-
-**REPLACE WITH:**
-
+REPLACE:
 ```tsx
-interface HomeProps {
-  onNavigate: (page: PageType) => void;
-  onOpenSortingQuiz: () => void;
-  userPledgedHouse: ClubHouse | null;
-}
-
-export const Home: React.FC<HomeProps> = ({
-  onNavigate,
-  onOpenSortingQuiz,
-  userPledgedHouse
-}) => {
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-28">
 ```
-
-### 10b. Remove the "View Pass Tiers & Perks" button (and its popup trigger)
-
-In the "SECURE YOUR WRIT OF ADMISSION ON TICKIFY" banner, **FIND:**
-
+**9b.** FIND:
 ```tsx
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
-              href={FEST_METADATA.tickifyLink}
-              external
-              className="w-full sm:w-auto"
-            >
-              BOOK TICKETS ON TICKIFY
-            </Button>
-
-            <Button
-              variant="secondary"
-              className="w-full sm:w-auto"
-              onClick={() => {
-                onOpenTickify();
-              }}
-            >
-              View Pass Tiers & Perks
-            </Button>
-          </div>
+      <div className="space-y-16">
 ```
-
-**REPLACE WITH** (only the direct Tickify button remains):
-
+REPLACE:
 ```tsx
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
-              href={FEST_METADATA.tickifyLink}
-              external
-              className="w-full sm:w-auto"
-            >
-              BOOK TICKETS ON TICKIFY
-            </Button>
-          </div>
+      <div className="space-y-24">
 ```
-
-### 10c. `src/App.tsx` — stop passing the removed prop
-
-**FIND:**
-
+**9c.** FIND:
 ```tsx
-          <Home
-            onNavigate={handleNavigate}
-            onOpenTickify={() => handleOpenTickify()}
-            onOpenSortingQuiz={() => setSortingQuizOpen(true)}
-            userPledgedHouse={userPledgedHouse}
-          />
+        <div className="mt-9 grid grid-cols-2 lg:grid-cols-4 gap-5 border-t border-[#5bc9d6]/20 pt-5">
 ```
-
-**REPLACE WITH:**
-
+REPLACE:
 ```tsx
-          <Home
-            onNavigate={handleNavigate}
-            onOpenSortingQuiz={() => setSortingQuizOpen(true)}
-            userPledgedHouse={userPledgedHouse}
-          />
+        <div className="mt-9 grid grid-cols-2 lg:grid-cols-4 gap-6 border-t border-[#5bc9d6]/20 pt-6">
 ```
-
-(Keep `handleOpenTickify` and `<TickifyModal>` in App.tsx — the Segments page, Fest page CTA
-and realm map still open it.)
-
-### 10d. Home text color variety (ice/teal tints — NOT gold) + glass buttons
-
-Apply each of these small find/replace edits in `src/pages/Home.tsx`:
-
-1. Hero tagline — **FIND** `className="font-garamond text-lg sm:text-xl md:text-2xl text-gold-2/90 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md"`
-   **REPLACE** `text-gold-2/90` in it with `text-[#a5ddd6]`.
-
-2. Pledged house badge — **FIND** `<div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-gold text-gold-2 text-xs font-cinzel tracking-widest">`
-   **REPLACE WITH** `<div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-[#5bc9d6]/50 text-[#bfe9e4] text-xs font-cinzel tracking-widest">`.
-
-3. Hero CTAs — change BOTH `variant="secondary"` on the **"Explore Tourneys"** and
-   **"Which House Are You?"** buttons to `variant="glass"`.
-
-4. "About the Fest" header pill — **FIND:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5" />
-            The Saga Begins
-          </div>
-          <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
-            About the Fest
-          </h2>
-```
-
-   **REPLACE WITH:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
-            The Saga Begins
-          </div>
-          <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold silver-text tracking-wide">
-            About the Fest
-          </h2>
-```
-
-5. Houses section pill + heading — **FIND:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-gold/30 text-gold text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5" />
-            The Four Pillars of Chittagong College
-          </div>
-          <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide">
-            THE FOUR GREAT HOUSES
-          </h2>
-```
-
-   **REPLACE WITH:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
-            <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
-            The Four Pillars of Chittagong College
-          </div>
-          <GemDivider className="py-1" />
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#dcefee] tracking-wide [text-shadow:0_2px_10px_rgba(0,0,0,0.7),0_0_30px_rgba(91,201,214,0.25)]">
-            THE FOUR GREAT HOUSES
-          </h2>
-```
-
-6. "ENTER THE SANCTUARY OF HOUSES & LORE" button — change its `variant="secondary"` to
-   `variant="glass"`.
-
-7. BOTH "View All Segments" buttons (the desktop `hidden lg:block absolute` one and the
-   mobile `lg:hidden` one) — change their `variant="secondary"` to `variant="glass"`.
-
-8. Tickify banner badge — **FIND:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-gold/40 text-gold-2 text-xs font-cinzel uppercase tracking-widest mb-4">
-            <Ticket className="w-3.5 h-3.5" />
-            Official Ticketing Partner: Tickify
-          </div>
-```
-
-   **REPLACE WITH:**
-
-```tsx
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[#8ce8f2] text-xs font-cinzel uppercase tracking-widest mb-4">
-            <Ticket className="w-3.5 h-3.5 text-[#5bc9d6]" />
-            Official Ticketing Partner: Tickify
-          </div>
-```
-
 ---
-
-## VERIFICATION CHECKLIST (run before declaring done)
-
-1. `npx tsc --noEmit` → zero errors (the tsconfig uses `noUnusedLocals`, so leftover unused
-   imports like `Crown`/`Scroll` in Organizers.tsx WILL fail — remove them as instructed).
-2. `npm run build` → succeeds.
-3. Manual pass (desktop + a ~375px phone viewport):
-   - Organizers page: solo **Protector of the Realm** card is centered with rotating geometry;
-     NO "Proclamation from the Office of the Convenor" anywhere; reel shows exactly these 12
-     in order: Mehraj Tajwar, Labib Hasan Mahmud, Apurba Das Joy, Ahnaf Azim, Fariha Marium
-     Masud, Rajarshi Das Gupta, Jit Chowdhury, Sabbir Hossain, Sudhriti Paul, Khadiza Nower
-     Namira, Arithra Chowdhury, Rabab Nayeem Siha. Progress bar counts to 12.
-   - Footer: "The Four Great Houses" band renders 4 crests; CCPAC row shows Facebook + globe
-     icons linking out; other rows show "Links soon".
-   - Segments page: open Physics Olympiad → stone slab decree appears, fully scrollable from
-     the top on mobile; diamond ✕ spins on hover; Esc closes.
-   - Home → "Which House Are You?" → quiz starts at the top on mobile, options/progress
-     visible, result view + confetti work, "Retake the Trial" resets.
-   - Home: NO "View Pass Tiers & Perks" button anywhere; headings/badges use ice/teal tints;
-     glass buttons visibly translucent-blue.
-   - Clubs page on a 360–390px phone: all four house selector cards visible with the stone
-     background; selecting one adds the ice border + bottom glow.
-   - Fest page: Codex shows the shield medallion + 3 stone decree cards; FAQ items expand
-     with the turning-diamond animation.
-   - Every button across the site is teal/steel or blue glass — no brown/maroon anywhere.
-
-## END OF PROMPT
+## TASK 10 — `src/pages/Organizers.tsx`
+FIND:
+```tsx
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
+```
+REPLACE:
+```tsx
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
+```
+---
