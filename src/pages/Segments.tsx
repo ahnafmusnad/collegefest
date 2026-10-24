@@ -128,7 +128,7 @@ const GroupFrameCard: React.FC<{
 
         {/* ── Roster ─────────────────────────────────────────── */}
         <div
-          className={`mt-8 grid gap-2.5 ${
+          className={`mt-10 grid gap-3.5 ${
             group.segmentIds.length >= 4 ? 'md:grid-cols-2' : 'md:grid-cols-1'
           }`}
         >
@@ -137,7 +137,7 @@ const GroupFrameCard: React.FC<{
               key={seg.id}
               type="button"
               onClick={() => onOpenRulesModal(seg)}
-              className="group/row flex min-w-0 items-center gap-3 text-left px-4 py-3 border border-[#5bc9d6]/20 bg-ink/50 hover:bg-ink-2/85 hover:border-[#8ce8f2]/60 transition-all duration-300"
+              className="group/row flex min-w-0 items-center gap-3 text-left px-4 py-3.5 border border-[#5bc9d6]/20 bg-ink/50 hover:bg-ink-2/85 hover:border-[#8ce8f2]/60 transition-all duration-300"
             >
               <Gem className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]/80 group-hover/row:text-[#8ce8f2] group-hover/row:drop-shadow-[0_0_6px_rgba(140,232,242,0.8)] transition-all" />
 
@@ -165,7 +165,7 @@ const GroupFrameCard: React.FC<{
         </div>
 
         {/* ── Condensed decree: prize / venue / dates / format ─ */}
-        <div className="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-4 border-t border-[#5bc9d6]/20 pt-5">
+        <div className="mt-9 grid grid-cols-2 lg:grid-cols-4 gap-5 border-t border-[#5bc9d6]/20 pt-5">
           <div className="flex items-start gap-2.5">
             <Trophy className="h-4 w-4 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
@@ -225,7 +225,7 @@ const GroupFrameCard: React.FC<{
 
 export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-12">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-20">
       {/* Page Hero */}
       <PageHero
         image="/images/iron-throne-hero.webp"
@@ -250,7 +250,7 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
       </Reveal>
 
       {/* Three framed group banners */}
-      <div className="space-y-10">
+      <div className="space-y-16">
         {SEGMENT_GROUPS.map((group, idx) => (
           <Reveal key={group.key} delay={idx * 80}>
             <GroupFrameCard group={group} onOpenRulesModal={onOpenRulesModal} />

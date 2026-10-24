@@ -41,7 +41,7 @@ export const Clubs: React.FC<ClubsProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-16">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-24">
       
       {/* Page Hero */}
       <PageHero
@@ -55,7 +55,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           (The old border-image nine-slice frame could render empty on
           mobile browsers without solid container-query support; these
           use plain layered backgrounds, so they always paint.) */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4">
         {FOUR_HOUSES.map((house, i) => {
           const isSelected = activeHouseId === house.id;
           const isPledged = userPledgedHouse?.id === house.id;
@@ -128,7 +128,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           Chrome — the dossier never became visible there. A 2D zoom
           entrance is projection-safe at any height. */}
       <Reveal direction="zoom" duration={1100}>
-      <div className="house-dossier space-y-6 relative px-3 py-6 sm:px-5 sm:py-7 md:px-7 md:py-8">
+      <div className="house-dossier space-y-8 relative px-3 py-6 sm:px-5 sm:py-7 md:px-7 md:py-8">
         {/* top roller rod + crest */}
         <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
         <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
@@ -191,11 +191,11 @@ export const Clubs: React.FC<ClubsProps> = ({
             <Award className="w-4 h-4 text-[#5bc9d6]" />
             Historic Trophies & Laurels
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
             {activeHouse.achievements.map((ach, i) => (
               <Reveal key={i} delay={i * 90}>
               <div
-                className="flex items-start gap-2.5 text-xs text-bone h-full"
+                className="flex items-start gap-2.5 text-[13px] text-bone h-full"
               >
                 <Crown className="w-3.5 h-3.5 text-[#5bc9d6] shrink-0 mt-px" />
                 <span>{ach}</span>
@@ -221,7 +221,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
             {houseSegments.map((seg, i) => (
               <Reveal key={seg.id} delay={i * 90} className="h-full">
               <TiltCard

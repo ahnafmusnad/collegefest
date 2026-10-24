@@ -169,22 +169,21 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FAST STATS & CITADEL HERALDRY STRIP
       ======================================================== */}
-      <section className="relative z-10 px-3 py-9 sm:px-6 md:py-12 lg:py-16">
+      <section className="relative z-10 px-3 py-14 sm:px-6 md:py-20 lg:py-24">
         <StatsPanel />
       </section>
 
       {/* ========================================================
           ABOUT THE FEST SECTION
       ======================================================== */}
-      <section className="relative py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
             <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
             The Saga Begins
           </div>
-          <GemDivider className="py-1" />
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold silver-text tracking-wide">
             About the Fest
           </h2>
@@ -201,15 +200,14 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           THE FOUR GREAT HOUSES SECTION (CORE FESTIVAL IDENTITY)
       ======================================================== */}
-      <section className="relative py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="relative py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2/80 border border-[#5bc9d6]/40 text-[#8ce8f2] text-xs font-cinzel tracking-widest uppercase">
             <Crown className="w-3.5 h-3.5 text-[#5bc9d6]" />
             The Four Pillars of Chittagong College
           </div>
-          <GemDivider className="py-1" />
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#dcefee] tracking-wide [text-shadow:0_2px_10px_rgba(0,0,0,0.7),0_0_30px_rgba(91,201,214,0.25)]">
             THE FOUR GREAT HOUSES
           </h2>
@@ -240,7 +238,7 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
         {/* View All Clubs CTA */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-12">
           <Button
             variant="glass"
             onClick={() => {
@@ -260,13 +258,13 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           FEATURED SEGMENTS & ARENAS — royal writ plaques
       ======================================================== */}
-      <section className="relative py-20 px-4 max-w-[88rem] mx-auto overflow-hidden">
+      <section className="relative py-24 md:py-28 px-4 max-w-[88rem] mx-auto overflow-hidden">
         {/* ambient teal glow behind the grid */}
         <div className="absolute inset-x-0 top-1/3 h-[32rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(20,94,98,0.16),transparent_70%)] pointer-events-none" />
 
 
         {/* ---------- centered header ---------- */}
-        <div className="relative text-center max-w-4xl mx-auto mb-14 space-y-4">
+        <div className="relative text-center max-w-4xl mx-auto mb-16 space-y-4">
           {/* top ornament */}
           <div className="flex items-center justify-center gap-3 text-crimson-2" aria-hidden="true">
             <span className="h-px w-16 sm:w-28 bg-gradient-to-r from-transparent to-crimson-2/70" />
@@ -333,7 +331,7 @@ export const Home: React.FC<HomeProps> = ({
 
 
         {/* ---------- the writ plaques ---------- */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-5">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-7">
           {FEATURED_SEGMENTS.map((segment, i) => (
             <Reveal key={segment.id} delay={i * 110} className="h-full">
               <TiltCard
@@ -409,7 +407,7 @@ export const Home: React.FC<HomeProps> = ({
       {/* ========================================================
           TICKIFY PORTAL BANNER
       ======================================================== */}
-      <section className="relative py-16 px-4 max-w-7xl mx-auto">
+      <section className="relative py-20 md:py-24 px-4 max-w-7xl mx-auto">
         <Reveal direction="zoom">
         <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-8 pt-24 pb-8 md:px-12 md:pt-28 md:pb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[#8ce8f2] text-xs font-cinzel uppercase tracking-widest mb-4">

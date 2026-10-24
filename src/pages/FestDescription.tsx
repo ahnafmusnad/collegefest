@@ -172,7 +172,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
       {/* ---------- all other sections ---------- */}
-      <div className="mx-auto max-w-7xl space-y-24 px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-32 px-4 py-24 sm:px-6 lg:px-8">
 
 
         {/* ========================================================
@@ -186,10 +186,10 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
             <h2 className={`font-cinzel mt-0 text-xl font-bold leading-tight tracking-wide sm:text-[1.75rem] ${SILVER}`}>
               Where Ancient Wisdom Meets Fierce Ambition
             </h2>
-            <p className="mt-3 text-[12.5px] leading-[1.55] text-bone/90 sm:text-[13px]">
+            <p className="mt-4 text-[14px] leading-[1.7] text-bone/90 sm:text-[15px]">
               Perched atop the legendary hills of Chawkbazar, Chittagong College has nurtured prime ministers, revolutionary scholars, scientists, and master artists. When the winter chill embraces the campus brick towers, the four guardian clubs—Physics & Astronomy, English Language & Literature, Debating, and the Photographic Society—raise their banners.
             </p>
-            <p className="font-garamond mt-2.5 text-[13px] italic leading-[1.55] text-bone-dim sm:text-[13.5px]">
+            <p className="font-garamond mt-3 text-[15px] italic leading-[1.7] text-bone-dim sm:text-[16px]">
               For two days, the campus transforms into an arena of science, language, debate, and the art of the lens. Whether you are stepping onto the debate podium or framing the perfect shot under the winter sky, you are part of this living saga.
             </p>
 
@@ -396,7 +396,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-3 sm:gap-5">
+              <div className="grid grid-cols-1 gap-6 pt-4 md:grid-cols-3 sm:gap-8">
                 {[
                   {
                     numeral: 'I',
@@ -471,7 +471,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
           </Reveal>
 
 
-          <div className="mx-auto max-w-3xl space-y-3.5">
+          <div className="mx-auto max-w-3xl space-y-5">
             {FAQS.map((faq, index) => {
               const isOpen = openFaqIndex === index;
               return (
