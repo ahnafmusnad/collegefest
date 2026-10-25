@@ -89,7 +89,7 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* Main Fest Heading */}
           <div className="space-y-2">
-            <h1 className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            <h1 aria-label="Carnaval Da Chittagong College" className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               CARNAVAL
             </h1>
             <SwordDivider className="mt-4 mb-4" />
@@ -224,6 +224,7 @@ export const Home: React.FC<HomeProps> = ({
               <HouseScroll
                 logo={house.logo}
                 name={house.name}
+                shortName={house.shortName}
                 houseName={house.houseName}
                 motto={house.motto}
                 lore={house.lore}

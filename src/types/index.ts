@@ -9,6 +9,8 @@ export type PageType =
 export interface ClubHouse {
   id: string;
   name: string;
+  /** Short display name for card headings, e.g. "The Muses". */
+  shortName: string;
   houseName: string;
   motto: string;
   sigil: string;

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 interface HouseScrollProps {
   logo: string;
   name: string;
+  shortName: string;
   houseName: string;
   motto: string;
   lore: string;
@@ -17,6 +18,7 @@ interface HouseScrollProps {
 export default function HouseScroll({
   logo,
   name,
+  shortName,
   houseName,
   motto,
   lore,
@@ -33,8 +35,9 @@ export default function HouseScroll({
     >
       <img src={logo} alt={`${name} logo`} loading="lazy" className="hs-logo" />
 
-      <h3 className="hs-name">{name.split("(")[0]}</h3>
+      <h3 className="hs-name">{shortName}</h3>
       <p className="hs-house">{houseName}</p>
+      <p className="hs-fullname">{name.split("(")[0]}</p>
       <div className="hs-rule" />
 
       <p className="hs-serif hs-motto">“{motto}”</p>

@@ -25,6 +25,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
   {
     id: 'house-arcanum',
     name: 'Chittagong College Physics & Astronomy Club (CCPAC)',
+    shortName: 'Physics & Astronomy',
     houseName: 'House Stark',
     motto: 'The North Remembers',
     sigil: 'The Direwolf',
@@ -55,6 +56,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
   {
     id: 'house-melodia',
     name: 'Chittagong College English Language & Literature Club — The Muses (CCELLC)',
+    shortName: 'The Muses',
     houseName: 'House Targaryen',
     motto: 'Fire & Blood',
     sigil: 'The Three-Headed Dragon',
@@ -85,6 +87,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
   {
     id: 'house-veritas',
     name: 'Chittagong College Debating Society (CCDS)',
+    shortName: 'Debating Society',
     houseName: 'House Lannister',
     motto: 'Lannisters Always Pay Their debt',
     sigil: 'The Golden Lion',
@@ -115,6 +118,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
   {
     id: 'house-valorous',
     name: 'Chittagong College Photographic Society (CCPS)',
+    shortName: 'Photographic Society',
     houseName: 'House Baratheon',
     motto: 'Ours Is The Fury',
     sigil: 'The Crowned Stag',

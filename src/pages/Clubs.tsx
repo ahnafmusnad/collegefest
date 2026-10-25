@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import { FOUR_HOUSES } from '../data/festData';
+import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { ClubHouse, PageType } from '../types';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
+import GemDivider from '../components/ui/GemDivider';
 import { 
   Crown,
   Award,
-  Check
+  Check,
+  Camera
 } from 'lucide-react';
+
+/* Scattered parchment prints — the houses caught mid-deed. */
+const CHRONICLE_PRINTS = [
+  { img: '/images/gallery/ccds-debate.webp', title: 'The War of Words', tag: 'CCDS · National Debate Fest', house: 'House Lannister', tilt: '-rotate-2' },
+  { img: '/images/gallery/ccpac-stargaze.webp', title: 'Vigil Under the Stars', tag: 'CCPAC · Observation Nights', house: 'House Stark', tilt: 'rotate-1' },
+  { img: '/images/gallery/muses-literary.webp', title: 'Keepers of the Word', tag: 'The Muses · Literary Evenings', house: 'House Targaryen', tilt: '-rotate-1' },
+  { img: '/images/gallery/ccps-photowalk.webp', title: 'The Winter Lens', tag: 'CCPS · Campus Photo Walks', house: 'House Baratheon', tilt: 'rotate-2' },
+  { img: '/images/gallery/carnaval-stage.webp', title: 'Night of the Citadel', tag: 'Carnaval · Main Stage', house: 'All Four Houses', tilt: '-rotate-[1.5deg]' },
+  { img: '/images/gallery/carnaval-coronation.webp', title: 'The Crowning', tag: 'Carnaval · Prize Coronation', house: 'All Four Houses', tilt: 'rotate-[1.5deg]' },
+] as const;
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 interface ClubsProps {
   onNavigate: (page: PageType) => void;
@@ -20,6 +33,7 @@ export const Clubs: React.FC<ClubsProps> = ({
   onPledgeHouse,
   userPledgedHouse
 }) => {
+  void FEST_SEGMENTS;
   const [activeHouseId, setActiveHouseId] = useState<string>(FOUR_HOUSES[0].id);
   const activeHouse = FOUR_HOUSES.find(h => h.id === activeHouseId) || FOUR_HOUSES[0];
 
@@ -203,7 +217,60 @@ export const Clubs: React.FC<ClubsProps> = ({
         <div className="dossier-rod absolute bottom-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
       </div>
       </Reveal>
-
+      {/* ========================================================
+          THE LIVING CHRONICLE — the houses caught mid-deed
+      ======================================================== */}
+      <section className="relative">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#5bc9d6]/40 bg-ink-2/80 px-3 py-1 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2]">
+            <Camera className="h-3.5 w-3.5 text-[#5bc9d6]" />
+            The Living Chronicle
+          </div>
+          <h2 className="mt-4 font-cinzel text-2xl font-extrabold tracking-wide text-[#dcefee] [text-shadow:0_2px_10px_rgba(0,0,0,0.7),0_0_28px_rgba(91,201,214,0.22)] sm:text-4xl">
+            Deeds of the Four Houses
+          </h2>
+          <GemDivider className="my-4" />
+          <p className="font-garamond text-sm italic leading-relaxed text-bone-dim sm:text-base">
+            Moments seized across the years — podiums and starlit roofs,
+            fog-bound gates and the roar of the Carnaval stage.
+          </p>
+        </Reveal>
+        <div className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3">
+          {CHRONICLE_PRINTS.map((pr, i) => (
+            <Reveal key={pr.img} delay={i * 90} className="mb-7 break-inside-avoid">
+              <figure
+                className={`chronicle-print group relative ${pr.tilt} transition-all duration-500 hover:z-10 hover:rotate-0 hover:scale-[1.03]`}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={pr.img}
+                    alt={pr.title}
+                    loading="lazy"
+                    className="w-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-110"
+                  />
+                  {/* cold veil that lifts on hover */}
+                  <div className="absolute inset-0 bg-[#04191c]/50 transition-opacity duration-500 group-hover:opacity-0" />
+                  {/* pinned numeral seal */}
+                  <span className="absolute left-2 top-2 flex h-6 w-6 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink/85 shadow-[0_0_12px_rgba(91,201,214,0.35)]">
+                    <span className="font-cinzel text-[10px] font-bold -rotate-45 text-[#8ce8f2]">{ROMAN[i]}</span>
+                  </span>
+                </div>
+                <figcaption className="px-1.5 pb-1 pt-3 text-center">
+                  <p className="font-cinzel text-[13px] font-bold tracking-wide text-[#e7e3d8]">
+                    {pr.title}
+                  </p>
+                  <p className="mt-1 font-cinzel text-[8.5px] uppercase tracking-[0.2em] text-[#9e9f9f]">
+                    {pr.tag}
+                  </p>
+                  <p className="mt-0.5 font-garamond text-[11px] italic text-[#5bc9d6]/90">
+                    {pr.house}
+                  </p>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

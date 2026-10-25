@@ -127,6 +127,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <p className="text-[11px] text-ash">
                 Sponsorship Wing: +880 1776-810739
               </p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Chittagong+College,+College+Road,+Chattogram"
+                target="_blank"
+                rel="noreferrer"
+                className="group/map inline-flex items-center gap-2 border border-iron/50 bg-ink-2/60 px-3 py-2 text-gold-2 transition-colors duration-300 hover:border-crimson-2/60 hover:bg-ink-3/60"
+              >
+                <MapPin className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/map:-translate-y-0.5" />
+                <span>Find the Red Citadel on the Map</span>
+              </a>
               {/* the Carnaval's own ravens — Facebook & Instagram */}
               <div className="pt-1">
                 <p className="mb-2 font-cinzel text-[9px] uppercase tracking-[0.28em] text-ash">
