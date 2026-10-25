@@ -1,6 +1,21 @@
 import React from 'react';
 import { PageType } from '../types';
-import { MapPin, Mail } from 'lucide-react';
+import { MapPin, Mail, Globe } from 'lucide-react';
+import { SocialGlyph } from './ui/Glyphs';
+import { SOCIAL_LINKS } from '../data/festData';
+/* Small round social chip — same hover language as the menu socials */
+const FooterSocial: React.FC<{ href: string; label: string; children: React.ReactNode }> = ({ href, label, children }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    aria-label={label}
+    title={label}
+    className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-iron/60 bg-ink-2/70 text-bone-dim transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5bc9d6]/70 hover:text-[#9fe0d4] hover:shadow-[0_0_14px_-4px_rgba(91,201,214,0.6)]"
+  >
+    {children}
+  </a>
+);
 interface FooterProps {
   onNavigate: (page: PageType) => void;
 }
@@ -112,6 +127,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <p className="text-[11px] text-ash">
                 Sponsorship Wing: +880 1776-810739
               </p>
+              {/* the Carnaval's own ravens — Facebook & Instagram */}
+              <div className="pt-1">
+                <p className="mb-2 font-cinzel text-[9px] uppercase tracking-[0.28em] text-ash">
+                  Follow the Carnaval
+                </p>
+                <div className="flex items-center gap-2">
+                  {SOCIAL_LINKS.filter((s) => s.url !== '#').map((s) => (
+                    <FooterSocial key={s.name} href={s.url} label={`Carnaval on ${s.name}`}>
+                      <SocialGlyph icon={s.icon} className="h-3.5 w-3.5" />
+                    </FooterSocial>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -120,6 +148,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
             &copy; 2026 Ahnaf Abrar Musnad. All rights reserved.
           </p>
+          {/* ---- Forged-by credit: the smith behind the realm ---- */}
+          <div className="mt-4 flex flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-4">
+            <span className="font-cinzel text-[9px] uppercase tracking-[0.3em] text-ash/80">
+              Realm forged by <span className="text-bone-dim">Musnad</span>
+            </span>
+            <span className="hidden h-3 w-px bg-iron/60 sm:block" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              <FooterSocial href="https://muzie-dev.vercel.app" label="Musnad — portfolio">
+                <Globe className="h-3.5 w-3.5" />
+              </FooterSocial>
+              <FooterSocial href="https://www.instagram.com/_.ahnaf_abrar._/" label="Ahnaf on Instagram">
+                <SocialGlyph icon="Instagram" className="h-3.5 w-3.5" />
+              </FooterSocial>
+              <FooterSocial href="https://www.facebook.com/profile.php?id=61595154770049" label="Ahnaf on Facebook">
+                <SocialGlyph icon="Facebook" className="h-3.5 w-3.5" />
+              </FooterSocial>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

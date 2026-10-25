@@ -16,8 +16,8 @@ export const FEST_METADATA = {
 // Official Carnaval social channels.
 // TODO: replace each placeholder "#" with the real profile URL.
 export const SOCIAL_LINKS = [
-  { name: 'Facebook', url: '#', icon: 'Facebook' },
-  { name: 'Instagram', url: '#', icon: 'Instagram' },
+  { name: 'Facebook', url: 'https://www.facebook.com/carnavaldacc', icon: 'Facebook' },
+  { name: 'Instagram', url: 'https://www.instagram.com/carnaval_da_cc/', icon: 'Instagram' },
   { name: 'YouTube', url: '#', icon: 'Youtube' },
 ] as const;
 
