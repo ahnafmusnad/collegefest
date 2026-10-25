@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
+import { FOUR_HOUSES } from '../data/festData';
 import { ClubHouse, PageType } from '../types';
 import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
-import { TiltCard } from '../components/TiltCard';
-import Button from '../components/ui/Button';
 import { 
   Crown,
   Award,
-  Swords, 
   Check
 } from 'lucide-react';
 
@@ -20,14 +17,11 @@ interface ClubsProps {
 }
 
 export const Clubs: React.FC<ClubsProps> = ({
-  onNavigate,
   onPledgeHouse,
   userPledgedHouse
 }) => {
   const [activeHouseId, setActiveHouseId] = useState<string>(FOUR_HOUSES[0].id);
-
   const activeHouse = FOUR_HOUSES.find(h => h.id === activeHouseId) || FOUR_HOUSES[0];
-  const houseSegments = FEST_SEGMENTS.filter(s => s.houseId === activeHouse.id);
 
   const handlePledge = (house: ClubHouse) => {
     onPledgeHouse(house);
@@ -205,53 +199,6 @@ export const Clubs: React.FC<ClubsProps> = ({
           </div>
         </div>
 
-        {/* House Segments Showcase */}
-        <div className="pt-3 border-t border-crimson/20 space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <Swords className="w-4 h-4 text-[#5bc9d6]" />
-              Tournament Segments Commanded by {activeHouse.houseName}
-            </h3>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onNavigate('segments')}
-            >
-              View All Tourneys
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-7">
-            {houseSegments.map((seg, i) => (
-              <Reveal key={seg.id} delay={i * 90} className="h-full">
-              <TiltCard
-                onClick={() => {
-                  onNavigate('segments');
-                }}
-                className="p-3 pl-4 border-l-2 border-iron/70 hover:border-[#5bc9d6] transition-colors flex flex-col justify-between h-full"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-cinzel text-[#5bc9d6]">{seg.category}</span>
-                    <span className="font-bold text-gold-2">{seg.prizePool}</span>
-                  </div>
-                  <h4 className="font-cinzel text-sm font-bold text-white group-hover:text-gold-2 transition-colors">
-                    {seg.title}
-                  </h4>
-                  <p className="text-xs text-bone-dim line-clamp-2 mt-1">
-                    {seg.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 mt-3 border-t border-iron/40 flex items-center justify-between text-[11px] text-bone-dim">
-                  <span>{seg.venue}</span>
-                  <span className="text-[#5bc9d6] font-cinzel font-bold group-hover:underline">Enter Tourney &rarr;</span>
-                </div>
-              </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
         {/* bottom roller rod */}
         <div className="dossier-rod absolute bottom-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
       </div>
