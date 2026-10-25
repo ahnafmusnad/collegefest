@@ -224,7 +224,6 @@ export const Home: React.FC<HomeProps> = ({
               <HouseScroll
                 logo={house.logo}
                 name={house.name}
-                shortName={house.shortName}
                 houseName={house.houseName}
                 motto={house.motto}
                 lore={house.lore}
