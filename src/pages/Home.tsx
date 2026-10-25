@@ -331,7 +331,7 @@ export const Home: React.FC<HomeProps> = ({
 
 
         {/* ---------- the writ plaques ---------- */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 xl:gap-8">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-14 xl:gap-9">
           {FEATURED_SEGMENTS.map((segment, i) => (
             <Reveal key={segment.id} delay={i * 110} className="h-full">
               <TiltCard

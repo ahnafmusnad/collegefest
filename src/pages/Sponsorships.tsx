@@ -46,7 +46,7 @@ export const Sponsorships: React.FC = () => {
 
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-36">
       
       {/* Page Hero */}
       <PageHero
@@ -58,7 +58,7 @@ export const Sponsorships: React.FC = () => {
 
 
       {/* ROI & Reach Statistics Banner */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-9">
         {[
           { label: 'On-Ground Footfall', value: '1,000+', desc: 'Students, Teachers & Guardians', icon: Users },
           { label: 'Participating Institutions', value: '25+', desc: 'SSC & HSC Level', icon: Building2 },
@@ -106,7 +106,7 @@ export const Sponsorships: React.FC = () => {
 
 
         {/* Sponsor Tier Cards Grid with 3D LIFT & TEAL GLOW */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
           {SPONSOR_TIERS.map((tier, i) => {
             const isTitle = tier.id === 'tier-title';
             const tierKey = tier.id.replace('tier-', '');

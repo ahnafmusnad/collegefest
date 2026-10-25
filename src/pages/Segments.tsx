@@ -127,7 +127,7 @@ const GroupFrameCard: React.FC<{
         </header>
 
         {/* ── Roster ─────────────────────────────────────────── */}
-        <div className="mt-5 grid gap-3 md:grid-cols-2 lg:mt-4 lg:grid-cols-1">
+        <div className="mt-5 grid gap-3.5 md:grid-cols-2 lg:mt-4 lg:grid-cols-1">
           {segments.map((seg) => (
             <button
               key={seg.id}
@@ -221,10 +221,10 @@ const GroupFrameCard: React.FC<{
 
 export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-28">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-32">
       {/* Page Hero */}
       <PageHero
-        image="/images/iron-throne-hero.webp"
+        image="/images/tour.webp"
         eyebrow="The Citadel Trials of Skill"
         title="Tourneys & Competitions"
         description="Fifteen trials, three banners of contest. Choose your ground — group, solo or online — read the royal decrees, and register your name on Tickify."
@@ -247,7 +247,7 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
 
       {/* Three framed group banners — stacked on mobile, all three
           abreast on desktop, each keeping its compact mobile shape. */}
-      <div className="grid grid-cols-1 gap-16 lg:grid-cols-3 lg:items-start lg:gap-5">
+      <div className="grid grid-cols-1 gap-20 lg:grid-cols-3 lg:items-start lg:gap-6">
         {SEGMENT_GROUPS.map((group, idx) => (
           <Reveal key={group.key} delay={idx * 80}>
             <GroupFrameCard group={group} onOpenRulesModal={onOpenRulesModal} />

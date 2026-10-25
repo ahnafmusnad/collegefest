@@ -261,7 +261,7 @@ export default function SmallCouncilReel() {
             onPointerLeave={endDrag}
             onPointerCancel={endDrag}
           >
-            <div className="flex items-center gap-7 md:gap-12 w-max py-6">
+            <div className="flex items-center gap-8 md:gap-12 w-max py-6">
               {items.map(({ m, copy }, i) => {
                 const isActive = i === active;
                 return (

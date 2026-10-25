@@ -41,7 +41,7 @@ export const Clubs: React.FC<ClubsProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-32">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-36">
       
       {/* Page Hero */}
       <PageHero
@@ -55,7 +55,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           (The old border-image nine-slice frame could render empty on
           mobile browsers without solid container-query support; these
           use plain layered backgrounds, so they always paint.) */}
-      <div className="grid grid-cols-2 gap-6 md:gap-7 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-7 md:gap-8 md:grid-cols-4">
         {FOUR_HOUSES.map((house, i) => {
           const isSelected = activeHouseId === house.id;
           const isPledged = userPledgedHouse?.id === house.id;
@@ -128,7 +128,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           Chrome — the dossier never became visible there. A 2D zoom
           entrance is projection-safe at any height. */}
       <Reveal direction="zoom" duration={1100}>
-      <div className="house-dossier space-y-5 relative px-5 py-5 sm:px-7 sm:py-6 md:px-9 md:py-7">
+      <div className="house-dossier space-y-5 relative px-5 pt-9 pb-5 sm:px-7 sm:pt-10 sm:pb-6 md:px-9 md:pt-11 md:pb-7">
         {/* top roller rod + crest */}
         <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
         <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
@@ -221,7 +221,7 @@ export const Clubs: React.FC<ClubsProps> = ({
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-7">
             {houseSegments.map((seg, i) => (
               <Reveal key={seg.id} delay={i * 90} className="h-full">
               <TiltCard

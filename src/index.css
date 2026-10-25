@@ -1017,14 +1017,14 @@
 .houses-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 2.75rem;
+  gap: 3.25rem;
   justify-items: center;
 }
 @media (min-width: 640px) {
   .houses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1180px) {
-  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem; }
+  .houses-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
 }
 
 .hs-cheer {
