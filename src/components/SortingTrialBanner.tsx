@@ -45,7 +45,7 @@ const CornerFlourish: React.FC<{ className?: string; style?: React.CSSProperties
 /* Sorting Trial Banner: "The Iron Raven's Sorting Ceremony" */
 export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin }) => {
   return (
-    <section className="relative py-20 md:py-24 px-4 overflow-hidden">
+    <section className="relative py-10 md:py-12 px-4 overflow-hidden">
       {/* checkered ceremony floor */}
       <div className="st-checker absolute inset-0" aria-hidden="true" />
       {/* ambient teal aura breathing behind the plaque */}
@@ -53,7 +53,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
 
       <div className="relative max-w-3xl mx-auto">
-        <div className="st-panel relative px-6 py-14 sm:px-12 sm:py-16 md:px-16 md:py-20 text-center">
+          <div className="st-panel relative px-4 py-7 sm:px-8 sm:py-8 md:px-10 md:py-9 text-center">
           {/* corner flourishes */}
           <CornerFlourish className="st-corner absolute top-1.5 left-1.5 w-12 h-12 sm:w-16 sm:h-16 text-gold" />
           <CornerFlourish
@@ -85,7 +85,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
           {/* heading */}
           <div className="relative z-10">
-            <h3 className="st-title font-cinzel text-[2rem] leading-[1.15] sm:text-5xl md:text-[3.4rem] font-bold text-gold-2 uppercase tracking-wide">
+            <h3 className="st-title font-cinzel text-xl leading-[1.15] sm:text-2xl md:text-3xl font-bold text-gold-2 uppercase tracking-wide">
               Discover Your True
               <br />
               College House
@@ -93,7 +93,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
 
             {/* diamond divider */}
-            <div className="flex items-center justify-center gap-3 mt-5 mb-6" aria-hidden="true">
+            <div className="flex items-center justify-center gap-3 mt-3 mb-3.5" aria-hidden="true">
               <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/70" />
               <span className="st-gem block w-2 h-2 rotate-45 border border-gold-2 bg-ink" />
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/70" />
@@ -101,7 +101,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
 
             {/* the call */}
-            <p className="font-garamond text-[15px] sm:text-lg leading-relaxed text-bone-dim max-w-xl mx-auto">
+            <p className="font-garamond text-xs sm:text-[13px] leading-relaxed text-bone-dim max-w-md mx-auto">
               Are your words sharp enough for{' '}
               <em className="text-bone not-italic font-medium">House Lannister</em>? Does your mind
               master the gears of <em className="text-bone not-italic font-medium">House Stark</em>?
@@ -113,7 +113,7 @@ export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin 
 
 
             {/* ritual button */}
-            <div className="mt-9">
+            <div className="mt-5">
               <Button onClick={onBegin}>Begin the Sorting Ritual</Button>
             </div>
           </div>

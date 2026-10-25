@@ -128,7 +128,7 @@ export const Clubs: React.FC<ClubsProps> = ({
           Chrome — the dossier never became visible there. A 2D zoom
           entrance is projection-safe at any height. */}
       <Reveal direction="zoom" duration={1100}>
-      <div className="house-dossier space-y-5 relative px-3 py-5 sm:px-5 sm:py-6 md:px-7 md:py-7">
+      <div className="house-dossier space-y-5 relative px-5 py-5 sm:px-7 sm:py-6 md:px-9 md:py-7">
         {/* top roller rod + crest */}
         <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
         <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">

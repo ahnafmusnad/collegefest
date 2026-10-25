@@ -134,13 +134,12 @@ function VenueTablet({
       aria-pressed={selected}
       aria-expanded={expanded}
       aria-controls={`arena-record-${loc.id}`}
-      className={`arena-tilt arena-sheen group relative block w-full py-5 text-left transition-[filter,transform] duration-300 ease-out ${
+      className={`arena-tilt arena-sheen group relative block w-full py-3.5 text-left transition-[filter,transform] duration-300 ease-out ${
         selected ? 'z-10' : ''
       }`}
       style={{ transform }}
     >
       <TabletFrame active={selected} />
-      <div className="arena-stone" style={{ opacity: 0.14 }} />
 
 
       {/* notch diamonds seated on the border lines */}
@@ -160,7 +159,7 @@ function VenueTablet({
       {/* faint rune chiseled behind the name */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute right-[14%] top-1/2 -translate-y-1/2 select-none font-garamond text-[64px] leading-none transition-all duration-500 ${
+        className={`pointer-events-none absolute right-[14%] top-1/2 -translate-y-1/2 select-none font-garamond text-[44px] leading-none transition-all duration-500 ${
           selected ? 'text-teal-glow/25' : 'text-teal-glow/10 group-hover:text-teal-glow/20'
         }`}
       >
@@ -175,7 +174,7 @@ function VenueTablet({
               {loc.numeral}.
             </span>
             <span
-              className={`truncate font-cinzel text-[15px] font-semibold tracking-[0.12em] transition-all duration-300 ${
+              className={`truncate font-cinzel text-[13px] font-semibold tracking-[0.12em] transition-all duration-300 ${
                 selected
                   ? 'text-silver'
                   : 'text-bone group-hover:text-silver'
@@ -184,14 +183,14 @@ function VenueTablet({
               {loc.name}
             </span>
           </span>
-          <span className="mt-1 block pl-6 font-garamond text-[16px] italic leading-snug text-bone-dim">
+          <span className="mt-0.5 block pl-5 font-garamond text-[13px] italic leading-snug text-bone-dim">
             “{loc.gotAlias}”
           </span>
         </span>
 
 
         <span
-          className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
+          className={`relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
             selected
               ? 'border-mint/70 bg-teal-glow/20 text-mint'
               : 'border-iron text-bone-dim group-hover:border-teal-glow/60 group-hover:text-teal-glow'
@@ -238,7 +237,6 @@ function DetailPlaque({
     <div className="relative">
       <div className="arena-sweep arena-sheen relative">
         <PlaqueFrame />
-        <div className="arena-stone" />
         <span className="arena-sweep-beam" />
 
 
@@ -387,29 +385,29 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
     <section id="arenas" className="relative py-6 sm:py-10">
       {/* header */}
       <Reveal className="text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-iron bg-ink-2/70 px-5 py-2 font-cinzel text-[10px] tracking-[0.38em] text-mint">
-          <MapPin className="h-3.5 w-3.5" />
+        <span className="inline-flex items-center gap-2 rounded-full border border-iron bg-ink-2/70 px-4 py-1.5 font-cinzel text-[9px] tracking-[0.38em] text-mint">
+          <MapPin className="h-3 w-3" />
           GEOGRAPHY OF THE CITADEL
         </span>
 
 
-        <h2 className="mt-7 font-cinzel-dec text-4xl font-black leading-tight text-silver drop-shadow-[0_0_30px_rgba(31,143,150,0.35)] sm:text-5xl lg:text-6xl">
+        <h2 className="mt-4 font-cinzel-dec text-2xl font-black leading-tight text-silver drop-shadow-[0_0_30px_rgba(31,143,150,0.35)] sm:text-3xl lg:text-4xl">
           Campus Arenas
-          <span className="mx-3 inline-block text-teal-glow">&</span>
+          <span className="mx-2.5 inline-block text-teal-glow">&</span>
           Landmarks
         </h2>
 
 
-        <FlourishDivider className="mx-auto mt-6 h-5 w-72 text-iron sm:w-96" />
+        <FlourishDivider className="mx-auto mt-4 h-4 w-56 text-iron sm:w-72" />
 
 
-        <p className="mx-auto mt-5 max-w-xl font-sans text-base font-light text-bone-dim sm:text-lg">
+        <p className="mx-auto mt-3 max-w-lg font-sans text-xs font-light text-bone-dim sm:text-sm">
           Explore key tournament venues situated across Chittagong College’s historic grounds.
         </p>
 
 
         {/* unrolling hint, phones & tablets only */}
-        <p className="mt-4 flex items-center justify-center gap-2 font-garamond text-base italic text-ash lg:hidden">
+        <p className="mt-3 flex items-center justify-center gap-2 font-garamond text-sm italic text-ash lg:hidden">
           <ChevronDown className="h-4 w-4 text-teal-glow" />
           Tap a landmark to unroll its record
         </p>
@@ -417,9 +415,9 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
 
 
       {/* the survey: tablets + great plaque */}
-      <div className="mt-12 grid gap-7 sm:mt-16 lg:grid-cols-[minmax(320px,400px)_1fr] lg:gap-8">
+      <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-[minmax(260px,330px)_1fr] lg:gap-6">
         <Reveal delay={120}>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-4">
             {ARENAS.map((loc) => {
               const isOpen = openId === loc.id;
               return (
@@ -447,7 +445,7 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
                 </div>
               );
             })}
-            <p className="mt-1 text-center font-garamond text-base italic text-ash">
+            <p className="mt-1 text-center font-garamond text-sm italic text-ash">
               “What is claimed by the Citadel must be defended.”
             </p>
           </div>
@@ -456,7 +454,7 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
 
         {/* desktop: the record always rests in the great plaque */}
         <Reveal delay={220} className="hidden lg:block">
-          <div className="lg:min-h-[520px]">
+          <div className="lg:min-h-[420px]">
             <DetailPlaque loc={active} onBook={onBook} />
           </div>
         </Reveal>

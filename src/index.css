@@ -2770,19 +2770,22 @@
 .stone-panel {
   border-style: solid;
   border-color: transparent;
-  border-width: 62px;
+  border-width: 44px;
   border-image-source: url("/images/stone-tablet.webp");
   border-image-slice: 135 fill;
-  border-image-width: 62px;
+  border-image-width: 44px;
   border-image-outset: 0;
   border-image-repeat: stretch;
   background: transparent;
+  /* border-image ignores border-radius, so round the carved frame
+     by clipping the whole painted output instead. */
+  clip-path: inset(0 round 20px);
   filter: drop-shadow(0 0 16px rgba(23, 104, 110, 0.16));
 }
 @media (max-width: 639px) {
   .stone-panel {
-    border-width: 34px;
-    border-image-width: 34px;
+    border-width: 28px;
+    border-image-width: 28px;
   }
 }
 

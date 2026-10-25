@@ -215,7 +215,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               <img
                 src={LORE_IMAGE}
                 alt="The historic red keep of Chawkbazar campus grounds"
-                className="h-[420px] w-full object-cover transition-transform duration-[1.8s] ease-out hover:scale-105 sm:h-[520px]"
+                className="h-[300px] w-full object-cover transition-transform duration-[1.8s] ease-out hover:scale-105 sm:h-[380px]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/20" />
@@ -277,24 +277,24 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
           {/* Active day panel */}
           <div key={activeDaySchedule.day} className="animate-fade-up mx-auto mt-10 max-w-5xl">
-            <div className="stone-panel mx-auto max-w-5xl space-y-4 px-2 py-2.5 sm:px-4 sm:py-3">
+            <div className="stone-panel mx-auto max-w-5xl space-y-4 px-4 py-2.5 sm:px-6 sm:py-3">
 
 
 
 
               {/* Day heading */}
-              <div className="flex items-start gap-4 border-b border-iron/30 pb-5">
+              <div className="flex items-start gap-3 border-b border-iron/30 pb-3.5">
                 <div className="animate-float hidden shrink-0 text-[#5bc9d6] sm:block">
-                  <Compass className="h-9 w-9" />
+                  <Compass className="h-7 w-7" />
                 </div>
                 <div>
-                  <h3 className="font-cinzel text-xl font-bold tracking-wide text-[#5bc9d6] sm:text-2xl">
+                  <h3 className="font-cinzel text-base font-bold tracking-wide text-[#5bc9d6] sm:text-lg">
                     {activeDaySchedule.gotTitle}
                   </h3>
-                  <p className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
+                  <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
                     {activeDaySchedule.date}
                   </p>
-                  <p className="font-garamond mt-2 max-w-2xl text-xs italic leading-relaxed text-bone/85 sm:text-[13px]">
+                  <p className="font-garamond mt-1 max-w-2xl text-[10px] italic leading-snug text-bone/85 sm:text-[11px]">
                     {activeDaySchedule.description}
                   </p>
                 </div>
@@ -306,10 +306,10 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   return (
                     <li
                       key={`${activeDaySchedule.day}-${idx}`}
-                      className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1.5 border-b border-iron/20 py-3.5 transition-colors duration-300 last:border-0 sm:grid-cols-[84px_auto_1fr_auto] sm:gap-x-5 sm:px-3"
+                      className="group grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-1 border-b border-iron/20 py-2.5 transition-colors duration-300 last:border-0 sm:grid-cols-[70px_auto_1fr_auto] sm:gap-x-4 sm:px-3"
                     >
                       {/* Time chip */}
-                      <span className="inline-flex items-center text-[10px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
+                      <span className="inline-flex items-center text-[9px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
                         {evt.time}
                       </span>
 
@@ -322,11 +322,11 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
                       {/* Title + house */}
                       <div className="col-span-2 sm:col-span-1">
-                        <p className="text-[13px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2 sm:text-sm">
+                        <p className="text-[11px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2 sm:text-xs">
                           {evt.title}
                         </p>
                         {evt.house && (
-                          <p className="mt-0.5 text-[10px] tracking-wide text-bone-dim">
+                          <p className="mt-0.5 text-[8px] tracking-wide text-bone-dim">
                             Presented by <span className="text-[#5bc9d6]">{evt.house}</span>
                           </p>
                         )}
@@ -336,8 +336,8 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
 
 
                       {/* Venue + type */}
-                      <div className="col-span-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 sm:col-span-1 sm:justify-end">
-                        <span className="inline-flex items-center gap-1.5 text-[10.5px] text-bone-dim">
+                      <div className="col-span-2 flex flex-wrap items-center gap-x-3 gap-y-1 sm:col-span-1 sm:justify-end">
+                        <span className="inline-flex items-center gap-1.5 text-[9px] text-bone-dim">
                           <MapPin className="h-3.5 w-3.5 text-[#5bc9d6]" />
                           {evt.venue}
                         </span>
@@ -372,7 +372,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
         <section>
           <Reveal className="mx-auto max-w-2xl text-center">
             <Eyebrow>The Law of the Land</Eyebrow>
-            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
+            <h2 className={`font-cinzel mt-5 text-2xl font-bold tracking-wide sm:text-3xl ${SILVER}`}>
               The Citadel Codex
             </h2>
             <p className="mt-3 font-cinzel text-[11px] uppercase tracking-[0.3em] text-bone-dim sm:text-xs">
@@ -382,7 +382,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
           </Reveal>
 
           <Reveal direction="zoom" duration={1100} className="mt-10">
-            <div className="stone-panel relative px-4 py-8 sm:px-8 sm:py-10">
+            <div className="relative rounded-xl border border-[#2f5557]/60 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(23,104,110,0.10),transparent_65%)] px-4 py-6 shadow-[inset_0_0_36px_rgba(2,10,11,0.35)] sm:px-6 sm:py-7">
               {/* corner brackets */}
               <span className="pointer-events-none absolute top-2 left-2 h-5 w-5 border-t-2 border-l-2 border-gold-2/60" aria-hidden="true" />
               <span className="pointer-events-none absolute top-2 right-2 h-5 w-5 border-t-2 border-r-2 border-gold-2/60" aria-hidden="true" />
@@ -390,13 +390,12 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
 
               {/* shield medallion crest */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2" aria-hidden="true">
-                <span className="flex h-12 w-12 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_24px_rgba(91,201,214,0.45)]">
-                  <ShieldCheck className="h-5 w-5 -rotate-45 text-[#8ce8f2]" />
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true">
+                <span className="flex h-10 w-10 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_24px_rgba(91,201,214,0.45)]">
+                  <ShieldCheck className="h-4 w-4 -rotate-45 text-[#8ce8f2]" />
                 </span>
               </div>
-
-              <div className="grid grid-cols-1 gap-6 pt-4 md:grid-cols-3 sm:gap-8">
+              <div className="grid grid-cols-1 gap-4 pt-2 md:grid-cols-3 sm:gap-6">
                 {[
                   {
                     numeral: 'I',
@@ -418,20 +417,19 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
                   }
                 ].map((decree, i) => (
                   <Reveal key={decree.numeral} delay={i * 110} className="h-full">
-                    <div className="codex-decree relative h-full p-5 sm:p-6">
+                    <div className="codex-decree relative h-full p-4 sm:p-5">
                       {/* hanging numeral seal */}
                       <div className="flex items-center justify-between">
-                        <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-[#5bc9d6]/45 bg-ink-2/90">
-                          <span className="font-cinzel text-sm font-bold -rotate-45 text-[#8ce8f2]">{decree.numeral}</span>
+                        <span className="flex h-8 w-8 rotate-45 items-center justify-center border border-[#5bc9d6]/45 bg-ink-2/90">
+                          <span className="font-cinzel text-[13px] font-bold -rotate-45 text-[#8ce8f2]">{decree.numeral}</span>
                         </span>
                         <span className="text-[#5bc9d6]">{decree.icon}</span>
                       </div>
-
-                      <h3 className="mt-4 font-cinzel text-[15px] font-bold tracking-wide text-white sm:text-base">
+                      <h3 className="mt-3 font-cinzel text-[13px] font-bold tracking-wide text-white sm:text-sm">
                         {decree.title}
                       </h3>
-                      <span className="mt-2 block h-px w-10 bg-gradient-to-r from-[#5bc9d6]/70 to-transparent" aria-hidden="true" />
-                      <p className="mt-3 text-xs leading-relaxed text-bone-dim sm:text-[13px]">
+                      <span className="mt-1.5 block h-px w-10 bg-gradient-to-r from-[#5bc9d6]/70 to-transparent" aria-hidden="true" />
+                      <p className="mt-2 text-[11px] leading-relaxed text-bone-dim sm:text-xs">
                         {decree.body}
                       </p>
                     </div>
@@ -440,7 +438,7 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               </div>
 
               {/* enforcement strip */}
-              <div className="mt-6 flex items-center justify-center gap-3 border-t border-[#5bc9d6]/20 pt-5 text-center">
+              <div className="mt-4 flex items-center justify-center gap-3 border-t border-[#5bc9d6]/20 pt-4 text-center">
                 <span className="hidden h-px w-16 bg-gradient-to-r from-transparent to-[#5bc9d6]/40 sm:block" aria-hidden="true" />
                 <p className="font-cinzel text-[9px] uppercase tracking-[0.26em] text-[#9fd8d2] sm:text-[10px]">
                   Breaking the Codex earns swift banishment beyond the walls
