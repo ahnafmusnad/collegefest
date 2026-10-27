@@ -9,6 +9,11 @@ interface FitTextProps {
   min?: number;
   className?: string;
 }
+/** The display face the hero titles are measured in — must match @font-face
+    in index.css. Measuring before it is active uses the fallback serif,
+    which is narrower — and that is what made the title visibly shrink from
+    big to small on slow/mobile connections. */
+const DISPLAY_FONT = 'GameOfThrones';
 /**
  * FIT TEXT — scales a single line of type so it always exactly fills the
  * width of its parent, no matter the viewport. Used to lock "CARNAVAL" and
@@ -16,9 +21,10 @@ interface FitTextProps {
  * them, on every device.
  *
  * NO-FLASH LOADING: the element renders invisible (opacity 0) until the
- * display font has finished loading and the first true measurement has been
- * applied — visitors never watch the title shrink from big to small while
- * the page settles. On resize it re-fits live.
+ * REAL display font face is confirmed usable via document.fonts.check —
+ * not merely until `document.fonts.ready` resolves, which is racy on
+ * mobile and can fire while the fallback face is still being measured.
+ * Only then is it measured and faded in, already at its final size.
  */
 export const FitText: React.FC<FitTextProps> = ({
   children,
@@ -28,10 +34,14 @@ export const FitText: React.FC<FitTextProps> = ({
   className = '',
 }) => {
   const ref = useRef<HTMLElement | null>(null);
+  // deps are intentionally [max, min] only: re-running on every parent
+  // re-render would reset opacity to 0 and cause a blink.
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     let revealed = false;
+    let pollTimer = 0;
+    let settleTimer = 0;
     const fit = () => {
       const parent = el.parentElement;
       if (!parent) return;
@@ -59,26 +69,58 @@ export const FitText: React.FC<FitTextProps> = ({
         });
       }
     };
-    // start hidden so the font-swap / measure never shows
+    // start hidden so the measure / font-swap never shows; layout space is
+    // still reserved, so nothing around the title jumps either.
     el.style.opacity = '0';
     fit();
-    // reveal once the real font face has landed (true metrics)
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(() => {
+    const fonts = document.fonts;
+    const faceUsable = (): boolean => {
+      try {
+        return fonts?.check ? fonts.check(`16px "${DISPLAY_FONT}"`) : true;
+      } catch {
+        return true;
+      }
+    };
+    // poll until the real face is usable (cap ~2.5s so a failed font load
+    // never leaves the title invisible), then measure + reveal once.
+    const waitForFace = () => {
+      if (faceUsable()) {
         reveal();
-        // fonts can swap a beat after `ready` resolves — refit once more
-        window.setTimeout(fit, 150);
-      });
+        settleTimer = window.setTimeout(fit, 200);
+        return;
+      }
+      let waited = 0;
+      pollTimer = window.setInterval(() => {
+        waited += 50;
+        if (faceUsable() || waited >= 2500) {
+          window.clearInterval(pollTimer);
+          reveal();
+          settleTimer = window.setTimeout(fit, 200);
+        }
+      }, 50);
+    };
+    // kick the font load explicitly (some mobile browsers delay webfont
+    // fetches for below-priority text), then wait for the real face.
+    if (fonts?.load) {
+      fonts
+        .load(`16px "${DISPLAY_FONT}"`)
+        .catch(() => [])
+        .then(waitForFace);
+    } else {
+      waitForFace();
     }
+    // belt-and-braces: also reveal on full page load
     window.addEventListener('load', reveal);
     // live re-fit on container resize
     const ro = new ResizeObserver(() => fit());
     if (el.parentElement) ro.observe(el.parentElement);
     return () => {
-      ro.disconnect();
+      window.clearInterval(pollTimer);
+      window.clearTimeout(settleTimer);
       window.removeEventListener('load', reveal);
+      ro.disconnect();
     };
-  }, [children, max, min]);
+  }, [max, min]);
   const Comp = Tag as React.ElementType;
   return (
     <Comp

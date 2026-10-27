@@ -81,7 +81,7 @@ export const Home: React.FC<HomeProps> = ({
               on every device — the sword is the ruler of the title. */}
           <div className="hero-ruler w-full max-w-3xl mx-auto px-4 space-y-3">
             <h1 aria-label="Carnaval Da Chittagong College" className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              <FitText as="span" max={168} min={34}>CARNAVAL</FitText>
+              <FitText as="span" max={168} min={20}>CARNAVAL</FitText>
             </h1>
             <SwordDivider className="!max-w-none !px-0 mt-1 mb-1" />
             {/* The right-to-left colour sweep, RESTORED. The old
@@ -92,7 +92,7 @@ export const Home: React.FC<HomeProps> = ({
                 animated layer the words still render, never vanish.
                 The breathing glow still animates on the wrapper. */}
             <p className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              <FitText as="span" max={56} min={11}>
+              <FitText as="span" max={56} min={9}>
                 <span>DA </span>
                 <span className="frost-glow">
                   <span className="sweep-text whitespace-pre" data-text="CHITTAGONG">CHITTAGONG</span>
