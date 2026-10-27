@@ -3588,3 +3588,429 @@ a.btn,
 @media (prefers-reduced-motion: reduce) {
   .ns-sway { animation: none; }
 }
+
+/* ============================================================
+   HALL OF BANNERS — Four Great Houses page (Clubs.tsx)
+   All classes are prefixed `hh-` so nothing else is affected.
+   ============================================================ */
+.hh-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  color: #dcefee;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 28px rgba(91, 201, 214, 0.22);
+}
+@media (min-width: 640px) {
+  .hh-title { font-size: 2.35rem; }
+}
+.hh-lead {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #c9d2d2;
+}
+.hh-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #c9d2d2;
+}
+.hh-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #5bc9d6;
+}
+
+
+/* ---------- Hanging house banners ---------- */
+.hh-banner {
+  position: relative;
+  height: 100%;
+  padding-top: 14px;
+  filter: drop-shadow(0 0 1px rgba(91, 201, 214, 0.45)) drop-shadow(0 18px 26px rgba(0, 0, 0, 0.6));
+  transition: filter 0.5s ease, translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hh-banner__rod {
+  position: absolute;
+  top: 4px;
+  left: -6px;
+  right: -6px;
+  height: 10px;
+  z-index: 2;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #d8ded9 0%, #9e9f9f 45%, #2f5557 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+.hh-banner__rod::before,
+.hh-banner__rod::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%) rotate(45deg);
+  background: #0b282a;
+  border: 1px solid #9e9f9f;
+}
+.hh-banner__rod::before { left: -4px; }
+.hh-banner__rod::after { right: -4px; }
+.hh-banner__cloth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 430px;
+  padding: 1.7rem 1rem 3.4rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px));
+  background:
+    linear-gradient(180deg, rgba(6, 26, 28, 0.35) 0%, rgba(2, 10, 11, 0.88) 68%, rgba(2, 10, 11, 0.96) 100%),
+    url('/images/cardbg.webp') center / cover no-repeat,
+    #061a1c;
+  transition: background 0.5s ease;
+}
+.hh-banner__cloth::before {
+  content: '';
+  position: absolute;
+  inset: 8px 8px 40px 8px;
+  border: 1px solid rgba(216, 222, 217, 0.16);
+  pointer-events: none;
+}
+.hh-banner__cloth::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 60% at 50% -10%, rgba(159, 224, 212, 0.16), transparent 60%);
+  pointer-events: none;
+}
+.hh-banner--active {
+  filter:
+    drop-shadow(0 0 1.5px rgba(140, 232, 242, 0.95))
+    drop-shadow(0 0 22px rgba(31, 143, 150, 0.55))
+    drop-shadow(0 18px 26px rgba(0, 0, 0, 0.6));
+}
+.hh-banner--active .hh-banner__cloth {
+  background:
+    linear-gradient(180deg, rgba(23, 104, 110, 0.5) 0%, rgba(2, 10, 11, 0.86) 68%, rgba(2, 10, 11, 0.96) 100%),
+    url('/images/cardbg.webp') center / cover no-repeat,
+    #061a1c;
+}
+@media (hover: hover) {
+  .hh-banner:hover { translate: 0 -6px; }
+}
+.hh-banner__numeral {
+  position: absolute;
+  top: 0.95rem;
+  right: 1.05rem;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 12px;
+  color: rgba(216, 222, 217, 0.45);
+}
+.hh-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8ce8f2;
+}
+.hh-banner__pledge {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0.45rem 0;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e7e3d8;
+  border: 1px solid rgba(201, 210, 210, 0.45);
+  background: rgba(2, 10, 11, 0.55);
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.hh-banner__pledge:hover {
+  color: #020a0b;
+  background: #8ce8f2;
+  border-color: #8ce8f2;
+}
+.hh-banner__sworn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8ce8f2;
+  border: 1px solid rgba(91, 201, 214, 0.5);
+  background: rgba(23, 104, 110, 0.22);
+}
+
+
+/* ---------- Logo medallion ---------- */
+.hh-medallion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  padding: 8px;
+  border-radius: 9999px;
+  background: #e7e3d8;
+  border: 2px solid #9e9f9f;
+  box-shadow: 0 0 0 4px #061a1c, 0 0 0 5px rgba(91, 201, 214, 0.5), 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+.hh-medallion img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 9999px;
+}
+.hh-medallion--lg {
+  width: 136px;
+  height: 136px;
+  padding: 12px;
+  margin: 0 auto;
+  box-shadow: 0 0 0 6px #061a1c, 0 0 0 7px rgba(91, 201, 214, 0.55), 0 0 40px rgba(31, 143, 150, 0.45);
+}
+.hh-medallion--sm {
+  width: 46px;
+  height: 46px;
+  padding: 4px;
+  box-shadow: 0 0 0 2px #061a1c, 0 0 0 3px rgba(91, 201, 214, 0.45);
+}
+@media (max-width: 639px) {
+  .hh-banner__cloth { min-height: 390px; padding: 1.5rem 0.7rem 3rem; }
+  .hh-banner .hh-medallion { width: 64px; height: 64px; padding: 6px; }
+}
+
+
+/* ---------- Panels (stone texture) ---------- */
+.hh-panel {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(11, 40, 42, 0.82), rgba(2, 10, 11, 0.93)),
+    url('/images/stone-teal.webp') center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(158, 159, 159, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+}
+.hh-crest {
+  position: relative;
+  background:
+    linear-gradient(100deg, rgba(2, 10, 11, 0.96) 0%, rgba(6, 26, 28, 0.88) 50%, rgba(2, 10, 11, 0.78) 100%),
+    url('/images/college-winter-citadel.webp') center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(158, 159, 159, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 30px 60px -25px rgba(0, 0, 0, 0.95),
+    0 0 50px -20px rgba(23, 104, 110, 0.45);
+}
+.hh-crest::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 80% at 15% 0%, rgba(91, 201, 214, 0.12), transparent 60%);
+  pointer-events: none;
+}
+.hh-crest__numeral {
+  position: absolute;
+  right: 0.1em;
+  bottom: -0.2em;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(9rem, 22vw, 16rem);
+  line-height: 1;
+  color: rgba(140, 232, 242, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/* ---------- Stat stones ---------- */
+.hh-stone {
+  position: relative;
+  height: 100%;
+  text-align: center;
+  padding: 1rem 0.75rem;
+  background:
+    linear-gradient(180deg, rgba(6, 26, 28, 0.65), rgba(2, 10, 11, 0.88)),
+    url('/images/stone-tablet.webp') center / cover no-repeat,
+    #061a1c;
+  border: 1px solid rgba(47, 85, 87, 0.9);
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+}
+
+
+/* ---------- Diamond numeral seal ---------- */
+.hh-seal {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0.35rem;
+  transform: rotate(45deg);
+  border: 1px solid rgba(91, 201, 214, 0.6);
+  background: #020a0b;
+  box-shadow: 0 0 14px rgba(91, 201, 214, 0.3);
+}
+.hh-seal > span {
+  transform: rotate(-45deg);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8ce8f2;
+}
+.hh-seal--sm {
+  width: 1.9rem;
+  height: 1.9rem;
+  margin: 0.3rem;
+}
+.hh-seal--sm > span { font-size: 10px; }
+
+
+/* ---------- Achievements ---------- */
+.hh-laurel {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  height: 100%;
+  padding: 1.1rem 1.2rem;
+  background: linear-gradient(90deg, rgba(23, 104, 110, 0.18), rgba(6, 26, 28, 0.75) 40%, rgba(2, 10, 11, 0.85));
+  border: 1px solid rgba(47, 85, 87, 0.8);
+  border-left: 3px solid #1f8f96;
+  transition: border-color 0.4s ease, translate 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .hh-laurel:hover { border-color: rgba(91, 201, 214, 0.7); translate: 4px 0; }
+}
+.hh-laurel__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(216, 222, 217, 0.4);
+  background: #020a0b;
+  color: #d8ded9;
+}
+
+
+/* ---------- Keeper portrait (Small Council frame) ---------- */
+.hh-keeper {
+  background: #020a0b url('/images/council-card-frame.webp') center / 100% 100% no-repeat;
+  box-shadow: 0 0 50px -14px rgba(23, 104, 110, 0.6);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+@media (hover: hover) {
+  .hh-keeper:hover { transform: translateY(-6px); box-shadow: 0 0 60px -10px rgba(31, 143, 150, 0.8); }
+}
+
+
+/* ---------- Missing-photo placeholder ---------- */
+.hh-photo-fallback {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background:
+    linear-gradient(180deg, rgba(11, 40, 42, 0.7), rgba(2, 10, 11, 0.9)),
+    url('/images/cardbg.webp') center / cover no-repeat,
+    #061a1c;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #9e9f9f;
+}
+
+
+/* ---------- Hosted trials ---------- */
+.hh-trial {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid rgba(91, 201, 214, 0.2);
+  background: rgba(2, 10, 11, 0.55);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.hh-trial:hover {
+  border-color: rgba(140, 232, 242, 0.6);
+  background: rgba(6, 26, 28, 0.85);
+}
+
+
+/* ---------- The Great Ledger ---------- */
+.hh-ledger-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border: 1px solid rgba(47, 85, 87, 0.7);
+  background: rgba(2, 10, 11, 0.55);
+  cursor: pointer;
+  transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.hh-ledger-row:hover {
+  border-color: rgba(91, 201, 214, 0.6);
+  background: rgba(11, 40, 42, 0.7);
+}
+.hh-ledger-row--active {
+  border-color: rgba(140, 232, 242, 0.75);
+  background: rgba(23, 104, 110, 0.22);
+  box-shadow: 0 0 24px -8px rgba(31, 143, 150, 0.7);
+}
+.hh-bar {
+  position: relative;
+  display: block;
+  height: 6px;
+  overflow: hidden;
+  background: #0b282a;
+  border: 1px solid rgba(47, 85, 87, 0.8);
+}
+.hh-bar > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #145e62, #1f8f96 60%, #8ce8f2);
+  box-shadow: 0 0 10px rgba(140, 232, 242, 0.5);
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hh-banner:hover,
+  .hh-laurel:hover,
+  .hh-keeper:hover {
+    translate: none;
+    transform: none;
+  }
+}

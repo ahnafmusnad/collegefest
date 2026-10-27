@@ -1,27 +1,189 @@
-import React, { useState } from 'react';
-import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
-import { ClubHouse, PageType } from '../types';
+import React, { useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
+import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
+import { HOUSE_DETAILS, type HouseKeeper, type HouseMoment } from '../data/houseDetails';
+import { ClubHouse, PageType } from '../types';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
 import GemDivider from '../components/ui/GemDivider';
-import { 
-  Crown,
+import EyebrowRule from '../components/ui/EyebrowRule';
+import Button from '../components/ui/Button';
+import {
+  ArrowRight,
   Award,
+  CalendarDays,
+  Camera,
   Check,
-  Camera
+  Crown,
+  Gem,
+  MapPin,
+  ScrollText,
+  ShieldHalf,
+  Sparkles,
+  Trophy,
+  Users
 } from 'lucide-react';
 
-/* Scattered parchment prints — the houses caught mid-deed. */
-const CHRONICLE_PRINTS = [
-  { img: '/images/gallery/ccds-debate.webp', title: 'The War of Words', tag: 'CCDS · National Debate Fest', house: 'House Lannister', tilt: '-rotate-2' },
-  { img: '/images/gallery/ccpac-stargaze.webp', title: 'Vigil Under the Stars', tag: 'CCPAC · Observation Nights', house: 'House Stark', tilt: 'rotate-1' },
-  { img: '/images/gallery/muses-literary.webp', title: 'Keepers of the Word', tag: 'The Muses · Literary Evenings', house: 'House Targaryen', tilt: '-rotate-1' },
-  { img: '/images/gallery/ccps-photowalk.webp', title: 'The Winter Lens', tag: 'CCPS · Campus Photo Walks', house: 'House Baratheon', tilt: 'rotate-2' },
-  { img: '/images/gallery/carnaval-stage.webp', title: 'Night of the Citadel', tag: 'Carnaval · Main Stage', house: 'All Four Houses', tilt: '-rotate-[1.5deg]' },
-  { img: '/images/gallery/carnaval-coronation.webp', title: 'The Crowning', tag: 'Carnaval · Prize Coronation', house: 'All Four Houses', tilt: 'rotate-[1.5deg]' },
-] as const;
+
+
+
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const PRINT_TILTS = ['-rotate-2', 'rotate-1', '-rotate-1', 'rotate-2', '-rotate-1', 'rotate-1'];
+
+
+
+
+const getInitials = (name: string) =>
+  name
+    .split(' ')
+    .filter((w) => w.length > 1)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+
+
+
+
+/* Four corner brackets — the shared frame ornament of the site */
+const Corners: React.FC<{ size?: string }> = ({ size = 'h-4 w-4' }) => (
+  <>
+    <span aria-hidden="true" className={`pointer-events-none absolute left-2 top-2 ${size} border-l border-t border-gold-2/50`} />
+    <span aria-hidden="true" className={`pointer-events-none absolute right-2 top-2 ${size} border-r border-t border-gold-2/50`} />
+    <span aria-hidden="true" className={`pointer-events-none absolute bottom-2 left-2 ${size} border-b border-l border-gold-2/50`} />
+    <span aria-hidden="true" className={`pointer-events-none absolute bottom-2 right-2 ${size} border-b border-r border-gold-2/50`} />
+  </>
+);
+
+
+
+
+/* Image that swaps to a themed fallback if the file is missing */
+const HouseImage: React.FC<{
+  src: string;
+  alt: string;
+  className?: string;
+  fallback: React.ReactNode;
+}> = ({ src, alt, className = '', fallback }) => {
+  const [failed, setFailed] = useState(!src);
+  if (failed) return <>{fallback}</>;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      draggable={false}
+      onError={() => setFailed(true)}
+      className={className}
+    />
+  );
+};
+
+
+
+
+/* Shared section heading */
+const SectionHead: React.FC<{
+  kicker: string;
+  title: string;
+  sub?: string;
+  icon: React.ElementType;
+}> = ({ kicker, title, sub, icon: Icon }) => (
+  <Reveal className="mx-auto max-w-3xl text-center">
+    <span className="hh-kicker">
+      <Icon className="h-3.5 w-3.5" />
+      {kicker}
+    </span>
+    <h3 className="hh-title mt-3">{title}</h3>
+    <GemDivider className="my-4" />
+    {sub && <p className="hh-lead">{sub}</p>}
+  </Reveal>
+);
+
+
+
+
+/* Portrait in the Small Council frame */
+const KeeperCard: React.FC<{ keeper: HouseKeeper; featured?: boolean }> = ({ keeper, featured = false }) => (
+  <figure className="flex flex-col items-center text-center">
+    <div
+      className={`hh-keeper relative shrink-0 overflow-hidden ${
+        featured
+          ? 'h-[300px] w-[200px] md:h-[348px] md:w-[232px]'
+          : 'h-[204px] w-[136px] sm:h-[240px] sm:w-[160px] md:h-[270px] md:w-[180px]'
+      }`}
+    >
+      <HouseImage
+        key={keeper.image}
+        src={keeper.image}
+        alt={keeper.name}
+        className="absolute left-1/2 top-[45.2%] aspect-square w-[66%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold-2/40 object-cover"
+        fallback={
+          <span
+            className={`absolute left-0 right-0 top-[45.2%] flex -translate-y-1/2 items-center justify-center font-cinzel-dec leading-none text-gold-2 drop-shadow-[0_0_22px_rgba(231,227,216,0.22)] ${
+              featured ? 'text-6xl md:text-7xl' : 'text-4xl md:text-5xl'
+            }`}
+          >
+            {getInitials(keeper.name)}
+          </span>
+        }
+      />
+      <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_70%_at_50%_-10%,rgba(231,227,216,0.08),transparent_60%)]" />
+      <span className="absolute bottom-[16%] left-[14%] right-[14%] border border-gold-2/40 bg-ink/80 px-1.5 py-1.5 font-cinzel text-[7px] uppercase leading-snug tracking-[0.12em] text-bone backdrop-blur-sm sm:text-[8px] md:text-[9px]">
+        {keeper.title}
+      </span>
+    </div>
+    <figcaption className="mt-4 max-w-[240px]">
+      <p className={`font-cinzel font-semibold text-gold-2 ${featured ? 'text-lg md:text-xl' : 'text-[14px] sm:text-[15px]'}`}>
+        {keeper.name}
+      </p>
+      <p className="mt-1 font-cinzel text-[9px] uppercase tracking-[0.22em] text-[#5bc9d6] sm:text-[10px]">
+        {keeper.role}
+      </p>
+      {featured && keeper.quote && (
+        <p className="mt-3 font-garamond text-[15px] italic leading-relaxed text-bone-dim">
+          &ldquo;{keeper.quote}&rdquo;
+        </p>
+      )}
+    </figcaption>
+  </figure>
+);
+
+
+
+
+/* Parchment photo print */
+const MomentPrint: React.FC<{ moment: HouseMoment; index: number }> = ({ moment, index }) => (
+  <figure
+    className={`chronicle-print group relative ${PRINT_TILTS[index % PRINT_TILTS.length]} transition-all duration-500 hover:z-10 hover:rotate-0 hover:scale-[1.03]`}
+  >
+    <div className="relative aspect-[4/3] overflow-hidden">
+      <HouseImage
+        key={moment.img}
+        src={moment.img}
+        alt={moment.title}
+        className="h-full w-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-110"
+        fallback={
+          <div className="hh-photo-fallback">
+            <Camera className="h-7 w-7 text-[#5bc9d6]" />
+            <span>Photo coming soon</span>
+          </div>
+        }
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[#04191c]/40 transition-opacity duration-500 group-hover:opacity-0" />
+      <span className="absolute left-2 top-2 flex h-6 w-6 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink/85 shadow-[0_0_12px_rgba(91,201,214,0.35)]">
+        <span className="-rotate-45 font-cinzel text-[10px] font-bold text-[#8ce8f2]">{ROMAN[index]}</span>
+      </span>
+    </div>
+    <figcaption className="px-2 pb-1 pt-3 text-center">
+      <p className="font-cinzel text-[14px] font-bold tracking-wide text-[#e7e3d8]">{moment.title}</p>
+      <p className="mt-1.5 font-garamond text-[14px] italic leading-snug text-bone-dim">{moment.caption}</p>
+    </figcaption>
+  </figure>
+);
+
+
+
 
 interface ClubsProps {
   onNavigate: (page: PageType) => void;
@@ -29,13 +191,32 @@ interface ClubsProps {
   userPledgedHouse: ClubHouse | null;
 }
 
-export const Clubs: React.FC<ClubsProps> = ({
-  onPledgeHouse,
-  userPledgedHouse
-}) => {
-  void FEST_SEGMENTS;
-  const [activeHouseId, setActiveHouseId] = useState<string>(FOUR_HOUSES[0].id);
-  const activeHouse = FOUR_HOUSES.find(h => h.id === activeHouseId) || FOUR_HOUSES[0];
+
+
+
+export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHouse }) => {
+  const [activeHouseId, setActiveHouseId] = useState<string>(userPledgedHouse?.id ?? FOUR_HOUSES[0].id);
+  const dossierRef = useRef<HTMLElement>(null);
+
+
+
+
+  const activeIndex = Math.max(0, FOUR_HOUSES.findIndex((h) => h.id === activeHouseId));
+  const activeHouse = FOUR_HOUSES[activeIndex];
+  const details = HOUSE_DETAILS[activeHouse.id];
+  const hostedTrials = FEST_SEGMENTS.filter((s) => s.houseId === activeHouse.id);
+  const isActivePledged = userPledgedHouse?.id === activeHouse.id;
+  const ledger = [...FOUR_HOUSES].sort((a, b) => b.points - a.points);
+  const topPoints = ledger[0]?.points || 1;
+
+
+
+
+  const membersOf = (house: ClubHouse) =>
+    HOUSE_DETAILS[house.id]?.membersLabel ?? (house.memberCount > 0 ? `${house.memberCount}+` : '—');
+
+
+
 
   const handlePledge = (house: ClubHouse) => {
     onPledgeHouse(house);
@@ -48,10 +229,36 @@ export const Clubs: React.FC<ClubsProps> = ({
     } catch {}
   };
 
+
+
+
+  const openChronicle = (id: string) => {
+    setActiveHouseId(id);
+    requestAnimationFrame(() => {
+      dossierRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
+
+
+
+  const vitals = [
+    { label: 'Founded', value: activeHouse.founded, icon: CalendarDays },
+    { label: 'Sworn Members', value: membersOf(activeHouse), icon: Users },
+    { label: 'Sigil', value: activeHouse.sigil, icon: ShieldHalf },
+    { label: 'Crest Points', value: activeHouse.points.toLocaleString(), icon: Crown }
+  ];
+
+
+
+
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-36">
-      
-      {/* Page Hero */}
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-28 sm:space-y-36">
+
+
+
+
+      {/* Page Hero — unchanged */}
       <PageHero
         image="/images/four-houses-heraldry.webp"
         eyebrow="The Citadel Quadrumvirate"
@@ -59,217 +266,446 @@ export const Clubs: React.FC<ClubsProps> = ({
         description="Four legendary clubs anchor Chittagong College’s student body. Each house bears its own sigil, sacred motto, heroic ancestry, and fierce competitive fire."
       />
 
-      {/* House Selector Tabs — carved stone sigil banners.
-          (The old border-image nine-slice frame could render empty on
-          mobile browsers without solid container-query support; these
-          use plain layered backgrounds, so they always paint.) */}
-      <div className="grid grid-cols-2 gap-7 md:gap-8 md:grid-cols-4">
-        {FOUR_HOUSES.map((house, i) => {
-          const isSelected = activeHouseId === house.id;
-          const isPledged = userPledgedHouse?.id === house.id;
-          return (
-            <Reveal key={house.id} delay={i * 80} className="h-full">
-              <div
-                className={`house-sigil-card ${isSelected ? 'house-sigil-card--active' : ''}`}
-              >
-                {/* corner brackets */}
-                <span className="pointer-events-none absolute top-1.5 left-1.5 h-3.5 w-3.5 border-t border-l border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute top-1.5 right-1.5 h-3.5 w-3.5 border-t border-r border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-3.5 w-3.5 border-b border-l border-gold-2/60" aria-hidden="true" />
-                <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-3.5 w-3.5 border-b border-r border-gold-2/60" aria-hidden="true" />
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    setActiveHouseId(house.id);
-                  }}
-                  aria-pressed={isSelected}
-                  className="group flex flex-1 flex-col gap-2.5 p-3.5 text-left sm:p-4"
-                >
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-iron bg-white/90 p-1 transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12">
-                      <img src={house.logo} alt={`${house.name} logo`} loading="lazy" className="h-full w-full object-contain" />
-                    </div>
 
-                    <div className="min-w-0">
-                      <div className="font-cinzel text-[9px] font-semibold uppercase leading-snug text-[#9fd8d2] line-clamp-2 sm:text-[11px]">
-                        {house.name.split('(')[0]}
-                      </div>
-                      <div className="mt-1 font-cinzel text-sm font-bold text-white transition-colors group-hover:text-[#8ce8f2] line-clamp-1">
-                        {house.houseName}
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="font-cinzel text-[10px] italic text-bone-dim line-clamp-1 sm:text-[11px]">
-                    &ldquo;{house.motto}&rdquo;
-                  </div>
-                </button>
+      {/* ========================================================
+          I. THE HALL OF BANNERS
+      ======================================================== */}
+      <section>
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <EyebrowRule>The Hall of Banners</EyebrowRule>
+          <h2 className="hh-title mt-6">Choose Your Banner</h2>
+          <GemDivider className="my-4" />
+          <p className="hh-lead">
+            Four banners hang in the Great Hall of the Citadel. Tap a banner to unroll its full
+            chronicle — its founding oath, its keepers, its trophies and its deeds — then pledge
+            your sword to the house that calls to you.
+          </p>
+        </Reveal>
 
-                <div className="px-3 pb-3">
-                  {isPledged ? (
-                    <div className="flex items-center justify-center gap-1.5 border border-[#5bc9d6]/50 bg-[#17686e]/20 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-wider text-[#8ce8f2]">
-                      <Check className="w-3 h-3" />
-                      Your House
-                    </div>
-                  ) : (
+
+
+
+        <div className="mt-14 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4 lg:gap-8">
+          {FOUR_HOUSES.map((house, i) => {
+            const isActive = house.id === activeHouseId;
+            const isPledged = userPledgedHouse?.id === house.id;
+            return (
+              <Reveal key={house.id} delay={i * 90} className="h-full">
+                <article className={`hh-banner ${isActive ? 'hh-banner--active' : ''}`}>
+                  <span className="hh-banner__rod" aria-hidden="true" />
+                  <div className="hh-banner__cloth">
                     <button
                       type="button"
-                      onClick={() => handlePledge(house)}
-                      className="w-full border border-[#c9d2d2]/45 py-1.5 text-[10px] font-cinzel font-bold uppercase tracking-[0.2em] text-[#e7e3d8] transition-colors hover:border-[#8ce8f2] hover:bg-[#8ce8f2] hover:text-ink"
+                      onClick={() => openChronicle(house.id)}
+                      aria-pressed={isActive}
+                      className="group relative z-[1] flex flex-1 flex-col items-center text-center"
                     >
-                      Pledge
+                      <span className="hh-banner__numeral">{ROMAN[i]}</span>
+
+
+
+
+                      <span className="hh-medallion mt-2 transition-transform duration-500 group-hover:scale-105">
+                        <img src={house.logo} alt={`${house.shortName} logo`} loading="lazy" />
+                      </span>
+
+
+
+
+                      <span className="mt-5 font-got text-base leading-tight text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-xl">
+                        {house.houseName}
+                      </span>
+                      <span className="mt-1.5 font-cinzel text-[9px] font-semibold uppercase tracking-[0.16em] text-[#9fd8d2] sm:text-[10px]">
+                        {house.shortName}
+                      </span>
+
+
+
+
+                      <span className="my-3 h-px w-12 bg-gradient-to-r from-transparent via-gold-2/60 to-transparent" />
+
+
+
+
+                      <span className="font-garamond text-[14px] italic leading-snug text-bone sm:text-[16px]">
+                        &ldquo;{house.motto}&rdquo;
+                      </span>
+
+
+
+
+                      <span className="mt-3 font-cinzel text-[9px] uppercase tracking-[0.16em] text-ash sm:text-[10px]">
+                        {house.sigil}
+                      </span>
+                      <span className="mt-1 font-cinzel text-[9px] uppercase tracking-[0.16em] text-ash sm:text-[10px]">
+                        {house.founded !== '—' ? `Est. ${house.founded}` : 'An Ancient House'}
+                      </span>
+
+
+
+
+                      <span className="hh-banner__cta mt-auto pt-5">
+                        {isActive ? 'Chronicle Open' : 'Read Chronicle'}
+                        <ArrowRight className="h-3 w-3" />
+                      </span>
                     </button>
+
+
+
+
+                    <div className="mt-4">
+                      {isPledged ? (
+                        <div className="hh-banner__sworn">
+                          <Check className="h-3 w-3" />
+                          Your House
+                        </div>
+                      ) : (
+                        <button type="button" onClick={() => handlePledge(house)} className="hh-banner__pledge">
+                          Pledge
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </div>
+      </section>
+
+
+
+
+      {/* ========================================================
+          II. THE HOUSE CHRONICLE (selected house)
+      ======================================================== */}
+      <section ref={dossierRef} className="scroll-mt-28">
+        <div key={activeHouse.id} className="animate-fadeIn space-y-24 sm:space-y-28">
+
+
+
+
+          {/* ---- Crest header ---- */}
+          <Reveal direction="up">
+            <div className="hh-crest relative overflow-hidden px-5 py-10 sm:px-8 md:px-12 md:py-14">
+              <Corners size="h-5 w-5" />
+              <span aria-hidden="true" className="hh-crest__numeral">{ROMAN[activeIndex]}</span>
+
+
+
+
+              <div className="relative z-10 grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-10">
+                <div className="hh-medallion hh-medallion--lg">
+                  <img src={activeHouse.logo} alt={`${activeHouse.shortName} logo`} />
+                </div>
+
+
+
+
+                <div className="text-center md:text-left">
+                  <span className="hh-kicker">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    House {ROMAN[activeIndex]}{details ? ` · ${details.code}` : ''}
+                  </span>
+                  <h2 className="mt-3 font-got text-3xl leading-tight text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)] sm:text-4xl md:text-5xl">
+                    {activeHouse.houseName}
+                  </h2>
+                  <p className="mt-2 font-cinzel text-xs font-semibold uppercase tracking-[0.16em] text-bone-sm sm:text-sm">
+                    {activeHouse.name.split('(')[0].trim()}
+                  </p>
+                  <p className="mt-4 font-garamond text-xl italic text-[#8ce8f2] sm:text-2xl">
+                    &ldquo;{activeHouse.motto}&rdquo;
+                  </p>
+                  {details && (
+                    <p className="mt-1 font-cinzel text-[11px] uppercase tracking-[0.3em] text-ash">
+                      {details.epithet}
+                    </p>
                   )}
                 </div>
               </div>
-            </Reveal>
-          );
-        })}
-      </div>
 
-      {/* ========================================================
-          ACTIVE HOUSE SHOWCASE DOSSIER
-      ======================================================== */}
-      {/* direction="flip" (3D perspective rotateX) breaks the reveal
-          observer's intersection math for tall elements on mobile
-          Chrome — the dossier never became visible there. A 2D zoom
-          entrance is projection-safe at any height. */}
-      <Reveal direction="zoom" duration={1100}>
-      <div className="house-dossier space-y-5 relative px-5 pt-9 pb-5 sm:px-7 sm:pt-10 sm:pb-6 md:px-9 md:pt-11 md:pb-7">
-        {/* top roller rod + crest */}
-        <div className="dossier-rod absolute top-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
-        <div className="absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
-          <span className="flex h-8 w-8 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink-2 shadow-[0_0_18px_rgba(91,201,214,0.45)]">
-            <Crown className="h-3.5 w-3.5 -rotate-45 text-[#8ce8f2]" />
-          </span>
-        </div>
-        {/* corner brackets */}
-        <span className="pointer-events-none absolute top-1.5 left-1.5 h-5 w-5 border-t-2 border-l-2 border-gold-2/60" aria-hidden="true" />
-        <span className="pointer-events-none absolute top-1.5 right-1.5 h-5 w-5 border-t-2 border-r-2 border-gold-2/60" aria-hidden="true" />
-        <span className="pointer-events-none absolute bottom-1.5 left-1.5 h-5 w-5 border-b-2 border-l-2 border-gold-2/60" aria-hidden="true" />
-        <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-5 w-5 border-b-2 border-r-2 border-gold-2/60" aria-hidden="true" />
-        {/* Top House Banner */}
-        <div className="border-b border-crimson/20 pb-4">
-          <span className="font-cinzel text-[10px] md:text-xs font-bold text-[#5bc9d6] uppercase tracking-widest block">
-            Citadel House Sigil: {activeHouse.sigil}
-          </span>
-          <h2 className="font-cinzel-dec text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-tight mt-1">
-            {activeHouse.name.split('(')[0]}
-          </h2>
-          <div className="font-cinzel text-[13px] font-semibold text-gold-2 mt-1">
-            {activeHouse.houseName}
-          </div>
-          <p className="font-cinzel text-[11px] md:text-xs text-gold-2/90 italic">
-            House Words: "{activeHouse.motto}"
-          </p>
-        </div>
 
-        {/* House Vitals — 4 across on desktop, 2x2 on mobile */}
-        <div className="grid grid-cols-2 gap-y-3 gap-x-3 md:grid-cols-4">
-          <Reveal delay={0}>
-            <div className="text-center h-full">
-              <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Founded</div>
-              <div className="font-cinzel text-base font-bold text-white">{activeHouse.founded}</div>
-            </div>
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="text-center h-full">
-              <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Members</div>
-              <div className="font-cinzel text-base font-bold text-white">{activeHouse.memberCount > 0 ? `${activeHouse.memberCount}+` : '—'}</div>
-            </div>
-          </Reveal>
-          <Reveal delay={160}>
-            <div className="text-center h-full">
-              <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Sigil</div>
-              <div className="font-cinzel text-[11px] font-bold text-gold-2 leading-tight px-1">{activeHouse.sigil}</div>
-            </div>
-          </Reveal>
-          <Reveal delay={240}>
-            <div className="text-center h-full">
-              <div className="text-[10px] font-cinzel text-[#5bc9d6] uppercase tracking-wider">Crest Points</div>
-              <div className="font-mono text-base font-bold text-gold-2">{activeHouse.points}</div>
-            </div>
-          </Reveal>
-        </div>
 
-        {/* Historic Trophies & Laurels — two columns on desktop, stacked on mobile */}
-        <div className="border-t border-crimson/20 pt-4 space-y-2.5">
-          <h3 className="font-cinzel text-xs font-bold text-[#5bc9d6] uppercase tracking-widest flex items-center gap-2">
-            <Award className="w-4 h-4 text-[#5bc9d6]" />
-            Historic Trophies & Laurels
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2.5">
-            {activeHouse.achievements.map((ach, i) => (
-              <Reveal key={i} delay={i * 90}>
-              <div
-                className="flex items-start gap-2.5 text-[12px] leading-snug text-bone h-full"
-              >
-                <Crown className="w-3.5 h-3.5 text-[#5bc9d6] shrink-0 mt-px" />
-                <span>{ach}</span>
+
+              <p className="hh-body relative z-10 mt-8 max-w-3xl text-center md:text-left">
+                {activeHouse.lore}
+              </p>
+
+
+
+
+              <div className="relative z-10 mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+                {vitals.map((v) => (
+                  <div key={v.label} className="hh-stone">
+                    <v.icon className="mx-auto h-4 w-4 text-[#5bc9d6]" />
+                    <div className="mt-2 font-cinzel text-[10px] uppercase tracking-[0.22em] text-ash">{v.label}</div>
+                    <div className="mt-1 font-cinzel text-[15px] font-bold leading-tight text-[#e7e3d8] sm:text-lg">{v.value}</div>
+                  </div>
+                ))}
               </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
 
-        {/* bottom roller rod */}
-        <div className="dossier-rod absolute bottom-2.5 left-6 right-6 sm:left-10 sm:right-10" aria-hidden="true" />
-      </div>
-      </Reveal>
-      {/* ========================================================
-          THE LIVING CHRONICLE — the houses caught mid-deed
-      ======================================================== */}
-      <section className="relative">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#5bc9d6]/40 bg-ink-2/80 px-3 py-1 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2]">
-            <Camera className="h-3.5 w-3.5 text-[#5bc9d6]" />
-            The Living Chronicle
-          </div>
-          <h2 className="mt-4 font-cinzel text-2xl font-extrabold tracking-wide text-[#dcefee] [text-shadow:0_2px_10px_rgba(0,0,0,0.7),0_0_28px_rgba(91,201,214,0.22)] sm:text-4xl">
-            Deeds of the Four Houses
-          </h2>
-          <GemDivider className="my-4" />
-          <p className="font-garamond text-sm italic leading-relaxed text-bone-dim sm:text-base">
-            Moments seized across the years — podiums and starlit roofs,
-            fog-bound gates and the roar of the Carnaval stage.
-          </p>
-        </Reveal>
-        <div className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3">
-          {CHRONICLE_PRINTS.map((pr, i) => (
-            <Reveal key={pr.img} delay={i * 90} className="mb-7 break-inside-avoid">
-              <figure
-                className={`chronicle-print group relative ${pr.tilt} transition-all duration-500 hover:z-10 hover:rotate-0 hover:scale-[1.03]`}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={pr.img}
-                    alt={pr.title}
-                    loading="lazy"
-                    className="w-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-110"
-                  />
-                  {/* cold veil that lifts on hover */}
-                  <div className="absolute inset-0 bg-[#04191c]/50 transition-opacity duration-500 group-hover:opacity-0" />
-                  {/* pinned numeral seal */}
-                  <span className="absolute left-2 top-2 flex h-6 w-6 rotate-45 items-center justify-center border border-[#5bc9d6]/60 bg-ink/85 shadow-[0_0_12px_rgba(91,201,214,0.35)]">
-                    <span className="font-cinzel text-[10px] font-bold -rotate-45 text-[#8ce8f2]">{ROMAN[i]}</span>
+
+
+
+              <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                {isActivePledged ? (
+                  <span className="inline-flex items-center gap-2 border border-[#5bc9d6]/50 bg-[#17686e]/20 px-4 py-2.5 font-cinzel text-[11px] font-bold uppercase tracking-[0.2em] text-[#8ce8f2]">
+                    <Check className="h-4 w-4" />
+                    Sworn to {activeHouse.houseName}
                   </span>
+                ) : (
+                  <Button onClick={() => handlePledge(activeHouse)}>{`Pledge to ${activeHouse.houseName}`}</Button>
+                )}
+                {activeHouse.links.website && (
+                  <Button variant="secondary" size="sm" href={activeHouse.links.website} external>
+                    Official Website
+                  </Button>
+                )}
+                {activeHouse.links.facebook && (
+                  <Button variant="secondary" size="sm" href={activeHouse.links.facebook} external>
+                    Facebook Page
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Reveal>
+
+
+
+
+          {/* ---- Founding oath + pillars ---- */}
+          {details && (
+            <div className="grid gap-8 lg:grid-cols-5">
+              <Reveal direction="left" className="lg:col-span-2">
+                <div className="hh-panel relative h-full p-6 sm:p-8">
+                  <Corners />
+                  <span className="hh-kicker">
+                    <ScrollText className="h-3.5 w-3.5" />
+                    The Founding Oath
+                  </span>
+                  <h3 className="mt-3 font-cinzel text-xl font-bold text-[#e7e3d8] sm:text-2xl">
+                    Why the House Was Raised
+                  </h3>
+                  <div className="mt-4 h-px w-16 bg-gradient-to-r from-crimson-2 to-transparent" />
+                  <p className="hh-body mt-5 first-letter:float-left first-letter:mr-2 first-letter:font-cinzel-dec first-letter:text-5xl first-letter:leading-[0.9] first-letter:text-gold-2">
+                    {details.foundingPurpose}
+                  </p>
                 </div>
-                <figcaption className="px-1.5 pb-1 pt-3 text-center">
-                  <p className="font-cinzel text-[13px] font-bold tracking-wide text-[#e7e3d8]">
-                    {pr.title}
-                  </p>
-                  <p className="mt-1 font-cinzel text-[8.5px] uppercase tracking-[0.2em] text-[#9e9f9f]">
-                    {pr.tag}
-                  </p>
-                  <p className="mt-0.5 font-garamond text-[11px] italic text-[#5bc9d6]/90">
-                    {pr.house}
-                  </p>
-                </figcaption>
-              </figure>
+              </Reveal>
+
+
+
+
+              <div className="grid gap-5 lg:col-span-3">
+                {details.pillars.map((p, i) => (
+                  <Reveal key={p.title} direction="right" delay={i * 100} className="h-full">
+                    <div className="frost-card flex h-full items-start gap-4 p-5 sm:p-6">
+                      <span className="hh-seal"><span>{ROMAN[i]}</span></span>
+                      <div>
+                        <h4 className="font-cinzel text-[15px] font-bold tracking-wide text-gold-2 sm:text-base">{p.title}</h4>
+                        <p className="mt-1.5 text-[14px] leading-relaxed text-bone sm:text-[15px]">{p.text}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          )}
+
+
+
+
+          {/* ---- Halls of glory ---- */}
+          {details && (
+            <section>
+              <SectionHead
+                icon={Trophy}
+                kicker="Halls of Glory"
+                title="Trophies & Laurels"
+                sub={`Honours carried home under the banner of ${activeHouse.houseName}.`}
+              />
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {activeHouse.achievements.map((ach, i) => (
+                  <Reveal key={ach} delay={i * 80} className="h-full">
+                    <div className="hh-laurel">
+                      <span className="hh-laurel__icon">
+                        <Award className="h-4 w-4" />
+                      </span>
+                      <p className="pt-1.5 text-[15px] leading-relaxed text-bone">{ach}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          )}
+
+
+
+
+          {/* ---- Keepers of the house ---- */}
+          {details && (
+            <section className="hh-panel relative overflow-hidden px-4 py-12 sm:px-8 md:py-16">
+              <Corners size="h-5 w-5" />
+              <SectionHead
+                icon={Crown}
+                kicker="The Keepers of the House"
+                title="Those Who Hold the Banner"
+                sub={`The president and core council who lead ${activeHouse.houseName} through the winter.`}
+              />
+              <div className="mt-12 flex flex-col items-center gap-12 lg:flex-row lg:items-start lg:justify-center lg:gap-16">
+                <Reveal direction="zoom">
+                  <KeeperCard keeper={details.president} featured />
+                </Reveal>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:pt-10">
+                  {details.coreMembers.map((k, i) => (
+                    <Reveal key={`${k.role}-${i}`} delay={i * 100}>
+                      <KeeperCard keeper={k} />
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+
+
+
+          {/* ---- Deeds in pictures ---- */}
+          {details && details.moments.length > 0 && (
+            <section>
+              <SectionHead
+                icon={Camera}
+                kicker="The Living Chronicle"
+                title="Deeds in Pictures"
+                sub={`Moments seized by ${activeHouse.shortName} — on stage, under the stars and across the Citadel grounds.`}
+              />
+              <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {details.moments.map((m, i) => (
+                  <Reveal key={`${m.img}-${i}`} delay={i * 90}>
+                    <MomentPrint moment={m} index={i} />
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          )}
+
+
+
+
+          {/* ---- Trials hosted by this house ---- */}
+          <section className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+            <Reveal direction="left">
+              <div className="text-center lg:text-left">
+                <span className="hh-kicker">
+                  <Gem className="h-3.5 w-3.5" />
+                  The House's Tourneys
+                </span>
+                <h3 className="hh-title mt-3">Trials Raised by {activeHouse.houseName}</h3>
+                <p className="hh-lead mt-4">
+                  At the Carnaval, every house hosts its own arenas. These are the trials where{' '}
+                  {activeHouse.shortName} sets the rules — enter, and prove your worth.
+                </p>
+                <div className="mt-7">
+                  <Button variant="secondary" size="sm" onClick={() => onNavigate('segments')}>
+                    View All Trials
+                  </Button>
+                </div>
+              </div>
             </Reveal>
-          ))}
+
+
+
+
+            <div className="space-y-3">
+              {hostedTrials.length === 0 ? (
+                <p className="hh-lead text-center">This house's trials will be proclaimed soon.</p>
+              ) : (
+                hostedTrials.map((seg, i) => (
+                  <Reveal key={seg.id} direction="right" delay={i * 70}>
+                    <div className="hh-trial">
+                      <Gem className="h-3.5 w-3.5 shrink-0 text-[#5bc9d6]" />
+                      <div className="min-w-0 flex-1">
+                        <p className="font-cinzel text-[14px] font-bold text-bone">{seg.title}</p>
+                        <p className="font-garamond text-[14px] italic text-bone-dim">&ldquo;{seg.gotTitle}&rdquo;</p>
+                        <p className="mt-1 font-cinzel text-[10px] uppercase tracking-[0.14em] text-ash sm:hidden">
+                          {seg.venue} · {seg.date}
+                        </p>
+                      </div>
+                      <div className="hidden shrink-0 text-right sm:block">
+                        <p className="flex items-center justify-end gap-1.5 font-cinzel text-[10px] uppercase tracking-[0.14em] text-ash">
+                          <MapPin className="h-3 w-3" />
+                          {seg.venue}
+                        </p>
+                        <p className="mt-1 font-cinzel text-[10px] uppercase tracking-[0.14em] text-gold-2">{seg.date}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))
+              )}
+            </div>
+          </section>
         </div>
+      </section>
+
+
+
+
+      {/* ========================================================
+          III. THE GREAT LEDGER — standings of all houses
+      ======================================================== */}
+      <section>
+        <SectionHead
+          icon={Trophy}
+          kicker="The Great Ledger"
+          title="Standing of the Houses"
+          sub="Crest points recorded by the Citadel. The final standing is sealed at the Coronation of Champions."
+        />
+        <Reveal direction="up">
+          <div className="hh-panel relative mx-auto mt-10 max-w-4xl p-4 sm:p-8">
+            <Corners />
+            <ol className="space-y-3">
+              {ledger.map((house, rank) => {
+                const pct = Math.round((house.points / topPoints) * 100);
+                const isActive = house.id === activeHouseId;
+                const isPledged = userPledgedHouse?.id === house.id;
+                return (
+                  <li key={house.id}>
+                    <button
+                      type="button"
+                      onClick={() => openChronicle(house.id)}
+                      className={`hh-ledger-row ${isActive ? 'hh-ledger-row--active' : ''}`}
+                    >
+                      <span className="hh-seal hh-seal--sm"><span>{ROMAN[rank]}</span></span>
+                      <span className="hh-medallion hh-medallion--sm">
+                        <img src={house.logo} alt="" loading="lazy" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                          <span className="font-cinzel text-[14px] font-bold text-[#e7e3d8] sm:text-[15px]">
+                            {house.houseName}
+                            {isPledged && (
+                              <span className="ml-2 font-cinzel text-[9px] uppercase tracking-[0.2em] text-[#8ce8f2]">
+                                · Your House
+                              </span>
+                            )}
+                          </span>
+                          <span className="font-mono text-sm font-bold text-gold-2">
+                            {house.points.toLocaleString()} pts
+                          </span>
+                        </span>
+                        <span className="hh-bar mt-2.5">
+                          <span style={{ width: `${pct}%` }} />
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </Reveal>
       </section>
     </div>
   );
