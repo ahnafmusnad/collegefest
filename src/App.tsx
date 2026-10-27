@@ -8,6 +8,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { TickifyModal } from './components/TickifyModal';
 import { SortingQuizModal } from './components/SortingQuizModal';
 import { SegmentRulesModal } from './components/SegmentRulesModal';
+import { ClubLoreModal } from './components/ClubLoreModal';
 import { ScrollToTop } from './components/ScrollToTop';
 import { AncientScriptureBackground } from './components/AncientScriptureBackground';
 import { InAppBrowserGate } from './components/InAppBrowserGate';
@@ -65,6 +66,11 @@ export function App() {
     setFocusHouseId(houseId);
     handleNavigate('clubs');
   };
+  // House archive modal state. IMPORTANT: the modal itself is rendered at
+  // the App ROOT (below, next to the Sorting Quiz) — never inside <Home> —
+  // because <main> is a z-10 stacking context and would trap the modal
+  // beneath the fixed navbar (z-40), hiding its top and close button.
+  const [loreHouse, setLoreHouse] = useState<ClubHouse | null>(null);
 
   // Load saved pledged house from localStorage on mount
   useEffect(() => {
@@ -183,8 +189,7 @@ export function App() {
           <Home
             onNavigate={handleNavigate}
             onOpenSortingQuiz={() => setSortingQuizOpen(true)}
-            onOpenClubChronicle={handleOpenClubChronicle}
-            onPledgeHouse={handlePledgeHouse}
+            onOpenLore={setLoreHouse}
             userPledgedHouse={userPledgedHouse}
           />
         )}
@@ -240,6 +245,14 @@ export function App() {
       <SortingQuizModal
         isOpen={sortingQuizOpen}
         onClose={() => setSortingQuizOpen(false)}
+        onPledgeHouse={handlePledgeHouse}
+      />
+      {/* House Archive Modal — "View Lore" from the home page cards.
+          Rendered at the root (like the quiz) so it covers the navbar. */}
+      <ClubLoreModal
+        house={loreHouse}
+        onClose={() => setLoreHouse(null)}
+        onEnterChronicle={handleOpenClubChronicle}
         onPledgeHouse={handlePledgeHouse}
       />
 

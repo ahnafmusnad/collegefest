@@ -3701,8 +3701,8 @@ a.btn,
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 430px;
-  padding: 1.7rem 1rem 3.4rem;
+  min-height: 398px;
+  padding: 1.4rem 0.9rem 2.9rem;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px));
   background:
     linear-gradient(180deg, rgba(6, 26, 28, 0.35) 0%, rgba(2, 10, 11, 0.88) 68%, rgba(2, 10, 11, 0.96) 100%),
@@ -3804,9 +3804,9 @@ a.btn,
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 84px;
-  height: 84px;
-  padding: 8px;
+  width: 76px;
+  height: 76px;
+  padding: 7px;
   border-radius: 9999px;
   background: #e7e3d8;
   border: 2px solid #9e9f9f;
@@ -3832,8 +3832,8 @@ a.btn,
   box-shadow: 0 0 0 2px #061a1c, 0 0 0 3px rgba(91, 201, 214, 0.45);
 }
 @media (max-width: 639px) {
-  .hh-banner__cloth { min-height: 390px; padding: 1.5rem 0.7rem 3rem; }
-  .hh-banner .hh-medallion { width: 64px; height: 64px; padding: 6px; }
+  .hh-banner__cloth { min-height: 356px; padding: 1.3rem 0.65rem 2.6rem; }
+  .hh-banner .hh-medallion { width: 58px; height: 58px; padding: 5px; }
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
@@ -13,7 +13,6 @@ import ProclamationPlaque from '../components/ui/ProclamationPlaque';
 import Button from '../components/ui/Button';
 import FitText from '../components/ui/FitText';
 import SortingTrialBanner from '../components/SortingTrialBanner';
-import ClubLoreModal from '../components/ClubLoreModal';
 import { 
   Crown, 
   Ticket, 
@@ -33,25 +32,21 @@ const FEATURED_SEGMENTS = [
 interface HomeProps {
   onNavigate: (page: PageType) => void;
   onOpenSortingQuiz: () => void;
-  onOpenClubChronicle: (houseId: string) => void;
-  onPledgeHouse: (house: ClubHouse) => void;
+  /** Opens the house archive modal (rendered at the App root, above the navbar). */
+  onOpenLore: (house: ClubHouse) => void;
   userPledgedHouse: ClubHouse | null;
 }
 
 export const Home: React.FC<HomeProps> = ({
   onNavigate,
   onOpenSortingQuiz,
-  onOpenClubChronicle,
-  onPledgeHouse,
+  onOpenLore,
   userPledgedHouse
 }) => {
   /* PERF FIX: the countdown timer and its 1-second setInterval used to live
      right here, inside this 469-line component. Every tick re-rendered the
      whole homepage. It now lives in <LiveCountdown />, a tiny leaf component
      that re-renders on its own - see where <LiveCountdown /> is used below. */
-
-  // The house whose full archive is currently unrolled in the lore modal
-  const [loreHouse, setLoreHouse] = useState<ClubHouse | null>(null);
 
   const HOUSE_TILT = ['-rotate-[0.6deg]', 'rotate-[0.5deg]', '-rotate-[0.4deg]', 'rotate-[0.7deg]'];
 
@@ -228,7 +223,7 @@ export const Home: React.FC<HomeProps> = ({
                 lore={house.lore}
                 links={house.links}
                 tilt={HOUSE_TILT[i]}
-                onViewLore={() => setLoreHouse(house)}
+                onViewLore={() => onOpenLore(house)}
               />
             </Reveal>
           ))}
@@ -430,17 +425,6 @@ export const Home: React.FC<HomeProps> = ({
         </div>
         </Reveal>
       </section>
-
-      {/* ========================================================
-          HOUSE ARCHIVE MODAL — the full chronicle of a house,
-          opened from "View Lore" on the parchment cards above.
-      ======================================================== */}
-      <ClubLoreModal
-        house={loreHouse}
-        onClose={() => setLoreHouse(null)}
-        onEnterChronicle={onOpenClubChronicle}
-        onPledgeHouse={onPledgeHouse}
-      />
 
     </div>
   );

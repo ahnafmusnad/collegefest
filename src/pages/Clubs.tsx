@@ -321,39 +321,39 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
                       {/* actual club name first & largest; the GoT house
                           name is now the small secondary line */}
-                      <span className="mt-5 font-got text-[15px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[17px]">
+                      <span className="mt-4 font-got text-[13px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[15px]">
                         {house.name.split('(')[0].trim()}
                       </span>
-                      <span className="mt-2 font-cinzel text-[9px] font-semibold uppercase tracking-[0.22em] text-[#9fd8d2] sm:text-[10px]">
+                      <span className="mt-1.5 font-cinzel text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9fd8d2] sm:text-[9px]">
                         {house.houseName}
                       </span>
 
 
 
 
-                      <span className="my-3 h-px w-12 bg-gradient-to-r from-transparent via-gold-2/60 to-transparent" />
+                      <span className="my-2.5 h-px w-11 bg-gradient-to-r from-transparent via-gold-2/60 to-transparent" />
 
 
 
 
-                      <span className="font-garamond text-[14px] italic leading-snug text-bone sm:text-[16px]">
+                      <span className="font-garamond text-[13px] italic leading-snug text-bone sm:text-[14px]">
                         &ldquo;{house.motto}&rdquo;
                       </span>
 
 
 
 
-                      <span className="mt-3 font-cinzel text-[9px] uppercase tracking-[0.16em] text-ash sm:text-[10px]">
+                      <span className="mt-2.5 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
                         {house.sigil}
                       </span>
-                      <span className="mt-1 font-cinzel text-[9px] uppercase tracking-[0.16em] text-ash sm:text-[10px]">
+                      <span className="mt-1 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
                         {house.founded !== '—' ? `Est. ${house.founded}` : 'An Ancient House'}
                       </span>
 
 
 
 
-                      <span className="hh-banner__cta mt-auto pt-5">
+                      <span className="hh-banner__cta mt-auto pt-4">
                         {isActive ? 'Chronicle Open' : 'Read Chronicle'}
                         <ArrowRight className="h-3 w-3" />
                       </span>
