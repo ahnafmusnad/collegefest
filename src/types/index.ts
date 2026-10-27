@@ -29,6 +29,8 @@ export interface ClubHouse {
   achievements: string[];
   memberCount: number;
   points: number;
+  /** Display label for trophies carried home, e.g. "40+". */
+  trophiesWon: string;
   /** Official club links shown in the footer. Leave '' to hide a link. */
   links: {
     facebook: string;

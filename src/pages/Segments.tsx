@@ -1,5 +1,5 @@
 import React from 'react';
-import { FEST_SEGMENTS, FEST_METADATA } from '../data/festData';
+import { FEST_SEGMENTS, FEST_METADATA, FOUR_HOUSES } from '../data/festData';
 import { Segment } from '../types';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
@@ -11,10 +11,19 @@ import {
   Globe,
   MapPin,
   CalendarDays,
+  Clock,
   ShieldHalf,
   ScrollText,
   Gem,
 } from 'lucide-react';
+
+/** The real club hosting a trial — its familiar abbreviation when it has one. */
+const hostLabel = (houseId: string): string => {
+  const house = FOUR_HOUSES.find((h) => h.id === houseId);
+  if (!house) return 'Organizing Committee';
+  const abbr = house.name.match(/\(([^)]+)\)/)?.[1];
+  return abbr ?? house.shortName;
+};
 
 interface SegmentsProps {
   onOpenRulesModal: (segment: Segment) => void;
@@ -141,17 +150,18 @@ const GroupFrameCard: React.FC<{
                 <span className="block font-cinzel text-xs sm:text-[13px] font-bold text-bone group-hover/row:text-gold-2 transition-colors truncate">
                   {seg.title}
                 </span>
-                <span className="block font-cinzel text-[8px] sm:text-[9px] italic text-ash truncate">
-                  {seg.gotTitle} &middot; {seg.venue}
+                <span className="block font-cinzel text-[8px] sm:text-[9px] uppercase tracking-[0.14em] text-[#8ce8f2]/80 truncate">
+                  Hosted by {hostLabel(seg.houseId)}
                 </span>
               </span>
 
               <span className="shrink-0 text-right">
-                <span className="block font-cinzel text-[9px] font-bold text-gold-2 tabular-nums">
-                  {seg.goldDragons.toLocaleString()}
+                <span className="flex items-center justify-end gap-1 font-cinzel text-[9px] sm:text-[10px] font-bold text-gold-2 tabular-nums">
+                  <Clock className="h-3 w-3 text-[#5bc9d6]" />
+                  {seg.time}
                 </span>
-                <span className="block font-cinzel text-[7px] uppercase tracking-[0.18em] text-ash">
-                  Gold
+                <span className="mt-0.5 block font-cinzel text-[7px] uppercase tracking-[0.18em] text-ash">
+                  {seg.venue}
                 </span>
               </span>
 

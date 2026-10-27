@@ -57,6 +57,15 @@ export function App() {
   // House Allegiance state
   const [userPledgedHouse, setUserPledgedHouse] = useState<ClubHouse | null>(null);
 
+  // House the Clubs page should open its chronicle on (set from the
+  // home page's "View Lore" archive → "Enter the House Chronicle").
+  const [focusHouseId, setFocusHouseId] = useState<string | null>(null);
+
+  const handleOpenClubChronicle = (houseId: string) => {
+    setFocusHouseId(houseId);
+    handleNavigate('clubs');
+  };
+
   // Load saved pledged house from localStorage on mount
   useEffect(() => {
     try {
@@ -174,6 +183,8 @@ export function App() {
           <Home
             onNavigate={handleNavigate}
             onOpenSortingQuiz={() => setSortingQuizOpen(true)}
+            onOpenClubChronicle={handleOpenClubChronicle}
+            onPledgeHouse={handlePledgeHouse}
             userPledgedHouse={userPledgedHouse}
           />
         )}
@@ -189,6 +200,7 @@ export function App() {
             onNavigate={handleNavigate}
             onPledgeHouse={handlePledgeHouse}
             userPledgedHouse={userPledgedHouse}
+            focusHouseId={focusHouseId}
           />
         )}
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { HOUSE_DETAILS, type HouseKeeper, type HouseMoment } from '../data/houseDetails';
@@ -140,11 +140,6 @@ const KeeperCard: React.FC<{ keeper: HouseKeeper; featured?: boolean }> = ({ kee
       <p className="mt-1 font-cinzel text-[9px] uppercase tracking-[0.22em] text-[#5bc9d6] sm:text-[10px]">
         {keeper.role}
       </p>
-      {featured && keeper.quote && (
-        <p className="mt-3 font-garamond text-[15px] italic leading-relaxed text-bone-dim">
-          &ldquo;{keeper.quote}&rdquo;
-        </p>
-      )}
     </figcaption>
   </figure>
 );
@@ -189,14 +184,26 @@ interface ClubsProps {
   onNavigate: (page: PageType) => void;
   onPledgeHouse: (house: ClubHouse) => void;
   userPledgedHouse: ClubHouse | null;
+  /** Open the chronicle of this house (from the home lore modal). */
+  focusHouseId?: string | null;
 }
 
 
 
 
-export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHouse }) => {
-  const [activeHouseId, setActiveHouseId] = useState<string>(userPledgedHouse?.id ?? FOUR_HOUSES[0].id);
+export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHouse, focusHouseId }) => {
+  const [activeHouseId, setActiveHouseId] = useState<string>(focusHouseId ?? userPledgedHouse?.id ?? FOUR_HOUSES[0].id);
   const dossierRef = useRef<HTMLElement>(null);
+
+  // When the home lore archive sends us here, open that house's chronicle
+  useEffect(() => {
+    if (focusHouseId && FOUR_HOUSES.some((h) => h.id === focusHouseId)) {
+      setActiveHouseId(focusHouseId);
+      requestAnimationFrame(() => {
+        dossierRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }, [focusHouseId]);
 
 
 
@@ -206,8 +213,6 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
   const details = HOUSE_DETAILS[activeHouse.id];
   const hostedTrials = FEST_SEGMENTS.filter((s) => s.houseId === activeHouse.id);
   const isActivePledged = userPledgedHouse?.id === activeHouse.id;
-  const ledger = [...FOUR_HOUSES].sort((a, b) => b.points - a.points);
-  const topPoints = ledger[0]?.points || 1;
 
 
 
@@ -246,14 +251,14 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
     { label: 'Founded', value: activeHouse.founded, icon: CalendarDays },
     { label: 'Sworn Members', value: membersOf(activeHouse), icon: Users },
     { label: 'Sigil', value: activeHouse.sigil, icon: ShieldHalf },
-    { label: 'Crest Points', value: activeHouse.points.toLocaleString(), icon: Crown }
+    { label: 'Trophies Won', value: activeHouse.trophiesWon, icon: Trophy }
   ];
 
 
 
 
   return (
-    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-28 sm:space-y-36">
+    <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-20 sm:space-y-32 lg:space-y-44">
 
 
 
@@ -287,7 +292,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-        <div className="mt-14 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4 lg:gap-8">
+        <div className="mt-10 sm:mt-14 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-8">
           {FOUR_HOUSES.map((house, i) => {
             const isActive = house.id === activeHouseId;
             const isPledged = userPledgedHouse?.id === house.id;
@@ -314,11 +319,13 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-                      <span className="mt-5 font-got text-base leading-tight text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-xl">
-                        {house.houseName}
+                      {/* actual club name first & largest; the GoT house
+                          name is now the small secondary line */}
+                      <span className="mt-5 font-got text-[15px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[17px]">
+                        {house.name.split('(')[0].trim()}
                       </span>
-                      <span className="mt-1.5 font-cinzel text-[9px] font-semibold uppercase tracking-[0.16em] text-[#9fd8d2] sm:text-[10px]">
-                        {house.shortName}
+                      <span className="mt-2 font-cinzel text-[9px] font-semibold uppercase tracking-[0.22em] text-[#9fd8d2] sm:text-[10px]">
+                        {house.houseName}
                       </span>
 
 
@@ -355,18 +362,14 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-                    <div className="mt-4">
-                      {isPledged ? (
+                    {isPledged && (
+                      <div className="mt-4">
                         <div className="hh-banner__sworn">
                           <Check className="h-3 w-3" />
                           Your House
                         </div>
-                      ) : (
-                        <button type="button" onClick={() => handlePledge(house)} className="hh-banner__pledge">
-                          Pledge
-                        </button>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </article>
               </Reveal>
@@ -382,14 +385,14 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
           II. THE HOUSE CHRONICLE (selected house)
       ======================================================== */}
       <section ref={dossierRef} className="scroll-mt-28">
-        <div key={activeHouse.id} className="animate-fadeIn space-y-24 sm:space-y-28">
+        <div key={activeHouse.id} className="animate-fadeIn space-y-14 sm:space-y-24 lg:space-y-28">
 
 
 
 
           {/* ---- Crest header ---- */}
           <Reveal direction="up">
-            <div className="hh-crest relative overflow-hidden px-5 py-10 sm:px-8 md:px-12 md:py-14">
+            <div className="hh-crest relative overflow-hidden px-4 py-7 sm:px-8 sm:py-10 md:px-12 md:py-14">
               <Corners size="h-5 w-5" />
               <span aria-hidden="true" className="hh-crest__numeral">{ROMAN[activeIndex]}</span>
 
@@ -409,11 +412,11 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
                     <Sparkles className="h-3.5 w-3.5" />
                     House {ROMAN[activeIndex]}{details ? ` · ${details.code}` : ''}
                   </span>
-                  <h2 className="mt-3 font-got text-3xl leading-tight text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)] sm:text-4xl md:text-5xl">
-                    {activeHouse.houseName}
+                  <h2 className="mt-3 font-got text-2xl leading-[1.2] text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)] sm:text-3xl md:text-4xl">
+                    {activeHouse.name}
                   </h2>
-                  <p className="mt-2 font-cinzel text-xs font-semibold uppercase tracking-[0.16em] text-bone-sm sm:text-sm">
-                    {activeHouse.name.split('(')[0].trim()}
+                  <p className="mt-2 font-cinzel text-xs font-semibold uppercase tracking-[0.24em] text-[#9fd8d2] sm:text-sm">
+                    {activeHouse.houseName} &middot; The {activeHouse.sigil}
                   </p>
                   <p className="mt-4 font-garamond text-xl italic text-[#8ce8f2] sm:text-2xl">
                     &ldquo;{activeHouse.motto}&rdquo;
@@ -546,7 +549,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
           {/* ---- Keepers of the house ---- */}
           {details && (
-            <section className="hh-panel relative overflow-hidden px-4 py-12 sm:px-8 md:py-16">
+            <section className="hh-panel relative overflow-hidden px-3 py-8 sm:px-8 sm:py-12 md:py-16">
               <Corners size="h-5 w-5" />
               <SectionHead
                 icon={Crown}
@@ -652,61 +655,6 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-      {/* ========================================================
-          III. THE GREAT LEDGER — standings of all houses
-      ======================================================== */}
-      <section>
-        <SectionHead
-          icon={Trophy}
-          kicker="The Great Ledger"
-          title="Standing of the Houses"
-          sub="Crest points recorded by the Citadel. The final standing is sealed at the Coronation of Champions."
-        />
-        <Reveal direction="up">
-          <div className="hh-panel relative mx-auto mt-10 max-w-4xl p-4 sm:p-8">
-            <Corners />
-            <ol className="space-y-3">
-              {ledger.map((house, rank) => {
-                const pct = Math.round((house.points / topPoints) * 100);
-                const isActive = house.id === activeHouseId;
-                const isPledged = userPledgedHouse?.id === house.id;
-                return (
-                  <li key={house.id}>
-                    <button
-                      type="button"
-                      onClick={() => openChronicle(house.id)}
-                      className={`hh-ledger-row ${isActive ? 'hh-ledger-row--active' : ''}`}
-                    >
-                      <span className="hh-seal hh-seal--sm"><span>{ROMAN[rank]}</span></span>
-                      <span className="hh-medallion hh-medallion--sm">
-                        <img src={house.logo} alt="" loading="lazy" />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                          <span className="font-cinzel text-[14px] font-bold text-[#e7e3d8] sm:text-[15px]">
-                            {house.houseName}
-                            {isPledged && (
-                              <span className="ml-2 font-cinzel text-[9px] uppercase tracking-[0.2em] text-[#8ce8f2]">
-                                · Your House
-                              </span>
-                            )}
-                          </span>
-                          <span className="font-mono text-sm font-bold text-gold-2">
-                            {house.points.toLocaleString()} pts
-                          </span>
-                        </span>
-                        <span className="hh-bar mt-2.5">
-                          <span style={{ width: `${pct}%` }} />
-                        </span>
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-        </Reveal>
-      </section>
     </div>
   );
 };

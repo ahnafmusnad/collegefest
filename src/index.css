@@ -934,6 +934,9 @@
 @media (hover: hover) {
   .house-scroll:hover { translate: 0 -6px; }
 }
+/* contain + inner padding so every club seal — including CCDS' square
+   black-backed torch — sits zoomed-out inside the roundel exactly like
+   it does in the Hall of Banners medallion. */
 .hs-logo {
   width: 2.9rem;
   height: 2.9rem;
@@ -941,7 +944,8 @@
   border-radius: 9999px;
   border: 1px solid rgba(158, 159, 159, 0.7);
   background: #fff;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.32rem;
 }
 .hs-name {
   margin-top: 0.8rem;
@@ -979,12 +983,23 @@
 }
 .hs-serif { font-family: "EB Garamond", Georgia, serif; }
 
-/* scattered parchment print for the Living Chronicle gallery */
+/* Deeds in Pictures — clean carved slate frame, no parchment paper */
 .chronicle-print {
-  background: url("/images/parchment-card.webp") center / 100% 100% no-repeat;
-  padding: 0.7rem 0.7rem 0.9rem;
-  filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.55));
+  position: relative;
+  background: linear-gradient(180deg, rgba(6, 26, 28, 0.9), rgba(2, 10, 11, 0.96));
+  border: 1px solid rgba(47, 85, 87, 0.85);
+  padding: 0.6rem 0.6rem 0.9rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 32px -14px rgba(0, 0, 0, 0.85);
   cursor: pointer;
+}
+.chronicle-print::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(158, 159, 159, 0.14);
+  pointer-events: none;
 }
 .hs-motto { margin-top: 0.55rem; font-size: 13.5px; font-style: italic; color: #c9d2d2; }
 .hs-lore {
@@ -1088,6 +1103,22 @@
 
 .hs-link { white-space: nowrap; font-size: 10px; letter-spacing: 0.12em; }
 .hs-footer { flex-wrap: nowrap; }
+
+/* social gates of a house — small sigil buttons in the scroll footer */
+.hs-gates { display: inline-flex; align-items: center; gap: 0.45rem; }
+.hs-gate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid rgba(91, 201, 214, 0.45);
+  color: #c9d2d2;
+  background: rgba(2, 10, 11, 0.35);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, translate 0.3s ease;
+}
+.hs-gate:hover { color: #020a0b; background: #8ce8f2; border-color: #8ce8f2; translate: 0 -2px; }
+.hs-gate--muted { opacity: 0.35; pointer-events: none; }
 
 
 /* Hero throne backdrop — anchored to the top on small screens so the artwork
@@ -1603,16 +1634,19 @@
 .council-slide { scroll-snap-align: center; scroll-snap-stop: always; }
 
 
-/* ===== Sorting Trial Banner ===== */
+/* ===== Sorting Trial Banner =====
+   No solid fill — the checkered ceremony floor now sits transparent over
+   the site-wide ancient scripture & rotating sigil-ring background, so the
+   section blends with the rest of the realm instead of punching a dark
+   rectangle through it. */
 .st-checker {
-  background-color: #020a0b;
   background-image:
-    linear-gradient(45deg, rgba(201, 210, 210, 0.07) 25%, transparent 25%, transparent 75%, rgba(201, 210, 210, 0.07) 75%),
-    linear-gradient(45deg, rgba(201, 210, 210, 0.07) 25%, transparent 25%, transparent 75%, rgba(201, 210, 210, 0.07) 75%);
+    linear-gradient(45deg, rgba(201, 210, 210, 0.055) 25%, transparent 25%, transparent 75%, rgba(201, 210, 210, 0.055) 75%),
+    linear-gradient(45deg, rgba(201, 210, 210, 0.055) 25%, transparent 25%, transparent 75%, rgba(201, 210, 210, 0.055) 75%);
   background-size: 74px 74px;
   background-position: 0 0, 37px 37px;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
 }
 
 
@@ -4013,4 +4047,22 @@ a.btn,
     translate: none;
     transform: none;
   }
+}
+
+
+/* ---------- Mobile compaction ----------
+   On phones the houses page read far too long. Tighten type scale, panel
+   padding and card chrome so the chronicle stays readable without an
+   endless scroll. Desktop is untouched. */
+@media (max-width: 639px) {
+  .hh-title { font-size: 1.35rem; }
+  .hh-lead { font-size: 0.95rem; line-height: 1.55; }
+  .hh-body { font-size: 13.5px; line-height: 1.7; }
+  .hh-kicker { font-size: 9px; letter-spacing: 0.24em; gap: 0.4rem; }
+  .hh-stone { padding: 0.7rem 0.5rem; }
+  .hh-laurel { padding: 0.85rem 0.9rem; gap: 0.7rem; }
+  .hh-laurel p { font-size: 13px; }
+  .hh-trial { padding: 0.7rem 0.8rem; gap: 0.6rem; }
+  .hh-panel { padding: 1.25rem 1rem; }
+  .chronicle-print { padding: 0.5rem 0.5rem 0.75rem; }
 }

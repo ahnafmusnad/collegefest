@@ -1,5 +1,4 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Globe, Landmark } from "lucide-react";
 
 interface HouseScrollProps {
   logo: string;
@@ -7,10 +6,8 @@ interface HouseScrollProps {
   houseName: string;
   motto: string;
   lore: string;
-  cheerCount: number;
-  cheered: boolean;
+  links: { facebook: string; website: string };
   tilt?: string;
-  onCheer: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onViewLore: () => void;
 }
 
@@ -20,10 +17,8 @@ export default function HouseScroll({
   houseName,
   motto,
   lore,
-  cheerCount,
-  cheered,
+  links,
   tilt = "",
-  onCheer,
   onViewLore,
 }: HouseScrollProps) {
   return (
@@ -41,13 +36,39 @@ export default function HouseScroll({
       <p className="hs-serif hs-lore">{lore}</p>
 
       <div className="hs-footer">
-        <button
-          type="button"
-          onClick={onCheer}
-          className={`hs-cheer ${cheered ? "is-cheered" : ""}`}
-        >
-          Cheer ({cheerCount})
-        </button>
+        {/* social gates of the house */}
+        <span className="hs-gates" onClick={(e) => e.stopPropagation()}>
+          {links.facebook && (
+            <a
+              href={links.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Visit the ${name} Facebook gate`}
+              title="Visit their Facebook gate"
+              className="hs-gate"
+            >
+              <Landmark className="h-3.5 w-3.5" />
+            </a>
+          )}
+          {links.website && (
+            <a
+              href={links.website}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Visit the ${name} website`}
+              title="Visit their website"
+              className="hs-gate"
+            >
+              <Globe className="h-3.5 w-3.5" />
+            </a>
+          )}
+          {!links.facebook && !links.website && (
+            <span className="hs-gate hs-gate--muted" title="Gates not yet proclaimed">
+              <Landmark className="h-3.5 w-3.5" />
+            </span>
+          )}
+        </span>
+
         <button
           type="button"
           onClick={(e) => {

@@ -48,6 +48,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     ],
     memberCount: 0,
     points: 1310,
+    trophiesWon: '25+',
     links: {
       facebook: 'https://www.facebook.com/61572631723477/',
       website: 'https://ccpac.vercel.app'
@@ -81,6 +82,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     ],
     memberCount: 150,
     points: 1190,
+    trophiesWon: '30+',
     /* ✏️ PASTE THE MUSES' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
     links: { facebook: '', website: '' }
   },
@@ -112,6 +114,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     ],
     memberCount: 0,
     points: 1240,
+    trophiesWon: '40+',
     /* ✏️ PASTE CCDS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
     links: { facebook: '', website: '' }
   },
@@ -141,6 +144,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     ],
     memberCount: 0,
     points: 1280,
+    trophiesWon: '20+',
     /* ✏️ PASTE CCPS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
     links: { facebook: '', website: '' }
   }

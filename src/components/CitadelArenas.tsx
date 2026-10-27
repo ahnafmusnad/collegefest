@@ -134,7 +134,7 @@ function VenueTablet({
       aria-pressed={selected}
       aria-expanded={expanded}
       aria-controls={`arena-record-${loc.id}`}
-      className={`arena-tilt arena-sheen group relative block w-full py-3.5 text-left transition-[filter,transform] duration-300 ease-out ${
+      className={`arena-tilt arena-sheen group relative block w-full py-5 text-center transition-[filter,transform] duration-300 ease-out ${
         selected ? 'z-10' : ''
       }`}
       style={{ transform }}
@@ -167,38 +167,32 @@ function VenueTablet({
       </span>
 
 
-      <span className="relative z-10 flex items-center justify-between gap-3 px-[11%]">
-        <span className="min-w-0">
-          <span className="flex items-baseline gap-2.5">
-            <span className={`font-cinzel text-[11px] transition-colors duration-300 ${selected ? 'text-mint' : 'text-ash'}`}>
-              {loc.numeral}.
-            </span>
-            <span
-              className={`truncate font-cinzel text-[13px] font-semibold tracking-[0.12em] transition-all duration-300 ${
-                selected
-                  ? 'text-silver'
-                  : 'text-bone group-hover:text-silver'
-              }`}
-            >
-              {loc.name}
-            </span>
-          </span>
-          <span className="mt-0.5 block pl-5 font-garamond text-[13px] italic leading-snug text-bone-dim">
-            “{loc.gotAlias}”
-          </span>
+      {/* the venue's real name, large and centered in the tablet */}
+      <span className="relative z-10 flex items-center justify-center gap-2.5 px-[11%] text-center">
+        <span className={`font-cinzel text-[11px] shrink-0 transition-colors duration-300 ${selected ? 'text-mint' : 'text-ash'}`}>
+          {loc.numeral}.
         </span>
-
-
         <span
-          className={`relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
+          className={`font-cinzel text-[15px] font-bold uppercase tracking-[0.1em] leading-tight transition-all duration-300 sm:text-[17px] ${
             selected
-              ? 'border-mint/70 bg-teal-glow/20 text-mint'
-              : 'border-iron text-bone-dim group-hover:border-teal-glow/60 group-hover:text-teal-glow'
+              ? 'text-silver'
+              : 'text-bone group-hover:text-silver'
           }`}
         >
-          <MapPin className="hidden h-4 w-4 lg:block" />
-          <ChevronDown className={`h-4 w-4 transition-transform duration-300 lg:hidden ${expanded ? 'rotate-180' : ''}`} />
+          {loc.name}
         </span>
+      </span>
+
+
+      <span
+        className={`absolute right-[7%] top-1/2 z-10 grid h-8 w-8 -translate-y-1/2 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
+          selected
+            ? 'border-mint/70 bg-teal-glow/20 text-mint'
+            : 'border-iron text-bone-dim group-hover:border-teal-glow/60 group-hover:text-teal-glow'
+        }`}
+      >
+        <MapPin className="hidden h-4 w-4 lg:block" />
+        <ChevronDown className={`h-4 w-4 transition-transform duration-300 lg:hidden ${expanded ? 'rotate-180' : ''}`} />
       </span>
     </button>
   );
@@ -283,9 +277,6 @@ function DetailPlaque({
               <h3 className="mt-5 font-cinzel-dec text-3xl font-bold text-silver drop-shadow-[0_0_22px_rgba(248,248,248,0.22)] sm:text-[42px] sm:leading-[1.1]">
                 {loc.name}
               </h3>
-              <p className="mt-2 font-garamond text-lg italic text-mint/90 sm:text-xl">
-                The Citadel Alias: <span className="text-bone">“{loc.gotAlias}”</span>
-              </p>
             </div>
 
 

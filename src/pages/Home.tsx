@@ -11,7 +11,9 @@ import SwordDivider from '../components/ui/SwordDivider';
 import GemDivider from '../components/ui/GemDivider';
 import ProclamationPlaque from '../components/ui/ProclamationPlaque';
 import Button from '../components/ui/Button';
+import FitText from '../components/ui/FitText';
 import SortingTrialBanner from '../components/SortingTrialBanner';
+import ClubLoreModal from '../components/ClubLoreModal';
 import { 
   Crown, 
   Ticket, 
@@ -31,12 +33,16 @@ const FEATURED_SEGMENTS = [
 interface HomeProps {
   onNavigate: (page: PageType) => void;
   onOpenSortingQuiz: () => void;
+  onOpenClubChronicle: (houseId: string) => void;
+  onPledgeHouse: (house: ClubHouse) => void;
   userPledgedHouse: ClubHouse | null;
 }
 
 export const Home: React.FC<HomeProps> = ({
   onNavigate,
   onOpenSortingQuiz,
+  onOpenClubChronicle,
+  onPledgeHouse,
   userPledgedHouse
 }) => {
   /* PERF FIX: the countdown timer and its 1-second setInterval used to live
@@ -44,21 +50,8 @@ export const Home: React.FC<HomeProps> = ({
      whole homepage. It now lives in <LiveCountdown />, a tiny leaf component
      that re-renders on its own - see where <LiveCountdown /> is used below. */
 
-
-  // House Cheer state (Interactive live cheers)
-  const [houseCheers, setHouseCheers] = useState<Record<string, number>>({
-    'house-veritas': 342,
-    'house-arcanum': 415,
-    'house-melodia': 389,
-    'house-valorous': 367
-  });
-  const [hasCheered, setHasCheered] = useState<Record<string, boolean>>({});
-
-  const handleCheer = (houseId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setHouseCheers(prev => ({ ...prev, [houseId]: prev[houseId] + 1 }));
-    setHasCheered(prev => ({ ...prev, [houseId]: true }));
-  };
+  // The house whose full archive is currently unrolled in the lore modal
+  const [loreHouse, setLoreHouse] = useState<ClubHouse | null>(null);
 
   const HOUSE_TILT = ['-rotate-[0.6deg]', 'rotate-[0.5deg]', '-rotate-[0.4deg]', 'rotate-[0.7deg]'];
 
@@ -87,12 +80,15 @@ export const Home: React.FC<HomeProps> = ({
           {/* Fest Proclamation Plaque */}
           <ProclamationPlaque />
 
-          {/* Main Fest Heading */}
-          <div className="space-y-2">
-            <h1 aria-label="Carnaval Da Chittagong College" className="font-got text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-wider leading-tight drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              CARNAVAL
+          {/* Main Fest Heading
+              "CARNAVAL" and "DA CHITTAGONG COLLEGE" are auto-fitted so each
+              line spans EXACTLY the length of the sword divider beneath it,
+              on every device — the sword is the ruler of the title. */}
+          <div className="hero-ruler w-full max-w-3xl mx-auto px-4 space-y-3">
+            <h1 aria-label="Carnaval Da Chittagong College" className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+              <FitText as="span" max={168} min={34}>CARNAVAL</FitText>
             </h1>
-            <SwordDivider className="mt-4 mb-4" />
+            <SwordDivider className="!max-w-none !px-0 mt-1 mb-1" />
             {/* The right-to-left colour sweep, RESTORED. The old
                 single-layer bg-clip-text + animated background-position
                 went invisible in Instagram's in-app WebKit browser, so
@@ -100,16 +96,19 @@ export const Home: React.FC<HomeProps> = ({
                 over SOLID silver base text — if a browser drops the
                 animated layer the words still render, never vanish.
                 The breathing glow still animates on the wrapper. */}
-            <p className="font-got text-lg sm:text-2xl md:text-3xl font-normal text-white tracking-[0.15em] sm:tracking-[0.3em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-              DA{' '}
-              <span className="frost-glow">
-                <span className="sweep-text whitespace-nowrap" data-text="CHITTAGONG">CHITTAGONG</span>
-              </span>{' '}
-              <span className="frost-glow">
-                <span className="sweep-text sweep-text-soft whitespace-nowrap" data-text="COLLEGE">COLLEGE</span>
-              </span>
+            <p className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+              <FitText as="span" max={56} min={11}>
+                <span>DA </span>
+                <span className="frost-glow">
+                  <span className="sweep-text whitespace-pre" data-text="CHITTAGONG">CHITTAGONG</span>
+                </span>
+                <span> </span>
+                <span className="frost-glow">
+                  <span className="sweep-text sweep-text-soft whitespace-pre" data-text="COLLEGE">COLLEGE</span>
+                </span>
+              </FitText>
             </p>
-            <p className="font-garamond text-lg sm:text-xl md:text-2xl text-[#e0a3a3] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
+            <p className="font-garamond text-base sm:text-xl md:text-2xl text-[#9fb6b3] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md pt-2">
               &ldquo;Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
             </p>
           </div>
@@ -227,11 +226,9 @@ export const Home: React.FC<HomeProps> = ({
                 houseName={house.houseName}
                 motto={house.motto}
                 lore={house.lore}
-                cheerCount={houseCheers[house.id]}
-                cheered={!!hasCheered[house.id]}
+                links={house.links}
                 tilt={HOUSE_TILT[i]}
-                onCheer={(e) => handleCheer(house.id, e)}
-                onViewLore={() => onNavigate('clubs')}
+                onViewLore={() => setLoreHouse(house)}
               />
             </Reveal>
           ))}
@@ -433,6 +430,17 @@ export const Home: React.FC<HomeProps> = ({
         </div>
         </Reveal>
       </section>
+
+      {/* ========================================================
+          HOUSE ARCHIVE MODAL — the full chronicle of a house,
+          opened from "View Lore" on the parchment cards above.
+      ======================================================== */}
+      <ClubLoreModal
+        house={loreHouse}
+        onClose={() => setLoreHouse(null)}
+        onEnterChronicle={onOpenClubChronicle}
+        onPledgeHouse={onPledgeHouse}
+      />
 
     </div>
   );
