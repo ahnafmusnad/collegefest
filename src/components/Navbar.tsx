@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 text-left shrink-0 focus:outline-none"
             >
-              <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-10 md:h-11 w-auto" />
+              <img src="/images/wax-seal-logo.jpeg" alt="Carnaval Da Chittagong College logo" className="h-10 md:h-11 w-auto" />
               <span className="hidden sm:block w-px h-9 bg-iron" />
               <span className="flex flex-col leading-none">
                 <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
