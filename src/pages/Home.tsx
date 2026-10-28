@@ -3,6 +3,7 @@ import { PageType, ClubHouse } from '../types';
 import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
+import ResponsiveImg from '../components/ui/ResponsiveImg';
 import HouseScroll from '../components/HouseScroll';
 import LiveCountdown from '../components/LiveCountdown';
 import StatsPanel from '../components/StatsPanel';
@@ -112,7 +113,15 @@ export const Home: React.FC<HomeProps> = ({
           {userPledgedHouse && (
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink-2/90 border border-[#5bc9d6]/50 text-[#bfe9e4] text-xs font-cinzel tracking-widest">
               <span className="w-6 h-6 rounded-md bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center">
-                <img src={userPledgedHouse.logo} alt="" className="w-full h-full object-contain" />
+                <ResponsiveImg
+                  src={userPledgedHouse.logo}
+                  alt=""
+                  sizes="40px"
+                  widths={[480]}
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-contain"
+                />
               </span>
               <span>You Have Sworn Allegiance to <strong>{userPledgedHouse.houseName}</strong></span>
             </div>

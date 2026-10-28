@@ -8,6 +8,7 @@ import PageHero from '../components/ui/PageHero';
 import GemDivider from '../components/ui/GemDivider';
 import EyebrowRule from '../components/ui/EyebrowRule';
 import Button from '../components/ui/Button';
+import ResponsiveImg from '../components/ui/ResponsiveImg';
 import {
   ArrowRight,
   Award,
@@ -68,10 +69,13 @@ const HouseImage: React.FC<{
   const [failed, setFailed] = useState(!src);
   if (failed) return <>{fallback}</>;
   return (
-    <img
+    <ResponsiveImg
       src={src}
       alt={alt}
+      sizes="(max-width: 640px) 160px, (max-width: 1024px) 232px, 348px"
+      widths={[480, 800, 1200]}
       loading="lazy"
+      decoding="async"
       draggable={false}
       onError={() => setFailed(true)}
       className={className}
@@ -313,7 +317,14 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
                       <span className="hh-medallion mt-2 transition-transform duration-500 group-hover:scale-105">
-                        <img src={house.logo} alt={`${house.shortName} logo`} loading="lazy" />
+                        <ResponsiveImg
+                          src={house.logo}
+                          alt={`${house.shortName} logo`}
+                          sizes="(max-width: 640px) 58px, 76px"
+                          widths={[480, 800]}
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </span>
 
 
@@ -388,7 +399,14 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
               <div className="relative z-10 grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-10">
                 <div className="hh-medallion hh-medallion--lg">
-                  <img src={activeHouse.logo} alt={`${activeHouse.shortName} logo`} />
+                  <ResponsiveImg
+                    src={activeHouse.logo}
+                    alt={`${activeHouse.shortName} logo`}
+                    sizes="(max-width: 640px) 136px, 136px"
+                    widths={[480, 800]}
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
 
 

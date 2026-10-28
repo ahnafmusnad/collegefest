@@ -1,4 +1,5 @@
 import { ArrowRight, Globe, Landmark } from "lucide-react";
+import ResponsiveImg from './ui/ResponsiveImg';
 
 interface HouseScrollProps {
   logo: string;
@@ -26,7 +27,15 @@ export default function HouseScroll({
       onClick={onViewLore}
       className={`house-scroll group relative flex h-full cursor-pointer flex-col ${tilt}`}
     >
-      <img src={logo} alt={`${name} logo`} loading="lazy" className="hs-logo" />
+      <ResponsiveImg
+        src={logo}
+        alt={`${name} logo`}
+        sizes="(max-width: 640px) 58px, 76px"
+        widths={[480, 800]}
+        loading="lazy"
+        decoding="async"
+        className="hs-logo"
+      />
 
       <h3 className="hs-name">{name.split("(")[0]}</h3>
       <p className="hs-house">{houseName}</p>
