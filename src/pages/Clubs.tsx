@@ -330,7 +330,7 @@ const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHou
 
                       {/* actual club name first & largest; the GoT house
                           name is now the small secondary line */}
-                      <span className="mt-4 font-got text-[12px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[14px]">
+                      <span className="mt-4 font-got text-[11px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[12px]">
                         {house.name.split('(')[0].trim()}
                       </span>
                       <span className="mt-1.5 font-cinzel text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9fd8d2] sm:text-[9px]">
