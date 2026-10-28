@@ -503,19 +503,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-              <div className="grid gap-5 lg:col-span-3">
-                {details.pillars.map((p, i) => (
-                  <Reveal key={p.title} direction="right" delay={i * 100} className="h-full">
-                    <div className="frost-card flex h-full items-start gap-4 p-5 sm:p-6">
-                      <span className="hh-seal"><span>{ROMAN[i]}</span></span>
-                      <div>
-                        <h4 className="font-cinzel text-[15px] font-bold tracking-wide text-gold-2 sm:text-base">{p.title}</h4>
-                        <p className="mt-1.5 text-[14px] leading-relaxed text-bone sm:text-[15px]">{p.text}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+
             </div>
           )}
 
