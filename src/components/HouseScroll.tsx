@@ -31,7 +31,6 @@ export default function HouseScroll({
         src={logo}
         alt={`${name} logo`}
         sizes="(max-width: 640px) 58px, 76px"
-        widths={[480, 800]}
         loading="lazy"
         decoding="async"
         className="hs-logo"

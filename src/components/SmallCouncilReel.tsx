@@ -320,7 +320,6 @@ export default function SmallCouncilReel() {
                           src={m.image}
                           alt={m.name}
                           sizes="(max-width: 640px) 60px, (max-width: 1024px) 120px, 180px"
-                          widths={[480, 800]}
                           loading="lazy"
                           decoding="async"
                           className={`absolute left-1/2 top-[45.2%] -translate-x-1/2 -translate-y-1/2 w-[66%] aspect-square rounded-full object-cover border transition-colors duration-500 ${

@@ -73,7 +73,6 @@ const HouseImage: React.FC<{
       src={src}
       alt={alt}
       sizes="(max-width: 640px) 160px, (max-width: 1024px) 232px, 348px"
-      widths={[480, 800, 1200]}
       loading="lazy"
       decoding="async"
       draggable={false}
@@ -321,7 +320,6 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
                           src={house.logo}
                           alt={`${house.shortName} logo`}
                           sizes="(max-width: 640px) 58px, 76px"
-                          widths={[480, 800]}
                           loading="lazy"
                           decoding="async"
                         />
@@ -403,7 +401,6 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
                     src={activeHouse.logo}
                     alt={`${activeHouse.shortName} logo`}
                     sizes="(max-width: 640px) 136px, 136px"
-                    widths={[480, 800]}
                     loading="eager"
                     decoding="async"
                   />
