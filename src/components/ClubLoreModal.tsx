@@ -84,7 +84,6 @@ export const ClubLoreModal: React.FC<ClubLoreModalProps> = ({
                     src={house.logo}
                     alt={`${house.shortName} logo`}
                     sizes="80px"
-                    widths={[480, 800]}
                     loading="eager"
                     decoding="async"
                     className="h-full w-full object-contain"

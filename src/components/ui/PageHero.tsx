@@ -65,7 +65,6 @@ export const PageHero: React.FC<PageHeroProps> = ({
           src={image}
           alt={imageAlt}
           sizes="100vw"
-          widths={[480, 800, 1200, 1600]}
           loading="eager"
           decoding="async"
           fetchPriority="high"

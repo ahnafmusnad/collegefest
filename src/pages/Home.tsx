@@ -117,7 +117,6 @@ export const Home: React.FC<HomeProps> = ({
                   src={userPledgedHouse.logo}
                   alt=""
                   sizes="40px"
-                  widths={[480]}
                   loading="eager"
                   decoding="async"
                   className="w-full h-full object-contain"

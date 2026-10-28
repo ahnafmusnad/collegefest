@@ -213,7 +213,6 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
                     src={sortedHouse.logo}
                     alt={`${sortedHouse.name} logo`}
                     sizes="96px"
-                    widths={[480, 800]}
                     loading="eager"
                     decoding="async"
                     className="h-full w-full object-contain"
