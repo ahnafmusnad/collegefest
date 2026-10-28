@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 
-export const Sponsorships: React.FC = () => {
+const Sponsorships: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     orgName: '',
@@ -442,3 +442,5 @@ export const Sponsorships: React.FC = () => {
     </div>
   );
 };
+
+export default Sponsorships;

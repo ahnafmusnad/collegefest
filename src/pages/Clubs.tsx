@@ -193,7 +193,7 @@ interface ClubsProps {
 
 
 
-export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHouse, focusHouseId }) => {
+const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHouse, focusHouseId }) => {
   const [activeHouseId, setActiveHouseId] = useState<string>(focusHouseId ?? userPledgedHouse?.id ?? FOUR_HOUSES[0].id);
   const dossierRef = useRef<HTMLElement>(null);
 
@@ -628,3 +628,5 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
     </div>
   );
 };
+
+export default Clubs;

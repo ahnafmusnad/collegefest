@@ -229,7 +229,7 @@ const GroupFrameCard: React.FC<{
   );
 };
 
-export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
+const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
   return (
     <div className="pt-24 pb-20 px-4 text-bone max-w-6xl mx-auto space-y-32">
       {/* Page Hero */}
@@ -286,3 +286,5 @@ export const Segments: React.FC<SegmentsProps> = ({ onOpenRulesModal }) => {
     </div>
   );
 };
+
+export default Segments;
