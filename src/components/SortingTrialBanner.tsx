@@ -46,8 +46,6 @@ const CornerFlourish: React.FC<{ className?: string; style?: React.CSSProperties
 export const SortingTrialBanner: React.FC<SortingTrialBannerProps> = ({ onBegin }) => {
   return (
     <section className="relative py-10 md:py-12 px-4 overflow-hidden">
-      {/* checkered ceremony floor */}
-      <div className="st-checker absolute inset-0" aria-hidden="true" />
       {/* ambient teal aura breathing behind the plaque */}
       <div className="st-aura absolute inset-0" aria-hidden="true" />
 
