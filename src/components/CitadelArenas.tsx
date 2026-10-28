@@ -168,12 +168,12 @@ function VenueTablet({
 
 
       {/* the venue's real name, large and centered in the tablet */}
-      <span className="relative z-10 flex items-center justify-center gap-2.5 px-[11%] text-center">
-        <span className={`font-cinzel text-[11px] shrink-0 transition-colors duration-300 ${selected ? 'text-mint' : 'text-ash'}`}>
+      <span className="relative z-10 flex items-center justify-center gap-2 px-[15%] text-center whitespace-nowrap">
+        <span className={`font-cinzel text-[10px] shrink-0 transition-colors duration-300 ${selected ? 'text-mint' : 'text-ash'}`}>
           {loc.numeral}.
         </span>
         <span
-          className={`font-cinzel text-[15px] font-bold uppercase tracking-[0.1em] leading-tight transition-all duration-300 sm:text-[17px] ${
+          className={`font-cinzel text-[13px] sm:text-[12px] lg:text-[13.5px] font-bold uppercase tracking-[0.05em] leading-tight transition-all duration-300 ${
             selected
               ? 'text-silver'
               : 'text-bone group-hover:text-silver'
@@ -185,14 +185,14 @@ function VenueTablet({
 
 
       <span
-        className={`absolute right-[7%] top-1/2 z-10 grid h-8 w-8 -translate-y-1/2 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
+        className={`absolute right-[8%] top-1/2 z-10 grid h-7 w-7 sm:h-8 sm:w-8 -translate-y-1/2 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
           selected
             ? 'border-mint/70 bg-teal-glow/20 text-mint'
             : 'border-iron text-bone-dim group-hover:border-teal-glow/60 group-hover:text-teal-glow'
         }`}
       >
-        <MapPin className="hidden h-4 w-4 lg:block" />
-        <ChevronDown className={`h-4 w-4 transition-transform duration-300 lg:hidden ${expanded ? 'rotate-180' : ''}`} />
+        <MapPin className="hidden h-3.5 w-3.5 lg:block" />
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 lg:hidden ${expanded ? 'rotate-180' : ''}`} />
       </span>
     </button>
   );
@@ -406,7 +406,7 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
 
 
       {/* the survey: tablets + great plaque */}
-      <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-[minmax(260px,330px)_1fr] lg:gap-6">
+      <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-[minmax(290px,360px)_1fr] lg:gap-6">
         <Reveal delay={120}>
           <div className="flex flex-col gap-4">
             {ARENAS.map((loc) => {
