@@ -589,24 +589,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
           {/* ---- Trials hosted by this house ---- */}
           <section className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
-            <Reveal direction="left">
-              <div className="text-center lg:text-left">
-                <span className="hh-kicker">
-                  <Gem className="h-3.5 w-3.5" />
-                  The House's Tourneys
-                </span>
-                <h3 className="hh-title mt-3">Trials Raised by {activeHouse.houseName}</h3>
-                <p className="hh-lead mt-4">
-                  At the Carnaval, every house hosts its own arenas. These are the trials where{' '}
-                  {activeHouse.shortName} sets the rules — enter, and prove your worth.
-                </p>
-                <div className="mt-7">
-                  <Button variant="secondary" size="sm" onClick={() => onNavigate('segments')}>
-                    View All Trials
-                  </Button>
-                </div>
-              </div>
-            </Reveal>
+
 
 
 
