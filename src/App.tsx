@@ -12,6 +12,7 @@ import { ClubLoreModal } from './components/ClubLoreModal';
 import { ScrollToTop } from './components/ScrollToTop';
 import { AncientScriptureBackground } from './components/AncientScriptureBackground';
 import { InAppBrowserGate } from './components/InAppBrowserGate';
+import { ErrorBoundary } from './components/ErrorBoundary';
 // Pages — Home loads eagerly (landing page), others lazy-loaded for smaller initial bundle
 import { Home } from './pages/Home';
 const FestDescription = lazy(() => import('./pages/FestDescription'));
@@ -185,7 +186,17 @@ export function App() {
           transforms (3D flips, sideways sweeps) from widening the document
           and dragging the fixed header/loader out of the viewport. */}
       <main className="flex-1 relative z-10 overflow-x-clip">
-        <Suspense fallback={<div className="min-h-[60vh] flex flex-col items-center justify-center pt-24 text-bone/60 font-cinzel text-xl">Loading realm...</div>}>
+        <ErrorBoundary
+          fallback={
+            <div className="min-h-[60vh] flex flex-col items-center justify-center pt-24 text-crimson font-cinzel text-xl text-center px-6">
+              <p>Failed to load this realm.</p>
+              <p className="mt-2 text-bone/60 text-sm">
+                Check the browser console (F12 → Console) for details.
+              </p>
+            </div>
+          }
+        >
+          <Suspense fallback={<div className="min-h-[60vh] flex flex-col items-center justify-center pt-24 text-bone/60 font-cinzel text-xl">Loading realm...</div>}>
           {currentPage === 'home' && (
             <Home
               onNavigate={handleNavigate}
@@ -225,6 +236,7 @@ export function App() {
             <Organizers />
           )}
         </Suspense>
+        </ErrorBoundary>
       </main>
 
       {/* Global Footer */}
