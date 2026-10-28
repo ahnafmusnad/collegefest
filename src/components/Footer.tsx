@@ -3,7 +3,6 @@ import { PageType } from '../types';
 import { MapPin, Mail, Globe } from 'lucide-react';
 import { SocialGlyph } from './ui/Glyphs';
 import { SOCIAL_LINKS } from '../data/festData';
-import ResponsiveImg from './ui/ResponsiveImg';
 /* Small round social chip — same hover language as the menu socials */
 const FooterSocial: React.FC<{ href: string; label: string; children: React.ReactNode }> = ({ href, label, children }) => (
   <a
@@ -78,13 +77,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span className="absolute -top-px -right-px h-2 w-2 border-t border-r border-gold-2/70" aria-hidden="true" />
                 <span className="absolute -bottom-px -left-px h-2 w-2 border-b border-l border-gold-2/70" aria-hidden="true" />
                 <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-gold-2/70" aria-hidden="true" />
-                <ResponsiveImg
+                <img
                   src="/images/college-crest.webp"
                   alt="Chittagong College crest"
-                  sizes="24px"
-                  widths={[480]}
-                  loading="eager"
-                  decoding="async"
                   className="h-8 w-8 object-contain"
                 />
               </div>
