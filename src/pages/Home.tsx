@@ -104,7 +104,7 @@ export const Home: React.FC<HomeProps> = ({
                 </span>
               </FitText>
             </p>
-            <p className="font-garamond text-base sm:text-xl md:text-2xl text-[#9fb6b3] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md pt-2">
+            <p className="font-garamond text-base sm:text-xl md:text-2xl text-[#8ce8f2] font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md pt-2">
               &ldquo;Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
             </p>
           </div>
