@@ -173,19 +173,6 @@ const GroupFrameCard: React.FC<{
         {/* ── Condensed decree: prize / venue / dates / format ─ */}
         <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 border-t border-[#5bc9d6]/20 pt-4">
           <div className="flex items-start gap-2">
-            <Trophy className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
-            <div className="min-w-0">
-              <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
-                Prize Vault
-              </span>
-              <span className="block text-[11px] sm:text-xs font-bold text-gold-2">
-                {totalDragons.toLocaleString()} BDT
-              </span>
-              <span className="block text-[9px] text-bone-dim">Crests &amp; Medals</span>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-2">
             <MapPin className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#5bc9d6]" />
             <div className="min-w-0">
               <span className="block font-cinzel text-[8px] uppercase tracking-[0.2em] text-ash">
