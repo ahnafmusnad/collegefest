@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import EyebrowRule from './EyebrowRule';
+import ResponsiveImg from './ResponsiveImg';
 
 
 
@@ -60,11 +61,14 @@ export const PageHero: React.FC<PageHeroProps> = ({
             decoding="async" keeps the image decode off the main thread so it
             does not block scrolling. Deliberately NOT loading="lazy":
             lazy-loading an above-the-fold hero makes LCP worse, not better. */}
-        <img
+        <ResponsiveImg
           src={image}
           alt={imageAlt}
-          fetchPriority="high"
+          sizes="100vw"
+          widths={[480, 800, 1200, 1600]}
+          loading="eager"
           decoding="async"
+          fetchPriority="high"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/45 to-ink" />

@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal';
 import CitadelArenas from '../components/CitadelArenas';
 import Button from '../components/ui/Button';
 import EyebrowRule from '../components/ui/EyebrowRule';
+import ResponsiveImg from '../components/ui/ResponsiveImg';
 import { 
   MapPin, 
   ShieldCheck, 
@@ -116,9 +117,14 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
       ======================================================== */}
       <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <ResponsiveImg
             src={HERO_IMAGE}
             alt="The Red Citadel of Chittagong College under a winter storm"
+            sizes="100vw"
+            widths={[480, 800, 1200, 1600]}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="h-full w-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/45 to-ink" />
@@ -212,11 +218,14 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
               <span className="corner tr z-10" />
               <span className="corner bl z-10" />
               <span className="corner br z-10" />
-              <img
+              <ResponsiveImg
                 src={LORE_IMAGE}
                 alt="The historic red keep of Chawkbazar campus grounds"
-                className="h-[300px] w-full object-cover transition-transform duration-[1.8s] ease-out hover:scale-105 sm:h-[380px]"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                widths={[480, 800, 1200]}
                 loading="lazy"
+                decoding="async"
+                className="h-[300px] w-full object-cover transition-transform duration-[1.8s] ease-out hover:scale-105 sm:h-[380px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/20" />
             </div>

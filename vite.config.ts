@@ -17,6 +17,11 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["repayment-abiding-pope.ngrok-free.dev"],
+    allowedHosts: true,
+  },
+  preview: {
+    allowedHosts: true,
+    port: 5173,
+    host: "0.0.0.0",
   },
 });

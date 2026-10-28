@@ -3,6 +3,7 @@ import { X, Crown, Trophy, CalendarDays, Users, ScrollText, Globe, Landmark } fr
 import { ClubHouse } from '../types';
 import { HOUSE_DETAILS } from '../data/houseDetails';
 import Button from './ui/Button';
+import ResponsiveImg from './ui/ResponsiveImg';
 
 interface ClubLoreModalProps {
   house: ClubHouse | null;
@@ -79,7 +80,15 @@ export const ClubLoreModal: React.FC<ClubLoreModalProps> = ({
               <div className="relative h-20 w-20 shrink-0">
                 <span className="absolute inset-0 rotate-45 border border-[#5bc9d6]/50" aria-hidden="true" />
                 <div className="absolute inset-[7px] flex items-center justify-center overflow-hidden rounded-full border-2 border-gold-2/60 bg-white p-1.5">
-                  <img src={house.logo} alt={`${house.shortName} logo`} className="h-full w-full object-contain" />
+                  <ResponsiveImg
+                    src={house.logo}
+                    alt={`${house.shortName} logo`}
+                    sizes="80px"
+                    widths={[480, 800]}
+                    loading="eager"
+                    decoding="async"
+                    className="h-full w-full object-contain"
+                  />
                 </div>
               </div>
               <div className="min-w-0">

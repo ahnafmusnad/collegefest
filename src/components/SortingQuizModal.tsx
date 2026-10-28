@@ -3,6 +3,7 @@ import { X, Shield, Sparkles, Crown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SORTING_QUESTIONS, FOUR_HOUSES } from '../data/festData';
 import { ClubHouse } from '../types';
+import ResponsiveImg from './ui/ResponsiveImg';
 import Button from './ui/Button';
 
 interface SortingQuizModalProps {
@@ -208,7 +209,15 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
               <div className="relative mx-auto mt-5 h-24 w-24">
                 <span className="absolute inset-0 rotate-45 border border-[#5bc9d6]/50" aria-hidden="true" />
                 <div className="absolute inset-[9px] flex items-center justify-center overflow-hidden rounded-full border-2 border-gold-2/60 bg-white p-2.5">
-                  <img src={sortedHouse.logo} alt={`${sortedHouse.name} logo`} className="h-full w-full object-contain" />
+                  <ResponsiveImg
+                    src={sortedHouse.logo}
+                    alt={`${sortedHouse.name} logo`}
+                    sizes="96px"
+                    widths={[480, 800]}
+                    loading="eager"
+                    decoding="async"
+                    className="h-full w-full object-contain"
+                  />
                 </div>
               </div>
 
