@@ -30,14 +30,10 @@ const PAGE_TYPES: PageType[] = [
   'organizers',
 ];
 
-const pageToHash = (page: PageType): string => (page === 'home' ? '#/' : `#/${page}`);
+const pageToPath = (page: PageType): string => (page === 'home' ? '/' : `/${page}`);
 
 const pageFromLocation = (): PageType => {
-  if (window.location.hash.startsWith('#/')) {
-    const hash = window.location.hash.slice(2).toLowerCase();
-    return PAGE_TYPES.includes(hash as PageType) ? (hash as PageType) : 'home';
-  }
-  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/').pop()?.toLowerCase() ?? '';
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase() ?? '';
   return PAGE_TYPES.includes(path as PageType) ? (path as PageType) : 'home';
 };
 
@@ -103,21 +99,19 @@ export function App() {
     };
 
     window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('hashchange', handleLocationChange);
     return () => {
       window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('hashchange', handleLocationChange);
     };
   }, []);
 
   // Page Navigation with Cinematic "Winter is Coming" Loading Screen
   const handleNavigate = useCallback((page: PageType) => {
     if (page === currentPage) {
-      window.history.replaceState(null, '', pageToHash(page));
+      window.history.replaceState(null, '', pageToPath(page));
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    window.history.pushState(null, '', pageToHash(page));
+    window.history.pushState(null, '', pageToPath(page));
     setTargetPage(page);
     setIsLoading(true);
   }, [currentPage]);
