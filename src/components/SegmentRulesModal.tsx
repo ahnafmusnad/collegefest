@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Trophy, MapPin, Clock, Users, ShieldAlert, ScrollText, Gem } from 'lucide-react';
+import { X, MapPin, Clock, Users, ShieldAlert, ScrollText, Gem } from 'lucide-react';
 import { Segment } from '../types';
 import { FOUR_HOUSES, FEST_METADATA } from '../data/festData';
 import Button from './ui/Button';
@@ -118,7 +118,6 @@ export const SegmentRulesModal: React.FC<SegmentRulesModalProps> = ({
 
           {/* ── Quick facts ───────────────────────────────── */}
           <div className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-4">
-            <FactCell icon={<Trophy className="h-3.5 w-3.5" />} label="Prize Vault" value={segment.prizePool} />
             <FactCell icon={<Users className="h-3.5 w-3.5" />} label="Team Size" value={segment.teamSize} />
             <FactCell icon={<MapPin className="h-3.5 w-3.5" />} label="Citadel Venue" value={segment.venue} />
             <FactCell icon={<Clock className="h-3.5 w-3.5" />} label="Schedule" value={segment.time} />
