@@ -343,17 +343,9 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-                      <span className="mt-2.5 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
-                        {house.sigil}
-                      </span>
-                      <span className="mt-1 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
-                        {house.founded !== '—' ? `Est. ${house.founded}` : 'An Ancient House'}
-                      </span>
 
-                      <span className="hh-banner__cta mt-auto pt-4">
-                        {isActive ? 'Chronicle Open' : 'Read Chronicle'}
-                        <ArrowRight className="h-3 w-3" />
-                      </span>
+
+
 
 
 
@@ -364,14 +356,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-                    {isPledged && (
-                      <div className="mt-4">
-                        <div className="hh-banner__sworn">
-                          <Check className="h-3 w-3" />
-                          Your House
-                        </div>
-                      </div>
-                    )}
+
                   </div>
                 </article>
               </Reveal>

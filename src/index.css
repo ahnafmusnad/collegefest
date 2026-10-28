@@ -3701,8 +3701,7 @@ a.btn,
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 398px;
-  padding: 1.4rem 0.9rem 2.9rem;
+  padding: 1.4rem 0.9rem 1.5rem;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px));
   background:
     linear-gradient(180deg, rgba(6, 26, 28, 0.35) 0%, rgba(2, 10, 11, 0.88) 68%, rgba(2, 10, 11, 0.96) 100%),
@@ -3713,7 +3712,7 @@ a.btn,
 .hh-banner__cloth::before {
   content: '';
   position: absolute;
-  inset: 8px 8px 40px 8px;
+  inset: 8px 8px 16px 8px;
   border: 1px solid rgba(216, 222, 217, 0.16);
   pointer-events: none;
 }
@@ -3832,7 +3831,7 @@ a.btn,
   box-shadow: 0 0 0 2px #061a1c, 0 0 0 3px rgba(91, 201, 214, 0.45);
 }
 @media (max-width: 639px) {
-  .hh-banner__cloth { min-height: 356px; padding: 1.3rem 0.65rem 2.6rem; }
+  .hh-banner__cloth { padding: 1.3rem 0.65rem 1.4rem; }
   .hh-banner .hh-medallion { width: 58px; height: 58px; padding: 5px; }
 }
 
