@@ -106,7 +106,7 @@ const Sponsorships: React.FC = () => {
 
 
         {/* Sponsor Tier Cards Grid with 3D LIFT & TEAL GLOW */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {SPONSOR_TIERS.map((tier, i) => {
             const isTitle = tier.id === 'tier-title';
             const tierKey = tier.id.replace('tier-', '');
@@ -131,7 +131,7 @@ const Sponsorships: React.FC = () => {
 
                 <div className="relative z-10">
                   {/* Badges */}
-                  <div className="flex items-center justify-center text-xs mb-3 pt-2">
+                  <div className="flex items-center justify-center text-xs mb-2 pt-1">
                     <span className={`px-2.5 py-0.5 rounded-full font-cinzel font-bold uppercase tracking-wider ${
                       isTitle ? 'bg-ember/15 text-ember border border-ember/60' : 'bg-ink-2 text-crimson-2 border border-crimson/40'
                     }`}>
@@ -141,26 +141,26 @@ const Sponsorships: React.FC = () => {
 
 
                    {/* Tier Title */}
-                   <h3 className="font-cinzel-dec text-xl font-black text-white text-center group-hover:text-bone transition-colors">
+                   <h3 className="font-cinzel-dec text-lg font-black text-white text-center group-hover:text-bone transition-colors">
                      {tier.name}
                    </h3>
                    <p className="font-cinzel text-[11px] text-gold/90 italic text-center">
                      "{tier.gotTitle}"
                    </p>
                    {/* sigil rule */}
-                   <div className="flex items-center justify-center gap-2 mt-2 mb-4" aria-hidden="true">
+                   <div className="flex items-center justify-center gap-2 mt-1 mb-3" aria-hidden="true">
                      <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
                      <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
                      <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
                    </div>
                    {/* Slot Availability */}
-                   <div className="p-2.5 bg-ink/80 border border-iron mb-4 text-center">
+                   <div className="p-2 bg-ink/80 border border-iron mb-3 text-center">
                      <span className="text-[9px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
-                     <span className={`font-cinzel text-base sm:text-lg font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
+                     <span className={`font-cinzel text-sm sm:text-base font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
                        {tier.slots}
                      </span>
                    </div>
-                   <p className="text-[11px] text-bone-dim leading-relaxed mb-4 text-center">
+                   <p className="text-[11px] text-bone-dim leading-relaxed mb-3 text-center">
                      {tier.description}
                    </p>
 
