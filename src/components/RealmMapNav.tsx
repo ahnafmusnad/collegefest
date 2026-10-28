@@ -611,15 +611,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
                   <div className="p-6 xl:p-7">
                     {/* crest & house */}
                     <div className="flex items-center gap-4">
-                      <ResponsiveImg
-                        src="/images/college-crest.webp"
-                        alt="Chittagong College crest"
-                        sizes="56px"
-                        widths={[480]}
-                        loading="eager"
-                        decoding="async"
-                        className="h-14 w-auto"
-                      />
+                      <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-14 w-auto" />
                       <div className="leading-tight">
                         <p className="font-cinzel-dec text-[15px] font-bold tracking-[0.08em] text-gold-2">
                           The Court of Carnaval
@@ -778,15 +770,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
       <div className="absolute inset-x-0 top-0 z-30 border-b border-gold/15 bg-gradient-to-b from-[#02090a]/95 via-[#02090a]/80 to-transparent px-3 pb-6 pt-3 sm:px-5">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <ResponsiveImg
-              src="/images/college-crest.webp"
-              alt=""
-              sizes="40px"
-              widths={[480]}
-              loading="eager"
-              decoding="async"
-              className="h-9 w-auto sm:h-10"
-            />
+            <img src="/images/college-crest.webp" alt="" className="h-9 w-auto sm:h-10" />
             <div className="min-w-0 leading-none">
               <p className="font-cinzel-dec text-sm sm:text-base font-bold tracking-[0.14em] text-gold-2 truncate">
                 {view === 'list' ? "The King's Menu" : 'The Royal Map'}
