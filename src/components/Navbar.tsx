@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={onToggleSnow}
                 title={`Snow: ${snowMode}`}
                 aria-label={`Snow: ${snowMode}`}
-                className={`hidden sm:flex items-center justify-center w-9 h-9 text-bone-dim hover:text-white transition-colors ${snowMode === 'off' ? 'opacity-40' : ''}`}
+                className={`flex items-center justify-center w-9 h-9 text-bone-dim hover:text-white transition-colors ${snowMode === 'off' ? 'opacity-40' : ''}`}
               >
                 <CloudSnow className="w-4 h-4" />
               </button>
