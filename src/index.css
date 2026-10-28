@@ -3832,11 +3832,19 @@ a.btn,
   border-radius: 9999px;
 }
 .hh-medallion--lg {
-  width: 136px;
-  height: 136px;
-  padding: 12px;
+  width: 96px;
+  height: 96px;
+  padding: 9px;
   margin: 0 auto;
-  box-shadow: 0 0 0 6px #061a1c, 0 0 0 7px rgba(91, 201, 214, 0.55), 0 0 40px rgba(31, 143, 150, 0.45);
+  box-shadow: 0 0 0 4px #061a1c, 0 0 0 5px rgba(91, 201, 214, 0.55), 0 0 30px rgba(31, 143, 150, 0.45);
+}
+@media (min-width: 640px) {
+  .hh-medallion--lg {
+    width: 136px;
+    height: 136px;
+    padding: 12px;
+    box-shadow: 0 0 0 6px #061a1c, 0 0 0 7px rgba(91, 201, 214, 0.55), 0 0 40px rgba(31, 143, 150, 0.45);
+  }
 }
 .hh-medallion--sm {
   width: 46px;

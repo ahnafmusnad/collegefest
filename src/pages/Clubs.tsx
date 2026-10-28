@@ -414,20 +414,16 @@ const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHou
                     <Sparkles className="h-3.5 w-3.5" />
                     House {ROMAN[activeIndex]}{details ? ` · ${details.code}` : ''}
                   </span>
-                  <h2 className="mt-3 font-got text-2xl leading-[1.2] text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)] sm:text-3xl md:text-4xl">
-                    {activeHouse.name}
-                  </h2>
+                   <h2 className="mt-3 font-got text-xl leading-[1.2] text-gold-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)] sm:text-3xl md:text-4xl">
+                     {activeHouse.name}
+                   </h2>
                   <p className="mt-2 font-cinzel text-xs font-semibold uppercase tracking-[0.24em] text-[#9fd8d2] sm:text-sm">
                     {activeHouse.houseName} &middot; The {activeHouse.sigil}
                   </p>
                   <p className="mt-4 font-garamond text-xl italic text-[#8ce8f2] sm:text-2xl">
                     &ldquo;{activeHouse.motto}&rdquo;
                   </p>
-                  {details && (
-                    <p className="mt-1 font-cinzel text-[11px] uppercase tracking-[0.3em] text-ash">
-                      {details.epithet}
-                    </p>
-                  )}
+
                 </div>
               </div>
 
