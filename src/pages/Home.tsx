@@ -70,7 +70,7 @@ export const Home: React.FC<HomeProps> = ({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,_rgba(158,42,43,0.10)_0%,_transparent_65%)] pointer-events-none" />
 
         {/* Layer 3: Hero Content */}
-        <div className="relative z-10 w-full min-w-0 max-w-5xl mx-auto text-center space-y-6">
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
           
           {/* Fest Proclamation Plaque */}
           <ProclamationPlaque />
@@ -79,7 +79,7 @@ export const Home: React.FC<HomeProps> = ({
               "CARNAVAL" and "DA CHITTAGONG COLLEGE" are auto-fitted so each
               line spans EXACTLY the length of the sword divider beneath it,
               on every device — the sword is the ruler of the title. */}
-          <div className="hero-ruler w-full min-w-0 max-w-3xl mx-auto px-4 space-y-3">
+          <div className="hero-ruler w-full max-w-3xl mx-auto px-4 space-y-3">
             <h1 aria-label="Carnaval Da Chittagong College" className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               <FitText as="span" max={168} min={20}>CARNAVAL</FitText>
             </h1>

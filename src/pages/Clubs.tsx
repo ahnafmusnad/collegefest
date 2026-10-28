@@ -321,7 +321,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
                       {/* actual club name first & largest; the GoT house
                           name is now the small secondary line */}
-                      <span className="mt-3.5 font-got text-[10.5px] leading-[1.2] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[15px]">
+                      <span className="mt-4 font-got text-[13px] leading-[1.25] text-gold-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] sm:text-[15px]">
                         {house.name.split('(')[0].trim()}
                       </span>
                       <span className="mt-1.5 font-cinzel text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9fd8d2] sm:text-[9px]">
@@ -343,11 +343,16 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-                      <span className="mt-2.5 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px] hidden sm:block">
+                      <span className="mt-2.5 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
                         {house.sigil}
                       </span>
                       <span className="mt-1 font-cinzel text-[8px] uppercase tracking-[0.15em] text-ash sm:text-[9px]">
                         {house.founded !== '—' ? `Est. ${house.founded}` : 'An Ancient House'}
+                      </span>
+
+                      <span className="hh-banner__cta mt-auto pt-4">
+                        {isActive ? 'Chronicle Open' : 'Read Chronicle'}
+                        <ArrowRight className="h-3 w-3" />
                       </span>
 
 
