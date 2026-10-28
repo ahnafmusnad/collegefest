@@ -589,10 +589,7 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
           {/* ---- Trials hosted by this house ---- */}
           <section className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
-
-
-
-
+            <h3 className="hh-title mt-3 lg:col-span-full text-center lg:text-left">Trials Raised by {activeHouse.houseName}</h3>
 
             <div className="space-y-3">
               {hostedTrials.length === 0 ? (
