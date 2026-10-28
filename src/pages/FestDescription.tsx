@@ -90,7 +90,7 @@ interface FestDescriptionProps {
 }
 
 
-export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
+const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
   const [selectedDay, setSelectedDay] = useState<number>(1);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
@@ -555,3 +555,5 @@ export const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify 
     </div>
   );
 };
+
+export default FestDescription;

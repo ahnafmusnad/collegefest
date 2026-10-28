@@ -6,7 +6,7 @@ import ProtectorSoloCard from '../components/ProtectorSoloCard';
 import { Shield } from 'lucide-react';
 
 
-export const Organizers: React.FC = () => {
+const Organizers: React.FC = () => {
   return (
     <div className="pt-24 pb-20 px-4 text-bone max-w-7xl mx-auto space-y-36">
 
@@ -48,3 +48,5 @@ export const Organizers: React.FC = () => {
     </div>
   );
 };
+
+export default Organizers;
