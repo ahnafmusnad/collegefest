@@ -1,4 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react';
+
+
 interface FitTextProps {
   children: React.ReactNode;
   /** Element tag to render. Defaults to a block span. */
@@ -9,22 +11,22 @@ interface FitTextProps {
   min?: number;
   className?: string;
 }
-/** The display face the hero titles are measured in — must match @font-face
-    in index.css. Measuring before it is active uses the fallback serif,
-    which is narrower — and that is what made the title visibly shrink from
-    big to small on slow/mobile connections. */
+
+
+/** Must match the @font-face family name in index.css. */
 const DISPLAY_FONT = 'GameOfThrones';
+
+
 /**
- * FIT TEXT — scales a single line of type so it always exactly fills the
- * width of its parent, no matter the viewport. Used to lock "CARNAVAL" and
- * "DA CHITTAGONG COLLEGE" to the exact length of the sword divider beneath
- * them, on every device.
+ * FIT TEXT — scales a single line so it exactly fills its parent's width.
  *
- * NO-FLASH LOADING: the element renders invisible (opacity 0) until the
- * REAL display font face is confirmed usable via document.fonts.check —
- * not merely until `document.fonts.ready` resolves, which is racy on
- * mobile and can fire while the fallback face is still being measured.
- * Only then is it measured and faded in, already at its final size.
+ * BUG FIX (first-load overflow on mobile):
+ * 1. The hero column now has a definite width (w-full min-w-0 in Home.tsx),
+ *    so the text can no longer stretch its own parent.
+ * 2. We re-fit whenever ANY web font finishes loading ('loadingdone'),
+ *    so a late font swap on slow connections is always corrected.
+ * 3. ResizeObserver only re-fits when the parent's WIDTH changes and is
+ *    batched with requestAnimationFrame (no feedback loop).
  */
 export const FitText: React.FC<FitTextProps> = ({
   children,
@@ -34,32 +36,54 @@ export const FitText: React.FC<FitTextProps> = ({
   className = '',
 }) => {
   const ref = useRef<HTMLElement | null>(null);
-  // deps are intentionally [max, min] only: re-running on every parent
-  // re-render would reset opacity to 0 and cause a blink.
+
+
+  // deps are intentionally [max, min] only (re-running would blink opacity).
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+
     let revealed = false;
     let pollTimer = 0;
     let settleTimer = 0;
+    let rafId = 0;
+    let lastParentWidth = -1;
+
+
     const fit = () => {
       const parent = el.parentElement;
       if (!parent) return;
       const target = parent.clientWidth;
       if (target <= 0) return;
+      lastParentWidth = target;
+
+
       // measure at max size, then scale down proportionally
       el.style.fontSize = `${max}px`;
       const measured = el.scrollWidth;
       if (measured <= 0) return;
+
+
       let size = (target / measured) * max;
       size = Math.max(min, Math.min(max, size));
       el.style.fontSize = `${size}px`;
+
+
       // one correction pass for letter-spacing rounding
       const remeasure = el.scrollWidth;
       if (remeasure > target) {
         el.style.fontSize = `${Math.max(min, size * (target / remeasure) * 0.995)}px`;
       }
     };
+
+
+    const scheduleFit = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(fit);
+    };
+
+
     const reveal = () => {
       fit();
       if (!revealed) {
@@ -69,11 +93,16 @@ export const FitText: React.FC<FitTextProps> = ({
         });
       }
     };
-    // start hidden so the measure / font-swap never shows; layout space is
-    // still reserved, so nothing around the title jumps either.
+
+
+    // start hidden so the measuring / font swap is never visible
     el.style.opacity = '0';
     fit();
+
+
     const fonts = document.fonts;
+
+
     const faceUsable = (): boolean => {
       try {
         return fonts?.check ? fonts.check(`16px "${DISPLAY_FONT}"`) : true;
@@ -81,8 +110,8 @@ export const FitText: React.FC<FitTextProps> = ({
         return true;
       }
     };
-    // poll until the real face is usable (cap ~2.5s so a failed font load
-    // never leaves the title invisible), then measure + reveal once.
+
+
     const waitForFace = () => {
       if (faceUsable()) {
         reveal();
@@ -99,8 +128,8 @@ export const FitText: React.FC<FitTextProps> = ({
         }
       }, 50);
     };
-    // kick the font load explicitly (some mobile browsers delay webfont
-    // fetches for below-priority text), then wait for the real face.
+
+
     if (fonts?.load) {
       fonts
         .load(`16px "${DISPLAY_FONT}"`)
@@ -109,24 +138,45 @@ export const FitText: React.FC<FitTextProps> = ({
     } else {
       waitForFace();
     }
+
+
+    // FIX: re-fit every time a web font finishes loading (late swap on slow 3G)
+    const onFontsLoaded = () => scheduleFit();
+    fonts?.addEventListener?.('loadingdone', onFontsLoaded);
+    fonts?.ready?.then(onFontsLoaded).catch(() => {});
+
+
     // belt-and-braces: also reveal on full page load
     window.addEventListener('load', reveal);
-    // live re-fit on container resize
-    const ro = new ResizeObserver(() => fit());
+
+
+    // FIX: only re-fit when the parent's WIDTH really changes
+    const ro = new ResizeObserver(() => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      if (parent.clientWidth !== lastParentWidth) scheduleFit();
+    });
     if (el.parentElement) ro.observe(el.parentElement);
+
+
     return () => {
       window.clearInterval(pollTimer);
       window.clearTimeout(settleTimer);
+      cancelAnimationFrame(rafId);
       window.removeEventListener('load', reveal);
+      fonts?.removeEventListener?.('loadingdone', onFontsLoaded);
       ro.disconnect();
     };
   }, [max, min]);
+
+
   const Comp = Tag as React.ElementType;
   return (
     <Comp
       ref={ref}
       className={`block whitespace-nowrap text-center ${className}`}
       style={{
+        maxWidth: '100%',
         lineHeight: 1.22,
         paddingTop: '0.12em',
         paddingBottom: '0.04em',
@@ -138,4 +188,6 @@ export const FitText: React.FC<FitTextProps> = ({
     </Comp>
   );
 };
+
+
 export default FitText;
