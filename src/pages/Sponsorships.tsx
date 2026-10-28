@@ -72,7 +72,7 @@ const Sponsorships: React.FC = () => {
             className="stat-tablet text-center space-y-1 group h-full"
           >
             <stat.icon className="w-5 h-5 text-ember mx-auto group-hover:scale-110 transition-transform drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]" />
-            <div className="font-cinzel text-2xl md:text-3xl font-extrabold text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
+            <div className="font-cinzel text-xl md:text-2xl font-extrabold text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
               {stat.value}
             </div>
             <div className="font-cinzel text-xs font-semibold text-gold-2/90 uppercase">

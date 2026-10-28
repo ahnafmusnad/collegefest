@@ -503,10 +503,10 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     id: 'tier-title',
     name: 'Title Sponsor',
     gotTitle: 'The Hand of the King',
-    brands: ['Braavos Financial Group'],
-    badge: '1 Exclusive Slot',
+    brands: ['Braavos Financial Group', 'Iron Coin Bank', "King's Landing Trust"],
+    badge: 'Limited Slots',
     description: 'The supreme patron whose banner flies above the Carnaval across every mention of the event — in print, online, and on-ground.',
-    slots: '1 Brand Only',
+    slots: 'Limited Brands',
     color: 'from-gold-2 to-gold',
     borderColor: 'border-gold',
     perks: [
