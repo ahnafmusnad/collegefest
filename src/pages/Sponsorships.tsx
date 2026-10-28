@@ -131,8 +131,8 @@ const Sponsorships: React.FC = () => {
 
                 <div className="relative z-10">
                   {/* Badges */}
-                  <div className="flex items-center justify-center text-xs mb-2 pt-1">
-                    <span className={`px-2.5 py-0.5 rounded-full font-cinzel font-bold uppercase tracking-wider ${
+                  <div className="flex items-center justify-center text-[10px] mb-1 pt-0.5">
+                    <span className={`px-2 py-0.25 rounded-full font-cinzel font-bold uppercase tracking-wider text-[10px] ${
                       isTitle ? 'bg-ember/15 text-ember border border-ember/60' : 'bg-ink-2 text-crimson-2 border border-crimson/40'
                     }`}>
                       {tier.badge}
@@ -141,26 +141,26 @@ const Sponsorships: React.FC = () => {
 
 
                    {/* Tier Title */}
-                   <h3 className="font-cinzel-dec text-lg font-black text-white text-center group-hover:text-bone transition-colors">
+                   <h3 className="font-cinzel-dec text-base font-black text-white text-center group-hover:text-bone transition-colors">
                      {tier.name}
                    </h3>
-                   <p className="font-cinzel text-[11px] text-gold/90 italic text-center">
+                   <p className="font-cinzel text-[10px] text-gold/90 italic text-center">
                      "{tier.gotTitle}"
                    </p>
                    {/* sigil rule */}
-                   <div className="flex items-center justify-center gap-2 mt-1 mb-3" aria-hidden="true">
-                     <span className="h-px w-10 bg-gradient-to-r from-transparent to-crimson-2/60" />
-                     <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
-                     <span className="h-px w-10 bg-gradient-to-l from-transparent to-crimson-2/60" />
+                   <div className="flex items-center justify-center gap-1.5 mt-0.5 mb-2" aria-hidden="true">
+                     <span className="h-px w-8 bg-gradient-to-r from-transparent to-crimson-2/60" />
+                     <span className="h-1 w-1 rotate-45 bg-ember/80" />
+                     <span className="h-px w-8 bg-gradient-to-l from-transparent to-crimson-2/60" />
                    </div>
                    {/* Slot Availability */}
-                   <div className="p-2 bg-ink/80 border border-iron mb-3 text-center">
-                     <span className="text-[9px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
-                     <span className={`font-cinzel text-sm sm:text-base font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
+                   <div className="p-1.5 bg-ink/80 border border-iron mb-2 text-center">
+                     <span className="text-[8px] text-bone-dim uppercase font-cinzel block">Royal Availability</span>
+                     <span className={`font-cinzel text-xs sm:text-sm font-extrabold ${isTitle ? 'text-gold-2' : 'text-gold-2'}`}>
                        {tier.slots}
                      </span>
                    </div>
-                   <p className="text-[11px] text-bone-dim leading-relaxed mb-3 text-center">
+                   <p className="text-[10px] text-bone-dim leading-relaxed mb-2 text-center">
                      {tier.description}
                    </p>
 
@@ -176,7 +176,7 @@ const Sponsorships: React.FC = () => {
                         tier.brands!.map((brand) => (
                           <span
                             key={brand}
-                            className="group/brand inline-flex items-center gap-1.5 px-2.5 py-1 bg-ink/70 border border-crimson/40 text-gold-2 text-[11px] font-cinzel tracking-wide transition-colors hover:border-ember hover:bg-ink-3/70"
+                            className="group/brand inline-flex items-center gap-1.5 px-3 py-1.5 bg-ink/70 border border-crimson/40 text-gold-2 text-[13px] font-cinzel tracking-wide transition-colors hover:border-ember hover:bg-ink-3/70"
                           >
                             <span className="h-1 w-1 rotate-45 bg-ember transition-transform group-hover/brand:scale-150" />
                             {brand}
@@ -239,7 +239,7 @@ const Sponsorships: React.FC = () => {
         {/* sigil rule */}
         <div className="flex items-center justify-center gap-2 pt-3" aria-hidden="true">
           <span className="h-px w-16 bg-gradient-to-r from-transparent to-crimson-2/60" />
-          <span className="h-1.5 w-1.5 rotate-45 bg-ember/80" />
+          <span className="h-1 w-1 rotate-45 bg-ember/80" />
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-crimson-2/60" />
         </div>
 
