@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import confetti from 'canvas-confetti';
 import { FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
 import { HOUSE_DETAILS, type HouseKeeper, type HouseMoment } from '../data/houseDetails';
 import { ClubHouse, PageType } from '../types';
@@ -226,9 +225,10 @@ export const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPle
 
 
 
-  const handlePledge = (house: ClubHouse) => {
+  const handlePledge = async (house: ClubHouse) => {
     onPledgeHouse(house);
     try {
+      const { default: confetti } = await import('canvas-confetti');
       confetti({
         particleCount: 90,
         spread: 80,

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { X, Shield, Sparkles, Crown } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { SORTING_QUESTIONS, FOUR_HOUSES } from '../data/festData';
 import { ClubHouse } from '../types';
 import ResponsiveImg from './ui/ResponsiveImg';
@@ -49,7 +48,7 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSelectOption = (houseId: string) => {
+  const handleSelectOption = async (houseId: string) => {
     const updated = { ...houseTallies, [houseId]: houseTallies[houseId] + 1 };
     setHouseTallies(updated);
 
@@ -68,8 +67,9 @@ export const SortingQuizModal: React.FC<SortingQuizModalProps> = ({
       const matched = FOUR_HOUSES.find(h => h.id === highestHouseId) || FOUR_HOUSES[0];
       setSortedHouse(matched);
 
-      // Confetti burst
+      // Confetti burst — dynamically imported to keep initial bundle small
       try {
+        const { default: confetti } = await import('canvas-confetti');
         confetti({
           particleCount: 80,
           spread: 70,

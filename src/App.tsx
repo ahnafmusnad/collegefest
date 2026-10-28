@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { PageType, ClubHouse, Segment } from './types';
 import { FOUR_HOUSES } from './data/festData';
 import { Navbar } from './components/Navbar';
@@ -12,13 +12,13 @@ import { ClubLoreModal } from './components/ClubLoreModal';
 import { ScrollToTop } from './components/ScrollToTop';
 import { AncientScriptureBackground } from './components/AncientScriptureBackground';
 import { InAppBrowserGate } from './components/InAppBrowserGate';
-// Pages
+// Pages — Home loads eagerly (landing page), others lazy-loaded for smaller initial bundle
 import { Home } from './pages/Home';
-import { FestDescription } from './pages/FestDescription';
-import { Clubs } from './pages/Clubs';
-import { Segments } from './pages/Segments';
-import { Sponsorships } from './pages/Sponsorships';
-import { Organizers } from './pages/Organizers';
+const FestDescription = lazy(() => import('./pages/FestDescription'));
+const Clubs = lazy(() => import('./pages/Clubs'));
+const Segments = lazy(() => import('./pages/Segments'));
+const Sponsorships = lazy(() => import('./pages/Sponsorships'));
+const Organizers = lazy(() => import('./pages/Organizers'));
 
 const PAGE_TYPES: PageType[] = [
   'home',
@@ -185,44 +185,46 @@ export function App() {
           transforms (3D flips, sideways sweeps) from widening the document
           and dragging the fixed header/loader out of the viewport. */}
       <main className="flex-1 relative z-10 overflow-x-clip">
-        {currentPage === 'home' && (
-          <Home
-            onNavigate={handleNavigate}
-            onOpenSortingQuiz={() => setSortingQuizOpen(true)}
-            onOpenLore={setLoreHouse}
-            userPledgedHouse={userPledgedHouse}
-          />
-        )}
+        <Suspense fallback={<div className="min-h-[60vh] flex flex-col items-center justify-center pt-24 text-bone/60 font-cinzel text-xl">Loading realm...</div>}>
+          {currentPage === 'home' && (
+            <Home
+              onNavigate={handleNavigate}
+              onOpenSortingQuiz={() => setSortingQuizOpen(true)}
+              onOpenLore={setLoreHouse}
+              userPledgedHouse={userPledgedHouse}
+            />
+          )}
 
-        {currentPage === 'description' && (
-          <FestDescription
-            onOpenTickify={() => handleOpenTickify()}
-          />
-        )}
+          {currentPage === 'description' && (
+            <FestDescription
+              onOpenTickify={() => handleOpenTickify()}
+            />
+          )}
 
-        {currentPage === 'clubs' && (
-          <Clubs
-            onNavigate={handleNavigate}
-            onPledgeHouse={handlePledgeHouse}
-            userPledgedHouse={userPledgedHouse}
-            focusHouseId={focusHouseId}
-          />
-        )}
+          {currentPage === 'clubs' && (
+            <Clubs
+              onNavigate={handleNavigate}
+              onPledgeHouse={handlePledgeHouse}
+              userPledgedHouse={userPledgedHouse}
+              focusHouseId={focusHouseId}
+            />
+          )}
 
-        {currentPage === 'segments' && (
-          <Segments
-            onOpenRulesModal={handleOpenRules}
-            onRegisterTickify={(name) => handleOpenTickify(name)}
-          />
-        )}
+          {currentPage === 'segments' && (
+            <Segments
+              onOpenRulesModal={handleOpenRules}
+              onRegisterTickify={(name) => handleOpenTickify(name)}
+            />
+          )}
 
-        {currentPage === 'sponsorships' && (
-          <Sponsorships />
-        )}
+          {currentPage === 'sponsorships' && (
+            <Sponsorships />
+          )}
 
-        {currentPage === 'organizers' && (
-          <Organizers />
-        )}
+          {currentPage === 'organizers' && (
+            <Organizers />
+          )}
+        </Suspense>
       </main>
 
       {/* Global Footer */}

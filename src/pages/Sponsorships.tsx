@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SPONSOR_TIERS } from '../data/festData';
-import confetti from 'canvas-confetti';
 import { Reveal } from '../components/Reveal';
 import PageHero from '../components/ui/PageHero';
 import { TiltCard } from '../components/TiltCard';
@@ -32,10 +31,11 @@ export const Sponsorships: React.FC = () => {
   });
 
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormSubmitted(true);
     try {
+      const { default: confetti } = await import('canvas-confetti');
       confetti({
         particleCount: 70,
         spread: 60,
