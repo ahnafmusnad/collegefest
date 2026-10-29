@@ -17,8 +17,6 @@ const HOLD_MS = 3000;        // how long the emblem shows before the dissolve
 const EXIT_MS = 700;         // must match the .cl-loader transition in index.css
 const MAX_IMG_WAIT_MS = 1200; // never wait longer than this for the image
 const EMBLEM_SRC = '/images/carnaval-loader.webp';
-const EMBLEM_SRC_480 = '/images/carnaval-loader.480.webp';
-const EMBLEM_SRC_800 = '/images/carnaval-loader.800.webp';
 
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({
@@ -103,53 +101,29 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
       aria-live="polite"
     >
       <div className="cl-stage" key={run}>
-        <picture key={run}>
-          <source
-            srcSet={EMBLEM_SRC_480}
-            media="(max-width: 767px)"
-            type="image/webp"
-          />
-          <source
-            srcSet={EMBLEM_SRC_800}
-            media="(max-width: 1023px)"
-            type="image/webp"
-          />
-          <img
-            ref={imgRef}
-            className="cl-emblem"
-            src={EMBLEM_SRC}
-            alt=""
-            width={1024}
-            height={537}
-            decoding="async"
-            fetchPriority="high"
-            draggable={false}
-            onLoad={() => setReady(true)}
-            onError={() => setReady(true)}
-          />
-        </picture>
-        <picture key={`${run}-glow`}>
-          <source
-            srcSet={EMBLEM_SRC_480}
-            media="(max-width: 767px)"
-            type="image/webp"
-          />
-          <source
-            srcSet={EMBLEM_SRC_800}
-            media="(max-width: 1023px)"
-            type="image/webp"
-          />
-          <img
-            className="cl-glow"
-            src={EMBLEM_SRC}
-            alt=""
-            width={1024}
-            height={537}
-            decoding="async"
-            draggable={false}
-            aria-hidden="true"
-          />
-        </picture>
+        <img
+          ref={imgRef}
+          className="cl-emblem"
+          src={EMBLEM_SRC}
+          alt=""
+          width={1024}
+          height={537}
+          decoding="async"
+          fetchPriority="high"
+          draggable={false}
+          onLoad={() => setReady(true)}
+          onError={() => setReady(true)}
+        />
+        <img
+          className="cl-glow"
+          src={EMBLEM_SRC}
+          alt=""
+          width={1024}
+          height={537}
+          decoding="async"
+          draggable={false}
+          aria-hidden="true"
+        />
         <div className="cl-sheen" aria-hidden="true" />
       </div>
       <span className="cl-sr">Entering {targetPageName}…</span>
