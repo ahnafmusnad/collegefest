@@ -1895,9 +1895,10 @@
 
 
 /* ============================================================
-   LOADING SCREEN: "Winter Is Coming"
-   Ported from the carnival-cc project, colours mapped to the
-   teal / silver palette. All names are prefixed cl- on purpose.
+   LOADING SCREEN: "Carnaval" emblem
+   Whole emblem fades in evenly -> blooms with a cyan glow ->
+   a light sheen glides across the metal -> glow breathes -> exit.
+   Only opacity + transform are animated (GPU-composited, cheap).
    ============================================================ */
 .cl-loader {
   position: fixed;
@@ -1906,142 +1907,141 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 60%, #0b282a 0%, #020a0b 70%);
-  transition:
-    opacity 1s cubic-bezier(0.77, 0, 0.18, 1),
-    visibility 1s,
-    transform 1.2s cubic-bezier(0.77, 0, 0.18, 1),
-    filter 1s;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, #031516 0%, #010607 55%, #000 100%);
+  transition: opacity 0.7s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.7s;
 }
 .cl-loader--done {
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.18);
-  filter: blur(8px);
   pointer-events: none;
 }
 
 
-.cl-frost {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 0 0, rgba(201, 210, 210, 0.22), transparent 35%),
-    radial-gradient(circle at 100% 0, rgba(201, 210, 210, 0.18), transparent 35%),
-    radial-gradient(circle at 0 100%, rgba(201, 210, 210, 0.18), transparent 35%),
-    radial-gradient(circle at 100% 100%, rgba(201, 210, 210, 0.22), transparent 35%);
-  opacity: 0;
-  animation: cl-frost-creep 2.8s ease-out forwards;
-}
-@keyframes cl-frost-creep {
-  to { opacity: 1; transform: scale(1.05); }
-}
-
-
-.cl-inner {
+/* the emblem box keeps the PNG's exact aspect ratio */
+.cl-stage {
   position: relative;
-  text-align: center;
-  padding: 0 1.5rem;
-}
-
-
-.cl-sigil {
-  display: flex;
-  justify-content: center;
-  color: #e7e3d8;
-  margin-bottom: 1.4rem;
-  animation: cl-spin 5s linear infinite;
-  filter: drop-shadow(0 0 18px rgba(248, 248, 248, 0.6));
-}
-.cl-sigil svg {
-  width: 3.2rem;
-  height: 3.2rem;
-}
-@keyframes cl-spin {
-  to { transform: rotate(360deg); }
-}
-
-
-.cl-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 700;
-  color: #e7e3d8;
-  font-size: clamp(2rem, 7vw, 4.6rem);
-  letter-spacing: 0.12em;
-  line-height: 1.15;
-}
-.cl-title span {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(14px);
-  letter-spacing: 0.6em;
-  transform: translateY(20px);
-  animation: cl-word 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.cl-title span:nth-child(1) { animation-delay: 0.25s; }
-.cl-title span:nth-child(2) { animation-delay: 0.75s; }
-.cl-title span:nth-child(3) { animation-delay: 1.25s; color: #c9d2d2; }
-@keyframes cl-word {
-  to {
-    opacity: 1;
-    filter: blur(0);
-    letter-spacing: 0.12em;
-    transform: none;
-    text-shadow: 0 0 30px rgba(231, 227, 216, 0.18);
-  }
-}
-
-
-.cl-bar {
-  position: relative;
-  width: min(300px, 70vw);
-  height: 2px;
-  margin: 2rem auto 1.2rem;
+  width: min(1024px, 94vw);
+  aspect-ratio: 1024 / 537;
   overflow: hidden;
-  background: rgba(47, 85, 87, 0.55);
+  isolation: isolate;
+  /* feather all four edges into the black background (static, no cost) */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.cl-bar span {
+/* phones in portrait: let the bars run off-screen so the wordmark is bigger */
+@media (orientation: portrait) and (max-width: 700px) {
+  .cl-stage { width: 165vw; }
+}
+.cl-loader--done .cl-stage { transform: scale(1.06); }
+
+
+.cl-emblem,
+.cl-glow {
   position: absolute;
   inset: 0;
-  width: 0;
-  background: linear-gradient(90deg, #145e62, #e7e3d8);
-  box-shadow: 0 0 14px rgba(248, 248, 248, 0.7);
-  animation: cl-bar 2.6s cubic-bezier(0.77, 0, 0.18, 1) forwards;
-}
-@keyframes cl-bar {
-  to { width: 100%; }
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 
-.cl-sub {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #9e9f9f;
+/* 1. even reveal — the full emblem appears at once, no wipe */
+.cl-emblem {
   opacity: 0;
-  animation: cl-sub 1s 1.8s forwards;
+  transform: scale(1.035);
+  animation: cl-emblem-in 1.2s cubic-bezier(0.22, 0.7, 0.2, 1) 0.15s both;
 }
-@keyframes cl-sub {
-  to { opacity: 1; }
+@keyframes cl-emblem-in {
+  from { opacity: 0; transform: scale(1.035); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+
+/* 2. glow — a pre-blurred, brightened copy of the emblem screened on top.
+      The filter is static (rendered once); only its opacity animates. */
+.cl-glow {
+  opacity: 0;
+  filter: blur(10px) brightness(1.5) contrast(1.9) saturate(1.6);
+  mix-blend-mode: screen;
+  animation:
+    cl-glow 2.4s cubic-bezier(0.3, 0, 0.3, 1) 0.75s both,
+    cl-breathe 2.2s ease-in-out 3.15s infinite alternate;
+}
+@keyframes cl-glow {
+  0%   { opacity: 0; }
+  40%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+@keyframes cl-breathe {
+  from { opacity: 0.4; }
+  to   { opacity: 0.65; }
+}
+
+
+/* 3. sheen — one soft band of light crosses the metal.
+      overlay blend leaves the black areas black, so only the
+      silver lettering and bevels catch the light. */
+.cl-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(160, 255, 255, 0.35) 46%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(160, 255, 255, 0.35) 54%,
+    transparent 62%
+  );
+  mix-blend-mode: overlay;
+  transform: translateX(-110%);
+  animation: cl-sheen 1.4s cubic-bezier(0.45, 0, 0.2, 1) 1.05s both;
+}
+@keyframes cl-sheen {
+  from { transform: translateX(-110%); }
+  to   { transform: translateX(110%); }
+}
+
+
+/* everything waits until the image has actually loaded */
+.cl-loader .cl-emblem,
+.cl-loader .cl-glow,
+.cl-loader .cl-sheen { animation-play-state: paused; }
+.cl-loader--ready .cl-emblem,
+.cl-loader--ready .cl-glow,
+.cl-loader--ready .cl-sheen { animation-play-state: running; }
+
+
+/* screen-reader-only status text */
+.cl-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 
 @media (prefers-reduced-motion: reduce) {
-  .cl-frost { animation: none; opacity: 1; }
-  .cl-sigil { animation: none; }
-  .cl-title span {
-    animation: none;
-    opacity: 1;
-    filter: none;
-    letter-spacing: 0.12em;
-    transform: none;
-  }
-  .cl-bar span { animation: none; width: 100%; }
-  .cl-sub { animation: none; opacity: 1; }
-  .cl-loader { transition: opacity 0.3s; }
-  .cl-loader--done { transform: none; filter: none; }
+  .cl-emblem { animation: none; opacity: 1; transform: none; }
+  .cl-glow   { animation: none; opacity: 0.45; }
+  .cl-sheen  { display: none; }
+  .cl-loader--done .cl-stage { transform: none; }
 }
+
+
+
 
 
 
