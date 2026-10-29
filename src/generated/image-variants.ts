@@ -12,7 +12,10 @@ export const IMAGE_VARIANTS: Record<string, number[]> = {
     480,
     800
   ],
-  "/club-logos/ccps-photographic-society.webp": [],
+  "/club-logos/ccps-photographic-society.webp": [
+    480,
+    800
+  ],
   "/club-logos/muses-english-literature.webp": [
     480,
     800
