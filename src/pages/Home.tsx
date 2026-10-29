@@ -137,15 +137,15 @@ export const Home: React.FC<HomeProps> = ({
               REGISTER VIA TICKIFY
             </Button>
 
-            {/* Explore Tourneys */}
+            {/* Explore Segments */}
             <Button
               variant="glass"
-              mobileLabel="Explore"
+              mobileLabel="Segments"
               onClick={() => {
                 onNavigate('segments');
               }}
             >
-              Explore Tourneys
+              Explore Segments
             </Button>
 
             {/* Sorting Quiz */}

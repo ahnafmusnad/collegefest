@@ -956,10 +956,10 @@
   height: 2.9rem;
   flex-shrink: 0;
   border-radius: 9999px;
-  border: 1px solid rgba(158, 159, 159, 0.7);
-  background: #fff;
+  border: 3px solid rgba(231, 227, 216, 0.9);
+  background: transparent;
   object-fit: contain;
-  padding: 0.32rem;
+  padding: 0;
 }
 .hs-name {
   margin-top: 0.8rem;
@@ -3818,16 +3818,17 @@ a.btn,
 /* ---------- Logo medallion ---------- */
 .hh-medallion {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   width: 76px;
   height: 76px;
-  padding: 7px;
+  padding: 0;
+  background: transparent;
   border-radius: 9999px;
-  background: #e7e3d8;
-  border: 2px solid #9e9f9f;
-  box-shadow: 0 0 0 4px #061a1c, 0 0 0 5px rgba(91, 201, 214, 0.5), 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 4px solid rgba(231, 227, 216, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 .hh-medallion img {
   width: 100%;
@@ -3838,27 +3839,26 @@ a.btn,
 .hh-medallion--lg {
   width: 96px;
   height: 96px;
-  padding: 9px;
-  margin: 0 auto;
-  box-shadow: 0 0 0 4px #061a1c, 0 0 0 5px rgba(91, 201, 214, 0.55), 0 0 30px rgba(31, 143, 150, 0.45);
+  padding: 0;
+  box-shadow: none;
 }
 @media (min-width: 640px) {
   .hh-medallion--lg {
     width: 136px;
     height: 136px;
-    padding: 12px;
-    box-shadow: 0 0 0 6px #061a1c, 0 0 0 7px rgba(91, 201, 214, 0.55), 0 0 40px rgba(31, 143, 150, 0.45);
+    padding: 0;
+    box-shadow: none;
   }
 }
 .hh-medallion--sm {
   width: 46px;
   height: 46px;
-  padding: 4px;
-  box-shadow: 0 0 0 2px #061a1c, 0 0 0 3px rgba(91, 201, 214, 0.45);
+  padding: 0;
+  box-shadow: none;
 }
 @media (max-width: 639px) {
   .hh-banner__cloth { padding: 1.3rem 0.65rem 1.4rem; }
-  .hh-banner .hh-medallion { width: 58px; height: 58px; padding: 5px; }
+  .hh-banner .hh-medallion { width: 58px; height: 58px; padding: 0; }
 }
 
 
