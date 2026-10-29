@@ -4,7 +4,6 @@ import { FEST_METADATA } from '../data/festData';
 import Button from './ui/Button';
 import { RealmMapNav } from './RealmMapNav';
 import { CloudSnow } from 'lucide-react';
-import ResponsiveImg from './ui/ResponsiveImg';
 
 interface NavbarProps {
   currentPage: PageType;
@@ -56,14 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 text-left shrink-0 focus:outline-none"
             >
-              <ResponsiveImg
-                src="/images/club-logos/ccps-logo.webp"
-                alt="CCPS — Chittagong College Photographic Society"
-                sizes="(max-width: 767px) 48px, (max-width: 1023px) 64px, 80px"
-                loading="eager"
-                decoding="sync"
-                className="h-10 md:h-11 w-auto shrink-0"
-              />
+              <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-10 md:h-11 w-auto" />
               <span className="hidden sm:block w-px h-9 bg-iron" />
               <span className="flex flex-col leading-none">
                 <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
