@@ -104,7 +104,7 @@ export function App() {
     };
   }, []);
 
-  // Page Navigation with Cinematic "Winter is Coming" Loading Screen
+  // Page Navigation — no loading screen between pages, only on initial load
   const handleNavigate = useCallback((page: PageType) => {
     if (page === currentPage) {
       window.history.replaceState(null, '', pageToPath(page));
@@ -113,7 +113,8 @@ export function App() {
     }
     window.history.pushState(null, '', pageToPath(page));
     setTargetPage(page);
-    setIsLoading(true);
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
   const handleLoadingFinish = useCallback(() => {
