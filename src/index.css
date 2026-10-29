@@ -1935,9 +1935,13 @@
   mask-composite: intersect;
   transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
 }
-/* phones in portrait: let the bars run off-screen so the wordmark is bigger */
-@media (orientation: portrait) and (max-width: 700px) {
-  .cl-stage { width: 165vw; }
+/* phones: let the emblem run wider so the wordmark stays readable */
+@media (max-width: 767px) {
+  .cl-stage { width: min(640px, 90vw); }
+}
+/* tablets: medium size between mobile and desktop */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cl-stage { width: min(800px, 92vw); }
 }
 .cl-loader--done .cl-stage { transform: scale(1.06); }
 
