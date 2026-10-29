@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-3 text-left shrink-0 focus:outline-none"
             >
               <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-9 md:h-10 w-auto" />
-              <span className="font-got text-base md:text-lg tracking-wide text-white">CARNAVAL</span>
+              <span className="font-got text-base md:text-lg tracking-wide text-gold-2">CARNAVAL</span>
             </button>
 
             {/* Right Action Icons */}
