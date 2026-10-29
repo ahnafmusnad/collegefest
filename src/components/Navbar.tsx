@@ -55,12 +55,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 text-left shrink-0 focus:outline-none"
             >
-              <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-10 md:h-11 w-auto" />
-              <span className="hidden sm:block w-px h-9 bg-iron" />
-              <span className="flex flex-col leading-none">
-                <span className="font-cinzel text-lg md:text-xl font-bold tracking-[0.22em] text-white">CARNAVAL</span>
-                <span className="font-cinzel text-[9px] md:text-[10px] tracking-[0.3em] text-bone-dim mt-1.5 uppercase">Da Chittagong College</span>
-              </span>
+              <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-9 md:h-10 w-auto" />
+              <span className="font-got text-base md:text-lg tracking-wide text-white">CARNAVAL</span>
             </button>
 
             {/* Right Action Icons */}

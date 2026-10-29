@@ -87,8 +87,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span className="block font-cinzel text-[10px] font-bold uppercase tracking-[0.28em] text-gold">
                   Chittagong College &bull; Est. 1869
                 </span>
-                <span className="block font-cinzel-dec text-xl font-black text-white">
-                  CARNAVAL DA CC
+                <span className="block font-got text-lg md:text-xl text-white tracking-wide">
+                  CARNAVAL
                 </span>
               </div>
             </div>
