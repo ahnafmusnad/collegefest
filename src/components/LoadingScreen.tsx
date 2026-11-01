@@ -124,7 +124,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           draggable={false}
           aria-hidden="true"
         />
-        <div className="cl-sheen" aria-hidden="true" />
       </div>
       <span className="cl-sr">Entering {targetPageName}…</span>
     </div>

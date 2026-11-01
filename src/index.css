@@ -1917,34 +1917,20 @@
 }
 
 
-/* the emblem box keeps the PNG's exact aspect ratio */
 .cl-stage {
-  position: relative;
-  width: min(1024px, 94vw);
-  aspect-ratio: 1024 / 537;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  isolation: isolate;
-  /* feather all four edges into the black background (static, no cost) */
-  -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  mask-composite: intersect;
   transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
 }
-/* phones: let the emblem run wider so the wordmark stays readable */
-@media (max-width: 767px) {
-  .cl-stage { width: min(640px, 90vw); }
+/* tablets & desktop: pad inward so emblem doesn't collide with screen edges */
+@media (min-width: 768px) {
+  .cl-stage { inset: 4vh 8vw; width: auto; height: auto; }
 }
-/* tablets: medium size between mobile and desktop */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .cl-stage { width: min(800px, 92vw); }
-}
-.cl-loader--done .cl-stage { transform: scale(1.06); }
-
 
 .cl-emblem,
 .cl-glow {
@@ -1952,6 +1938,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: contain;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
@@ -1992,38 +1979,11 @@
 }
 
 
-/* 3. sheen — one soft band of light crosses the metal.
-      overlay blend leaves the black areas black, so only the
-      silver lettering and bevels catch the light. */
-.cl-sheen {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(160, 255, 255, 0.35) 46%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(160, 255, 255, 0.35) 54%,
-    transparent 62%
-  );
-  mix-blend-mode: overlay;
-  transform: translateX(-110%);
-  animation: cl-sheen 1.4s cubic-bezier(0.45, 0, 0.2, 1) 1.05s both;
-}
-@keyframes cl-sheen {
-  from { transform: translateX(-110%); }
-  to   { transform: translateX(110%); }
-}
-
-
 /* everything waits until the image has actually loaded */
 .cl-loader .cl-emblem,
-.cl-loader .cl-glow,
-.cl-loader .cl-sheen { animation-play-state: paused; }
+.cl-loader .cl-glow { animation-play-state: paused; }
 .cl-loader--ready .cl-emblem,
-.cl-loader--ready .cl-glow,
-.cl-loader--ready .cl-sheen { animation-play-state: running; }
+.cl-loader--ready .cl-glow { animation-play-state: running; }
 
 
 /* screen-reader-only status text */
@@ -2040,7 +2000,6 @@
 @media (prefers-reduced-motion: reduce) {
   .cl-emblem { animation: none; opacity: 1; transform: none; }
   .cl-glow   { animation: none; opacity: 0.45; }
-  .cl-sheen  { display: none; }
   .cl-loader--done .cl-stage { transform: none; }
 }
 
