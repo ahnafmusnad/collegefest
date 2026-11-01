@@ -1929,7 +1929,13 @@
 }
 /* tablets & desktop: pad inward so emblem doesn't collide with screen edges */
 @media (min-width: 768px) {
-  .cl-stage { inset: 4vh 8vw; width: auto; height: auto; }
+  .cl-stage { inset: 4vh 8vw; width: auto; height: auto; transform: scale(1.1); }
+}
+/* mobile: zoom the emblem in more so it fills the screen */
+@media (max-width: 767px) {
+  .cl-stage {
+    transform: scale(1.3);
+  }
 }
 
 .cl-emblem,

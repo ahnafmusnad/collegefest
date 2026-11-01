@@ -53,10 +53,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Brand Logo & Sigil */}
             <button
               onClick={() => handleNavClick('home')}
-              className="flex items-center gap-3 text-left shrink-0 focus:outline-none"
+              className="flex items-center gap-1.5 sm:gap-3 text-left shrink-0 focus:outline-none"
             >
               <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-9 md:h-10 w-auto" />
-              <span className="font-got text-base md:text-lg tracking-wide text-gold-2">CARNAVAL</span>
+              <span className="font-cinzel-dec text-sm sm:text-base md:text-lg tracking-wide text-[#5bc9d6] drop-shadow-[0_0_12px_rgba(91,201,214,0.6)]">CARNAVAL</span>
             </button>
 
             {/* Right Action Icons */}
