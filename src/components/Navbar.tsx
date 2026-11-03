@@ -3,7 +3,7 @@ import { PageType } from '../types';
 import { FEST_METADATA } from '../data/festData';
 import Button from './ui/Button';
 import { RealmMapNav } from './RealmMapNav';
-import { CloudSnow } from 'lucide-react';
+import { CloudSnow, Swords } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: PageType;
@@ -56,11 +56,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-1.5 sm:gap-3 text-left shrink-0 focus:outline-none"
             >
               <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-9 md:h-10 w-auto" />
-              <span className="font-cinzel-dec text-sm sm:text-base md:text-lg tracking-wide text-[#5bc9d6] drop-shadow-[0_0_12px_rgba(91,201,214,0.6)]">CARNAVAL</span>
+              <span className="brand-sigil font-cinzel-dec text-sm sm:text-base md:text-lg tracking-wide">CARNAVAL</span>
             </button>
 
             {/* Right Action Icons */}
-            <div className="flex items-center gap-2 md:gap-3 shrink-0">
+            <div className="flex items-center gap-2 md:gap-3 shrink-0 mr-2 sm:mr-4">
               {/* Snowfall Intensity Toggle */}
               <button
                 onClick={onToggleSnow}
@@ -85,11 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 aria-expanded={mapOpen}
                 title="Open the menu"
               >
-                <span className={`burger-icon ${mapOpen ? 'burger-icon--open' : ''}`} aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </span>
+                <Swords className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden min-[1180px]:inline font-cinzel text-[11px] font-semibold uppercase tracking-[0.16em]">Menu</span>
               </button>
             </div>

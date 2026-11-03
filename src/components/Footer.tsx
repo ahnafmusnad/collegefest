@@ -1,9 +1,12 @@
 import React from 'react';
 import { PageType } from '../types';
-import { MapPin, Mail, Globe } from 'lucide-react';
+import { MapPin, Mail, Globe, CalendarDays, MapPinned, Ticket, Crown } from 'lucide-react';
 import { SocialGlyph } from './ui/Glyphs';
-import { SOCIAL_LINKS } from '../data/festData';
-/* Small round social chip — same hover language as the menu socials */
+import { SOCIAL_LINKS, FOUR_HOUSES, FEST_METADATA } from '../data/festData';
+
+
+/* Small round social chip — hover rides the theme tokens (gold-2 /
+   crimson-2) so it re-tints itself when the golden lamp is lit. */
 const FooterSocial: React.FC<{ href: string; label: string; children: React.ReactNode }> = ({ href, label, children }) => (
   <a
     href={href}
@@ -11,14 +14,18 @@ const FooterSocial: React.FC<{ href: string; label: string; children: React.Reac
     rel="noreferrer"
     aria-label={label}
     title={label}
-    className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-iron/60 bg-ink-2/70 text-bone-dim transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5bc9d6]/70 hover:text-[#9fe0d4] hover:shadow-[0_0_14px_-4px_rgba(91,201,214,0.6)]"
+    className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-iron/60 bg-ink-2/70 text-bone-dim transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-2/70 hover:text-gold-2 hover:shadow-[0_0_14px_-4px_rgba(216,222,217,0.55)]"
   >
     {children}
   </a>
 );
+
+
 interface FooterProps {
   onNavigate: (page: PageType) => void;
 }
+
+
 /* A single realm link — diamond marker fades in and the
    line steps toward it on hover. */
 const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
@@ -35,6 +42,8 @@ const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = 
     </button>
   </li>
 );
+
+
 /* Column heading with a forged diamond marker */
 const FooterHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h4 className="mb-5 flex items-center gap-2.5 font-cinzel text-xs font-bold uppercase tracking-[0.22em] text-gold-2">
@@ -42,11 +51,19 @@ const FooterHeading: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     {children}
   </h4>
 );
+
+
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="relative z-10 overflow-hidden border-t border-crimson/20 bg-gradient-to-b from-ink via-ink to-ink pt-16 pb-10 text-bone-dim">
-      {/* ---- Valyrian steel top divider: hairlines meeting a center gem ---- */}
-      <div className="absolute top-0 left-0 right-0" aria-hidden="true">
+
+
+      {/* ---- Castle battlement rim along the very top edge ---- */}
+      <div className="footer-battlement absolute top-0 left-0 right-0" aria-hidden="true" />
+
+
+      {/* ---- Valyrian steel divider: hairlines meeting a center gem ---- */}
+      <div className="absolute top-[14px] left-0 right-0" aria-hidden="true">
         <div className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
         <div className="relative mx-auto -mt-[5px] flex w-fit items-center justify-center">
           <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold/60" />
@@ -54,23 +71,64 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold/60" />
         </div>
       </div>
-      {/* faint ambient glow + watermark */}
+
+
+      {/* faint ambient glow (class-based so the gold theme re-tints it) */}
       <div
-        className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[70%] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(23,104,110,0.25), transparent 70%)' }}
+        className="footer-glow pointer-events-none absolute -top-24 left-1/2 h-48 w-[70%] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
         aria-hidden="true"
       />
+
+
+      {/* ghost watermarks */}
       <span
         className="pointer-events-none absolute -right-6 bottom-6 select-none font-cinzel-dec text-[11rem] font-black leading-none text-white/[0.025]"
         aria-hidden="true"
       >
         1869
       </span>
+      <img
+        src="/images/college-crest.webp"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-10 bottom-10 w-48 select-none opacity-[0.04] grayscale"
+      />
+
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+
+        {/* ---- Royal Proclamation strip: date ♦ venue ♦ passes ---- */}
+        <div className="mb-14 flex flex-col items-center justify-center gap-4 border-y border-iron/40 py-5 text-center sm:flex-row sm:gap-6">
+          <span className="inline-flex items-center gap-2 font-garamond text-sm italic text-bone">
+            <CalendarDays className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+            December 18–19, 2026
+          </span>
+          <span className="hidden h-1 w-1 rotate-45 bg-gold/70 sm:block" aria-hidden="true" />
+          <span className="inline-flex items-center gap-2 font-garamond text-sm italic text-bone">
+            <MapPinned className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+            Chittagong College Heritage Campus, Chawkbazar
+          </span>
+          <span className="hidden h-1 w-1 rotate-45 bg-gold/70 sm:block" aria-hidden="true" />
+          <a
+            href={FEST_METADATA.tickifyLink}
+            target="_blank"
+            rel="noreferrer"
+            className="group/pass inline-flex items-center gap-2 font-garamond text-sm italic text-gold-2 transition-colors duration-300 hover:text-white"
+          >
+            <Ticket className="h-4 w-4 shrink-0 text-gold transition-transform duration-300 group-hover/pass:-rotate-12" aria-hidden="true" />
+            Passes live on Tickify
+            <span className="h-px w-0 bg-gold-2 transition-all duration-300 group-hover/pass:w-6" aria-hidden="true" />
+          </a>
+        </div>
+
+
         {/* ---- Main Footer Grid ---- */}
-        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {/* Fest Proclamation */}
-          <div className="space-y-4 md:col-span-2 lg:pr-10 lg:col-span-2">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+
+
+          {/* Fest Proclamation / brand */}
+          <div className="space-y-4 lg:col-span-4 lg:pr-8">
             <div className="flex items-center gap-3">
               <div className="relative flex h-11 w-11 items-center justify-center border border-gold/50 bg-ink-2">
                 <span className="absolute -top-px -left-px h-2 w-2 border-t border-l border-gold-2/70" aria-hidden="true" />
@@ -99,9 +157,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
               <span>Chawkbazar, College Road, Chittagong-4203, Bangladesh</span>
             </div>
+            {/* the Carnaval's own ravens — Facebook & Instagram */}
+            <div className="pt-1">
+              <p className="mb-2 font-cinzel text-[9px] uppercase tracking-[0.28em] text-ash">
+                Follow the Carnaval
+              </p>
+              <div className="flex items-center gap-2">
+                {SOCIAL_LINKS.filter((s) => s.url !== '#').map((s) => (
+                  <FooterSocial key={s.name} href={s.url} label={`Carnaval on ${s.name}`}>
+                    <SocialGlyph icon={s.icon} className="h-3.5 w-3.5" />
+                  </FooterSocial>
+                ))}
+              </div>
+            </div>
           </div>
+
+
           {/* Quick Realms */}
-          <nav aria-label="Footer navigation">
+          <nav aria-label="Footer navigation" className="lg:col-span-2">
             <FooterHeading>The Realms</FooterHeading>
             <ul className="space-y-2.5 font-sans text-xs">
               <RealmLink onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
@@ -112,8 +185,43 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <RealmLink onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
             </ul>
           </nav>
+
+
+          {/* The Four Great Houses — sigils & mottos */}
+          <div className="lg:col-span-3">
+            <FooterHeading>The Four Great Houses</FooterHeading>
+            <ul className="space-y-1.5">
+              {FOUR_HOUSES.map((h) => (
+                <li key={h.id}>
+                  <button
+                    onClick={() => onNavigate('clubs')}
+                    className="group/house flex w-full items-center gap-3 border border-transparent px-2 py-1.5 text-left transition-all duration-300 hover:border-iron/60 hover:bg-ink-2/70"
+                  >
+                    <img
+                      src={h.logo}
+                      alt={`${h.houseName} sigil`}
+                      className="h-7 w-7 shrink-0 rounded-full border border-iron/60 object-contain transition-transform duration-300 group-hover/house:scale-110"
+                    />
+                    <span className="min-w-0">
+                      <span className="block truncate font-cinzel text-[11px] font-bold uppercase tracking-[0.14em] text-bone transition-colors duration-300 group-hover/house:text-gold-2">
+                        {h.houseName}
+                      </span>
+                      <span className="block truncate font-garamond text-[11px] italic text-ash">
+                        &ldquo;{h.motto}&rdquo;
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 px-2 font-garamond text-[11px] italic leading-relaxed text-ash">
+              Four banners, one Citadel — pledge your allegiance at the Sorting Ceremony.
+            </p>
+          </div>
+
+
           {/* Contact Treasury */}
-          <div>
+          <div className="lg:col-span-3">
             <FooterHeading>Royal Ravens</FooterHeading>
             <div className="space-y-3 text-xs text-bone-dim">
               <p>For inquiries, partnerships or royal scrolls:</p>
@@ -136,24 +244,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <MapPin className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/map:-translate-y-0.5" />
                 <span>Find the Red Citadel on the Map</span>
               </a>
-              {/* the Carnaval's own ravens — Facebook & Instagram */}
-              <div className="pt-1">
-                <p className="mb-2 font-cinzel text-[9px] uppercase tracking-[0.28em] text-ash">
-                  Follow the Carnaval
-                </p>
-                <div className="flex items-center gap-2">
-                  {SOCIAL_LINKS.filter((s) => s.url !== '#').map((s) => (
-                    <FooterSocial key={s.name} href={s.url} label={`Carnaval on ${s.name}`}>
-                      <SocialGlyph icon={s.icon} className="h-3.5 w-3.5" />
-                    </FooterSocial>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
+
+
+        {/* ---- Crown sigil divider ---- */}
+        <div className="mb-8 flex items-center justify-center gap-3" aria-hidden="true">
+          <span className="h-px w-24 bg-gradient-to-r from-transparent to-iron/80" />
+          <Crown className="h-3.5 w-3.5 text-gold/70" />
+          <span className="h-px w-24 bg-gradient-to-l from-transparent to-iron/80" />
+        </div>
+
+
         {/* ---- Bottom Copyright ---- */}
-        <div className="border-t border-ink-2 pt-7 text-center">
+        <div className="text-center">
           <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
             &copy; 2026 Ahnaf Abrar Musnad. All rights reserved.
           </p>

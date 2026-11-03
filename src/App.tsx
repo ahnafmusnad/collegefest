@@ -3,6 +3,7 @@ import { PageType, ClubHouse, Segment } from './types';
 import { FOUR_HOUSES } from './data/festData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { ThemeLamp } from './components/ThemeLamp';
 import { SnowfallCanvas } from './components/SnowfallCanvas';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TickifyModal } from './components/TickifyModal';
@@ -44,6 +45,8 @@ export function App() {
   const [targetPage, setTargetPage] = useState<PageType>(initialPage);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Initial winter loading
   const [snowMode, setSnowMode] = useState<'gentle' | 'blizzard' | 'off'>('gentle');
+  // Golden Lamp theme — false = winter (teal/silver), true = gold
+  const [goldTheme, setGoldTheme] = useState<boolean>(false);
   
   // Modals state
   const [tickifyModalOpen, setTickifyModalOpen] = useState(false);
@@ -79,6 +82,18 @@ export function App() {
       }
     } catch {
       // localStorage policy
+    }
+  }, []);
+
+  // Restore the saved theme from localStorage on first load
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('cdcc_theme') === 'gold') {
+        setGoldTheme(true);
+        document.documentElement.setAttribute('data-theme', 'gold');
+      }
+    } catch {
+      // localStorage may be unavailable
     }
   }, []);
 
@@ -129,6 +144,23 @@ export function App() {
     setSnowMode(next);
   };
 
+  // Golden Lamp pull-cord handler — flips data-theme on <html>,
+  // which re-forges every theme token in index.css into gold
+  const handleToggleTheme = useCallback(() => {
+    setGoldTheme(prev => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.setAttribute('data-theme', 'gold');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      try {
+        localStorage.setItem('cdcc_theme', next ? 'gold' : 'winter');
+      } catch {}
+      return next;
+    });
+  }, []);
+
   // Open rules modal
   const handleOpenRules = (segment: Segment) => {
     setSelectedSegmentForRules(segment);
@@ -161,6 +193,9 @@ export function App() {
 
       {/* Dynamic Falling Snow Simulation */}
       <SnowfallCanvas intensity={snowMode} aboveLoader={isLoading} />
+
+      {/* Golden Lamp — pull-rope theme switcher, right edge */}
+      <ThemeLamp goldOn={goldTheme} onToggle={handleToggleTheme} />
 
       {/* Cinematic Winter Loading Screen */}
       <LoadingScreen
