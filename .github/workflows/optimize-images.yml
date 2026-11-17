@@ -1,0 +1,52 @@
+name: Optimize images
+
+
+on:
+  workflow_dispatch:
+
+
+permissions:
+  contents: write
+
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+
+      - name: Install sharp
+        run: npm install --no-save sharp
+
+
+      - name: Run the optimizer
+        run: node optimize-images.mjs
+
+
+      - name: Report the result
+        run: |
+          echo "public/images is now:"
+          du -sh public/images
+          echo
+          find public/images -type f | sort
+
+
+      - name: Commit the optimized images back
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A public/images src
+          if git diff --cached --quiet; then
+            echo "No changes to commit - images were already optimized."
+          else
+            git commit -m "perf: convert images to WebP, delete unused and duplicate assets"
+            git push
+          fi

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.log
+prompt.txt
+imageaddition.txt
+club logos/

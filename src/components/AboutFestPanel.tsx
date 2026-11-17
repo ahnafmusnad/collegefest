@@ -1,0 +1,28 @@
+// EDIT THESE LATER: the paragraphs.
+const ABOUT_TEXT = [
+  "Carnaval Da Chittagong College is the grand winter fest of Chittagong College, held on December 18–19, 2026.",
+  "Four Houses, eight segments, and a prize vault of over 150,000 BDT waiting for the victors.",
+  "Winter is coming. Choose your House, and write your name in the saga.",
+];
+export default function AboutFestPanel() {
+  return (
+    <div className="mx-auto max-w-2xl px-3 py-2 sm:px-4 sm:py-2.5">
+      <div className="space-y-2 text-left">
+        {ABOUT_TEXT.map((text, i) => (
+          <p
+            key={i}
+            className={`text-[13.5px] leading-[1.55] text-[#c9d2d2] sm:text-[14.5px] ${
+              i === 0
+                ? "first-letter:float-left first-letter:mr-1.5 first-letter:font-cinzel first-letter:text-4xl first-letter:font-bold first-letter:leading-[0.9] first-letter:text-[#e7e3d8]"
+                : ""
+            }`}
+            style={{ fontFamily: '"EB Garamond", Georgia, serif' }}
+          >
+            {text}
+          </p>
+        ))}
+      </div>
+      <div className="my-4 h-px w-full bg-[#9e9f9f]/35" />
+    </div>
+  );
+}
