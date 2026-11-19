@@ -85,7 +85,7 @@ export default function HouseScroll({
           }}
           className="hs-link"
         >
-          <span>View Lore</span>
+          <span>View More</span>
           <ArrowRight className="h-3 w-3" />
         </button>
       </div>
