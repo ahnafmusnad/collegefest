@@ -254,7 +254,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo / Duo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 18, 2026',
+    date: 'December 19, 2026',
     time: '11:00 AM onwards',
     description: 'The written crucible of House Stark. SSC and HSC-level scholars battle through conceptual and problem-solving rounds modeled on international Olympiad standards.',
     rules: [
@@ -277,7 +277,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 18, 2026',
+    date: 'December 19, 2026',
     time: '12:30 PM onwards',
     description: 'Hosted by The Muses, this written championship tests grammar, comprehension, vocabulary and literary intuition — a true trial for the wordsmiths of the realm.',
     rules: [
@@ -300,7 +300,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
-    date: 'December 18, 2026',
+    date: 'December 19, 2026',
     time: '03:00 PM onwards',
     description: 'Presented by the Photographic Society, this on-spot contest challenges shooters to capture the smallest empires — dew, brick, light and shadow — hiding in plain sight across the Citadel.',
     rules: [
