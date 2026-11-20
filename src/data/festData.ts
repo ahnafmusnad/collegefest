@@ -162,7 +162,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '3-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 18–19, 2026',
+    date: 'December 18, 2026',
     time: '10:00 AM onwards',
     description: 'The flagship oratory trial of the Carnaval. Teams from institutions across the nation clash in parliamentary battle, where the sharpest arguments and coldest nerves carry the crest.',
     rules: [
@@ -185,7 +185,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Parade Ground',
-    date: 'December 19, 2026',
+    date: 'December 18, 2026',
     time: '11:00 AM onwards',
     description: 'Teams bid gold-dragons for physics problem lots, then solve what they win. Strategy, nerve and equations collide in the Citadel’s most thrilling open-ground spectacle.',
     rules: [
@@ -231,7 +231,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-5 Members',
     entryFee: 'Tickify Pass',
     venue: 'Main Gate → Parade Ground',
-    date: 'December 19, 2026',
+    date: 'December 18, 2026',
     time: '01:00 PM onwards',
     description: 'Riddles, clues and hidden sigils scattered across the historic campus. Teams race from the Main Gate through the courts of the Red Citadel to unearth the hidden treasure.',
     rules: [
@@ -301,7 +301,7 @@ export const FEST_SEGMENTS: Segment[] = [
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
     date: 'December 19, 2026',
-    time: '03:00 PM onwards',
+    time: 'Day Long',
     description: 'Presented by the Photographic Society, this on-spot contest challenges shooters to capture the smallest empires — dew, brick, light and shadow — hiding in plain sight across the Citadel.',
     rules: [
       'On-spot macro photography within the announced campus zone.',
@@ -415,7 +415,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 19, 2026',
     time: 'Submission Window',
     description: 'Write an original short story inspired by the Carnaval theme. Imagination, narrative arc, and prose decide the champion.',
     rules: [
@@ -438,7 +438,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 19, 2026',
     time: 'Submission Window',
     description: 'An essay-style challenge that looks beyond the syllabus — on education, society, and what comes after school.',
     rules: [
@@ -461,7 +461,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 19, 2026',
     time: 'Submission Window',
     description: 'Create a digital scrapbook collage themed around Carnaval memories. Layout, creativity, and visual storytelling count.',
     rules: [
@@ -484,7 +484,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 19, 2026',
     time: 'Submission Window',
     description: 'Create an academic-themed meme that lands with students and scholars alike. Wit, relevance, and originality win.',
     rules: [
