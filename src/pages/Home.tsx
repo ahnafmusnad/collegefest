@@ -105,7 +105,7 @@ export const Home: React.FC<HomeProps> = ({
               </FitText>
             </p>
             <p className="font-cinzel text-sm sm:text-lg md:text-xl text-gold-2 font-medium tracking-widest max-w-2xl mx-auto drop-shadow-md pt-2">
-              &ldquo;Da Fucking Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
+              &ldquo;Da Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
             </p>
           </div>
 
