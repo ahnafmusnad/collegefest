@@ -16,7 +16,7 @@ const Organizers: React.FC = () => {
         image="/images/small-council-chamber.webp"
         eyebrow="The Citadel High Chamber"
         title="The Small Council & Organizers"
-        description="Meet the architects, marshals, and visionaries steering Carnaval Da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud."
+        description="Meet the architects, marshals, and visionaries steering Carnaval da Chittagong College. Bound by honor and tireless dedication, they ensure the Citadel stands proud."
       />
 
 

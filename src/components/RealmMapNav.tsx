@@ -704,7 +704,7 @@ export const RealmMapNav: React.FC<RealmMapNavProps> = ({
               >
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <p className="font-cinzel text-[9px] uppercase leading-relaxed tracking-[0.3em] text-ash">
-                    Winter is Coming <span className="text-iron">◆</span> Carnaval Da Chittagong College{' '}
+                    Winter is Coming <span className="text-iron">◆</span> Carnaval da Chittagong College{' '}
                     <span className="text-iron">◆</span> MMXXVI
                   </p>
 

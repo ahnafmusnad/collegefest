@@ -1,6 +1,6 @@
 // EDIT THESE LATER: the paragraphs.
 const ABOUT_TEXT = [
-  "Carnaval Da Chittagong College is the grand winter fest of Chittagong College, held on December 18–19, 2026.",
+  "Carnaval da Chittagong College is the grand winter fest of Chittagong College, held on December 25–26, 2026.",
   "Four Houses, eight segments, and a prize vault of over 150,000 BDT waiting for the victors.",
   "Winter is coming. Choose your House, and write your name in the saga.",
 ];

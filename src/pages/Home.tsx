@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageType, ClubHouse } from '../types';
-import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS } from '../data/festData';
+import { FEST_METADATA, FOUR_HOUSES, FEST_SEGMENTS, FAQS } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import { TiltCard } from '../components/TiltCard';
 import ResponsiveImg from '../components/ui/ResponsiveImg';
@@ -17,6 +17,9 @@ import SortingTrialBanner from '../components/SortingTrialBanner';
 import { 
   Crown, 
   Ticket, 
+  HelpCircle,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 
 /* The four headlining contests shown on the throne-room floor,
@@ -50,6 +53,11 @@ export const Home: React.FC<HomeProps> = ({
      that re-renders on its own - see where <LiveCountdown /> is used below. */
 
   const HOUSE_TILT = ['-rotate-[0.6deg]', 'rotate-[0.5deg]', '-rotate-[0.4deg]', 'rotate-[0.7deg]'];
+  const [openFaqIndex, setOpenFaqIndex] = React.useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   return (
     <div className="relative text-bone">
@@ -81,7 +89,7 @@ export const Home: React.FC<HomeProps> = ({
               line spans EXACTLY the length of the sword divider beneath it,
               on every device — the sword is the ruler of the title. */}
           <div className="hero-ruler w-full min-w-0 max-w-3xl mx-auto px-4 space-y-3">
-            <h1 aria-label="Carnaval Da Chittagong College" className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            <h1 aria-label="Carnaval da Chittagong College" className="font-got font-normal text-white tracking-[0.06em] drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
               <FitText as="span" max={168} min={20}>CARNAVAL</FitText>
             </h1>
             <SwordDivider className="!max-w-none !px-0 mt-1 mb-1" />
@@ -105,7 +113,7 @@ export const Home: React.FC<HomeProps> = ({
               </FitText>
             </p>
             <p className="font-cinzel text-sm sm:text-lg md:text-xl text-gold-2 font-medium tracking-widest max-w-2xl mx-auto drop-shadow-md pt-2">
-              &ldquo;Da Winter Is Coming &mdash; And When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
+              &ldquo;When You Play The Game Of Thrones, You Win Or You Die.&rdquo;
             </p>
           </div>
 
@@ -405,33 +413,78 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* ========================================================
-          TICKIFY PORTAL BANNER
+          ROYAL FAQ ACCORDION — ravens of inquiry
       ======================================================== */}
-      <section className="relative py-24 md:py-28 px-4 max-w-7xl mx-auto">
-        <Reveal direction="zoom">
-        <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-6 py-8 md:px-10 md:py-9">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[11px] font-cinzel uppercase tracking-widest mb-3">
-            <Ticket className="w-3.5 h-3.5 text-[#5bc9d6]" />
-            Official Ticketing Partner: Tickify
+      <section className="relative py-24 md:py-28 px-4 max-w-5xl mx-auto space-y-10">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <div className="inline-flex items-center gap-2 border border-[#5bc9d6]/40 bg-ink-2/80 px-4 py-1.5 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2] sm:text-xs">
+            <HelpCircle className="w-3.5 h-3.5" />
+            Answers from the Citadel
           </div>
-          <h2 className="font-cinzel text-lg sm:text-2xl md:text-[1.7rem] font-extrabold text-white tracking-wide mb-2">
-            SECURE YOUR WRIT OF ADMISSION ON TICKIFY
+          <h2 className="font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl text-gold-2 [text-shadow:0_1px_0_rgba(231,227,216,0.12),0_2px_6px_rgba(0,0,0,0.75),0_0_28px_rgba(31,138,145,0.25)]">
+            Frequently Asked Questions
           </h2>
-          <p className="font-sans text-xs md:text-sm text-bone-dim max-w-lg mx-auto mb-5">
-            From the General Citadel Pass to the Knight's Tournament Writ, get your tickets verified with Valyrian QR codes directly on Tickify.
+          <p className="mt-3 font-garamond text-sm italic text-bone-dim sm:text-[15px]">
+            Send no raven before reading these — the maesters have answered the realm&rsquo;s most common calls.
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
-              href={FEST_METADATA.tickifyLink}
-              external
-              className="w-full sm:w-auto"
-            >
-              BOOK TICKETS ON TICKIFY
-            </Button>
-          </div>
-        </div>
+          <GemDivider className="mt-6" />
         </Reveal>
+
+        <div className="mx-auto max-w-3xl space-y-5">
+          {FAQS.map((faq, index) => {
+            const isOpen = openFaqIndex === index;
+            return (
+              <Reveal key={index} delay={index * 80}>
+                <div className={`faq-item relative ${isOpen ? 'faq-item--open' : ''}`}>
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center gap-3.5 p-4 text-left sm:gap-4 sm:p-5"
+                  >
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center border font-cinzel text-xs font-bold transition-colors duration-300 sm:h-10 sm:w-10 ${
+                        isOpen
+                          ? 'border-[#5bc9d6]/70 bg-[#17686e]/30 text-[#8ce8f2]'
+                          : 'border-iron/70 bg-ink-2/80 text-bone-dim'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <span
+                      className={`flex-1 font-cinzel text-[13px] font-bold leading-snug transition-colors duration-300 sm:text-[15px] ${
+                        isOpen ? 'text-[#dcefee]' : 'text-bone hover:text-white'
+                      }`}
+                    >
+                      {faq.q}
+                    </span>
+
+                    <span className="relative flex h-8 w-8 shrink-0 items-center justify-center" aria-hidden="true">
+                      <span className={`faq-diamond absolute h-3 w-3 rotate-45 border ${isOpen ? 'border-transparent' : 'border-ash/70 bg-transparent'}`} />
+                      {isOpen ? (
+                        <ChevronUp className="relative h-4 w-4 text-ink" />
+                      ) : (
+                        <ChevronDown className="relative h-4 w-4 text-ash" />
+                      )}
+                    </span>
+                  </button>
+
+                  <div className="faq-body">
+                    <div>
+                      <div className="border-t border-[#5bc9d6]/20 px-4 pb-5 pt-4 sm:px-5 sm:pl-[4.75rem]">
+                        <p className="text-xs leading-relaxed text-bone-dim sm:text-sm">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
       </section>
 
     </div>

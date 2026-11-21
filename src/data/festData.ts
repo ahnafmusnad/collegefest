@@ -1,16 +1,16 @@
 import { ClubHouse, Segment, SponsorTier, OrganizerMember, FestDaySchedule, CampusLocation } from '../types';
 
 export const FEST_METADATA = {
-  name: "Carnaval Da Chittagong College",
+  name: "Carnaval da Chittagong College",
   tagline: "When Winter Descends Upon The Red Citadel, Four Great Houses Clash For Eternal Glory.",
   edition: "Inaugural Edition",
-  dates: "December 18–19, 2026",
+  dates: "December 25–26, 2026",
   venue: "Chittagong College Heritage Campus, Chawkbazar, Chittagong",
   tickifyLink: "https://tickify.live",
   totalPrizePool: "150,000+ BDT",
   expectedFootfall: "1,000+ Students, Teachers & Guardians",
   participatingInstitutions: "25+ Institutions",
-  countdownTarget: "2026-12-18T09:00:00",
+  countdownTarget: "2026-12-25T09:00:00",
 };
 
 // Official Carnaval social channels.
@@ -84,7 +84,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     points: 1190,
     trophiesWon: '30+',
     /* ✏️ PASTE THE MUSES' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
+    links: { facebook: 'https://www.facebook.com/share/1EENgGUEiU/', instagram: 'https://www.instagram.com/ccellc.official?evlk=eTMzYmJ2NzAxOXRr', website: '' }
   },
   {
     id: 'house-veritas',
@@ -116,7 +116,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     points: 1240,
     trophiesWon: '40+',
     /* ✏️ PASTE CCDS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
+    links: { facebook: 'https://www.facebook.com/share/1CXnvkWj2J/', instagram: 'https://www.instagram.com/chittagongcollege.ds?avpt=MTB3cGZxdTBoYzV3bw==', website: '' }
   },
   {
     id: 'house-valorous',
@@ -146,7 +146,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
     points: 1280,
     trophiesWon: '20+',
     /* ✏️ PASTE CCPS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
-    links: { facebook: '', website: '' }
+    links: { facebook: 'https://www.facebook.com/ccpsofficial', website: 'https://ccps.pages.dev/' }
   }
 ];
 
@@ -162,7 +162,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '3-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 18, 2026',
+    date: 'December 25, 2026',
     time: '10:00 AM onwards',
     description: 'The flagship oratory trial of the Carnaval. Teams from institutions across the nation clash in parliamentary battle, where the sharpest arguments and coldest nerves carry the crest.',
     rules: [
@@ -185,7 +185,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-4 Members',
     entryFee: 'Tickify Pass',
     venue: 'Parade Ground',
-    date: 'December 18, 2026',
+    date: 'December 25, 2026',
     time: '11:00 AM onwards',
     description: 'Teams bid gold-dragons for physics problem lots, then solve what they win. Strategy, nerve and equations collide in the Citadel’s most thrilling open-ground spectacle.',
     rules: [
@@ -208,7 +208,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '3 Members',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 18, 2026',
+    date: 'December 25, 2026',
     time: '02:00 PM onwards',
     description: 'Rapid-fire general knowledge and literature rounds where three minds must think as one. Only the swiftest council claims the crest.',
     rules: [
@@ -231,7 +231,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: '2-5 Members',
     entryFee: 'Tickify Pass',
     venue: 'Main Gate → Parade Ground',
-    date: 'December 18, 2026',
+    date: 'December 25, 2026',
     time: '01:00 PM onwards',
     description: 'Riddles, clues and hidden sigils scattered across the historic campus. Teams race from the Main Gate through the courts of the Red Citadel to unearth the hidden treasure.',
     rules: [
@@ -254,7 +254,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo / Duo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: '11:00 AM onwards',
     description: 'The written crucible of House Stark. SSC and HSC-level scholars battle through conceptual and problem-solving rounds modeled on international Olympiad standards.',
     rules: [
@@ -277,7 +277,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Academic Building',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: '12:30 PM onwards',
     description: 'Hosted by The Muses, this written championship tests grammar, comprehension, vocabulary and literary intuition — a true trial for the wordsmiths of the realm.',
     rules: [
@@ -300,7 +300,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: 'Day Long',
     description: 'Presented by the Photographic Society, this on-spot contest challenges shooters to capture the smallest empires — dew, brick, light and shadow — hiding in plain sight across the Citadel.',
     rules: [
@@ -323,7 +323,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo / Duo',
     entryFee: 'Tickify Pass',
     venue: 'Parade by Lane',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: '02:30 PM onwards',
     description: 'A chromatic scavenger chase — participants hunt and photograph every colour of the spectrum hidden across the grounds. The most complete palette claims glory.',
     rules: [
@@ -346,7 +346,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 25–26, 2026',
     time: 'Submission Window',
     description: 'Write a concise scientific article on a given theme and submit digitally. Rigorous research, clear exposition and scholarly tone decide the winner.',
     rules: [
@@ -369,7 +369,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 25–26, 2026',
     time: 'Submission Window',
     description: 'Submit a written position piece arguing for or against a provocative motion. The most compelling, logically sound stance claims the crest.',
     rules: [
@@ -392,7 +392,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 18–19, 2026',
+    date: 'December 25–26, 2026',
     time: 'Submission Window',
     description: 'Explain a complex scientific theory in simple terms for a general audience. Clarity and accessibility win over jargon.',
     rules: [
@@ -415,7 +415,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: 'Submission Window',
     description: 'Write an original short story inspired by the Carnaval theme. Imagination, narrative arc, and prose decide the champion.',
     rules: [
@@ -438,7 +438,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: 'Submission Window',
     description: 'An essay-style challenge that looks beyond the syllabus — on education, society, and what comes after school.',
     rules: [
@@ -461,7 +461,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: 'Submission Window',
     description: 'Create a digital scrapbook collage themed around Carnaval memories. Layout, creativity, and visual storytelling count.',
     rules: [
@@ -484,7 +484,7 @@ export const FEST_SEGMENTS: Segment[] = [
     teamSize: 'Solo',
     entryFee: 'Tickify Pass',
     venue: 'Online',
-    date: 'December 19, 2026',
+    date: 'December 26, 2026',
     time: 'Submission Window',
     description: 'Create an academic-themed meme that lands with students and scholars alike. Wit, relevance, and originality win.',
     rules: [
@@ -510,7 +510,7 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     color: 'from-gold-2 to-gold',
     borderColor: 'border-gold',
     perks: [
-      'Official naming rights: the festival is presented as "[Your Brand] presents Carnaval Da Chittagong College"',
+      'Official naming rights: the festival is presented as "[Your Brand] presents Carnaval da Chittagong College"',
       'Maximum banner visibility — the most prominent placement across all event banners',
       'Leading shoutout across all official social media promotions, plus a dedicated announcement post',
       'Highest visibility in the official promo video, plus an optional dedicated promotional video for your brand',
@@ -618,7 +618,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Organizer, Segments & Stage',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Builder of the Tourney Grounds',
     quote: 'From the first riddle to the final crest — we forge the trials that legends are made of.',
     image: '',
@@ -631,7 +631,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Volunteer & Logistics Coordinator',
     category: 'guard',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Shield of the Realm',
     quote: 'Discipline and hospitality are our sacred vows — no warrior shall go unguided at the Citadel.',
     image: '',
@@ -644,7 +644,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Organizer, Operations & Coordination',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Commander of the Grounds',
     quote: 'Every segment, every stall, every banner — the Citadel shall stand ready for the realm’s brightest minds.',
     image: '',
@@ -657,7 +657,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Head, Publicity & Outreach',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Voice that Rallies the Banners',
     quote: 'Let every raven carry the word — from the first banner raised to the last torch lit, the realm shall know of this Carnaval.',
     image: '',
@@ -670,7 +670,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Registration & Records Keeper',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Keeper of Every Name Sworn',
     quote: 'Every champion begins as a name upon a scroll — and no name sworn to this tourney shall ever be misplaced.',
     image: '',
@@ -683,7 +683,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Segment Scheduling & Coordination',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Keeper of the Tourney Order',
     quote: 'Sixteen trials, one grand design — every bout and every round shall fall in its appointed hour.',
     image: '',
@@ -696,7 +696,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Venue Setup & Infrastructure',
     category: 'guard',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Forge and Framework of the Citadel',
     quote: 'Stage, gate, and ground — before the first horn sounds, the Citadel itself shall be worthy of its champions.',
     image: '',
@@ -709,7 +709,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Head, Sponsorship Wing',
     category: 'council',
     batch: 'Organizing Committee',
-    department: 'Sponsorship Wing, Carnaval Da Chittagong College',
+    department: 'Sponsorship Wing, Carnaval da Chittagong College',
     houseAllegiance: 'House of Partnerships & Alliances',
     quote: 'We invite your house to join ours — let us build a partnership that empowers the leaders of tomorrow.',
     image: '',
@@ -722,7 +722,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Media & Communications',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Chronicler of the Carnaval',
     quote: 'Every victory, every song, every face in the crowd — this court shall see them written into legend.',
     image: '',
@@ -735,7 +735,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Finance & Budgeting',
     category: 'steward',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Guardian of the Citadel Treasury',
     quote: 'A realm is only as strong as its stewardship — every coin shall serve the glory of this gathering.',
     image: '',
@@ -748,7 +748,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Crowd Control & Discipline',
     category: 'guard',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Shield at the Citadel Doors',
     quote: 'Order at the gates makes joy within the walls — every guest shall pass in peace, and leave with honor.',
     image: '',
@@ -761,7 +761,7 @@ export const SMALL_COUNCIL: OrganizerMember[] = [
     modernRole: 'Guest Care & Refreshments',
     category: 'guard',
     batch: 'Organizing Committee',
-    department: 'Carnaval Da Chittagong College',
+    department: 'Carnaval da Chittagong College',
     houseAllegiance: 'Warmth of the Great Hall',
     quote: 'No guest of the Citadel shall want for welcome — bread, warmth, and good cheer await all who gather here.',
     image: '',
@@ -787,7 +787,7 @@ export const PROTECTOR_OF_THE_REALM: OrganizerMember = {
 export const FEST_SCHEDULE: FestDaySchedule[] = [
   {
     day: 1,
-    date: 'Friday, December 18, 2026',
+    date: 'Friday, December 25, 2026',
     title: 'The Gathering of Banners',
     gotTitle: 'Prologue: When the Raven Sings',
     description: 'The royal opening ceremony, the written olympiads, the National Debate Fest preliminaries, and the first frames of the photography contest.',
@@ -803,7 +803,7 @@ export const FEST_SCHEDULE: FestDaySchedule[] = [
   },
   {
     day: 2,
-    date: 'Saturday, December 19, 2026',
+    date: 'Saturday, December 26, 2026',
     title: 'The Grand Finals & Coronation',
     gotTitle: 'Act II: The Clash of Champions',
     description: 'The Grand Final of debates, the Team Physics Auction spectacle, the Treasure Hunt and Colour Hunt across campus, and the closing coronation.',
@@ -892,7 +892,7 @@ export const SORTING_QUESTIONS = [
 
 export const FAQS = [
   {
-    q: "Who is eligible to participate in Carnaval Da Chittagong College?",
+    q: "Who is eligible to participate in Carnaval da Chittagong College?",
     a: "The festival brings together more than 1,000 SSC and HSC level students from 25+ institutions across the country, along with 40–50 accompanying teachers and 150–200 guardians. Registration is open to all eligible students through Tickify."
   },
   {
@@ -905,7 +905,7 @@ export const FAQS = [
   },
   {
     q: "When and where is the festival held?",
-    a: "Carnaval Da Chittagong College takes place on December 18–19, 2026 at the Chittagong College heritage campus in Chawkbazar — the Main Gate, Academic Building, Parade Ground and Parade by Lane host the segments."
+    a: "Carnaval da Chittagong College takes place on December 25–26, 2026 at the Chittagong College heritage campus in Chawkbazar — the Main Gate, Academic Building, Parade Ground and Parade by Lane host the segments."
   },
   {
     q: "How can my organization become a sponsor?",

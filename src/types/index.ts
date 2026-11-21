@@ -34,6 +34,7 @@ export interface ClubHouse {
   /** Official club links shown in the footer. Leave '' to hide a link. */
   links: {
     facebook: string;
+    instagram?: string;
     website: string;
   };
 }

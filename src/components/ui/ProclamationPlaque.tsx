@@ -33,7 +33,7 @@ interface ProclamationPlaqueProps {
 
 
 export const ProclamationPlaque: React.FC<ProclamationPlaqueProps> = ({
-  title = 'Chittagong College • December 18–19, 2026',
+  title = 'Chittagong College • December 25–26, 2026',
   className = '',
 }) => {
   const [place, date] = title.includes('•')

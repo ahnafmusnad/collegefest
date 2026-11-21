@@ -4,6 +4,7 @@ import { ClubHouse } from '../types';
 import { HOUSE_DETAILS } from '../data/houseDetails';
 import Button from './ui/Button';
 import ResponsiveImg from './ui/ResponsiveImg';
+import { SocialGlyph } from './ui/Glyphs';
 
 interface ClubLoreModalProps {
   house: ClubHouse | null;
@@ -166,6 +167,17 @@ export const ClubLoreModal: React.FC<ClubLoreModalProps> = ({
                     Facebook Gate
                   </a>
                 )}
+                {house.links.instagram && (
+                  <a
+                    href={house.links.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex items-center gap-2 border border-iron/70 bg-ink-2/70 px-3.5 py-2 font-cinzel text-[10px] font-bold uppercase tracking-[0.18em] text-bone transition-all duration-300 hover:border-[#5bc9d6]/70 hover:text-[#8ce8f2]"
+                  >
+                    <SocialGlyph icon="Instagram" className="h-3.5 w-3.5 text-[#5bc9d6] transition-transform duration-300 group-hover:-translate-y-0.5" />
+                    Instagram Gate
+                  </a>
+                )}
                 {house.links.website && (
                   <a
                     href={house.links.website}
@@ -177,7 +189,7 @@ export const ClubLoreModal: React.FC<ClubLoreModalProps> = ({
                     Official Website
                   </a>
                 )}
-                {!house.links.facebook && !house.links.website && (
+                {!house.links.facebook && !house.links.instagram && !house.links.website && (
                   <p className="font-garamond text-[13px] italic text-ash">
                     The ravens have not yet returned with this house&rsquo;s gates.
                   </p>

@@ -1,10 +1,9 @@
 import { useCallback, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
-import { ChevronDown, Gem, MapPin, Ticket, X } from 'lucide-react';
+import { ChevronDown, Gem, MapPin, X } from 'lucide-react';
 import { CAMPUS_LOCATIONS } from '../data/festData';
 import type { CampusLocation } from '../types';
 import { Reveal } from './Reveal';
 import {
-  BannerCap,
   CornerFlourish,
   FlourishDivider,
   KeepSilhouette,
@@ -199,32 +198,12 @@ function VenueTablet({
 }
 
 
-/* BANNER BUTTON — ribbon with cracked stone caps */
-function BannerButton({ label, onClick }: { label: string; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="group relative flex h-12 items-stretch transition-all duration-300 hover:drop-shadow-[0_0_22px_rgba(31,143,150,0.55)]"
-    >
-      <BannerCap />
-      <span className="arena-banner-body flex items-center gap-2 px-4 font-cinzel text-[10px] font-bold tracking-[0.2em] text-mint transition-colors duration-300 group-hover:text-silver sm:gap-2.5 sm:px-8 sm:text-[11px] sm:tracking-[0.28em]">
-        <Ticket className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:-rotate-12" />
-        {label}
-      </span>
-      <BannerCap right />
-    </button>
-  );
-}
-
-
 /* THE GREAT PLAQUE — detail of the chosen arena */
 function DetailPlaque({
   loc,
-  onBook,
   onClose,
 }: {
   loc: ArenaLocation;
-  onBook: () => void;
   onClose?: () => void;
 }) {
   return (
@@ -313,14 +292,13 @@ function DetailPlaque({
           <FlourishDivider className="mt-8 h-4 w-full text-iron" />
 
 
-          <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-6">
             <p className="font-sans text-sm text-ash">
               Location Coordinates: <span className="text-bone-dim">Chittagong College Heritage Campus</span>
               <span className="ml-2 font-cinzel text-[11px] tracking-[0.2em] text-teal-glow">
                 · GRID {loc.coordinates.x} / {loc.coordinates.y}
               </span>
             </p>
-            <BannerButton label="BOOK EVENT PASS" onClick={onBook} />
           </div>
         </div>
       </div>
@@ -352,7 +330,7 @@ function DetailPlaque({
 
 
 /* THE SECTION */
-export default function CitadelArenas({ onBook }: { onBook: () => void }) {
+export default function CitadelArenas() {
   /* null = every arena record folded away (the mobile / tablet default) */
   const [openId, setOpenId] = useState<string | null>(() =>
     typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches
@@ -430,7 +408,7 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
                     }`}
                   >
                     <div className={`overflow-hidden ${isOpen ? '' : 'pointer-events-none'}`}>
-                      <DetailPlaque loc={loc} onBook={onBook} onClose={() => setOpenId(null)} />
+                      <DetailPlaque loc={loc} onClose={() => setOpenId(null)} />
                     </div>
                   </div>
                 </div>
@@ -446,7 +424,7 @@ export default function CitadelArenas({ onBook }: { onBook: () => void }) {
         {/* desktop: the record always rests in the great plaque */}
         <Reveal delay={220} className="hidden lg:block">
           <div className="lg:min-h-[420px]">
-            <DetailPlaque loc={active} onBook={onBook} />
+            <DetailPlaque loc={active} />
           </div>
         </Reveal>
       </div>

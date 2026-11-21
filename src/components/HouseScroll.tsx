@@ -1,4 +1,5 @@
 import { ArrowRight, Globe, Landmark } from "lucide-react";
+import { SocialGlyph } from "./ui/Glyphs";
 import ResponsiveImg from './ui/ResponsiveImg';
 
 interface HouseScrollProps {
@@ -7,7 +8,7 @@ interface HouseScrollProps {
   houseName: string;
   motto: string;
   lore: string;
-  links: { facebook: string; website: string };
+  links: { facebook: string; instagram?: string; website: string };
   tilt?: string;
   onViewLore: () => void;
 }
@@ -58,6 +59,18 @@ export default function HouseScroll({
               <Landmark className="h-3.5 w-3.5" />
             </a>
           )}
+          {links.instagram && (
+            <a
+              href={links.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Visit the ${name} Instagram gate`}
+              title="Visit their Instagram gate"
+              className="hs-gate"
+            >
+              <SocialGlyph icon="Instagram" className="h-3.5 w-3.5" />
+            </a>
+          )}
           {links.website && (
             <a
               href={links.website}
@@ -70,7 +83,7 @@ export default function HouseScroll({
               <Globe className="h-3.5 w-3.5" />
             </a>
           )}
-          {!links.facebook && !links.website && (
+          {!links.facebook && !links.instagram && !links.website && (
             <span className="hs-gate hs-gate--muted" title="Gates not yet proclaimed">
               <Landmark className="h-3.5 w-3.5" />
             </span>

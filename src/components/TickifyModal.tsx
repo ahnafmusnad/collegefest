@@ -88,7 +88,7 @@ export const TickifyModal: React.FC<TickifyModalProps> = ({
           <p className="text-sm text-bone-dim mt-1">
             {preselectedSegment
               ? `You are registering for: ${preselectedSegment}`
-              : 'Secure your pass for Carnaval Da Chittagong College on Tickify'}
+              : 'Secure your pass for Carnaval da Chittagong College on Tickify'}
           </p>
         </div>
 

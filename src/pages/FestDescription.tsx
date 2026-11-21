@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FEST_SCHEDULE, FAQS } from '../data/festData';
+import { FEST_SCHEDULE, FEST_METADATA } from '../data/festData';
 import { Reveal } from '../components/Reveal';
 import CitadelArenas from '../components/CitadelArenas';
 import Button from '../components/ui/Button';
@@ -22,7 +22,8 @@ import {
   ScrollText,
   Sparkles,
   Swords,
-  Trophy
+  Trophy,
+  Ticket,
 } from 'lucide-react';
 
 
@@ -157,7 +158,7 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
             className="animate-fade-up mx-auto mt-8 max-w-2xl text-sm leading-relaxed text-bone/90 sm:text-[15px]"
             style={{ animationDelay: '240ms' }}
           >
-            Founded in 1869, Chittagong College stands as one of the most venerable educational citadels in Bengal. Carnaval Da Chittagong College is the grand winter convergence where our four legendary student clubs join forces to crown the realm’s brightest champions.
+            Founded in 1869, Chittagong College stands as one of the most venerable educational citadels in Bengal. Carnaval da Chittagong College is the grand winter convergence where our four legendary student clubs join forces to crown the realm’s brightest champions.
           </p>
         </div>
 
@@ -370,7 +371,7 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
         {/* ========================================================
             CAMPUS CITADEL INTERACTIVE MAP
         ======================================================== */}
-        <CitadelArenas onBook={onOpenTickify} />
+        <CitadelArenas />
 
 
         {/* ========================================================
@@ -458,95 +459,34 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
 
 
         {/* ========================================================
-            ROYAL FAQ ACCORDION — ravens of inquiry
+            TICKIFY PORTAL BANNER
         ======================================================== */}
-        <section className="space-y-10">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-2 border border-[#5bc9d6]/40 bg-ink-2/80 px-4 py-1.5 font-cinzel text-[10px] uppercase tracking-[0.3em] text-[#8ce8f2] sm:text-xs">
-              <HelpCircle className="w-3.5 h-3.5" />
-              Answers from the Citadel
+        <section className="relative py-24 md:py-28 px-4 max-w-7xl mx-auto">
+          <Reveal direction="zoom">
+          <div className="tickify-frame relative overflow-hidden text-center max-w-4xl mx-auto px-6 py-8 md:px-10 md:py-9">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink-2 border border-[#5bc9d6]/45 text-[11px] font-cinzel uppercase tracking-widest mb-3">
+              <Ticket className="w-3.5 h-3.5 text-[#5bc9d6]" />
+              Official Ticketing Partner: Tickify
             </div>
-            <h2 className={`font-cinzel mt-5 text-3xl font-bold tracking-wide sm:text-4xl ${SILVER}`}>
-              Frequently Asked Questions
+            <h2 className="font-cinzel text-lg sm:text-2xl md:text-[1.7rem] font-extrabold text-white tracking-wide mb-2">
+              SECURE YOUR WRIT OF ADMISSION ON TICKIFY
             </h2>
-            <p className="mt-3 font-garamond text-sm italic text-bone-dim sm:text-[15px]">
-              Send no raven before reading these — the maesters have answered the realm&rsquo;s most common calls.
+            <p className="font-sans text-xs md:text-sm text-bone-dim max-w-lg mx-auto mb-5">
+              From the General Citadel Pass to the Knight's Tournament Writ, get your tickets verified with Valyrian QR codes directly on Tickify.
             </p>
-            <OrnamentRule className="mt-6" />
-          </Reveal>
 
-
-          <div className="mx-auto max-w-3xl space-y-5">
-            {FAQS.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
-              return (
-                <Reveal key={index} delay={index * 80}>
-                  <div className={`faq-item relative ${isOpen ? 'faq-item--open' : ''}`}>
-                    {/* question number plaque */}
-                    <button
-                      type="button"
-                      onClick={() => toggleFaq(index)}
-                      aria-expanded={isOpen}
-                      className="flex w-full items-center gap-3.5 p-4 text-left sm:gap-4 sm:p-5"
-                    >
-                      <span
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center border font-cinzel text-xs font-bold transition-colors duration-300 sm:h-10 sm:w-10 ${
-                          isOpen
-                            ? 'border-[#5bc9d6]/70 bg-[#17686e]/30 text-[#8ce8f2]'
-                            : 'border-iron/70 bg-ink-2/80 text-bone-dim'
-                        }`}
-                        aria-hidden="true"
-                      >
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-
-                      <span
-                        className={`flex-1 font-cinzel text-[13px] font-bold leading-snug transition-colors duration-300 sm:text-[15px] ${
-                          isOpen ? 'text-[#dcefee]' : 'text-bone hover:text-white'
-                        }`}
-                      >
-                        {faq.q}
-                      </span>
-
-                      {/* diamond toggle */}
-                      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center" aria-hidden="true">
-                        <span className={`faq-diamond absolute h-3 w-3 rotate-45 border ${isOpen ? 'border-transparent' : 'border-ash/70 bg-transparent'}`} />
-                        {isOpen ? (
-                          <ChevronUp className="relative h-4 w-4 text-ink" />
-                        ) : (
-                          <ChevronDown className="relative h-4 w-4 text-ash" />
-                        )}
-                      </span>
-                    </button>
-
-                    {/* smooth reveal body */}
-                    <div className="faq-body">
-                      <div>
-                        <div className="border-t border-[#5bc9d6]/20 px-4 pb-5 pt-4 sm:px-5 sm:pl-[4.75rem]">
-                          <p className="text-xs leading-relaxed text-bone-dim sm:text-sm">
-                            {faq.a}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Button
+                href={FEST_METADATA.tickifyLink}
+                external
+                className="w-full sm:w-auto"
+              >
+                BOOK TICKETS ON TICKIFY
+              </Button>
+            </div>
           </div>
+          </Reveal>
         </section>
-
-
-        {/* Bottom CTA to Tickify */}
-        <Reveal className="text-center">
-          <Button
-            onClick={() => {
-              onOpenTickify();
-            }}
-          >
-            JOIN THE FESTIVAL VIA TICKIFY
-          </Button>
-        </Reveal>
 
 
       </div>

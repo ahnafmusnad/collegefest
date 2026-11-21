@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="mb-14 flex flex-col items-center justify-center gap-4 border-y border-iron/40 py-5 text-center sm:flex-row sm:gap-6">
           <span className="inline-flex items-center gap-2 font-garamond text-sm italic text-bone">
             <CalendarDays className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
-            December 18–19, 2026
+            December 25–26, 2026
           </span>
           <span className="hidden h-1 w-1 rotate-45 bg-gold/70 sm:block" aria-hidden="true" />
           <span className="inline-flex items-center gap-2 font-garamond text-sm italic text-bone">
