@@ -100,7 +100,7 @@ export const HOUSE_DETAILS: Record<string, HouseDetails> = {
   'house-melodia': {
     code: 'CCELLC',
     epithet: 'Keepers of the Dragon\'s Word',
-    membersLabel: '150+',
+    membersLabel: '200+',
     foundingPurpose:
       'The Muses was founded in 2025 to give Chittagong College\'s writers, readers and speakers a stage of their own. The club exists to build creativity and confidence in English — through writing, literature, public speaking and culture — so that students can carry their voice from the classroom to national platforms and beyond.',
     pillars: [

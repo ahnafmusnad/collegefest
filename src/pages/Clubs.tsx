@@ -469,6 +469,11 @@ const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHou
                     Facebook Page
                   </Button>
                 )}
+                {activeHouse.links.instagram && (
+                  <Button variant="secondary" size="sm" href={activeHouse.links.instagram} external>
+                    Instagram Page
+                  </Button>
+                )}
               </div>
             </div>
           </Reveal>

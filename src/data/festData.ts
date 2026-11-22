@@ -71,7 +71,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
       accent: 'text-crimson-2'
     },
-    lore: 'Founded in 2025, The Muses is a 150+ member literary club building creativity and confidence through workshops, writing competitions, public speaking and cultural programmes. The club represents Chittagong College nationally and even collaborated with Memorial University of Newfoundland, Canada on an academic session about higher education abroad.',
+    lore: 'Founded in 2025, The Muses is a 200+ member literary club building creativity and confidence through workshops, writing competitions, public speaking and cultural programmes. The club represents Chittagong College nationally and even collaborated with Memorial University of Newfoundland, Canada on an academic session about higher education abroad.',
     founded: '2025',
     achievements: [
       'QCEC Gold Medal',
@@ -80,7 +80,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'Annual Fest – 300+ participants, staged in presence of the Principal',
       'Cultural Event 2026 – vibrant programme with 150+ students'
     ],
-    memberCount: 150,
+    memberCount: 200,
     points: 1190,
     trophiesWon: '30+',
     /* ✏️ PASTE THE MUSES' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
@@ -104,7 +104,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       accent: 'text-crimson-2'
     },
     lore: 'Forged in the debating chambers of the Red Citadel, House Lannister exists to build a culture of argument and inquiry at Chittagong College. Its debaters have stood tall in national tournaments alongside the country’s established institutions, sharpening critical thinking, research, public speaking and communication on the way to becoming one of Bangladesh’s leading debating societies.',
-    founded: '—',
+    founded: '2026',
     achievements: [
       'Champions – CUSD Nationals 2026',
       'Champions – CUDS Nationals 2025',
@@ -112,7 +112,7 @@ export const FOUR_HOUSES: ClubHouse[] = [
       'Semi-Finalists – CSDS, PUDS & DCU Nationals 2026',
       'Semi-Finalists – Drishty Debate Championship 2026'
     ],
-    memberCount: 0,
+    memberCount: 140,
     points: 1240,
     trophiesWon: '40+',
     /* ✏️ PASTE CCDS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */
@@ -135,14 +135,14 @@ export const FOUR_HOUSES: ClubHouse[] = [
       bgGradient: 'from-ink-3/80 via-ink-2/90 to-ink/80',
       accent: 'text-crimson-2'
     },
-    lore: 'Established in 2026, CCPS has become one of Chittagong College’s most engaging clubs, bringing hundreds of photography enthusiasts together through online contests like Capture the Campus and offline sessions, while running weekly and monthly member-exclusive contests that champion creative freedom alongside academic excellence.',
+    lore: 'Established in 2026, CCPS has become one of Chittagong College’s most engaging clubs, bringing 100+ photography enthusiasts together through online contests like Capture the Campus and offline sessions, while running weekly and monthly member-exclusive contests that champion creative freedom alongside academic excellence.',
     founded: '2026',
     achievements: [
       'Capture the Campus – 200+ participants with 50+ expressive entries',
       'Monthly photography contests with 50+ photographers, expert judges & prize pools',
       'College archives and social media features amplifying student creativity'
     ],
-    memberCount: 0,
+    memberCount: 100,
     points: 1280,
     trophiesWon: '20+',
     /* ✏️ PASTE CCPS' OFFICIAL FACEBOOK PAGE + WEBSITE URLS BELOW */

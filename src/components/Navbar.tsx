@@ -85,8 +85,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 aria-expanded={mapOpen}
                 title="Open the menu"
               >
+                <span className="font-cinzel text-[11px] font-semibold uppercase tracking-[0.16em]">Menu</span>
                 <Swords className="w-4 h-4" aria-hidden="true" />
-                <span className="hidden min-[1180px]:inline font-cinzel text-[11px] font-semibold uppercase tracking-[0.16em]">Menu</span>
               </button>
             </div>
           </div>

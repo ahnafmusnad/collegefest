@@ -80,7 +80,7 @@ export const ClubLoreModal: React.FC<ClubLoreModalProps> = ({
             <div className="flex flex-col items-center gap-4 pr-8 text-center sm:flex-row sm:items-center sm:text-left">
               <div className="relative h-20 w-20 shrink-0">
                 <span className="absolute inset-0 rotate-45 border border-[#5bc9d6]/50" aria-hidden="true" />
-                <div className="absolute inset-[7px] flex items-center justify-center overflow-hidden rounded-full border-2 border-gold-2/60 bg-white p-1.5">
+                <div className="absolute inset-[7px] flex items-center justify-center overflow-hidden rounded-full border-2 border-gold-2/60 bg-transparent">
                   <ResponsiveImg
                     src={house.logo}
                     alt={`${house.shortName} logo`}

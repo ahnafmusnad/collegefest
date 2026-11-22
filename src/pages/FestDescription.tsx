@@ -299,10 +299,10 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
                   <h3 className="font-cinzel text-base font-bold tracking-wide text-[#5bc9d6] sm:text-lg">
                     {activeDaySchedule.gotTitle}
                   </h3>
-                  <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.3em] text-bone-dim">
+                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-bone-dim sm:text-[11px]">
                     {activeDaySchedule.date}
                   </p>
-                  <p className="font-garamond mt-1 max-w-2xl text-[10px] italic leading-snug text-bone/85 sm:text-[11px]">
+                  <p className="font-garamond mt-1 max-w-2xl text-[12px] italic leading-snug text-bone/85 sm:text-[13px]">
                     {activeDaySchedule.description}
                   </p>
                 </div>
@@ -317,7 +317,7 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
                       className="group grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-1 border-b border-iron/20 py-2.5 transition-colors duration-300 last:border-0 sm:grid-cols-[70px_auto_1fr_auto] sm:gap-x-4 sm:px-3"
                     >
                       {/* Time chip */}
-                      <span className="inline-flex items-center text-[9px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
+                      <span className="inline-flex items-center text-[11px] font-bold tracking-[0.14em] text-[#5bc9d6] transition-colors duration-300 group-hover:text-gold-2">
                         {evt.time}
                       </span>
 
@@ -330,11 +330,11 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
 
                       {/* Title + house */}
                       <div className="col-span-2 sm:col-span-1">
-                        <p className="text-[11px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2 sm:text-xs">
+                        <p className="text-[13px] font-semibold text-white transition-colors duration-300 group-hover:text-gold-2 sm:text-sm">
                           {evt.title}
                         </p>
                         {evt.house && (
-                          <p className="mt-0.5 text-[8px] tracking-wide text-bone-dim">
+                          <p className="mt-0.5 text-[10px] tracking-wide text-bone-dim">
                             Presented by <span className="text-[#5bc9d6]">{evt.house}</span>
                           </p>
                         )}
@@ -345,12 +345,12 @@ const FestDescription: React.FC<FestDescriptionProps> = ({ onOpenTickify }) => {
 
                       {/* Venue + type */}
                       <div className="col-span-2 flex flex-wrap items-center gap-x-3 gap-y-1 sm:col-span-1 sm:justify-end">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] text-bone-dim">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] text-bone-dim">
                           <MapPin className="h-3.5 w-3.5 text-[#5bc9d6]" />
                           {evt.venue}
                         </span>
                         <span
-                          className={`text-[9px] font-bold uppercase tracking-[0.2em] ${
+                          className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
                             evt.type === 'ceremony'
                               ? 'text-[#5bc9d6]'
                               : 'text-bone-dim'
