@@ -183,8 +183,9 @@ const Sponsorships: React.FC = () => {
                           </span>
                         ))
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-dashed border-iron text-ash text-[11px] font-cinzel tracking-wide">
-                          Your brand here
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-dashed border-iron text-gold-2 text-[13px] font-cinzel tracking-wide">
+                          <span className="h-1 w-1 rotate-45 bg-ember" />
+                          To Be Announced
                         </span>
                       )}
                     </div>

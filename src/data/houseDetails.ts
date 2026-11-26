@@ -58,6 +58,7 @@ export const HOUSE_DETAILS: Record<string, HouseDetails> = {
   'house-arcanum': {
     code: 'CCPAC',
     epithet: 'Keepers of the Cold Stars',
+    membersLabel: '250+',
     foundingPurpose:
       'CCPAC was founded in 2025 to give the young scientists of Chittagong College a home beyond the syllabus — a place to question how the universe works, to train seriously for Physics and Astronomy Olympiads, and to look up at the night sky together. Its founders wanted every curious student, not only the toppers, to have mentors, problem sets and a telescope within reach.',
     pillars: [

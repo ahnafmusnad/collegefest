@@ -68,14 +68,24 @@ export default function ProtectorSoloCard() {
             <span className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 border-b-2 border-r-2 border-gold-2/70" aria-hidden="true" />
 
             {/* monogram sigil: circle ring inside a rotating diamond */}
-            <div className="relative mx-auto mb-5 h-20 w-20 md:h-24 md:w-24">
+            <div className="relative mx-auto mb-5 h-24 w-24 md:h-28 md:w-28">
               <div className="absolute inset-0 rotate-45 border border-gold-2/50" aria-hidden="true" />
               <div className="absolute inset-2 rotate-45 border border-iron/60" aria-hidden="true" />
               <div className="absolute inset-0 rounded-full border border-gold-2/40 animate-rune-spin-rev" style={{ borderStyle: 'dashed' }} aria-hidden="true" />
-              <div className="absolute inset-[8px] rounded-full border border-iron/50 bg-gradient-to-br from-ink-2 via-ink-3/50 to-ink flex items-center justify-center">
-                <span className="font-cinzel-dec text-2xl md:text-3xl font-black text-gold-2 drop-shadow-[0_0_22px_rgba(216,222,217,0.28)]">
-                  MI
-                </span>
+              <div className="absolute inset-[8px] rounded-full overflow-hidden border border-gold-2/40 bg-gradient-to-br from-ink-2 via-ink-3/50 to-ink flex items-center justify-center">
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    loading="eager"
+                    decoding="async"
+                    className="h-full w-full object-cover object-[center_20%]"
+                  />
+                ) : (
+                  <span className="font-cinzel-dec text-2xl md:text-3xl font-black text-gold-2 drop-shadow-[0_0_22px_rgba(216,222,217,0.28)]">
+                    MI
+                  </span>
+                )}
               </div>
               {/* crown notch */}
               <svg viewBox="0 0 24 24" className="absolute -top-3 left-1/2 -translate-x-1/2 h-4 w-4 text-gold-2" fill="currentColor" aria-hidden="true">

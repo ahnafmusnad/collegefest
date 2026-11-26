@@ -50,8 +50,8 @@ const SEGMENT_GROUPS: SegmentGroup[] = [
     gotTitle: 'Banners That March Together',
     blurb: 'Team trials on the Citadel grounds — bring your battalion.',
     icon: <Users className="h-4 w-4" />,
-    formatLabel: 'Teams of 2–5',
-    venueSummary: 'Academic Building · Parade Ground · Campus Trail',
+    formatLabel: 'Teams of 3',
+    venueSummary: 'Chittagong College',
     segmentIds: [
       'seg-debate-fest',
       'seg-physics-auction',
@@ -67,7 +67,7 @@ const SEGMENT_GROUPS: SegmentGroup[] = [
     blurb: 'Single champions forged in science, language and the lens.',
     icon: <User className="h-4 w-4" />,
     formatLabel: 'Solo / Duo',
-    venueSummary: 'Academic Building · Parade by Lane',
+    venueSummary: 'Chittagong College',
     segmentIds: [
       'seg-physics-olympiad',
       'seg-english-olympiad',
@@ -82,7 +82,7 @@ const SEGMENT_GROUPS: SegmentGroup[] = [
     blurb: 'Submit from anywhere — the realm judges by scroll and screen.',
     icon: <Globe className="h-4 w-4" />,
     formatLabel: 'Solo · Online Entry',
-    venueSummary: 'Tickify Portal · Parade by Lane',
+    venueSummary: 'Chittagong College',
     segmentIds: [
       'seg-colour-hunt',
       'seg-scientific-article-writing',
@@ -159,9 +159,6 @@ const GroupFrameCard: React.FC<{
                 <span className="flex items-center justify-end gap-1 font-cinzel text-[9px] sm:text-[10px] font-bold text-gold-2 tabular-nums">
                   <Clock className="h-3 w-3 text-[#5bc9d6]" />
                   {seg.time}
-                </span>
-                <span className="mt-0.5 block font-cinzel text-[7px] uppercase tracking-[0.18em] text-ash">
-                  {seg.venue}
                 </span>
               </span>
 
