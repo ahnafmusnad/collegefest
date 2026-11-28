@@ -14,7 +14,7 @@ export interface PageSeoMeta {
 export const SITE_SEO_DEFAULTS = {
   siteName: 'Carnaval da Chittagong College',
   shortName: 'CDCC Fest 2026',
-  siteUrl: 'https://carnvaldacc.site',
+  siteUrl: 'https://carnavaldacc.site',
   defaultImage: '/images/hero-castle.webp',
   defaultImageAlt: 'Carnaval da Chittagong College — The Red Citadel under a winter sky',
   locale: 'en_US',
