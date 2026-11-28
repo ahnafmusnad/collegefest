@@ -1,74 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://carnavaldacc.site/</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/iron-throne-hero.webp</image:loc>
-      <image:title>The Iron Throne Room — Carnaval da Chittagong College</image:title>
-      <image:caption>Carnaval da Chittagong College 2026 National Winter Fest</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/college-crest.webp</image:loc>
-      <image:title>Chittagong College Crest</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://carnavaldacc.site/description</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/hero-castle.webp</image:loc>
-      <image:title>The Citadel Chronicle — Carnaval da Chittagong College</image:title>
-      <image:caption>Official Schedule, Campus Map &amp; Lore of Carnaval da Chittagong College</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://carnavaldacc.site/clubs</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/four-houses-heraldry.webp</image:loc>
-      <image:title>The Four Great Houses of Chittagong College</image:title>
-      <image:caption>CCPAC (House Stark), CCELLC The Muses (House Targaryen), CCDS (House Lannister), CCPS (House Baratheon)</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://carnavaldacc.site/segments</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/tour.webp</image:loc>
-      <image:title>The Tournament Arenas — 15 Competition Segments</image:title>
-      <image:caption>National Debate Fest, Team Physics Auction, Physics Olympiad, English Olympiad, Photography &amp; More</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://carnavaldacc.site/sponsorships</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/college-winter-citadel.webp</image:loc>
-      <image:title>The Iron Bank Vault — Royal Sponsorships &amp; Partners</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://carnavaldacc.site/organizers</loc>
-    <lastmod>2026-11-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://carnavaldacc.site/images/small-council-chamber.webp</image:loc>
-      <image:title>The Small Council Chamber — Organizers of Carnaval da Chittagong College</image:title>
-    </image:image>
   </url>
 </urlset>
