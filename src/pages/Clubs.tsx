@@ -8,6 +8,7 @@ import GemDivider from '../components/ui/GemDivider';
 import EyebrowRule from '../components/ui/EyebrowRule';
 import Button from '../components/ui/Button';
 import ResponsiveImg from '../components/ui/ResponsiveImg';
+import { applyPageSeo } from '../utils/seo';
 import {
   ArrowRight,
   Award,
@@ -215,6 +216,72 @@ const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHou
   const details = HOUSE_DETAILS[activeHouse.id];
   const hostedTrials = FEST_SEGMENTS.filter((s) => s.houseId === activeHouse.id);
   const isActivePledged = userPledgedHouse?.id === activeHouse.id;
+
+  // Update Clubs page meta description, title, keywords & Club Organization JSON-LD
+  useEffect(() => {
+    const isGold = document.documentElement.getAttribute('data-theme') === 'gold';
+    applyPageSeo({
+      page: 'clubs',
+      activeHouse,
+      goldTheme: isGold,
+    });
+
+    const clubsJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'The Four Great Clubs of Chittagong College',
+      description:
+        'Official directory of the four co-hosting student clubs of Carnaval da Chittagong College: Chittagong College Physics & Astronomy Club (CCPAC), Chittagong College English Language & Literature Club — The Muses (CCELLC), Chittagong College Debating Society (CCDS), and Chittagong College Photographic Society (CCPS).',
+      url: 'https://carnavaldacc.site/clubs',
+      numberOfItems: FOUR_HOUSES.length,
+      itemListElement: FOUR_HOUSES.map((house, idx) => {
+        const houseDetail = HOUSE_DETAILS[house.id];
+        const sameAs = [house.links.facebook, house.links.instagram, house.links.website].filter(
+          (u): u is string => Boolean(u)
+        );
+        return {
+          '@type': 'ListItem',
+          position: idx + 1,
+          item: {
+            '@type': 'Organization',
+            '@id': `https://carnavaldacc.site/clubs#${house.id}`,
+            name: house.name,
+            alternateName: [
+              house.shortName,
+              houseDetail?.code,
+              house.houseName,
+              `${house.shortName} Chittagong College`,
+            ].filter(Boolean),
+            url: house.links.website || 'https://carnavaldacc.site/clubs',
+            logo: `https://carnavaldacc.site${house.logo}`,
+            foundingDate: house.founded,
+            slogan: house.motto,
+            description: `${house.lore} ${houseDetail?.foundingPurpose ?? ''}`.trim(),
+            parentOrganization: {
+              '@type': 'EducationalOrganization',
+              name: 'Chittagong College',
+              url: 'https://carnavaldacc.site/',
+            },
+            award: house.achievements,
+            sameAs,
+          },
+        };
+      }),
+    };
+
+    let scriptEl = document.head.querySelector<HTMLScriptElement>('#clubs-page-jsonld');
+    if (!scriptEl) {
+      scriptEl = document.createElement('script');
+      scriptEl.id = 'clubs-page-jsonld';
+      scriptEl.type = 'application/ld+json';
+      document.head.appendChild(scriptEl);
+    }
+    scriptEl.textContent = JSON.stringify(clubsJsonLd);
+
+    return () => {
+      scriptEl?.remove();
+    };
+  }, [activeHouse]);
 
 
 
@@ -621,6 +688,50 @@ const Clubs: React.FC<ClubsProps> = ({ onNavigate, onPledgeHouse, userPledgedHou
             </div>
           </section>
         </div>
+      </section>
+
+      {/* Complete SEO-Indexable Directory of All Four Chittagong College Clubs
+          Ensures search engines index every club's full name, abbreviation,
+          description, founding purpose, and achievements regardless of which
+          interactive banner tab is currently active. */}
+      <section className="sr-only" aria-label="Complete Directory of Chittagong College Clubs">
+        <h2>Chittagong College Student Clubs Hosting Carnaval da Chittagong College</h2>
+        {FOUR_HOUSES.map((house) => {
+          const houseDetail = HOUSE_DETAILS[house.id];
+          const houseSegments = FEST_SEGMENTS.filter((s) => s.houseId === house.id);
+          return (
+            <article key={`seo-${house.id}`} id={`club-${houseDetail?.code?.toLowerCase() ?? house.id}`}>
+              <h3>
+                {house.name} ({houseDetail?.code ? `${houseDetail.code} — ` : ''}
+                {house.shortName} · {house.houseName})
+              </h3>
+              <p>
+                <strong>Motto:</strong> {house.motto} | <strong>Sigil:</strong> {house.sigil} |{' '}
+                <strong>Founded:</strong> {house.founded}
+              </p>
+              <p>{house.lore}</p>
+              {houseDetail && <p>{houseDetail.foundingPurpose}</p>}
+              <h4>Achievements &amp; Honours of {house.name}</h4>
+              <ul>
+                {house.achievements.map((ach) => (
+                  <li key={ach}>{ach}</li>
+                ))}
+              </ul>
+              {houseSegments.length > 0 && (
+                <>
+                  <h4>Competition Segments Hosted by {house.name}</h4>
+                  <ul>
+                    {houseSegments.map((seg) => (
+                      <li key={seg.id}>
+                        {seg.title} ({seg.gotTitle}) — {seg.description}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </article>
+          );
+        })}
       </section>
 
 

@@ -48,14 +48,15 @@ export const PAGE_SEO_CONFIG: Record<PageType, PageSeoMeta> = {
   },
   clubs: {
     path: '/clubs',
-    title: 'The Four Great Houses — CCPAC, CCELLC, CCDS & CCPS | Carnaval da Chittagong College',
+    title:
+      'Chittagong College Clubs — CCPAC, CCELLC (The Muses), CCDS & CCPS | Carnaval da Chittagong College',
     description:
-      'Meet the Four Great Houses co-hosting Carnaval da Chittagong College: Physics & Astronomy Club (CCPAC — House Stark), English Language & Literature Club The Muses (CCELLC — House Targaryen), Debating Society (CCDS — House Lannister), and Photographic Society (CCPS — House Baratheon).',
+      'Official page of the Four Great Clubs of Chittagong College hosting Carnaval da Chittagong College: Chittagong College Physics & Astronomy Club (CCPAC), Chittagong College English Language & Literature Club — The Muses (CCELLC), Chittagong College Debating Society (CCDS), and Chittagong College Photographic Society (CCPS). Explore club lore, achievements, leadership & events.',
     keywords:
-      'Chittagong College Clubs, CCPAC, Chittagong College Physics and Astronomy Club, CCELLC, The Muses Chittagong College, CCDS, Chittagong College Debating Society, CCPS, Chittagong College Photographic Society, Four Great Houses CDCC',
+      'Chittagong College Clubs, Chittagong College Physics and Astronomy Club, CCPAC, Chittagong College English Language and Literature Club, The Muses Chittagong College, CCELLC, Chittagong College Debating Society, CCDS, Chittagong College Photographic Society, CCPS, Chittagong College Student Organizations, Four Great Houses CDCC',
     image: '/images/four-houses-heraldry.webp',
-    imageAlt: 'Heraldry of the Four Great Houses of Chittagong College',
-    breadcrumbName: 'The Four Great Houses',
+    imageAlt: 'The Four Great Clubs of Chittagong College — CCPAC, CCELLC, CCDS & CCPS',
+    breadcrumbName: 'The Four Great Houses (Clubs)',
   },
   segments: {
     path: '/segments',
@@ -155,8 +156,8 @@ export function applyPageSeo({
     description = `${activeSegment.description} Category: ${activeSegment.category}. Format: ${activeSegment.teamSize}. Prize Pool: ${activeSegment.prizePool}. Date: ${activeSegment.date} at ${activeSegment.venue}.`;
     keywords = `${activeSegment.title}, ${activeSegment.gotTitle}, ${activeSegment.category}, ${activeSegment.tags.join(', ')}, ${baseMeta.keywords}`;
   } else if (activeHouse) {
-    title = `${activeHouse.shortName} (${activeHouse.houseName}) | Carnaval da Chittagong College`;
-    description = `${activeHouse.name} — ${activeHouse.houseName} ("${activeHouse.motto}"). ${activeHouse.lore}`;
+    title = `${activeHouse.name} | CCPAC, CCELLC, CCDS & CCPS | Carnaval da Chittagong College`;
+    description = `${activeHouse.name} (${activeHouse.houseName} — "${activeHouse.motto}"): ${activeHouse.lore} Explore all four Chittagong College clubs: Physics & Astronomy Club (CCPAC), English Language & Literature Club — The Muses (CCELLC), Debating Society (CCDS), and Photographic Society (CCPS).`;
     keywords = `${activeHouse.name}, ${activeHouse.shortName}, ${activeHouse.houseName}, ${activeHouse.motto}, ${baseMeta.keywords}`;
     image = activeHouse.logo || baseMeta.image;
     imageAlt = `${activeHouse.name} (${activeHouse.houseName}) official crest`;
