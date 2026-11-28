@@ -14,6 +14,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { AncientScriptureBackground } from './components/AncientScriptureBackground';
 import { InAppBrowserGate } from './components/InAppBrowserGate';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { applyPageSeo } from './utils/seo';
 // Pages — Home loads eagerly (landing page), others lazy-loaded for smaller initial bundle
 import { Home } from './pages/Home';
 const FestDescription = lazy(() => import('./pages/FestDescription'));
@@ -96,6 +97,23 @@ export function App() {
       // localStorage may be unavailable
     }
   }, []);
+
+  // Synchronize page-level & modal-level SEO metadata, Open Graph, Twitter Cards, canonical URL & JSON-LD
+  useEffect(() => {
+    const focusedHouse =
+      loreHouse ??
+      (currentPage === 'clubs' && focusHouseId
+        ? FOUR_HOUSES.find((h) => h.id === focusHouseId) ?? null
+        : null);
+    const activeSegment = rulesModalOpen ? selectedSegmentForRules : null;
+
+    applyPageSeo({
+      page: currentPage,
+      activeHouse: focusedHouse,
+      activeSegment,
+      goldTheme,
+    });
+  }, [currentPage, loreHouse, focusHouseId, rulesModalOpen, selectedSegmentForRules, goldTheme]);
 
   const handlePledgeHouse = (house: ClubHouse) => {
     setUserPledgedHouse(house);

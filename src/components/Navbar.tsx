@@ -51,13 +51,20 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Brand Logo & Sigil */}
-            <button
-              onClick={() => handleNavClick('home')}
+            <a
+              href="/"
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                  e.preventDefault();
+                  handleNavClick('home');
+                }
+              }}
+              aria-label="Carnaval da Chittagong College — Home"
               className="flex items-center gap-1.5 sm:gap-3 text-left shrink-0 focus:outline-none"
             >
               <img src="/images/college-crest.webp" alt="Chittagong College crest" className="h-9 md:h-10 w-auto" />
               <span className="brand-sigil font-cinzel-dec text-sm sm:text-base md:text-lg tracking-wide">CARNAVAL</span>
-            </button>
+            </a>
 
             {/* Right Action Icons */}
             <div className="flex items-center gap-2 md:gap-3 shrink-0 mr-2 sm:mr-4">

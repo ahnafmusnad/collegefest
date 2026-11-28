@@ -1,0 +1,42 @@
+{
+  "name": "Carnaval da Chittagong College (CDCC Fest 2026)",
+  "short_name": "CDCC Fest",
+  "description": "The grand national winter festival uniting the Four Great Houses of Chittagong College on December 25–26, 2026 across 15 segments in Debate, Science, Literature, Photography & Culture.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020a0b",
+  "theme_color": "#020a0b",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "entertainment", "events"],
+  "icons": [
+    {
+      "src": "/images/college-crest.webp",
+      "sizes": "1413x1113",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tournament Segments",
+      "short_name": "Segments",
+      "description": "Browse all 15 competition segments and rulebooks",
+      "url": "/segments"
+    },
+    {
+      "name": "Fest Schedule & Chronicle",
+      "short_name": "Schedule",
+      "description": "View the two-day festival schedule and campus map",
+      "url": "/description"
+    },
+    {
+      "name": "The Four Great Houses",
+      "short_name": "Clubs",
+      "description": "Explore CCPAC, CCELLC, CCDS, and CCPS",
+      "url": "/clubs"
+    }
+  ]
+}

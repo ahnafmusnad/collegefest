@@ -28,10 +28,20 @@ interface FooterProps {
 
 /* A single realm link — diamond marker fades in and the
    line steps toward it on hover. */
-const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
+const RealmLink: React.FC<{ href: string; onClick: () => void; children: React.ReactNode }> = ({
+  href,
+  onClick,
+  children,
+}) => (
   <li>
-    <button
-      onClick={onClick}
+    <a
+      href={href}
+      onClick={(e) => {
+        if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className="group/link relative inline-flex items-center gap-0 text-left text-bone-dim transition-all duration-300 hover:text-gold-2 hover:tracking-wide"
     >
       <span
@@ -39,7 +49,7 @@ const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = 
         aria-hidden="true"
       />
       {children}
-    </button>
+    </a>
   </li>
 );
 
@@ -177,12 +187,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <nav aria-label="Footer navigation" className="lg:col-span-2">
             <FooterHeading>The Realms</FooterHeading>
             <ul className="space-y-2.5 font-sans text-xs">
-              <RealmLink onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
-              <RealmLink onClick={() => onNavigate('description')}>Fest Chronicle &amp; Schedule</RealmLink>
-              <RealmLink onClick={() => onNavigate('clubs')}>The 4 Great Houses (Clubs)</RealmLink>
-              <RealmLink onClick={() => onNavigate('segments')}>Tourneys &amp; Competitions</RealmLink>
-              <RealmLink onClick={() => onNavigate('sponsorships')}>Iron Bank (Sponsorships)</RealmLink>
-              <RealmLink onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
+              <RealmLink href="/" onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
+              <RealmLink href="/description" onClick={() => onNavigate('description')}>Fest Chronicle &amp; Schedule</RealmLink>
+              <RealmLink href="/clubs" onClick={() => onNavigate('clubs')}>The 4 Great Houses (Clubs)</RealmLink>
+              <RealmLink href="/segments" onClick={() => onNavigate('segments')}>Tourneys &amp; Competitions</RealmLink>
+              <RealmLink href="/sponsorships" onClick={() => onNavigate('sponsorships')}>Iron Bank (Sponsorships)</RealmLink>
+              <RealmLink href="/organizers" onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
             </ul>
           </nav>
 
@@ -193,8 +203,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-1.5">
               {FOUR_HOUSES.map((h) => (
                 <li key={h.id}>
-                  <button
-                    onClick={() => onNavigate('clubs')}
+                  <a
+                    href="/clubs"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault();
+                        onNavigate('clubs');
+                      }
+                    }}
                     className="group/house flex w-full items-center gap-3 border border-transparent px-2 py-1.5 text-left transition-all duration-300 hover:border-iron/60 hover:bg-ink-2/70"
                   >
                     <img
@@ -210,7 +226,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                         &ldquo;{h.motto}&rdquo;
                       </span>
                     </span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
