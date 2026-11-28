@@ -28,10 +28,20 @@ interface FooterProps {
 
 /* A single realm link — diamond marker fades in and the
    line steps toward it on hover. */
-const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
+const RealmLink: React.FC<{ href: string; onClick: () => void; children: React.ReactNode }> = ({
+  href,
+  onClick,
+  children,
+}) => (
   <li>
-    <button
-      onClick={onClick}
+    <a
+      href={href}
+      onClick={(e) => {
+        if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className="group/link relative inline-flex items-center gap-0 text-left text-bone-dim transition-all duration-300 hover:text-gold-2 hover:tracking-wide"
     >
       <span
@@ -39,7 +49,7 @@ const RealmLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = 
         aria-hidden="true"
       />
       {children}
-    </button>
+    </a>
   </li>
 );
 
@@ -177,12 +187,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <nav aria-label="Footer navigation" className="lg:col-span-2">
             <FooterHeading>The Realms</FooterHeading>
             <ul className="space-y-2.5 font-sans text-xs">
-              <RealmLink onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
-              <RealmLink onClick={() => onNavigate('description')}>Fest Chronicle &amp; Schedule</RealmLink>
-              <RealmLink onClick={() => onNavigate('clubs')}>The 4 Great Houses (Clubs)</RealmLink>
-              <RealmLink onClick={() => onNavigate('segments')}>Tourneys &amp; Competitions</RealmLink>
-              <RealmLink onClick={() => onNavigate('sponsorships')}>Iron Bank (Sponsorships)</RealmLink>
-              <RealmLink onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
+              <RealmLink href="/" onClick={() => onNavigate('home')}>The Iron Throne (Home)</RealmLink>
+              <RealmLink href="/description" onClick={() => onNavigate('description')}>Fest Chronicle &amp; Schedule</RealmLink>
+              <RealmLink href="/clubs" onClick={() => onNavigate('clubs')}>The 4 Great Houses (Clubs)</RealmLink>
+              <RealmLink href="/segments" onClick={() => onNavigate('segments')}>Tourneys &amp; Competitions</RealmLink>
+              <RealmLink href="/sponsorships" onClick={() => onNavigate('sponsorships')}>Iron Bank (Sponsorships)</RealmLink>
+              <RealmLink href="/organizers" onClick={() => onNavigate('organizers')}>Small Council (Organizers)</RealmLink>
             </ul>
           </nav>
 
@@ -193,8 +203,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-1.5">
               {FOUR_HOUSES.map((h) => (
                 <li key={h.id}>
-                  <button
-                    onClick={() => onNavigate('clubs')}
+                  <a
+                    href="/clubs"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault();
+                        onNavigate('clubs');
+                      }
+                    }}
                     className="group/house flex w-full items-center gap-3 border border-transparent px-2 py-1.5 text-left transition-all duration-300 hover:border-iron/60 hover:bg-ink-2/70"
                   >
                     <img
@@ -210,7 +226,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                         &ldquo;{h.motto}&rdquo;
                       </span>
                     </span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -259,24 +275,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         {/* ---- Bottom Copyright ---- */}
         <div className="text-center">
-          <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
-            &copy; 2026 Ahnaf Abrar Musnad. All rights reserved.
+          <p className="font-cinzel text-sm sm:text-base font-semibold tracking-[0.18em] text-bone-dim uppercase">
+            &copy; 2026 <span className="text-gold-2 font-bold">Ahnaf Abrar Musnad</span>. All rights reserved.
           </p>
           {/* ---- Forged-by credit: the smith behind the realm ---- */}
-          <div className="mt-4 flex flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-4">
-            <span className="font-cinzel text-[9px] uppercase tracking-[0.3em] text-ash/80">
-              Realm forged by <span className="text-bone-dim">Musnad</span>
+          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <span className="font-cinzel text-xs sm:text-sm uppercase tracking-[0.28em] text-bone-dim">
+              Realm forged by <span className="font-bold text-gold-2">Musnad</span>
             </span>
-            <span className="hidden h-3 w-px bg-iron/60 sm:block" aria-hidden="true" />
-            <div className="flex items-center gap-2">
+            <span className="hidden h-4 w-px bg-iron/60 sm:block" aria-hidden="true" />
+            <div className="flex items-center gap-2.5">
               <FooterSocial href="https://muzie-dev.vercel.app" label="Musnad — portfolio">
-                <Globe className="h-3.5 w-3.5" />
+                <Globe className="h-4 w-4" />
               </FooterSocial>
               <FooterSocial href="https://www.instagram.com/_.ahnaf_abrar._/" label="Ahnaf on Instagram">
-                <SocialGlyph icon="Instagram" className="h-3.5 w-3.5" />
+                <SocialGlyph icon="Instagram" className="h-4 w-4" />
               </FooterSocial>
               <FooterSocial href="https://www.facebook.com/profile.php?id=61595154770049" label="Ahnaf on Facebook">
-                <SocialGlyph icon="Facebook" className="h-3.5 w-3.5" />
+                <SocialGlyph icon="Facebook" className="h-4 w-4" />
               </FooterSocial>
             </div>
           </div>
