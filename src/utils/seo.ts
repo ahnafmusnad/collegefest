@@ -14,6 +14,7 @@ export interface PageSeoMeta {
 export const SITE_SEO_DEFAULTS = {
   siteName: 'Carnaval da Chittagong College',
   shortName: 'CDCC Fest 2026',
+  siteUrl: 'https://carnvaldacc.site',
   defaultImage: '/images/hero-castle.webp',
   defaultImageAlt: 'Carnaval da Chittagong College — The Red Citadel under a winter sky',
   locale: 'en_US',
@@ -123,12 +124,8 @@ function setCanonicalLink(url: string): void {
 
 function toAbsoluteUrl(pathOrUrl: string): string {
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  const origin =
-    typeof window !== 'undefined' && window.location.origin && window.location.origin !== 'null'
-      ? window.location.origin
-      : '';
   const normalizedPath = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
-  return origin ? `${origin}${normalizedPath}` : normalizedPath;
+  return `${SITE_SEO_DEFAULTS.siteUrl}${normalizedPath}`;
 }
 
 export interface ApplySeoOptions {
