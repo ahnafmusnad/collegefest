@@ -275,24 +275,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         {/* ---- Bottom Copyright ---- */}
         <div className="text-center">
-          <p className="font-cinzel text-sm sm:text-base font-semibold tracking-[0.18em] text-bone-dim uppercase">
-            &copy; 2026 <span className="text-gold-2 font-bold">Ahnaf Abrar Musnad</span>. All rights reserved.
+          <p className="font-cinzel text-[11px] tracking-[0.18em] text-ash uppercase">
+            &copy; 2026 Ahnaf Abrar Musnad. All rights reserved.
           </p>
           {/* ---- Forged-by credit: the smith behind the realm ---- */}
-          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <span className="font-cinzel text-xs sm:text-sm uppercase tracking-[0.28em] text-bone-dim">
-              Realm forged by <span className="font-bold text-gold-2">Musnad</span>
+          <div className="mt-4 flex flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-4">
+            <span className="font-cinzel text-[9px] uppercase tracking-[0.3em] text-ash/80">
+              Realm forged by <span className="text-bone-dim">Musnad</span>
             </span>
-            <span className="hidden h-4 w-px bg-iron/60 sm:block" aria-hidden="true" />
-            <div className="flex items-center gap-2.5">
+            <span className="hidden h-3 w-px bg-iron/60 sm:block" aria-hidden="true" />
+            <div className="flex items-center gap-2">
               <FooterSocial href="https://muzie-dev.vercel.app" label="Musnad — portfolio">
-                <Globe className="h-4 w-4" />
+                <Globe className="h-3.5 w-3.5" />
               </FooterSocial>
               <FooterSocial href="https://www.instagram.com/_.ahnaf_abrar._/" label="Ahnaf on Instagram">
-                <SocialGlyph icon="Instagram" className="h-4 w-4" />
+                <SocialGlyph icon="Instagram" className="h-3.5 w-3.5" />
               </FooterSocial>
               <FooterSocial href="https://www.facebook.com/profile.php?id=61595154770049" label="Ahnaf on Facebook">
-                <SocialGlyph icon="Facebook" className="h-4 w-4" />
+                <SocialGlyph icon="Facebook" className="h-3.5 w-3.5" />
               </FooterSocial>
             </div>
           </div>
